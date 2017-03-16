@@ -1,0 +1,123 @@
+﻿ @model Gmou.Web.Models.FuelViewModel
+@{
+      ViewBag.Title = "Employee1";
+      Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<style type="text/css">
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div class="PageContent">
+    <div id="OtherExpences">
+        <div class="col-md-12 marT20">
+            <div class="box box-success">
+                <div class="boxHeading">
+                    <b>Search Owner Advance </b>
+                    <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                </div>
+                <div class="box-body">
+
+
+                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                        <tr>
+                            <td>Vechile No.</td>
+                            <td>@Html.DropDownListFor(model => model.busnumber, Model.busnumber, new { @class = "txt100PValidBreak", id = "ddlbusNumberlst", accesskey = "a", style = "width: 135px;" })</td>     
+                            <td><button class="pull-right btn btn-primary" type="button" onclick="ShowAdvanceDetail()">Show</button></td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+
+
+    <table cellpadding="0px" cellspacing="0px" width="100%">
+        <tr>
+            <td style="width: 6px;">
+                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+            </td>
+            <td class="PageWindowHeader">
+                <table width="100%" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td width="200px">
+                            &nbsp; <label>Show Amount Advance</label>
+                        </td>
+                        <td align="right"></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 6px;">
+                <img src="~/Images/gridImages/RightCorner.png" />
+            </td>
+        </tr>
+    </table>
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+        <table id="AdvanceDetailTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect hide">
+            <thead>
+                <tr>
+                    <th>
+                        Bus No
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div style="height:20px"></div>
+<script type="text/javascript">
+  function  ShowAdvanceDetail(){
+        $('#dvLoading').fadeOut(2000);
+        $.ajax({
+            type: "POST",
+            url: "/Admin/ShowAmountAdvance",
+            traditional: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                debugger;
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {  
+                            if (data[i].EmployeeID) {
+                                var formateDate = new Date(parseInt(data[i].Date.substr(6))).format("dd/mm/yyyy")
+                                txt += "<tr><td>" + data[i].BusNumber + "</td>" +"<td>" + data[i].Amount +"</td><td>" + data[i].formateDate + "</td></tr>";
+                            }
+                        }
+                        if (txt != "") {
+                            $("#AdvanceDetailTable").append(txt);
+                            $("#AdvanceDetailTable").removeClass("hide");
+                        }
+                        else {
+                            $("#AdvanceDetailTable").addClass("hide");
+                        }
+                    }
+                }
+            },
+            error: function (data) { alert("error" + data) }
+        });
+
+    }
+ 
+</script>

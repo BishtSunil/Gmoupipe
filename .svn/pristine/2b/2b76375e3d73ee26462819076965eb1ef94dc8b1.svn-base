@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ <script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+    <label for="lblSearch">Enter Bus Number</label>
+    <div class="col-md-12" id="searchContainer">
+        <input type="text" id="txtBusSearch" accesskey="a" class="form-control" style="width:80%;display:inline-block">
+        <input type="submit" id="btnBusSearch" value="Search" class="pull-right btn btn-primary" />
+        </div>
+   
+ 
+<div id="Busdetails" class="hidden" style="margin-top: 79px;">
+    <div class="col-md-6">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="lblSearch">Bus Number:</label>
+                <span id="lblBusNumber" for="lblfirstname"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Owner Name :</label>
+                <span id="lblOwnerName"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblMember">Member of Company From:</label>  
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Permit Number :</label>
+                <span id="lblPermitNumber"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Dipoo :</label>
+                <span id="lblDipoo"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Registration Number :</label>
+                <span id="lblRegistrationNo"></span>
+                </div>
+                <div class="form-group">
+                    <label for="lblSearch">Model :</label>
+                    <span id="lblModel"></span>
+                </div>
+             
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="lblSearch">No Of Seats :</label>
+                <span id="lblNoOfSeats"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="lblSearch">Chassis Number :</label>
+                <span id="lblChassisNo"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Engine Number :</label>
+                <span id="lblEngineNo"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Fitness :</label>
+                <span id="lblFitness"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Insorance :</label>
+                <span id="lblInsorance"></span>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Valid :</label>
+                <span id="lblValid"></span>
+            </div>
+            
+
+            </div>
+        </div>
+    
+<div id="myModal" class="modal fade" style="padding-top:129px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Not Found!!</h4>
+            </div>
+            <div class="modal-body">
+
+                <p>Employee Deatil Not Found<span id="spnEmpID"></span></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $('#txtBusSearch').click(function () {
+        var abc = validateTextBoxes('searchContainer');
+        if (abc == true) {
+
+            var busnumver = $('#txtBusSearch').val().trim();
+            $.ajax({
+                type: 'GET',
+                data: { 'BusNumber': busnumver },
+                url: "/Buses/GetBusDetails",
+
+                success: function (data) {
+                    if (data != "") {
+                        $("#Busdetails").removeClass("hidden");
+                        setControlValue("lblBusNumber", data[0].bus_number)
+                        setControlValue("lblOwnerName", data[0].bus_owner_name)
+                        setControlValue("lblMember", data[0].FatherName)
+                        setControlValue("lblPermitNumber", data[0].permit_number)
+                        setControlValue("lblDipoo", data[0].bus_operating_center)
+                        setControlValue("lblRegistrationNo", data[0].registration_number)
+                        setControlValue("lblModel", data[0].model)
+                        setControlValue("lblNoOfSeats", data[0].seats)
+                        setControlValue("lblChassisNo", data[0].chesis_number)
+                        setControlValue("lblEngineNo", data[0].engine_number)
+                        setControlValue("lblFitness", data[0].fitness)
+                        setControlValue("lblInsorance", data[0].Insorance)
+                        setControlValue("lblValid", data[0].validity)
+                    }
+                    else {
+                        $("#myModal").modal('show');
+                    }
+                }
+
+            });
+        }
+    });
+</script>

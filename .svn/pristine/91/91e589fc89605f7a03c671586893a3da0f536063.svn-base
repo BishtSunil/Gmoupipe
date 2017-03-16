@@ -1,0 +1,336 @@
+
+body
+{
+	padding:0px;
+	margin:0px;
+	text-align:left;
+	font-family:Trebuchet MS;
+	/*background-color: #f6f6f6;*/
+	background: url(../../Images/gridImages//price/content-bg.png) repeat top left;
+}
+.Button
+{
+	background-color: transparent;
+	border:solid 0px black;
+	background-image:url(../../Images/gridImages//Button.png);
+}
+.Pager
+{
+	Color:Black; 
+	Text-Align:Right; 
+ 	Font-Weight:Bold;
+ 	font-style:italic;
+ 	background-image:url(../../Images/gridImages//background.png);
+ 	font-size:10px;
+ 	Height:25px;
+ 	border-top:solid 0px black;
+}
+.Pager td
+{
+ 	Margin:0px;
+ 	padding:0px;
+ 	border-top:solid 0px gray;
+}
+.Pager td td
+{
+ 	Margin:0px;
+ 	padding:0px;
+ 	border-top:solid 0px gray;
+}
+.NavWindow
+{
+	width: 225px; 
+	height: 1000px; 
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom:solid 1px black;
+	
+}
+A:link
+{
+	color:Blue;
+	text-decoration:none;
+}
+A:visited
+{
+color:Blue;
+	text-decoration:none;
+}
+A:active
+{
+	color:Black;
+	text-decoration:none;
+}
+A:hover
+{
+	color:Blue;
+	text-decoration:underline;
+}
+.NavWindow A:link
+{
+	color:Black;
+	text-decoration:none;
+}
+.NavWindow A:visited
+{
+color:Black;
+	text-decoration:none;
+}
+.NavWindow A:active
+{
+	color:Black;
+	text-decoration:none;
+}
+.NavWindow A:hover
+{
+	color:Black;
+	text-decoration:underline;
+}
+.NavWindowItemHeader
+{
+	text-align:left;
+	margin:0px 0px 0px 0px;;
+	padding:0px 0px 0px 0px;;
+	width:200px;
+	height:25px;
+	border-right:solid 1px Gray;
+	border-left:solid 1px Gray;
+	border-top:solid 1px Gray;
+	border-bottom:solid 1px Gray;
+	border-bottom:solid 1px Gray;
+	font-size:14px;
+	font-weight:bold;
+	background-image:url(../../Images/gridImages//NavItemHeaderBg.jpg);
+	background-repeat:repeat-x;
+}
+.PageContentWindowHeader
+{
+	text-align:left;
+	margin-left: auto;
+	margin-right: auto;
+	margin:left:15px;
+	width:100%;
+	height:25px;
+	border-right:solid 1px Gray;
+	border-left:solid 1px Gray;
+	border-top:solid 1px Gray;
+	border-bottom:solid 1px Gray;
+	font-size:14px;
+	font-weight:bold;
+	background-image:url(../../Images/gridImages//NavItemHeaderBg.jpg);
+	background-repeat:repeat-x;
+	
+}
+.NavWindowItem
+{
+	text-align:left;
+	width:202px;
+	background-color: White;
+	font-size:12px;
+	background-repeat:repeat-y;
+	overflow:hidden;
+	margin-left: auto;
+	margin-right: auto;
+}
+.InnerPanel
+{
+	border-right:solid 1px Gray;
+	border-bottom:solid 1px Gray;
+	border-left:solid 1px Gray;
+}
+.PageHeader
+{
+	width: 100%; 
+	border-bottom: solid 1px black; 
+	height: 25px;
+	background-image:url(../../Images/gridImages//PageHeaderBg2.jpg);
+	background-color:#e9e9e9;
+	background-position: top right;
+	background-repeat: repeat-y;
+}
+.ContentWindowHeader
+{
+	text-align:left;
+	margin:left:15px;
+	width:200px;
+	height:25px;
+	border-right:solid 1px Gray;
+	border-left:solid 1px Gray;
+	border-top:solid 1px Gray;
+	border-bottom:solid 1px Gray;
+	font-size:14px;
+	font-weight:bold;
+	background-image:url(../../Images/gridImages//NavItemHeaderBg.jpg);
+	background-repeat:repeat-x;
+	
+}
+.ContentWindowItem
+{
+	text-align:left;
+	width:202px;
+	background-color: White;
+	font-size:12px;
+	border-right:solid 1px Gray;
+	border-left:solid 1px Gray;
+	border-bottom:solid 1px Gray;
+	background-repeat:repeat-y;
+}
+.PageContent
+{
+	width:98%;
+	text-align:left;
+	padding-left:10px;
+}
+
+.InnerContent
+{
+	 text-align:center;
+	 margin-left: auto; 
+	 margin-right: auto;
+}
+.PageContentWindow
+{
+	border-right:solid 1px Gray;
+	border-bottom:solid 1px Gray;
+	border-left:solid 1px Gray;
+	font-size:13px;	
+	margin-left: auto;
+	margin-right: auto;
+	background-color:White;
+}
+.GridviewRow
+{
+	border-top:solid 1px #dddddd;
+}
+.DataListRow
+{
+	border-top:solid 1px #dddddd;
+}
+.PageContentWindow table
+{
+	
+}
+.MyCalendar .ajax__calendar_container {
+    border:1px solid #646464;
+    background-color: White;
+    color: black;
+}
+.modalBackground
+{
+	background-color: Black;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+.collapsePanel
+{
+	height:0px;
+	overflow:hidden;
+}
+.collapsePanelHeader
+{
+}
+.pager
+{
+	color:black;
+}
+.pager a:link
+{
+	text-decoration:underline;
+}
+.pager a:visited
+{
+	text-decoration:underline;
+}
+.pager a:active
+{
+	text-decoration:underline;
+}
+.pager a:hover
+{
+	text-decoration:underline;
+}
+.NavigationHeader
+{
+	text-align: left; 
+	font-size:13px;	
+	font-weight: bold;
+	width: 188px; 
+	background-image: url(../../Images/gridImages//background.png);
+	text-align: left;
+}
+.NavigationWindow
+{
+	Width:198px;
+	border-left: solid 1px gray;
+	border-right: solid 1px gray; 
+	border-bottom: solid 1px gray; 
+	text-align: left;
+	font-size: 12px; 
+	font-weight: normal;
+	height: auto; 
+	margin-bottom: 8px;
+	text-align:left;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:White;
+}
+.PageWindowHeader
+{
+	width:100%;
+	font-size:13px;	
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url(../../Images/gridImages//background.png);
+	background-repeat:repeat-x;
+}
+.PageHeaderLink
+{
+	Color: Blue;
+	text-decoration: none;
+	font-style:italic;
+}
+.PageHeaderLink a:link
+{
+	text-decoration:none;
+}
+.PageHeaderLink a:visited
+{
+	text-decoration:none;
+}
+.PageHeaderLink a:hover
+{
+	text-decoration:none;
+}
+.PageHeaderLink a:active
+{
+	text-decoration:none;
+}
+.GridviewHeaderStyle th
+{
+	text-align:left
+}
+.tbldata{margin-bottom:200px}
+a[btn]{background-color: #dddddd;padding: 2px 6px;border: 1px solid #808080;color: black;font-size: 11.5px;text-decoration: none;}
+input[type=submit]{cursor:pointer}
+._hideImage{display:none!important}
+._showImage{display:block!important}
+
+
+
+
+
+
+
+
+.modal-box {  display: none;  position: fixed;  z-index: 1000;width:300px;background: white;border-bottom: 1px solid #aaa;
+        border-radius: 4px;box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);border: 1px solid rgba(0, 0, 0, 0.1);background-clip: padding-box;}
+@media (min-width: 32em) {.modal-box {  }}
+.modal-box header,.modal-box .modal-header {padding: 1.25em 1.5em;border-bottom: 1px solid #ddd;}
+.modal-box header h3,.modal-box header h4,.modal-box .modal-header h3,.modal-box .modal-header h4 { margin: 0; }
+.modal-box .modal-body { padding: 2em 1.5em; }
+.modal-box footer,.modal-box .modal-footer {padding: 1em;border-top: 1px solid #ddd;background: rgba(0, 0, 0, 0.02);text-align: right;}
+.modal-overlay {opacity: 0;filter: alpha(opacity=0);position: fixed;top: 0;left: 0;z-index: 900;
+        width: 100%;height: 100%;background: rgba(0, 0, 0, 0.3) !important;}
+a.close {line-height: 1;font-size: 1.5em;position: absolute;top: 5%;right: 2%;text-decoration: none;color: #bbb;}
+a.close:hover {color: #222;-webkit-transition: color 1s ease;-moz-transition: color 1s ease;transition: color 1s ease;}

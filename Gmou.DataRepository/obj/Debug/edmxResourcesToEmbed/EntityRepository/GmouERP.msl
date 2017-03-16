@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GMOUMISModelStoreContainer" CdmEntityContainer="GMOUMISEntities">
+    <EntitySetMapping Name="tblBus">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBu">
+        <MappingFragment StoreEntitySet="tblBus">
+          <ScalarProperty Name="busid" ColumnName="busid" />
+          <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+          <ScalarProperty Name="setid" ColumnName="setid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBusDetails">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBusDetail">
+        <MappingFragment StoreEntitySet="tblBusDetails">
+          <ScalarProperty Name="busdetailid" ColumnName="busdetailid" />
+          <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+          <ScalarProperty Name="bus_operating_center" ColumnName="bus_operating_center" />
+          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+          <ScalarProperty Name="permit_number" ColumnName="permit_number" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="seats" ColumnName="seats" />
+          <ScalarProperty Name="chesis_number" ColumnName="chesis_number" />
+          <ScalarProperty Name="engine_number" ColumnName="engine_number" />
+          <ScalarProperty Name="road_tax" ColumnName="road_tax" />
+          <ScalarProperty Name="fitness" ColumnName="fitness" />
+          <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+          <ScalarProperty Name="last_modified_by" ColumnName="last_modified_by" />
+          <ScalarProperty Name="last_modified_date" ColumnName="last_modified_date" />
+          <ScalarProperty Name="insurance_details_id" ColumnName="insurance_details_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBusInsuranceDeatils">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBusInsuranceDeatil">
+        <MappingFragment StoreEntitySet="tblBusInsuranceDeatils">
+          <ScalarProperty Name="insurance_details_id" ColumnName="insurance_details_id" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="company_address" ColumnName="company_address" />
+          <ScalarProperty Name="validity" ColumnName="validity" />
+          <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBusOwnerDetails">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBusOwnerDetail">
+        <MappingFragment StoreEntitySet="tblBusOwnerDetails">
+          <ScalarProperty Name="bus_owner_ID" ColumnName="bus_owner_ID" />
+          <ScalarProperty Name="bus_owner_name" ColumnName="bus_owner_name" />
+          <ScalarProperty Name="owner_father_name" ColumnName="owner_father_name" />
+          <ScalarProperty Name="owner_address" ColumnName="owner_address" />
+          <ScalarProperty Name="owner_contact_number" ColumnName="owner_contact_number" />
+          <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+          <ScalarProperty Name="entry_amount" ColumnName="entry_amount" />
+          <ScalarProperty Name="entry_reciept_number" ColumnName="entry_reciept_number" />
+          <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+          <ScalarProperty Name="security_amount" ColumnName="security_amount" />
+          <ScalarProperty Name="security_money_reciept" ColumnName="security_money_reciept" />
+          <ScalarProperty Name="remaining_amount" ColumnName="remaining_amount" />
+          <ScalarProperty Name="gauranter1" ColumnName="gauranter1" />
+          <ScalarProperty Name="gauranter1_bus" ColumnName="gauranter1_bus" />
+          <ScalarProperty Name="gauranter2" ColumnName="gauranter2" />
+          <ScalarProperty Name="gauranter2_bus" ColumnName="gauranter2_bus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.DomainModelEntities.AllSalesModel
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<script src="~/Scripts/GmouScripts/autocompletedropdown.js"></script>
+
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+
+
+    <style type="text/css" > .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+<div id=" " style="height:100%;overflow-y:auto">
+    <div class="box-body">
+
+
+        <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+            <tr>
+                <td>Station Name</td>
+                <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
+
+                <td></td>
+                <td><button class="pull-right btn btn-primary" type="button" onclick="ShowSummary()">
+    Save
+</button></td>
+                
+            </tr>
+            </table>
+        </div>
+    <div id="summaryDIV">
+     
+    </div>
+    </div>
+    <script>
+        function SaveSummary()
+        {
+            var obj = new Object();
+          
+            obj.pumpid = 5;
+            obj.smeter_petrol =	 getControlValueN("txtPatrolStart");
+            obj.emeter_petrol =	getControlValueN("txtPatrolEnd");
+            obj. ownersale_petrol = 	getControlValueN("txtPatrolOwnerAmount");
+            obj. cashsale_petrol =	getControlValueN("txtPatrolCashAmount");
+            obj. staffsale_petrol =	getControlValueN("txtPatrolStaffAmount");
+            obj. othersale_petrol =	getControlValueN("txtPatrolOtherSale");
+            obj. ownerquanity_petrol =	getControlValueN("txtPatrolOwnerQty");
+            obj. cashquanity_petrol= 	getControlValueN("txtPatrolCashQty");
+            obj. staffquanity_petrol =	 getControlValueN("txtPatrolStaffQty");
+            obj. otherquanity_petrol =	getControlValueN("txtPatrolOtherQty");
+            obj.smeter_diesel =	getControlValueN("txtDieselStart");
+            obj.emeter_diesel =	getControlValueN("txtDieselEnd");
+            obj. ownersale_diesel= 	getControlValueN("txtDieselOwnerAmount");
+            obj. cashsale_diesel=	getControlValueN("txtDieselCashAmount");
+            obj. staffsale_diesel =	getControlValueN("txtDieselStaffAmount");
+            obj. othersale_diesel =	getControlValueN("txtDieselOtherAmount");
+            obj. ownerquanity_diesel= 	getControlValueN("txtDieselOwnerQty");
+            obj. cashquanity_diesel =	getControlValueN("txtDieselCashQty");
+            obj. staffquanity_diesel =	getControlValueN("txtDieselStaffQty");
+            obj. otherquanity_diesel= 	getControlValueN("txtDieselOtherQty");
+            obj. ownersale_lub =	getControlValueN("txtLubOwnerAmount");
+            obj. cashsale_lub =	getControlValueN("txtLubCashAmount");
+            obj. staffsale_lub =	getControlValueN("txtLubStaffAmount");
+            obj. othersale_lub =	getControlValueN("txtLubOtherAmount");
+            obj. ownerquanity_lub =	getControlValueN("txtLubOwnerQty");
+            obj. cashquanity_lub= 	getControlValueN("txtLubCashQty");
+            obj. staffquanity_lub =	getControlValueN("txtLubStaffQty");
+            obj. otherquanity_lub =	getControlValueN("txtLubOtherQty");
+            $.ajax({
+
+
+                type: "POST",
+                url: '/Fuel/SaveDailySummary',
+
+                dataType: "json",
+                data: JSON.stringify(obj),
+
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data) {
+                        $('#txtPatrolCashAmount').val(data.Price);
+                        $('#txtPatrolCashQty').val(data.Quantity);
+                    }
+                }
+
+
+            })
+
+        }
+        function ShowSummary()
+        {
+            $.ajax({
+                type: "GET",
+                url: '/Fuel/ShowDailySummary',
+
+               
+                data: {'pumpid':$('#ddlpumplst').val()},
+
+               
+                success: function (data) {
+                    $('#summaryDIV').html(data);
+                }
+
+            })
+
+        }
+
+        function GetPetrolCash(fuelid) {
+
+            debugger;
+            var obj = new Object();
+
+            obj.PumpId = 1;
+            obj.FuelType = fuelid;
+            obj.StartReading = getControlValueN("txtPatrolStart");
+            obj.EndReading = getControlValueN("txtPatrolEnd");
+            obj.ChitQuanity = getControlValueN("txtPatrolOwnerQty");
+            obj.StaffQuanity = getControlValueN("txtPatrolStaffQty");
+            obj.OtherQuanity = getControlValueN("txtPatrolOtherQty");
+
+
+            $.ajax({
+                type: "POST",
+                url: '/Fuel/GetCashDetails',
+
+                dataType: "json",
+                data: JSON.stringify(obj),
+
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data) {
+                        $('#txtPatrolCashAmount').val(data.Price);
+                        $('#txtPatrolCashQty').val(data.Quantity);
+                    }
+                }
+
+            });
+        }
+        function GetDieselCash(fuelid) {
+
+            debugger;
+            var obj = new Object();
+
+            obj.PumpId = 1;// getCongetControlValueN("ddlfuellst");trolValueN("ddlpumplst");
+            obj.FuelType = fuelid;
+            obj.StartReading = getControlValueN("txtDieselStart");
+            obj.EndReading = getControlValueN("txtDieselEnd");
+            obj.ChitQuanity = getControlValueN("txtDieselOwnerQty");
+            obj.StaffQuanity = getControlValueN("txtDieselStaffQty");
+            obj.OtherQuanity = getControlValueN("txtDieselOtherQty");
+
+            $.ajax({
+                type: "POST",
+                url: '/Fuel/GetCashDetails',
+
+                dataType: "json",
+                data: JSON.stringify(obj),
+
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data) {
+                        $('#txtDieselCashAmount').val(data.Price);
+                        $('#txtDieselCashQty').val(data.Quantity);
+                    }
+                }
+
+            });
+        }
+    </script>
+
+
+

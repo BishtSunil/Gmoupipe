@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.Sql;
+using Gmou.DomainModelEntities;
+using System.Data.SqlClient;
+
+namespace Gmou.DataRepository
+{
+    public class WayBillRepository
+    {
+        public static int GetVivraniSerial(Vivirani model)
+        {
+            int serialID;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_CashVivraniMaster", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("emp_id", model.UserID);
+                    cmd.Parameters.AddWithValue("emp_department", model.DepartmentId);
+                    cmd.Parameters.AddWithValue("Issubmited", model.IsSubmitted);
+                    conn.Open();
+                    serialID =(int) cmd.ExecuteScalar();
+                    conn.Close();
+                }
+            }
+            return serialID;
+        }
+    }
+}

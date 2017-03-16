@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Gmou.Repository;
+using Gmou.DomainModelEntities;
+using Gmou.DataRepository;
+
+namespace Gmou.BusinessAccessLayer
+{
+  public   class WayBillBAL
+    {
+      public static vivraniDomainModel GetCashVivraiSerial(Vivirani model)
+      {
+
+      return WayBillRepository.GetVivraniSerial(model);
+      }
+      public static CashSheetModel GetCashSheetSerialNumber(Vivirani model)
+      {
+          return WayBillRepository.GetCashSheetSerial(model);
+      }
+      public static List<VivraniDetailsModel> AddVivraniDetails(VivraniDetails model)
+      {model.vivranifuel.VivraniSerialID=model.vivraniSerialNumber;
+          SaveVivraniFuelDeatils(model.vivranifuel);
+        return  WayBillRepository.SaveVivraniDetails(model).ToList();
+      }
+
+      public static int ? GetPendingVivraniSerial(int empid, int department)
+      {
+          return WayBillRepository.GetPendingVivraniSerial(empid, department);
+      }
+      public static bool SaveVivraniFuelDeatils(FuelVivrani model)
+      {
+          return WayBillRepository.InsertVivraniFuleDetails(model);
+      }
+     public static List<CashSheetDetailsModel> AddCashsheetOtherExpenses(CashSheetDetails model)
+      {
+          return WayBillRepository.SaveCashOtherExpensesDetails(model).ToList() ;
+      }
+    }
+}

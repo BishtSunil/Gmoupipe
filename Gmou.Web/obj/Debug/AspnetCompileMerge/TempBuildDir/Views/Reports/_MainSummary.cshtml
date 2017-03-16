@@ -1,0 +1,14 @@
+﻿@model Gmou.DomainModelEntities.MontlyBusReport
+
+<div>
+
+    <div>
+@Html.Partial(@"~/Views\\Reports\_Partial_VivraniDetails.cshtml",Model.lstVivraniReports)
+
+    </div>
+
+    <div>
+        @Html.Partial(@"~/Views\\Reports\_Partial_FuelDeatils.cshtml", Model.lstFuleReposrts)
+
+    </div>
+</div>

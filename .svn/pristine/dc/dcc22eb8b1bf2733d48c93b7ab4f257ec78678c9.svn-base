@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gmou.Web", "Gmou.Web\Gmou.Web.csproj", "{5F4FA753-F90E-4F7D-A3AD-127271D8E6EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gmou.BusinessLayer", "Gmou.BusinessLayer", "{E48327A8-4F88-45BF-96CD-CEB429DF8C51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gmou.BusinessAccessLayer", "Gmou.BusinessAccessLayer\Gmou.BusinessAccessLayer.csproj", "{2A277F29-1898-40A7-831D-68BED14A4906}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gmou.DataRepository", "Gmou.DataRepository", "{5AD8B624-FEBF-448D-A8E5-07131D882203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gmou.Repository", "Gmou.DataRepository\Gmou.Repository.csproj", "{3D6B6AEF-7EB9-49FE-9356-E7914FDCF943}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gmou.DomainEntities", "Gmou.DomainEntities", "{C043BD65-3A76-451D-873B-D89BEB504E63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gmou.DomainModelEntities", "Gmou.DomainModelEntities\Gmou.DomainModelEntities.csproj", "{C68CDFCF-D598-4B03-B334-79849D6BC573}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{3D76AD73-ED0D-4B36-BD46-425836CC5207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserValidation", "UserValidation\UserValidation.csproj", "{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refrences", "Refrences", "{57E26321-2900-4F3B-8144-E4E3C6FE20E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataScripts", "DataScripts", "{9817612E-2429-4477-B765-C6D03A6EA5F3}"
+	ProjectSection(SolutionItems) = preProject
+		..\Users\sunil_bisht\Desktop\sp_GetEmployeeByID.sql = ..\Users\sunil_bisht\Desktop\sp_GetEmployeeByID.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityRepository", "EntityRepository", "{18232638-A8D1-4587-A7B1-461EA43BA03E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F4FA753-F90E-4F7D-A3AD-127271D8E6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F4FA753-F90E-4F7D-A3AD-127271D8E6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F4FA753-F90E-4F7D-A3AD-127271D8E6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F4FA753-F90E-4F7D-A3AD-127271D8E6EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A277F29-1898-40A7-831D-68BED14A4906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A277F29-1898-40A7-831D-68BED14A4906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A277F29-1898-40A7-831D-68BED14A4906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A277F29-1898-40A7-831D-68BED14A4906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D6B6AEF-7EB9-49FE-9356-E7914FDCF943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D6B6AEF-7EB9-49FE-9356-E7914FDCF943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D6B6AEF-7EB9-49FE-9356-E7914FDCF943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D6B6AEF-7EB9-49FE-9356-E7914FDCF943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C68CDFCF-D598-4B03-B334-79849D6BC573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C68CDFCF-D598-4B03-B334-79849D6BC573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C68CDFCF-D598-4B03-B334-79849D6BC573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C68CDFCF-D598-4B03-B334-79849D6BC573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A277F29-1898-40A7-831D-68BED14A4906} = {E48327A8-4F88-45BF-96CD-CEB429DF8C51}
+		{3D6B6AEF-7EB9-49FE-9356-E7914FDCF943} = {5AD8B624-FEBF-448D-A8E5-07131D882203}
+		{C68CDFCF-D598-4B03-B334-79849D6BC573} = {C043BD65-3A76-451D-873B-D89BEB504E63}
+		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4} = {3D76AD73-ED0D-4B36-BD46-425836CC5207}
+		{9817612E-2429-4477-B765-C6D03A6EA5F3} = {5AD8B624-FEBF-448D-A8E5-07131D882203}
+		{18232638-A8D1-4587-A7B1-461EA43BA03E} = {5AD8B624-FEBF-448D-A8E5-07131D882203}
+	EndGlobalSection
+EndGlobal

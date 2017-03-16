@@ -1,0 +1,279 @@
+﻿@{
+    ViewBag.Title = "_fuelentry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.FuelViewModel
+@using System.Web;
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div id="OtherExpences">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Cash Fuel Sale</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+
+
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tr>
+                        <td>Station Name</td>
+                        <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
+
+                        <td>Vechile No.</td>
+                        <td><input id="txtvechileno" class="  txt100" /></td>
+
+                    </tr>
+
+
+
+                </table>
+                <div style="padding-top:10px;"></div>
+                <button class="pull-right btn btn-primary" type="button" onclick="GetStock()">
+                    Show Stock
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<table cellpadding="0px" cellspacing="0px" width="100%">
+    <tr>
+        <td style="width: 6px;">
+            <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+        </td>
+        <td class="PageWindowHeader">
+            <table width="100%" cellpadding="0px" cellspacing="0px">
+                <tr>
+                    <td width="200px">
+                        &nbsp; <label>Fuel Opening/Closing Stock</label>
+                    </td>
+                    <td align="right"></td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 6px;">
+            <img src="~/Images/gridImages/RightCorner.png" />
+        </td>
+    </tr>
+</table>
+
+<div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+    <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+
+        <tr>
+            <th scope="col">Details</th>
+            <th scope="col">Opening Balance</th>
+            <th scope="col">Qty.</th>
+            <th scope="col">No.&Date</th>
+            <th scope="col">Sales Quantity</th>
+            <th scope="col">Closing Quantity Balance</th>
+            <th scope="col">Closing Quantity Balance</th>
+            <th scope="col">Remark & Vehicle No.</th>
+        </tr>
+        @*<tr>
+            <th scope="row">Petrol</th>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <th scope="row">Diesel</th>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <th scope="row">Turbo</th>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+        </tr>
+        <tr>
+
+            <th scope="row">Loose Mobil Oil</th>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th scope="row">Mobil Oil(5 Ltr. Tin)</th>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th scope="row">Mobil Oil(1 Ltr. Tin)</th>
+            <td>5</td>
+            <td>5</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <th scope="row">Mobil Oil(20 Ltr. Bucket)</th>
+            <td>6</td>
+            <td>6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <th scope="row">Mobil Oil(10 Ltr. Bucket)</th>
+            <td>7</td>
+            <td>7</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <th scope="row">Mobil Oil(15 Ltr. Bucket)</th>
+            <td>8</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+        <tr>
+
+            <th scope="row"> Loose Gear Oil( 1/2 Ltr.)</th>
+            <td>9</td>
+            <td>9</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <th scope="row">Gear Oil( 1/2 Ltr.)</th>
+            <td>9</td>
+            <td>9</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <th scope="row">Gear Oil(1 Ltr. Tin)</th>
+            <td>10</td>
+            <td>10</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <th scope="row">Gear Oil(5 Ltr. Tin)</th>
+            <td>11</td>
+            <td>11</td>
+            <td>11</td>
+        </tr>
+        <tr>
+            <th scope="row">W.B Grease(3 Kg.)</th>
+            <td>12</td>
+            <td>12</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <th scope="row">W.B Grease(2 Kg.)</th>
+            <td>13</td>
+            <td>13</td>
+            <td>13</td>
+        </tr>
+        <tr>
+            <th scope="row">W.B Grease(1 Kg.)</th>
+            <td>14</td>
+            <td>14</td>
+            <td>14</td>
+        </tr>
+        </tr>
+        <tr>
+            <th scope="row">W.B Grease(1/2 Kg.)</th>
+            <td>15</td>
+            <td>15</td>
+            <td>15</td>
+        </tr>
+        </tr>
+        <tr>
+            <th scope="row">Brake Oil(1 Ltr.)</th>
+            <td>16</td>
+            <td>16</td>
+            <td>16</td>
+        </tr>
+        </tr>
+        <tr>
+            <th scope="row">Brake Oil(1/2 Ltr.)</th>
+            <td>17</td>
+            <td>17</td>
+            <td>17</td>
+        </tr>
+        </tr>
+        <tr>
+            <th scope="row">2T Oil(1 Ltr.)</th>
+            <td>18</td>
+            <td>18</td>
+            <td>18</td>
+        </tr>
+        </tr>
+        <tr>
+            <th scope="row">2T Oil(1/2 Ltr.)</th>
+            <td>19</td>
+            <td>19</td>
+            <td>19</td>
+        </tr>*@
+
+
+    </table>
+</div>
+
+<script>
+
+    function GetStock() {
+        debugger;
+
+
+        var pumpid = getControlValueN("ddlpumplst");
+       
+        
+        $.ajax({
+            type: "GET",
+            url: '/Fuel/GetStock?pumpid=' + pumpid,
+
+            dataType: "json",
+            data: { "pumpid": pumpid },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data) {
+
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+
+                        for (var i = 0; i < len; i++) {
+                           
+                            
+                            var regDate = new Date(parseInt(data[i].RecievingDate.substr(6))).format("dd/mm/yyyy")
+                            txt += "<tr><td>" + data[i].FuelType + "</td><td>" + data[i].OpeningStock + "</td>"
+                                  + "<td>" + data[i].RecievingQuantity + "</td><td>" + regDate + "</td>"
+                                  + "<td>" + data[i].CurrentQuantity + "</td><td>" + data[i].ClosingStock + "</td><td>" + data[i].VechileNumber + "</td></tr>";
+
+                        }
+
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+
+                        }
+                    }
+                }
+            }
+        });
+    }
+    </script>

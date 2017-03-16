@@ -1,0 +1,315 @@
+﻿@{
+    ViewBag.Title = "BusInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<div id="busInformation">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Bus Detail</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <req>*</req> bus number
+                            </td>
+                            <td>
+                                <input type="text" id="txtBusNumber" accesskey="a" class="txt100PValidBreak">
+                            </td>
+                            <td class="alignR_PR5">
+                                <req>*</req> Permit Number
+                            </td>
+                            <td><input type="text" id="txtPermitNumber" accesskey="a" onchange="fillPermit()" class="txt100PValidBreak"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <req>*</req> Owner Name
+                            </td>
+                            <td>
+                                <input type="text" id="txtOwnerName" accesskey="a" class="txt100PValidBreak">
+
+                            </td>
+                            <td class="alignR">
+                                Father Name
+                            </td>
+                            <td>
+                                <input type="text" id="txtFatherName" class="txt100P">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Address
+                            </td>
+                            <td>
+                                <input name="txtAddress" type="text" id="txtAddress" tabindex="3" class="txt100P">
+                            </td>
+                            <td class="alignR">
+                                <req>*</req> Member of Company From
+                            </td>
+                            <td>
+                                <input type="text" id="txtMember" accesskey="a" class="txt100 datepicker">
+                                <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="alignR">
+                                <req>*</req> Set
+                            </td>
+                            <td>
+                                <select id="txtSet" accesskey="a" onchange="selectDipoo()">
+                                    <option>Select Set</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+
+                            </td>
+                            <td>
+                                <req>*</req> Dipoo
+                            </td>
+                            <td>
+                                <select id="txtDipoo" accesskey="a">
+                                    <option>Select Dipoo</option>
+                                    <option value="1">Pauri</option>
+                                    <option value="2">Kotdwar</option>
+                                    <option value="3">Rishikesh</option>
+                                    <option value="4">Karanprayag</option>
+                                    <option value="5">Srinagar</option>
+                                </select>
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="alignR">
+                                <req>*</req> Entry Deposit
+                            </td>
+                            <td>
+                                <input type="text" id="txtEntryDeposit" accesskey="a" class="txt100">
+                            </td>
+                            <td class="alignR">
+                                <req>*</req> Recipt Number
+                            </td>
+                            <td>
+                                <input type="text" id="txtReciptNo" accesskey="a" class="txt100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="alignR">
+                                <req>*</req> Caution Money
+                            </td>
+                            <td>
+                                <input type="text" id="txtCautionMoney" accesskey="a" class="txt100">
+                            </td>
+                            <td class="alignR">
+                                <req>*</req> Recipt Number
+                            </td>
+                            <td>
+                                <input type="text" id="txtCautionMoneyReciptNo" accesskey="a" class="txt100">
+                            </td>
+                            <td class="alignR">
+                                <req>*</req> Caution Money Deposit Date
+                            </td>
+                            <td>
+                                <input type="text" id="txtCautionMoneyDate" accesskey="a" class="txt100 datepicker">
+                                <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="alignR">
+                                <req>*</req> Remaining Money
+                            </td>
+                            <td>
+                                <input type="text" id="txtRemainingMoney" accesskey="a" class="txt100">
+                            </td>
+                            <td class="alignR">
+                                <req>*</req> EMI/Month
+                            </td>
+                            <td>
+                                <input type="text" id="txtEmi" accesskey="a" class="txt100">
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marT20">
+        <div class="col-md-6 marT20">
+            <div class="box box-success">
+                <div class="boxHeading">
+                    <b> Bus Detail</b>
+                    <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                </div>
+                <div class="box-body">
+                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <req>*</req> Bus guarantor1 Name
+                                </td>
+                                <td>
+                                    <input type="text" id="txtguarantor1Name" accesskey="a" class="txt100PValidBreak">
+                                </td>
+                                <td class="alignR_PR5">
+                                    <req>*</req> guarantor1 Bus Number
+                                </td>
+                                <td><input type="text" id="txtguarantor1BusNumber" accesskey="a" class="txt100PValidBreak"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> Bus guarantor2 Name
+                                </td>
+                                <td>
+                                    <input type="text" id="txtguarantor2Name" accesskey="a" class="txt100PValidBreak">
+                                </td>
+                                <td class="alignR_PR5">
+                                    <req>*</req> guarantor2 Bus Number
+                                </td>
+                                <td><input type="text" id="txtguarantor2BusNumber" accesskey="a" class="txt100PValidBreak"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 marT20">
+            <div class="box box-success">
+                <div class="boxHeading">
+                    <b> Bus Detail</b>
+                    <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                </div>
+                <div class="box-body">
+                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Bus Dipoo
+                                </td>
+                                <td>
+                                    <input type="text" id="txtBusDipoo" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> Registration Number
+                                </td>
+                                <td>
+                                    <input type="text" id="txtRegistrationNo" accesskey="a" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Permit Number
+                                </td>
+                                <td>
+                                    <input type="text" id="txtPermitNo2" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> Model
+                                </td>
+                                <td>
+                                    <input type="text" id="txtModel" accesskey="a" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> No Of Seats
+                                </td>
+                                <td>
+                                    <input type="text" id="txtNoOfSeats" accesskey="a" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> Chassis Number
+                                </td>
+                                <td>
+                                    <input type="text" id="txtChassisNo" accesskey="a" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> Engine Number
+                                </td>
+                                <td>
+                                    <input type="text" id="txtEngineNo" accesskey="a" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <req>*</req> Toll Tax
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTollTax" accesskey="a" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> Fitness
+                                </td>
+                                <td>
+                                    <input type="text" id="txtFitness" accesskey="a" class="txt100PValidBreak">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <req>*</req> Insorance
+                                </td>
+                                <td>
+                                    <input type="text" id="txtInsorance" accesskey="a" class="txt100PValidBreak">
+                                </td>
+                                <td>
+                                    <req>*</req> Valid
+                                </td>
+                                <td>
+                                    <input type="text" id="txtValid " accesskey="a" class="txt100PValidBreak datepicker">
+                                    <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer clearfix" style="padding-right:30px">
+        <input type="button" id="btnSaveBusInformation" value="Save" class="pull-left btn btn-primary" style="padding:4px 22px 6px 15px;margin-left: 40px;" />
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+    function fillPermit() {
+        setControlValue("txtPermitNo2", getControlValueN("txtPermitNumber"))
+    }
+    function selectDipoo() {
+        setControlValue("txtDipoo", getControlValueN("txtSet"))
+        setControlValue("txtBusDipoo", document.getElementById('txtDipoo').options[document.getElementById('txtDipoo').selectedIndex].text)
+    }
+</script>

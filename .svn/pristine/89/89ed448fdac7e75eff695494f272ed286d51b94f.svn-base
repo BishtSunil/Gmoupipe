@@ -1,0 +1,445 @@
+﻿
+@model Gmou.Web.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ <style type="text/css">
+
+     .input-append, .input-prepend {
+         margin-bottom: 5px;
+         font-size: 0;
+         white-space: nowrap;
+     }
+ </style>
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+ <script src="~/Scripts/BlockUI/jquery.blockUI.js" type="text/javascript">
+</script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <link href="~/Content/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Uploader-style.css" type="text/css" rel="stylesheet" />
+
+    <script src="~/Scripts/bootstrap.js" type="text/javascript"></script>
+<script src="~/Scripts/Uploader/Uploader-Common.js" type="text/javascript"></script>
+<script src="~/Scripts/Uploader/Uploader-single.core.js" type="text/javascript"></script>
+<script src="~/Scripts/Uploader/Uploder-multiple.core.js" type="text/javascript"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+ <script src="~/Scripts/LTE/BlockUI/jquery.blockUI.js" type="text/javascript"></script>
+     <div id="employeeContainer">
+     <div class="col-md-12 marT20">
+         <div class="box box-success">
+             <div class="boxHeading">
+                 <b>Employee Detail</b>
+                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+             </div>
+             <div class="box-body">
+                 <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                     <tbody>
+                         <tr>
+                             <td>
+                                 <req>*</req> First Name
+                             </td>
+                             <td>
+                                 <input type="text" class="txt100PValidBreak" accesskey="a" id="txtFirstName" onkeypress="return alphanumeric(event)"></td>
+                             <td class="alignR_PR5">
+                                 Middle Name
+                             </td>
+                             <td>
+                                 <input type="text" class="txt100PValidBreak" id="txtMiddleName" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td class="alignR_PR5">
+                                 Last Name
+                             </td>
+                             <td>
+                                 <input type="text" class="txt100PValidBreak" id="txtLastName" onkeypress="return alphanumeric(event)" />
+                             </td>
+                         </tr>
+
+                         <tr>
+                             <td>
+                                 Father/Husband Name
+                             </td>
+                             <td>
+                                 <input id="txtFatherName" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td class="alignR_PR5">
+                                 Cast
+                             </td>
+                             <td>
+                                 <input id="txtCast" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td class="alignR_PR5">
+                                 <req>*</req>Date Of Birth
+                             </td>
+                             <td>
+                                 <input type="text" class="txt100PValidBreak datepicker" accesskey="a" id="txtDob">
+                                 <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                             </td>
+                         </tr>
+
+                         <tr>
+                             <td class="alignR_PR5">
+                                 <req>*</req> Contact No
+                             </td>
+                             <td>
+                                 <input type="text" accesskey="a" class="txt100PValidBreak" id="txtContactNo" onkeypress="return numbersonly(event)">
+
+                             </td>
+                             <td>
+                                 <req>*</req> Identification Mark 1
+                             </td>
+                             <td>
+                                 <input id="txtIdentificationmark1" accesskey="a" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td class="alignR_PR5">
+                                 Identification Mark 2
+                             </td>
+                             <td>
+                                 <input id="txtIdentificationmark2" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+
+                         </tr>
+
+                         <tr>
+                             <td>
+                                 Local Address
+                             </td>
+                             <td>
+                                 <textarea id="txtLocalAddress" class="txt100PValidBreak" cols="50" rows="5"></textarea>
+                             </td>
+                         </tr>
+
+                         <tr>
+
+                             <td class="alignR_PR5">
+                                <req>*</req> Village
+                             </td>
+                             <td>
+                                 <input id="txtVillage" accesskey="a" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td>
+                                 Patti
+                             </td>
+                             <td>
+                                 <input id="txtPatti" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td class="alignR_PR5">
+                                 Thana
+                             </td>
+                             <td>
+                                 <input id="txtThana" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                            
+
+
+                         </tr>
+
+                         <tr>
+                             <td>
+                                 Tehsil
+                             </td>
+                             <td>
+                                 <input id="txtTehsil" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td class="alignR_PR5">
+                                 District
+                             </td>
+                             <td>
+                                 <input id="txtDistrict" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+
+                         </tr>
+
+                         <tr>
+                             <td class="alignR_PR5">
+                                 State
+                             </td>
+                             <td>
+                                 <input id="txtState" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                             <td>
+                                 <req>*</req> Post Office
+                             </td>
+                             <td>
+                                 <input id="txtPostOffice" accesskey="a" type="text" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                             </td>
+                         </tr>
+                         <tr>
+                             <td class="alignR_PR5">
+                                 Photo
+                             </td>
+                             <td>
+                                 @Ajax.ActionLink("Uplad Image", "Upload", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "createView", OnSuccess = "createMode()", InsertionMode = InsertionMode.Replace })
+
+
+                             </td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+     </div>
+
+     <div class="col-md-12 marT20">
+
+         <div class="col-md-6 marT20">
+             <div class="box box-success">
+                 <div class="boxHeading">
+                     <b>Family Detail</b>
+                     <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                 </div>
+                 <div class="box-body">
+                     <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     Wife Name
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak" id="txtWifeName" onkeypress="return alphanumeric(event)">
+                                 </td>
+                                 <td class="alignR_PR5">
+                                     Wife DOB
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak datepicker" id="txtWifeDob" style="width: 114px;">
+                                     <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                                 </td>
+                             </tr>
+
+                             <tr>
+                                 <td>
+                                     <req>*</req> Nominee Name
+                                 </td>
+                                 <td>
+                                     <input type="text" accesskey="a" class="txt100PValidBreak" id="txtNomineeName" onkeypress="return alphanumeric(event)">
+                                 </td>
+                                 <td class="alignR_PR5">
+                                     <req>*</req> Relation Ship
+                                 </td>
+                                 <td>
+                                     <input type="text" accesskey="a" class="txt100PValidBreak" id="txtRelationShip" onkeypress="return alphanumeric(event)">
+                                 </td>
+                             </tr>
+
+                             <tr>
+                                 <td>
+                                     <req>*</req> Nominee Identification 1
+                                 </td>
+                                 <td>
+                                     <input type="text" accesskey="a" class="txt100PValidBreak" id="txtNominee1" onkeypress="return alphanumeric(event)">
+                                 </td>
+                                 <td class="alignR_PR5">
+                                     Nominee Identification 2
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak" id="txtNominee2" onkeypress="return alphanumeric(event)">
+                                 </td>
+                             </tr>
+
+                             <tr>
+                                 <td>
+                                     Next Kin
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak" id="txtNextkin">
+                                 </td>
+                                 <td class="alignR_PR5">
+                                     Member Name
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak" id="txtMemberName">
+                                 </td>
+                             </tr>
+
+
+
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+         </div>
+
+         <div class="col-md-6 marT20">
+             <div class="box box-success">
+                 <div class="boxHeading">
+                     <b>Working Detail</b>
+                     <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                 </div>
+                 <div class="box-body">
+                     <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     Qualification
+                                 </td>
+                                 <td>
+                                     <select class="txt100PValidBreak" id="ddlQualification">
+                                         <option>Select QualifiCation</option>
+                                         <option value="Graduate">Graduate</option>
+                                         <option value="Post Graduate">Post Graduate</option>
+                                     </select>
+                                 </td>
+                                 <td>
+                                     Department
+                                 </td>
+                                 <td>
+                                     @Html.DropDownListFor(m => m.OfficeID, Model.lstDepartment, new { @class = "txt100PValidBreak", id = "ddlDepartMent", style = "width: 135px;" })
+                                 </td>
+
+                             </tr>
+
+                             <tr>
+                                 <td class="alignR_PR5">
+                                     Date Of Joining
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak datepicker" id="txtDoj" style="width: 114px;">
+                                     <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                                 </td>
+                                 <td>
+                                     Working Office
+                                 </td>
+                                 <td>
+                                     @Html.DropDownListFor(m => m.OfficeID, Model.lstOffices, new { @class = "txt100PValidBreak", id = "ddlWorkingOffice", style = "width: 135px;" })
+                                 </td>
+
+                             </tr>
+                             <tr>
+                                 <td>
+                                     UAN
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak" id="txtUAN">
+                                 </td>
+                                 <td class="alignR_PR5">
+                                     PAN
+                                 </td>
+                                 <td>
+                                     <input type="text" class="txt100PValidBreak" id="txtPAN">
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <div class="box-footer clearfix" style="padding-right:30px">
+         <input type="button" id="btnClearEmployee" value="Cancel" class="pull-right btn btn-primary" style="padding:4px 22px 6px 15px" />
+         <input type="submit" id="btnSaveEmployee" value="Save" class="pull-right btn btn-primary" style="padding:4px 22px 6px 15px;margin-right:25px" />
+         <input type="hidden" name="hiddenID" id="IDhidden">
+     </div>
+ </div>
+  <div id="createView">
+ </div>
+ <div id="myModal" class="modal fade" style="padding-top:129px">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <h4 class="modal-title">Success!!</h4>
+             </div>
+             <div class="modal-body">
+
+                 <p>Employee Has been Addedd Succfully<span id="spnEmpID"></span></p>
+
+             </div>
+         </div>
+     </div>
+     </div>
+
+  <script type="text/javascript">
+   
+      $(function () {
+          $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy', maxDate: new Date() });
+      });
+
+
+     $(document).ready(function () {
+
+
+         var id = '@ViewBag.empId'
+         if(id != "")
+         {
+
+
+             $.ajax({
+                 type: 'GET',
+                 data: { 'empId': id },
+                 url: "/Admin/EditEmployeeDetail",
+                 success: function (data) {
+                     $('body').loader('show');
+
+                     // alert(data[0].WorkingDepartment)
+                     debugger;
+                     $('#IDhidden').val(data[0].EmployeeID);
+                     var formateddob = new Date(parseInt(data[0].BirthDate.substr(6))).format("dd/mm/yyyy")
+                     var dojDate = new Date(parseInt(data[0].JoiningDate.substr(6))).format("dd/mm/yyyy")
+                     var wifeDob = new Date(parseInt(data[0].WifeDOB.substr(6))).format("dd/mm/yyyy")
+                     setControlValue("txtFirstName", data[0].FirstName)
+                     setControlValue("txtMiddleName", data[0].MiddleName)
+                     setControlValue("txtLastName", data[0].LastName)
+                     setControlValue("txtCast", data[0].Caste)
+                     setControlValue("txtFatherName", data[0].FatherName)
+                     setControlValue("txtVillage", data[0].Village)
+                     setControlValue("txtPostOffice", data[0].PostOffice)
+                     setControlValue("txtPatti", data[0].Patti)
+                     setControlValue("txtThana", data[0].Thana)
+                     setControlValue("txtTehsil", data[0].Tehsil)
+                     setControlValue("txtDistrict", data[0].District)
+                     setControlValue("txtState", data[0].State)
+                     setControlValue("txtDob", formateddob)
+                     setControlValue("txtDoj", dojDate)
+                     setControlValue("txtContactNo", data[0].Contact)
+                     setControlValue("ddlQualification", data[0].Qaulification)
+                     setControlValue("txtLocalAddress", data[0].LocalAddress)
+                     setControlValue("txtIdentificationmark1", data[0].IdentificationMark1)
+                     setControlValue("txtIdentificationmark2", data[0].IdentificationMark2)
+                     setControlValue("txtUAN", data[0].UAN)
+                     setControlValue("txtPAN", data[0].PAN)
+                     //setControlValue("ddlWorkingOffice", data[0].WorkingOffice)
+
+
+                     $('select[id^="ddlDepartMent"] option[value="' + data[0].WorkingDepartment + '"]').attr("selected", "selected");
+
+                     $('select[id^="ddlWorkingOffice"] option[value="' + data[0].WorkingOffice + '"]').attr("selected", "selected");
+                     // setControlValue("lblretirementdate", data[0].UAN)
+                     //setControlValue("ddlDepartMent", data[0].WorkingDepartment)
+                     setControlValue("txtWifeName", data[0].WifeName)
+                     setControlValue("txtNextkin", data[0].NextToKin)
+                     setControlValue("txtWifeDob", wifeDob)
+                     setControlValue("txtNomineeName", data[0].NomineeName)
+                     setControlValue("txtNominee1", data[0].NomineeIdentificationMark1)
+                     setControlValue("txtNominee2", data[0].NomineeIdentificationMark2)
+                     setControlValue("txtRelationShip", data[0].RelationShip)
+                     setControlValue("txtMemberName", data[0].MemberName)
+                      
+                     $('body').loader('hide');
+                 }
+             });
+
+         }
+     });
+
+     //function alphanumeric(event) {
+     //    debugger;
+     //    var inp = String.fromCharCode(event.keyCode);
+     //   if (/[a-zA-Z]/.test(inp))
+     //   // if (/^[a-zA-Z0-9\-\s]+$/.test(inp))
+     //        return true
+     //    else
+     //        return false
+     //}
+
+
+     $('#btnClearEmployee').click(function () {
+         resetTextBoxes();
+     });
+</script>
+ 

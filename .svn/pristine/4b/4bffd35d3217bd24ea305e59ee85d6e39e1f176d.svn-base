@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Buses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<style type="text/css">
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div class="PageContent">
+    <table cellpadding="0px" cellspacing="0px" width="100%">
+        <tr>
+            <td style="width: 6px;">
+                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+            </td>
+            <td class="PageWindowHeader">
+                <table width="100%" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td width="200px">
+                            &nbsp; <label>Buses</label>
+                        </td>
+                        <td align="right"></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 6px;">
+                <img src="~/Images/gridImages/RightCorner.png" />
+            </td>
+        </tr>
+    </table>
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+        <table id="BusTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+            <thead>
+                <tr>
+                    <th>
+                        Bus Number
+                    </th>
+                    <th>
+                        Station
+                    </th>
+                    <th>
+                        Owner Name
+                    </th>
+                    <th>
+                        Registartion Date
+                    </th>
+                    <th>
+                        Number of seats
+                    </th>
+
+                    <th style="width:30px">Edit</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dvLoading').fadeOut(2000);
+        $.ajax({
+            type: "POST",
+            url: "/Buses/getAllBuses",
+            traditional: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                debugger;
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {
+                            if (data[i].bus_id) {
+                                var regDate = new Date(parseInt(data[i].registration_date.substr(6))).format("dd/mm/yyyy")                    
+                              txt += "<tr><td>" + data[i].bus_number + "</td>" + "<td>" + data[i].bus_operating_center+ "</td><td>" + data[i].bus_owner_name + "</td>"
+                                  + "<td>" + regDate + "</td>" + "<td>" + data[i].seats + "</td>"
+                               + "<td><a href='javascript:void(0)' onclick= editEmployee(" + '"' + data[i].encrpID + '"' + ")><img src='../Images/edit.png' style='height:20px' /></a></td></tr>";                           
+                            }
+                        }
+                        if (txt != "") {
+                            $("#BusTable").append(txt);
+
+                        }
+                    }
+                }
+            },
+            error: function (data) { alert("error" + data) }
+        });
+
+    });
+
+    //function editEmployee(id) {
+    //    var url = "/admin/EditEmployee?empId=" +id;
+    //    window.location.href = url;
+    //}
+</script>

@@ -1,0 +1,42 @@
+﻿using Gmou.DomainModelEntities.Reports;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Gmou.DataRepository
+{
+   public class ReportsRepository
+   {
+       public static IEnumerable<BusTransactionModel> GetBusTransactionDetails(int busid)
+       {
+           using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+           {
+               using (var cmd = new SqlCommand("sp_GetBusTransactionDetails", conn))
+               {
+                   cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                   cmd.Parameters.AddWithValue("@busid", busid);
+                  
+                   conn.Open();
+                   SqlDataReader dr = cmd.ExecuteReader();
+                   while (dr.Read())
+                   {
+                       yield return new BusTransactionModel(
+                          dr["bus_number"].ToString(),
+
+                         Convert.ToDecimal((dr["amount"])),
+                         Convert.ToDateTime((dr["insertdate"])),
+                       (dr["description"]).ToString());
+                       
+                   }
+                   conn.Close();
+
+               }
+           }
+
+       }
+    }
+}

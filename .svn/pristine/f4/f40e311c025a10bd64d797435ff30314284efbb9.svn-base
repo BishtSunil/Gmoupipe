@@ -1,0 +1,217 @@
+﻿using Gmou.DataRepository.EntityRepository;
+using Gmou.DomainModelEntities;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Gmou.DataRepository.CustomRepository
+{
+ public class BusRepository
+    {
+
+        public static bool AddBusDetails(SaveBusModel model)
+        {
+            try
+            {
+                using (var item = new GMOUMISEntity())
+                {
+                    tblBu bs = new tblBu()
+                    {
+                        bus_number = model.bus_number,
+                        setid = model.setid
+                    };
+                   
+                    item.tblBus.Add(bs);
+                    item.SaveChanges();
+                    int id = bs.busid;
+                    //int id = Convert.ToInt32(item.tblBus.Select(m => m.busid).FirstOrDefault());
+                    tblBusInsuranceDeatil businsurancedetails = new tblBusInsuranceDeatil()
+                    {
+                        bus_id = id,
+                        company_name = model.company_name,
+                        company_address = model.company_address,
+                        validity = model.validity
+
+                    };
+                    item.tblBusInsuranceDeatils.Add(businsurancedetails);
+                    item.SaveChanges();
+                    tblBusOwnerDetail busownerDetails = new tblBusOwnerDetail()
+                    {
+
+                        bus_owner_name = model.bus_owner_name,
+                        owner_father_name = model.owner_father_name,
+                        owner_address = model.owner_address,
+                        owner_contact_number = model.owner_contact_number,
+                        bus_id = id,
+                        entry_amount = model.entry_amount,
+                        payment_date = model.payment_date,
+                        security_amount = model.security_amount,
+                        security_money_reciept = model.security_money_reciept,
+                        remaining_amount = model.remaining_amount,
+                        gauranter1 = model.gauranter1,
+                        gauranter1_bus = model.gauranter1_bus,
+                        gauranter2 = model.gauranter2,
+                        gauranter2_bus = model.gauranter2_bus
+
+                    };
+                    item.tblBusOwnerDetails.Add(busownerDetails);
+                    tblBusDetail busdetails = new tblBusDetail()
+                    {
+                        bus_id = id,
+                        bus_number = model.bus_number,
+                        bus_operating_center = model.bus_operating_center,
+                        chesis_number = model.chesis_number,
+                        engine_number = model.engine_number,
+                        fitness = model.fitness,
+                        last_modified_date = DateTime.Now,
+                        registration_date = model.registration_date,
+                        permit_number = model.permit_number,
+                        model = model.model,
+                        seats = model.seats,
+                        road_tax = model.road_tax,
+                        isDeleted = false,
+                        last_modified_by = "Admin"
+
+                    };
+                    item.tblBusDetails.Add(busdetails);
+                    item.SaveChanges();
+                }
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                return false;
+            }
+
+        }
+
+        public static List<BusListModel> GetAllBuses()
+        {
+            
+                List<BusListModel> employeeList = new List<BusListModel>();
+                try
+                {
+                using (var item = new GMOUMISEntity())
+                {
+
+                    employeeList = (from b in item.tblBus
+                                    join bd in item.tblBusDetails on b.busid equals bd.bus_id
+                                    join bo in item.tblBusOwnerDetails on b.busid equals bo.bus_id
+                                    select new BusListModel { bus_number = b.bus_number, bus_id = b.busid, bus_operating_center = bd.bus_operating_center, seats = bd.seats, bus_owner_name = bo.bus_owner_name }).ToList();
+                    return employeeList;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+                return employeeList;
+             
+            }
+            
+        }
+
+     public static SaveBusModel BusDetailsByNumber(string busnumber)
+        {
+            SaveBusModel savebusmodel;
+            try
+            {
+                savebusmodel = new SaveBusModel();
+                using (var item = new GMOUMISEntity())
+                {
+                    var  busID =item.tblBus.Where(i=>i.bus_number==busnumber).Select(i=>i.busid).SingleOrDefault();
+                    if(busID==0)
+                    { return null; }
+                    savebusmodel = (from b in item.tblBus
+                                    join bd in item.tblBusDetails on b.busid equals bd.bus_id
+                                    join bo in item.tblBusOwnerDetails on b.busid equals bo.bus_id
+                                    join bins in item.tblBusInsuranceDeatils on b.busid equals bins.bus_id
+                                    where b.busid == busID
+                                    select new SaveBusModel
+                                    {
+                                        bus_number = b.bus_number,
+                                     bus_operating_center=   bd.bus_operating_center,
+                                     registration_date=   bd.registration_date,
+                                       permit_number= bd.permit_number,
+                                     model=   bd.model,
+                                      seats=  bd.seats,
+                                       chesis_number= bd.chesis_number,
+                                       engine_number= bd.engine_number
+                                        ,road_tax= bd.road_tax,fitness= bd.fitness,company_name=bins.company_name,company_address=bins.company_address, validity=bins.validity,
+                                        bus_owner_name=bo.bus_owner_name,owner_father_name=bo.owner_father_name,owner_address=bo.owner_address,owner_contact_number=bo.owner_contact_number, 
+                                        entry_amount=bo.entry_amount, entry_reciept_number=bo.entry_reciept_number,payment_date=bo.payment_date,security_amount=bo.security_amount,security_money_reciept=bo.security_money_reciept,
+                                    remaining_amount=bo.remaining_amount,gauranter1=bo.gauranter1,gauranter2=bo.gauranter2,gauranter1_bus=bo.gauranter1_bus,
+                                    gauranter2_bus=bo.gauranter2_bus}).FirstOrDefault();
+                }
+                return savebusmodel;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
+     public static SaveBusModel EditBusDetails(int id)
+     {
+         SaveBusModel savebusmodel;
+         try
+         {
+             savebusmodel = new SaveBusModel();
+             using (var item = new GMOUMISEntity())
+             {
+                 //var busID = item.tblBus.Where(i => i.bus_number == busnumber).Select(i => i.busid).SingleOrDefault();
+
+                 savebusmodel = (from b in item.tblBus
+                                 join bd in item.tblBusDetails on b.busid equals bd.bus_id
+                                 join bo in item.tblBusOwnerDetails on b.busid equals bo.bus_id
+                                 join bins in item.tblBusInsuranceDeatils on b.busid equals bins.bus_id
+                                 where b.busid == id
+                                 select new SaveBusModel
+                                 {
+                                     bus_number = b.bus_number,
+                                     bus_operating_center = bd.bus_operating_center,
+                                     registration_date = bd.registration_date,
+                                     permit_number = bd.permit_number,
+                                     model = bd.model,
+                                     seats = bd.seats,
+                                     chesis_number = bd.chesis_number,
+                                     engine_number = bd.engine_number,
+                                     
+                                     road_tax = bd.road_tax,
+                                     fitness = bd.fitness,
+                                     company_name = bins.company_name,
+                                     company_address = bins.company_address,
+                                     validity = bins.validity,
+                                     bus_owner_name = bo.bus_owner_name,
+                                     owner_father_name = bo.owner_father_name,
+                                     owner_address = bo.owner_address,
+                                     owner_contact_number = bo.owner_contact_number,
+                                     entry_amount = bo.entry_amount,
+                                     entry_reciept_number = bo.entry_reciept_number,
+                                     payment_date = bo.payment_date,
+                                     security_amount = bo.security_amount,
+                                     security_money_reciept = bo.security_money_reciept,
+                                     remaining_amount = bo.remaining_amount,
+                                     gauranter1 = bo.gauranter1,
+                                     gauranter2 = bo.gauranter2,
+                                     gauranter1_bus = bo.gauranter1_bus,
+                                     gauranter2_bus = bo.gauranter2_bus
+                                 }).FirstOrDefault();
+             }
+             return savebusmodel;
+         }
+         catch (Exception ex)
+         {
+             throw;
+         }
+
+     }
+   
+    }
+}

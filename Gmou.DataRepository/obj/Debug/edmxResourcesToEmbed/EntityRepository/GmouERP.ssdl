@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GMOUMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblBus">
+    <Key>
+      <PropertyRef Name="busid" />
+    </Key>
+    <Property Name="busid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bus_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="setid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBusDetails">
+    <Key>
+      <PropertyRef Name="busdetailid" />
+    </Key>
+    <Property Name="busdetailid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bus_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="bus_operating_center" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="registration_date" Type="date" Nullable="false" />
+    <Property Name="permit_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="model" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="seats" Type="int" Nullable="false" />
+    <Property Name="chesis_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="engine_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="road_tax" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fitness" Type="nvarchar" MaxLength="50" />
+    <Property Name="isDeleted" Type="bit" />
+    <Property Name="last_modified_by" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_modified_date" Type="date" Nullable="false" />
+    <Property Name="insurance_details_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBusInsuranceDeatils">
+    <Key>
+      <PropertyRef Name="insurance_details_id" />
+    </Key>
+    <Property Name="insurance_details_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="company_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="company_address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="validity" Type="date" Nullable="false" />
+    <Property Name="bus_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBusOwnerDetails">
+    <Key>
+      <PropertyRef Name="bus_owner_ID" />
+    </Key>
+    <Property Name="bus_owner_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bus_owner_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="owner_father_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="owner_address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="owner_contact_number" Type="bigint" />
+    <Property Name="bus_id" Type="int" Nullable="false" />
+    <Property Name="entry_amount" Type="int" Nullable="false" />
+    <Property Name="entry_reciept_number" Type="nvarchar" MaxLength="50" />
+    <Property Name="payment_date" Type="date" />
+    <Property Name="security_amount" Type="int" Nullable="false" />
+    <Property Name="security_money_reciept" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="remaining_amount" Type="int" />
+    <Property Name="gauranter1" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gauranter1_bus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gauranter2" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gauranter2_bus" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblBusDetails_tblBusDetails">
+    <End Role="tblBusDetails" Type="Self.tblBusDetails" Multiplicity="1" />
+    <End Role="tblBusDetails1" Type="Self.tblBusDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblBusDetails">
+        <PropertyRef Name="busdetailid" />
+      </Principal>
+      <Dependent Role="tblBusDetails1">
+        <PropertyRef Name="busdetailid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusDetails_tblBusInsuranceDeatils">
+    <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatils" Multiplicity="1" />
+    <End Role="tblBusDetails" Type="Self.tblBusDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBusInsuranceDeatils">
+        <PropertyRef Name="insurance_details_id" />
+      </Principal>
+      <Dependent Role="tblBusDetails">
+        <PropertyRef Name="insurance_details_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusInsuranceDeatils_tblBus">
+    <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+    <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusInsuranceDeatils">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusOwnerDetails_tblBus">
+    <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+    <End Role="tblBusOwnerDetails" Type="Self.tblBusOwnerDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusOwnerDetails">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GMOUMISModelStoreContainer">
+    <EntitySet Name="tblBus" EntityType="Self.tblBus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBusDetails" EntityType="Self.tblBusDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBusInsuranceDeatils" EntityType="Self.tblBusInsuranceDeatils" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBusOwnerDetails" EntityType="Self.tblBusOwnerDetails" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblBusDetails_tblBusDetails" Association="Self.FK_tblBusDetails_tblBusDetails">
+      <End Role="tblBusDetails" EntitySet="tblBusDetails" />
+      <End Role="tblBusDetails1" EntitySet="tblBusDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusDetails_tblBusInsuranceDeatils" Association="Self.FK_tblBusDetails_tblBusInsuranceDeatils">
+      <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+      <End Role="tblBusDetails" EntitySet="tblBusDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusInsuranceDeatils_tblBus" Association="Self.FK_tblBusInsuranceDeatils_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusOwnerDetails_tblBus" Association="Self.FK_tblBusOwnerDetails_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusOwnerDetails" EntitySet="tblBusOwnerDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    
+       <div>
+            <label for="lblSearch">Enter Employee Name</label>
+            <input type="text" id="txtEmployeeSearch"class="form-control">
+            <input type="submit" id="btnEmployeeSearch" value="Search" class="pull-right btn btn-primary" />
+        </div>
+
+    </div>
+<div id="employeedetails"style="display:none">
+    <div class="col-md-4">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="lblSearch">Name :</label>
+                <label id="lblfirstname" for="lblfirstname">Sunil</label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Caste :</label>
+                <label id="lblcaste"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Father/Husband Name :</label>
+                <label id="lblhusbandname"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Village :</label>
+                <label id="lblvillage"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Post Office :</label>
+                <label id="lblpostoffice"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Patti :</label>
+                <label fid="lblpatti"></label>
+                <div class="form-group">
+                    <label for="lblSearch">Tehsil :</label>
+                    <label id="lbltehsil"></label>
+                </div>
+                <div class="form-group">
+                    <label for="lblSearch">District :</label>
+                    <label id="lbldistrict"></label>
+                </div>
+                <div class="form-group">
+                    <label for="lblSearch">State :</label>
+                    <label id="lblstate"></label>
+                </div>
+                <div class="form-group">
+                    <label for="lblSearch">Joining Date :</label>
+                    <label id="lbljoiningdate"></label>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="lblSearch">Contact No. :</label>
+                <label id="lblcontactname"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Qualification :</label>
+                <label id="lblqualification"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Local Address :</label>
+                <label id ="lbllocaladdress"></label>
+</div>
+            <div class="form-group">
+                <label for="lblSearch">Identification Mark 1 :</label>
+                <label id="lblidentificationmark1"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Identification Mark 2 :</label>
+                <label id="lblidentificationmark2"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">UAN :</label>
+                <label id="lbluan"></label>
+                <div class="form-group">
+                    <label for="lblSearch">PAN :</label>
+                    <label id="lblpan"></label>
+                </div>
+                <div class="form-group">
+                    <label for="lblSearch">Department :</label>
+                    <label id="lbldepartment"></label>
+                </div>
+                <div class="form-group">
+                    <label for="lblSearch">Office :</label>
+                    <label id="lbloffice"></label>
+                </div>
+                <div class="form-group">
+                    <label for="lblSearch">Retirement Date :</label>
+                    <label id="lblretirementdate"></label>
+                </div>
+
+              
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="lblSearch">Wife Name :</label>
+                <label id="lblwifename"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Next to Kin :</label>
+                <label id="lblnexttokin"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Wife DOB:</label>
+                <label id="lblwifedob"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Nominee Name :</label>
+                <label id="lblnomineename"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">Identification Mark 1 :</label>
+                <label id="lblnomineeIdentificationMark1"></label>
+            </div>
+            <div class="form-group">
+                <label for="lblSearch">lblnomineeIdentificationMark2 :</label>
+                <label id="lblName"></label>
+              
+            </div>
+        </div>
+    </div>
+    </div>
+

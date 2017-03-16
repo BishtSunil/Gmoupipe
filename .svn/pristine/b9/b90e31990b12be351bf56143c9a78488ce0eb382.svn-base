@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Gmou.DomainModelEntities;
+using Gmou.Repository;
+using System.Data.SqlClient;
+ 
+
+namespace Gmou.BusinessAccessLayer
+{
+    public class EmployeeBAL
+    {
+        public static List<Department> GetDepartmentList()
+        {
+
+          return  EmployeeRepository.GetDepartments().ToList();
+        }
+
+        public static List<Office>GetOfficeList()
+        {
+            return EmployeeRepository.GetOffice().ToList();
+        }
+
+        public static List<Employee> GetAllEmployeelist()
+        {
+            return EmployeeRepository.GetAllEmployee().ToList();
+        }
+        public static List<Employee> GetEmployeeDetail(int id)
+        {
+            return EmployeeRepository.GetEmployeeDetail(id).ToList();
+        }
+     
+
+        //public static bool SaveEmployee(SaveEmployeeModel model)
+        //{
+        //    return true;
+        //}
+    }
+}

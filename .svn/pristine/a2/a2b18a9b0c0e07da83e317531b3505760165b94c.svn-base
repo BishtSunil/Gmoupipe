@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Gmou.Web.Controllers
+{
+    public class FuelController : Controller
+    {
+        //
+        // GET: /Fuel/
+
+        public ActionResult Index()
+        {
+            return PartialView(@"~/Views\Fuel\_FuelDetail.cshtml");
+        }
+
+    }
+}

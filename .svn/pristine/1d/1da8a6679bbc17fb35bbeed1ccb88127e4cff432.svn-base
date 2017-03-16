@@ -1,0 +1,9 @@
+﻿.fontNoBold {font-weight: normal;}
+req {
+    color: Red;
+    font-weight: 700;
+}
+.ValidBreak {
+    border: 1px solid red;
+    background-color: #ffe1e1;
+}

@@ -1,0 +1,671 @@
+﻿@{
+    ViewBag.Title = "_fuelentry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.FuelViewModel
+@using System.Web;
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+    .txtH20{
+        height:20px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div id="OtherExpences">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Chit Fuel Sale</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+
+
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tr>
+                        <td>Station Name</td>
+                        <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
+
+                        <td>Vechile No.</td>
+                        <td>@Html.DropDownListFor(model => model.busnumber, Model.busnumber, new { @class = "txt100PValidBreak", id = "ddlbusNumberlst", accesskey = "a", style = "width: 135px;" })</td>
+
+                    </tr>
+                    <tr>
+                        <td>Diesel Book No.</td>
+                        <td><input id="txtdieselbookno" class="  txt100" /></td>
+                        <td>Date:</td>
+                        <td>@DateTime.Now.ToString() </td>
+                    </tr>
+                    <tr>
+                   
+                        <td>Chit Number</td>
+                        <td><input id="txtchitnumber" class="  txt100" /></td>
+                    </tr>
+                </table>
+               
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="PageContent">
+        <table cellpadding="0px" cellspacing="0px" width="100%">
+            <tr>
+                <td style="width: 6px;">
+                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                </td>
+                <td class="PageWindowHeader">
+                    <table width="100%" cellpadding="0px" cellspacing="0px">
+                        <tr>
+                            <td width="200px">
+                                &nbsp; <label>Fuel Details</label>
+                            </td>
+                            <td align="right"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 6px;">
+                    <img src="~/Images/gridImages/RightCorner.png" />
+                </td>
+            </tr>
+        </table>
+
+
+        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+            <table id="FuelTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                <thead>
+                    <tr>
+                        <th>Fuel Type</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlPatrolfuellst", chaildID = "txtPatrolAmt", chaildID2 = "txtPatrolQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                        </td>
+                        <td><input type="text" id="txtPatrolQty" chailid="txtPatrolAmt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td><input type="text" id="txtPatrolAmt" class="txtH20" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlDiselfuellst", chaildID = "txtDiselAmt", chaildID2 = "txtDiselQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                        </td>
+                        <td><input type="text" id="txtDiselQty" chailid="txtDiselAmt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td><input type="text" id="txtDiselAmt" class="txtH20" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub1fuellst", chaildID = "txtLub1Amt", chaildID2 = "txtLub1Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                        </td>
+                        <td><input type="text" id="txtLub1Qty" chailid="txtLub1Amt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td><input type="text" id="txtLub1Amt" class="txtH20"  /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub2fuellst", chaildID = "txtLub2Amt", chaildID2 = "txtLub2Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                        </td>
+                        <td><input type="text" id="txtLub2Qty" chailid="txtLub2Amt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td><input type="text" id="txtLub2Amt" class="txtH20" /></td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div style="padding-top:10px;"></div>
+    <button class="pull-right btn btn-primary" type="button" onclick="SavChitdetails()">
+        Save
+    </button>
+</div>
+<div style="padding-top:10px;"></div>
+    <div class="PageContent">
+        <table cellpadding="0px" cellspacing="0px" width="100%">
+            <tr>
+                <td style="width: 6px;">
+                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                </td>
+                <td class="PageWindowHeader">
+                    <table width="100%" cellpadding="0px" cellspacing="0px">
+                        <tr>
+                            <td width="200px">
+                                &nbsp; <label>Fuel Chit Entry</label>
+                            </td>
+                            <td align="right"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 6px;">
+                    <img src="~/Images/gridImages/RightCorner.png" />
+                </td>
+            </tr>
+        </table>
+        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+            <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                <thead>
+
+                    <tr>
+                        <th>
+                            Bus Number
+                        </th>
+
+                        <th>
+                            Fuel Type
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Price
+                        </th>
+
+
+                        <th>
+                            Station Name
+                        </th>
+                        <th>
+                            Book Number
+                        </th>
+                        <th>
+                            Chit Number
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+ 
+<script>
+    var fuelprice;
+    $(function () {
+
+        $(".datepicker").datepicker();
+        GetAllChitDetails();
+ 
+    });
+
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .tooltip()
+
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.data("ui-autocomplete").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $(function () {
+        $("#ddlbusNumberlst").combobox();
+        $("#toggle").click(function () {
+            $("#ddlbusNumberlst").toggle();
+        });
+    });
+    function SavChitdetails() {
+        debugger;
+        var fueldata = {
+            VechileNumber: getControlValueN("ddlbusNumberlst"),
+            FuelStationID: getControlValueN("ddlpumplst"),
+            InsertedBy: 0,
+            DieselBookno: getControlValueN("txtdieselbookno"),
+            ChitNo: getControlValueN("txtchitnumber"),
+            Comment: getControlValueN("txtcomment"),
+            listFuel: []
+         
+        };
+      
+       
+       // var obj = new Object();
+       // obj.VechileNumber = getControlValueN("ddlbusNumberlst");
+       //// obj.Fueltype = getControlValueN("ddlfuellst");
+       //// obj.FuelQuantity = getControlValueN("txtfuelquantity");
+       //// obj.Price = getControlValueN("txtfuelprice");
+       //// obj.OtherFule = getControlValueN("txtotherfuel");
+       // //obj.OtherPrice = getControlValueN("txtotherfuelprice");
+       // obj.FuelStationID = getControlValueN("ddlpumplst");
+       // obj.InsertedBy = 0;
+       // obj.DieselBookno = getControlValueN("txtdieselbookno");
+       // obj.ChitNo = getControlValueN("txtchitnumber");
+       // obj.Comment = getControlValueN("txtcomment");
+        // var listFuel = new Object();
+        var queue = [];
+        if ($("#txtPatrolQty").val() != null)
+        {
+           // var obj = new Array();
+            //listFuel.FuelType = $("#ddlPatrolfuellst").val()
+            //listFuel.FuelQuantity = $("#txtPatrolQty").val()
+            //listFuel.Price = $("#txtPatrolAmt").val()
+            //obj.listFuel = listFuel;
+            fueldata.listFuel.push({
+                "Fueltype": $("#ddlPatrolfuellst").val(),
+                "FuelQuantity": $("#txtPatrolQty").val(),
+                "Price": $("#txtPatrolAmt").val()//   Issue here if you don't specify the decimal place
+               
+            });
+            
+           // queue.push({ Fueltype: $("#ddlPatrolfuellst").val(), FuelQuantity: $("#txtPatrolQty").val(), Price: $("#txtPatrolAmt").val() });
+            //obj['Fueltype'] = $("#ddlPatrolfuellst").val()
+            //obj.FuelType = 
+           // obj['FuelQuantity'] = $("#txtPatrolQty").val()
+          //  obj['Price'] = $("#txtPatrolAmt").val()
+           // queue.push(obj)
+        }
+        if ($("#txtDiselQty").val() != null) {
+            //listFuel.FuelType = $("#ddlDiselfuellst").val()
+            //listFuel.FuelQuantity = $("#txtDiselQty").val()
+            //listFuel.Price = $("#txtDiselAmt").val()
+            //obj.listFuel = listFuel;
+            //var obj = new Array();
+            //obj['FuelType'] = $("#ddlDiselfuellst").val()
+            //obj['FuelQuantity'] = $("#txtDiselQty").val()
+            //obj['Price'] = $("#txtDiselAmt").val()
+            //queue.push(obj)
+            fueldata.listFuel.push({
+                "Fueltype": $("#ddlDiselfuellst").val(),
+                "FuelQuantity": $("#txtDiselQty").val(),
+                "Price": $("#txtDiselAmt").val()//   Issue here if you don't specify the decimal place
+
+            });
+           // queue.push({ Fueltype: $("#ddlDiselfuellst").val(), FuelQuantity: $("#txtDiselQty").val(), Price: $("#txtDiselAmt").val() });
+
+        }
+        //if ($("#txtLub1Qty").val() != null) {
+        //    listFuel.FuelType = $("#ddlLub1fuellst").val()
+        //    listFuel.FuelQuantity = $("#txtLub1Qty").val()
+        //    listFuel.Price = $("#txtLub1Amt").val()
+        //    obj.listFuel = listFuel;
+        //}
+        //if ($("#txtLub2Qty").val() != null) {
+        //    listFuel.FuelType = $("#ddlLub2fuellst").val()
+        //    listFuel.FuelQuantity = $("#txtLub2Qty").val()
+        //    listFuel.Price = $("#txtLub2Amt").val()
+        //    obj.listFuel = listFuel;
+        //}
+        //var data = [];
+        //data.push({
+        //    "VechileNumber": getControlValueN("ddlbusNumberlst"),
+        //    "FuelStationID": getControlValueN("ddlpumplst"),
+        //    "InsertedBy": 0,
+        //    "DieselBookno": getControlValueN("txtdieselbookno"),
+        //    "ChitNo": getControlValueN("txtchitnumber"),
+        //    "Comment": getControlValueN("txtcomment"),
+        //    "listFuel": queue
+        //});
+       
+        $.ajax({
+            type: "POST",
+            url: '/Fuel/SaveChitFuelDetails',
+          
+            data: JSON.stringify( fueldata),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data) {
+                    GetAllChitDetails();
+                }
+
+
+            }
+        });
+    }
+    function GetPrice(e) {
+        debugger;
+        var obj = new Object();
+
+        obj.pumpid = $("#ddlpumplst").val();
+        obj.fuelid =$(e).val();
+        $.ajax({
+            type: "POST",
+            url: '/Fuel/GetFuelPrice',
+
+            dataType: "json",
+            data: JSON.stringify(obj),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data) {
+                    //alert(data);
+                    $("#" + $(e).attr("chaildId")).val(data);
+                    $("#"+$(e).attr("chaildID2")).val("1");
+                }
+            }
+
+        });
+    }
+
+    function GetCalculate(e) {
+        $("#" + $(e).attr("chailid")).val(($(e).val()) * ($("#" + $(e).attr("chailid")).val()));    
+    }
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .tooltip()
+
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.data("ui-autocomplete").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+
+    function GetAllChitDetails() {
+        debugger;
+
+        $.ajax({
+            type: "GET",
+            url: '/Fuel/GetAllChitDetailsByUser',
+
+            dataType: "json",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+
+
+                        for (var i = 0; i < len; i++) {
+
+                            var regDate = new Date(parseInt(data[i].InsertedDate.substr(6))).format("dd/mm/yyyy")
+                            txt += "<tr><td>" + data[i].VechileNumber + "</td><td>" + data[i].Fueltype + "</td>"
+                                  + "<td>" + data[i].FuelQuantity + "</td><td>" + data[i].Price + "</td><td>" + data[i].FuelStationID + "</td><td>" + data[i].BookNo + "</td>"
+                                  + "<td>" + data[i].ChitNo + "</td><td>" + data[i].Comment + "</td><td>" + regDate + "</td></tr>";
+
+                        }
+
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+
+                        }
+                    }
+                }
+
+
+            }
+
+        });
+    }
+
+    $(document).ready(function () {
+        debugger;
+
+        $("select[name='fueltype']").trigger("change");
+  //GetPrice($("select[name='fueltype']").html());
+        $('#txtfuelquantity').focusout(function () {
+            debugger;
+            GetCalculate(getControlValueN("txtfuelquantity"))
+        });
+
+    });
+    $(function () {
+        $("#ddlbusNumberlst").combobox();
+        $("#toggle").click(function () {
+            $("#ddlbusNumberlst").toggle();
+        });
+
+
+
+
+    });
+</script>
+
+

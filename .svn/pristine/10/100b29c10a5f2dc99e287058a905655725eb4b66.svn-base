@@ -1,0 +1,628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GMOUMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_CashVivrani">
+          <Key>
+            <PropertyRef Name="vivrani_serial_id" />
+          </Key>
+          <Property Name="vivrani_serial_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vivrani_serial_number" Type="int" Nullable="false" />
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="emp_department" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="Issubmited" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBus">
+          <Key>
+            <PropertyRef Name="busid" />
+          </Key>
+          <Property Name="busid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bus_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="setid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBusDetails">
+          <Key>
+            <PropertyRef Name="busdetailid" />
+          </Key>
+          <Property Name="busdetailid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bus_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bus_operating_center" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="registration_date" Type="date" Nullable="false" />
+          <Property Name="permit_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="model" Type="nvarchar" MaxLength="50" />
+          <Property Name="seats" Type="int" Nullable="false" />
+          <Property Name="chesis_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="engine_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="road_tax" Type="nvarchar" MaxLength="50" />
+          <Property Name="fitness" Type="nvarchar" MaxLength="50" />
+          <Property Name="isDeleted" Type="bit" />
+          <Property Name="last_modified_by" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_modified_date" Type="date" Nullable="false" />
+          <Property Name="bus_id" Type="int" Nullable="false" />
+          <Property Name="bus_registration_type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblBusInsuranceDeatils">
+          <Key>
+            <PropertyRef Name="insurance_details_id" />
+          </Key>
+          <Property Name="insurance_details_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="company_address" Type="nvarchar" MaxLength="500" />
+          <Property Name="validity" Type="date" Nullable="false" />
+          <Property Name="bus_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBusOwnerDetails">
+          <Key>
+            <PropertyRef Name="bus_owner_ID" />
+          </Key>
+          <Property Name="bus_owner_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bus_owner_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="owner_father_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="owner_address" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="owner_contact_number" Type="bigint" />
+          <Property Name="bus_id" Type="int" Nullable="false" />
+          <Property Name="entry_amount" Type="int" />
+          <Property Name="entry_reciept_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="payment_date" Type="date" />
+          <Property Name="security_amount" Type="int" />
+          <Property Name="security_money_reciept" Type="nvarchar" MaxLength="50" />
+          <Property Name="remaining_amount" Type="int" />
+          <Property Name="gauranter1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gauranter1_bus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gauranter2" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gauranter2_bus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="building_fund" Type="nvarchar" MaxLength="50" />
+          <Property Name="old_bus_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="old_bus_owner_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="previous_building_fund" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblEmployeeQuick">
+          <Key>
+            <PropertyRef Name="serial_id" />
+          </Key>
+          <Property Name="serial_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="middle_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="department_id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="confirm_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="created_on" Type="date" Nullable="false" />
+          <Property Name="date_of_birth" Type="date" Nullable="false" />
+          <Property Name="Isdeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblMasterDepartment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="department_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblSets">
+          <Key>
+            <PropertyRef Name="setid" />
+          </Key>
+          <Property Name="setid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="setname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="station" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_CashVivrani_tblEmployeeQuick">
+          <End Role="tblEmployeeQuick" Type="Self.tblEmployeeQuick" Multiplicity="1" />
+          <End Role="tbl_CashVivrani" Type="Self.tbl_CashVivrani" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployeeQuick">
+              <PropertyRef Name="serial_id" />
+            </Principal>
+            <Dependent Role="tbl_CashVivrani">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_CashVivrani_tblMasterDepartment">
+          <End Role="tblMasterDepartment" Type="Self.tblMasterDepartment" Multiplicity="1" />
+          <End Role="tbl_CashVivrani" Type="Self.tbl_CashVivrani" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterDepartment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_CashVivrani">
+              <PropertyRef Name="emp_department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBus_tblSets">
+          <End Role="tblSets" Type="Self.tblSets" Multiplicity="1" />
+          <End Role="tblBus" Type="Self.tblBus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSets">
+              <PropertyRef Name="setid" />
+            </Principal>
+            <Dependent Role="tblBus">
+              <PropertyRef Name="setid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusDetails_tblBus">
+          <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+          <End Role="tblBusDetails" Type="Self.tblBusDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="busid" />
+            </Principal>
+            <Dependent Role="tblBusDetails">
+              <PropertyRef Name="bus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusInsuranceDeatils_tblBus">
+          <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+          <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatils" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="busid" />
+            </Principal>
+            <Dependent Role="tblBusInsuranceDeatils">
+              <PropertyRef Name="bus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusOwnerDetails_tblBus">
+          <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+          <End Role="tblBusOwnerDetails" Type="Self.tblBusOwnerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="busid" />
+            </Principal>
+            <Dependent Role="tblBusOwnerDetails">
+              <PropertyRef Name="bus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEmployeeQuick_tblMasterDepartment">
+          <End Role="tblMasterDepartment" Type="Self.tblMasterDepartment" Multiplicity="1" />
+          <End Role="tblEmployeeQuick" Type="Self.tblEmployeeQuick" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterDepartment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblEmployeeQuick">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GMOUMISModelStoreContainer">
+          <EntitySet Name="tbl_CashVivrani" EntityType="Self.tbl_CashVivrani" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBus" EntityType="Self.tblBus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBusDetails" EntityType="Self.tblBusDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBusInsuranceDeatils" EntityType="Self.tblBusInsuranceDeatils" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBusOwnerDetails" EntityType="Self.tblBusOwnerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployeeQuick" EntityType="Self.tblEmployeeQuick" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMasterDepartment" EntityType="Self.tblMasterDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSets" EntityType="Self.tblSets" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_CashVivrani_tblEmployeeQuick" Association="Self.FK_tbl_CashVivrani_tblEmployeeQuick">
+            <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuick" />
+            <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_CashVivrani_tblMasterDepartment" Association="Self.FK_tbl_CashVivrani_tblMasterDepartment">
+            <End Role="tblMasterDepartment" EntitySet="tblMasterDepartment" />
+            <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBus_tblSets" Association="Self.FK_tblBus_tblSets">
+            <End Role="tblSets" EntitySet="tblSets" />
+            <End Role="tblBus" EntitySet="tblBus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusDetails_tblBus" Association="Self.FK_tblBusDetails_tblBus">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBusDetails" EntitySet="tblBusDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusInsuranceDeatils_tblBus" Association="Self.FK_tblBusInsuranceDeatils_tblBus">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusOwnerDetails_tblBus" Association="Self.FK_tblBusOwnerDetails_tblBus">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBusOwnerDetails" EntitySet="tblBusOwnerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEmployeeQuick_tblMasterDepartment" Association="Self.FK_tblEmployeeQuick_tblMasterDepartment">
+            <End Role="tblMasterDepartment" EntitySet="tblMasterDepartment" />
+            <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuick" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GMOUMISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblBu">
+          <Key>
+            <PropertyRef Name="busid" />
+          </Key>
+          <Property Name="busid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bus_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="setid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblSet" Relationship="Self.FK_tblBus_tblSets" FromRole="tblBus" ToRole="tblSets" />
+          <NavigationProperty Name="tblBusDetails" Relationship="Self.FK_tblBusDetails_tblBus" FromRole="tblBus" ToRole="tblBusDetails" />
+          <NavigationProperty Name="tblBusInsuranceDeatils" Relationship="Self.FK_tblBusInsuranceDeatils_tblBus" FromRole="tblBus" ToRole="tblBusInsuranceDeatils" />
+          <NavigationProperty Name="tblBusOwnerDetails" Relationship="Self.FK_tblBusOwnerDetails_tblBus" FromRole="tblBus" ToRole="tblBusOwnerDetails" />
+        </EntityType>
+        <EntityType Name="tblBusDetail">
+          <Key>
+            <PropertyRef Name="busdetailid" />
+          </Key>
+          <Property Name="busdetailid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bus_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bus_operating_center" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="registration_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="permit_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="seats" Type="Int32" Nullable="false" />
+          <Property Name="chesis_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="engine_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="road_tax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fitness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="last_modified_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_modified_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="bus_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblBu" Relationship="Self.FK_tblBusDetails_tblBus" FromRole="tblBusDetails" ToRole="tblBus" />
+          <Property Name="bus_registration_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblBusInsuranceDeatil">
+          <Key>
+            <PropertyRef Name="insurance_details_id" />
+          </Key>
+          <Property Name="insurance_details_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="company_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="validity" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="bus_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblBu" Relationship="Self.FK_tblBusInsuranceDeatils_tblBus" FromRole="tblBusInsuranceDeatils" ToRole="tblBus" />
+        </EntityType>
+        <EntityType Name="tblBusOwnerDetail">
+          <Key>
+            <PropertyRef Name="bus_owner_ID" />
+          </Key>
+          <Property Name="bus_owner_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bus_owner_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="owner_father_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="owner_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="owner_contact_number" Type="Int64" />
+          <Property Name="bus_id" Type="Int32" Nullable="false" />
+          <Property Name="entry_amount" Type="Int32" />
+          <Property Name="entry_reciept_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payment_date" Type="DateTime" Precision="0" />
+          <Property Name="security_amount" Type="Int32" />
+          <Property Name="security_money_reciept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remaining_amount" Type="Int32" />
+          <Property Name="gauranter1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gauranter1_bus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gauranter2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gauranter2_bus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblBu" Relationship="Self.FK_tblBusOwnerDetails_tblBus" FromRole="tblBusOwnerDetails" ToRole="tblBus" />
+          <Property Name="building_fund" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="old_bus_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="old_bus_owner_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="previous_building_fund" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblSet">
+          <Key>
+            <PropertyRef Name="setid" />
+          </Key>
+          <Property Name="setid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="setname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="station" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblBus" Relationship="Self.FK_tblBus_tblSets" FromRole="tblSets" ToRole="tblBus" />
+        </EntityType>
+        <Association Name="FK_tblBus_tblSets">
+          <End Role="tblSets" Type="Self.tblSet" Multiplicity="1" />
+          <End Role="tblBus" Type="Self.tblBu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSets">
+              <PropertyRef Name="setid" />
+            </Principal>
+            <Dependent Role="tblBus">
+              <PropertyRef Name="setid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusDetails_tblBus">
+          <End Role="tblBus" Type="Self.tblBu" Multiplicity="1" />
+          <End Role="tblBusDetails" Type="Self.tblBusDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="busid" />
+            </Principal>
+            <Dependent Role="tblBusDetails">
+              <PropertyRef Name="bus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusInsuranceDeatils_tblBus">
+          <End Role="tblBus" Type="Self.tblBu" Multiplicity="1" />
+          <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="busid" />
+            </Principal>
+            <Dependent Role="tblBusInsuranceDeatils">
+              <PropertyRef Name="bus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBusOwnerDetails_tblBus">
+          <End Role="tblBus" Type="Self.tblBu" Multiplicity="1" />
+          <End Role="tblBusOwnerDetails" Type="Self.tblBusOwnerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="busid" />
+            </Principal>
+            <Dependent Role="tblBusOwnerDetails">
+              <PropertyRef Name="bus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GMOUMISEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblBus" EntityType="Self.tblBu" />
+          <EntitySet Name="tblBusDetails" EntityType="Self.tblBusDetail" />
+          <EntitySet Name="tblBusInsuranceDeatils" EntityType="Self.tblBusInsuranceDeatil" />
+          <EntitySet Name="tblBusOwnerDetails" EntityType="Self.tblBusOwnerDetail" />
+          <EntitySet Name="tblSets" EntityType="Self.tblSet" />
+          <AssociationSet Name="FK_tblBus_tblSets" Association="Self.FK_tblBus_tblSets">
+            <End Role="tblSets" EntitySet="tblSets" />
+            <End Role="tblBus" EntitySet="tblBus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusDetails_tblBus" Association="Self.FK_tblBusDetails_tblBus">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBusDetails" EntitySet="tblBusDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusInsuranceDeatils_tblBus" Association="Self.FK_tblBusInsuranceDeatils_tblBus">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBusOwnerDetails_tblBus" Association="Self.FK_tblBusOwnerDetails_tblBus">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBusOwnerDetails" EntitySet="tblBusOwnerDetails" />
+          </AssociationSet>
+          <EntitySet Name="tblEmployeeQuicks" EntityType="GMOUMISModel.tblEmployeeQuick" />
+          <EntitySet Name="tblMasterDepartments" EntityType="GMOUMISModel.tblMasterDepartment" />
+          <AssociationSet Name="FK_tblEmployeeQuick_tblMasterDepartment" Association="GMOUMISModel.FK_tblEmployeeQuick_tblMasterDepartment">
+            <End Role="tblMasterDepartment" EntitySet="tblMasterDepartments" />
+            <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuicks" />
+          </AssociationSet>
+          <EntitySet Name="tbl_CashVivrani" EntityType="GMOUMISModel.tbl_CashVivrani" />
+          <AssociationSet Name="FK_tbl_CashVivrani_tblEmployeeQuick" Association="GMOUMISModel.FK_tbl_CashVivrani_tblEmployeeQuick">
+            <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuicks" />
+            <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_CashVivrani_tblMasterDepartment" Association="GMOUMISModel.FK_tbl_CashVivrani_tblMasterDepartment">
+            <End Role="tblMasterDepartment" EntitySet="tblMasterDepartments" />
+            <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblEmployeeQuick">
+          <Key>
+            <PropertyRef Name="serial_id" />
+          </Key>
+          <Property Name="serial_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="department_id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_by" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_on" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Isdeleted" Type="Boolean" />
+          <NavigationProperty Name="tblMasterDepartment" Relationship="GMOUMISModel.FK_tblEmployeeQuick_tblMasterDepartment" FromRole="tblEmployeeQuick" ToRole="tblMasterDepartment" />
+          <Property Name="confirm_password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_CashVivrani" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblEmployeeQuick" FromRole="tblEmployeeQuick" ToRole="tbl_CashVivrani" />
+        </EntityType>
+        <EntityType Name="tblMasterDepartment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="department_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblEmployeeQuicks" Relationship="GMOUMISModel.FK_tblEmployeeQuick_tblMasterDepartment" FromRole="tblMasterDepartment" ToRole="tblEmployeeQuick" />
+          <NavigationProperty Name="tbl_CashVivrani" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblMasterDepartment" FromRole="tblMasterDepartment" ToRole="tbl_CashVivrani" />
+        </EntityType>
+        <Association Name="FK_tblEmployeeQuick_tblMasterDepartment">
+          <End Type="GMOUMISModel.tblMasterDepartment" Role="tblMasterDepartment" Multiplicity="1" />
+          <End Type="GMOUMISModel.tblEmployeeQuick" Role="tblEmployeeQuick" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterDepartment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblEmployeeQuick">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_CashVivrani">
+          <Key>
+            <PropertyRef Name="vivrani_serial_id" />
+          </Key>
+          <Property Name="vivrani_serial_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_department" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Issubmited" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblEmployeeQuick" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblEmployeeQuick" FromRole="tbl_CashVivrani" ToRole="tblEmployeeQuick" />
+          <NavigationProperty Name="tblMasterDepartment" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblMasterDepartment" FromRole="tbl_CashVivrani" ToRole="tblMasterDepartment" />
+          <Property Name="vivrani_serial_number" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_CashVivrani_tblEmployeeQuick">
+          <End Type="GMOUMISModel.tblEmployeeQuick" Role="tblEmployeeQuick" Multiplicity="1" />
+          <End Type="GMOUMISModel.tbl_CashVivrani" Role="tbl_CashVivrani" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployeeQuick">
+              <PropertyRef Name="serial_id" />
+            </Principal>
+            <Dependent Role="tbl_CashVivrani">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_CashVivrani_tblMasterDepartment">
+          <End Type="GMOUMISModel.tblMasterDepartment" Role="tblMasterDepartment" Multiplicity="1" />
+          <End Type="GMOUMISModel.tbl_CashVivrani" Role="tbl_CashVivrani" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasterDepartment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_CashVivrani">
+              <PropertyRef Name="emp_department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GMOUMISModelStoreContainer" CdmEntityContainer="GMOUMISEntity">
+          <EntitySetMapping Name="tblBus">
+            <EntityTypeMapping TypeName="GMOUMISModel.tblBu">
+              <MappingFragment StoreEntitySet="tblBus">
+                <ScalarProperty Name="busid" ColumnName="busid" />
+                <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+                <ScalarProperty Name="setid" ColumnName="setid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBusDetails">
+            <EntityTypeMapping TypeName="GMOUMISModel.tblBusDetail">
+              <MappingFragment StoreEntitySet="tblBusDetails">
+                <ScalarProperty Name="bus_registration_type" ColumnName="bus_registration_type" />
+                <ScalarProperty Name="busdetailid" ColumnName="busdetailid" />
+                <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+                <ScalarProperty Name="bus_operating_center" ColumnName="bus_operating_center" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+                <ScalarProperty Name="permit_number" ColumnName="permit_number" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="chesis_number" ColumnName="chesis_number" />
+                <ScalarProperty Name="engine_number" ColumnName="engine_number" />
+                <ScalarProperty Name="road_tax" ColumnName="road_tax" />
+                <ScalarProperty Name="fitness" ColumnName="fitness" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="last_modified_by" ColumnName="last_modified_by" />
+                <ScalarProperty Name="last_modified_date" ColumnName="last_modified_date" />
+                <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBusInsuranceDeatils">
+            <EntityTypeMapping TypeName="GMOUMISModel.tblBusInsuranceDeatil">
+              <MappingFragment StoreEntitySet="tblBusInsuranceDeatils">
+                <ScalarProperty Name="insurance_details_id" ColumnName="insurance_details_id" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="company_address" ColumnName="company_address" />
+                <ScalarProperty Name="validity" ColumnName="validity" />
+                <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBusOwnerDetails">
+            <EntityTypeMapping TypeName="GMOUMISModel.tblBusOwnerDetail">
+              <MappingFragment StoreEntitySet="tblBusOwnerDetails">
+                <ScalarProperty Name="previous_building_fund" ColumnName="previous_building_fund" />
+                <ScalarProperty Name="old_bus_owner_name" ColumnName="old_bus_owner_name" />
+                <ScalarProperty Name="old_bus_number" ColumnName="old_bus_number" />
+                <ScalarProperty Name="building_fund" ColumnName="building_fund" />
+                <ScalarProperty Name="bus_owner_ID" ColumnName="bus_owner_ID" />
+                <ScalarProperty Name="bus_owner_name" ColumnName="bus_owner_name" />
+                <ScalarProperty Name="owner_father_name" ColumnName="owner_father_name" />
+                <ScalarProperty Name="owner_address" ColumnName="owner_address" />
+                <ScalarProperty Name="owner_contact_number" ColumnName="owner_contact_number" />
+                <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+                <ScalarProperty Name="entry_amount" ColumnName="entry_amount" />
+                <ScalarProperty Name="entry_reciept_number" ColumnName="entry_reciept_number" />
+                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="security_amount" ColumnName="security_amount" />
+                <ScalarProperty Name="security_money_reciept" ColumnName="security_money_reciept" />
+                <ScalarProperty Name="remaining_amount" ColumnName="remaining_amount" />
+                <ScalarProperty Name="gauranter1" ColumnName="gauranter1" />
+                <ScalarProperty Name="gauranter1_bus" ColumnName="gauranter1_bus" />
+                <ScalarProperty Name="gauranter2" ColumnName="gauranter2" />
+                <ScalarProperty Name="gauranter2_bus" ColumnName="gauranter2_bus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSets">
+            <EntityTypeMapping TypeName="GMOUMISModel.tblSet">
+              <MappingFragment StoreEntitySet="tblSets">
+                <ScalarProperty Name="setid" ColumnName="setid" />
+                <ScalarProperty Name="setname" ColumnName="setname" />
+                <ScalarProperty Name="station" ColumnName="station" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployeeQuicks">
+            <EntityTypeMapping TypeName="GMOUMISModel.tblEmployeeQuick">
+              <MappingFragment StoreEntitySet="tblEmployeeQuick">
+                <ScalarProperty Name="confirm_password" ColumnName="confirm_password" />
+                <ScalarProperty Name="Isdeleted" ColumnName="Isdeleted" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="serial_id" ColumnName="serial_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMasterDepartments">
+            <EntityTypeMapping TypeName="GMOUMISModel.tblMasterDepartment">
+              <MappingFragment StoreEntitySet="tblMasterDepartment">
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_CashVivrani">
+            <EntityTypeMapping TypeName="GMOUMISModel.tbl_CashVivrani">
+              <MappingFragment StoreEntitySet="tbl_CashVivrani">
+                <ScalarProperty Name="vivrani_serial_number" ColumnName="vivrani_serial_number" />
+                <ScalarProperty Name="Issubmited" ColumnName="Issubmited" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="emp_department" ColumnName="emp_department" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="vivrani_serial_id" ColumnName="vivrani_serial_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

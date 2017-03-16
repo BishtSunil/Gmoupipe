@@ -1,0 +1,192 @@
+﻿@model Gmou.Web.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Create Empolyee</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                @using (@Html.BeginForm())
+                {
+
+
+                    <div class="col-md-6">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">First Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Middle Name</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Last Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">First Name</label>
+                                <input id="txtFirstName" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Middle Name</label>
+                                <input id="txtMiddleName" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblLastName">Last Name</label>
+                                <input id="txtEmail" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Cast</label>
+                                <input id="txtCast" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblfathername">Father/Husband Name</label>
+                                <input id="txtFatherName" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblVillage">Village</label>
+                                <input id="txtVillage" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"> Date Of Birth</label>
+                                <input type="password" class="form-control datepicker">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblPostOffice">Post Office</label>
+                                <input id="txtPostOffice" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblPostOffice">Post Office</label>
+                                <input id="txtPostOffice" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblPatti">Patti</label>
+                                <input id="txtPatti" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblThana">Thana</label>
+                                <input id="txtThana" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblTehsil">Tehsil</label>
+                                <input id="txtTehsil" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblDistrict">District</label>
+                                <input id="txtDistrict" type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblDistrict">District</label>
+                                <input id="txtDistrict" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblState">State</label>
+                                <input id="txtState" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblLocalArea">Local Address</label>
+                                <textarea id="txtLocalArea" class="form-control" cols="50" rows="5"></textarea>
+                            </div>
+                          
+                            <div class="form-group">
+                                <label>City</label>
+                                @Html.DropDownListFor(m => m.OfficeID, Model.lstOffices, new { @class = "form-control" })
+                                @*<select class="form-control">
+                                    <option>Select City</option>
+                                    <option>Pauri</option>
+                                    <option>Kotdwar</option>
+                                    <option>Chamoli</option>
+                                    <option>Rishikesh</option>
+                                    <option>Haridwar</option>
+                                    <option>Srinagar</option>
+                                </select>*@
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Zip</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Contact No</label>
+                                <input type="text" class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Home Phone No</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address(Optional)</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Qualification</label>
+                                <label>City</label>
+                                <select class="form-control">
+                                    <option>Select QualifiCation</option>
+                                    <option>Graduate</option>
+                                    <option>Post Graduate</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Date Of Joining</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Employee Type</label>
+                                <label>City</label>
+                                <select class="form-control">
+                                    <option>Select Employee Type</option>
+                                    <option>Full Time</option>
+                                    <option>Part Time</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" style=" padding-right:10px!important;">Mattrial Status</label>
+                                <input type="radio" name="Mattrial Status" value="Single"> Single
+                                <input type="radio" name="Mattrial Status" value="Single"> Married
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Working Office</label>
+                                <textarea class="form-control" cols="50" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Department</label>
+                               @Html.DropDownListFor(m => m.OfficeID, Model.lstDepartment, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-footer clearfix" style="padding-right:30px">
+                        <input type="submit" value="Save" class="pull-right btn btn-primary" style="padding:4px 22px 6px 15px" />
+                    </div>
+
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+        });
+    });
+</script>

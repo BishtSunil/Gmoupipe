@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.VivraniViewModel
+
+@using System.Web;
+<script src="~/Scripts/Admin/general.js"></script>
+<script src="~/Scripts/Admin/validation.js"></script>
+ 
+ <style type="text/css">
+     .txt100{
+         width:100px
+     }
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+    <div class="PageContent">
+        <table cellpadding="0px" cellspacing="0px" width="100%">
+            <tr>
+                <td style="width: 6px;">
+                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                </td>
+                <td class="PageWindowHeader">
+                    <table width="100%" cellpadding="0px" cellspacing="0px">
+                        <tr>
+                            <td width="200px">
+                                &nbsp; <label style="float: left;">Date: @DateTime.Now.ToString("MM/dd/yyyy")</label>
+                            </td>
+                            <td align="right"></td>
+                            <td width="200px">
+                                &nbsp; <label>Cash Sheet: @ViewBag.CashSheetID</label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 6px;">
+                    <img src="~/Images/gridImages/RightCorner.png" />
+                </td>
+            </tr>
+        </table>
+        <div style="height:40px"></div>
+
+    <div class="col-md-12 marT20">
+        <div class="col-md-6">
+            <div class="box box-success">
+                <table cellpadding="0px" cellspacing="0px" width="100%">
+                    <tr>
+                        <td style="width: 6px;">
+                            <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                        </td>
+                        <td class="PageWindowHeader">
+                            <table width="100%" cellpadding="0px" cellspacing="0px">
+                                <tr>
+                                    <td width="200px">
+                                        &nbsp; <label style="float: left;">Other Expences</label>
+                                    </td>
+                                    <td align="right"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 6px;">
+                            <img src="~/Images/gridImages/RightCorner.png" />
+                        </td>
+                    </tr>
+                </table>
+
+                <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                    <tr>
+                        <th>
+                            Cash Sheet Number
+                        </th>
+                        <th>
+                            Bus number
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                    </tr>
+
+                </table>
+                <hr />
+                <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;">Total Amount :- <span id="ttlamt"></span></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-success">
+                <table cellpadding="0px" cellspacing="0px" width="100%">
+                    <tr>
+                        <td style="width: 6px;">
+                            <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                        </td>
+                        <td class="PageWindowHeader">
+                            <table width="100%" cellpadding="0px" cellspacing="0px">
+                                <tr>
+                                    <td width="200px">
+                                        &nbsp; <label style="float: left;">Bus WayBill</label>
+                                    </td>
+                                    <td align="right"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 6px;">
+                            <img src="~/Images/gridImages/RightCorner.png" />
+                        </td>
+                    </tr>
+                </table>
+                <table id="EmployeesTable1" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                    <tr>
+                        <th>
+                            Vivrani Serial Number
+                        </th>
+                        <th>
+                            Bus number
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                    </tr>
+                </table>
+                <hr />
+                <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;" class="">Total Amount :- <span id="ttlamt1"></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                </div>
+            Total Amount :- <span id="totalCash"></span>
+              </div>
+          </div>
+                <div style="height:10px"></div>
+                <button class="pull-right btn btn-primary" type="button" onclick="showOtherExpences()">
+                    Submit All
+                </button>
+
+
+
+            </div>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/WayBill/GetCashSheet",
+                        traditional: true,
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                     
+
+                            //setControlValue("ttlamt", data[0].TotalAmount);
+                            //$("#ttlamtttxt").removeClass("hide")
+                            if (data.otherexepnseslist) {
+                                var daa1 = data.otherexepnseslist;
+                                var len = daa1.length;
+                                var txt = "";
+                                var totalAmount = 0;
+                                if (len > 0) {
+
+                                    for (var i = 0; i < len; i++) {
+                                        txt += "<tr><td>" + daa1[i].CashSheetSerial + "</td><td>" + daa1[i].BusNumber + "</td>"
+                                              + "<td>" + daa1[i].Amount + "</td></tr>";
+                                        totalAmount = totalAmount + daa1[i].Amount
+
+                                    }
+
+
+                                    if (txt != "") {
+                                        $("#EmployeesTable").append(txt);
+
+                                    }
+                                }
+
+                                setControlValue("ttlamt", totalAmount);
+                                //$("#ttlamt").val(totalAmount);
+                                var daa2 = data.cashsheetvivranidetailslust;
+                                var len1 = daa2.length;
+                                var txt1 = "";
+                                var totalAmount1 = 0;
+                                if (len1 > 0) {
+
+                                    for (var i = 0; i < len1; i++) {
+
+
+                                        txt1 += "<tr><td>" + daa2[i].VivraniSerialNumber + "</td><td>" + daa2[i].BusNumber + "</td>"
+                                              + "<td id='dtaAmt'>" + daa2[i].Amount + "</td></tr>";
+                                        totalAmount1 = totalAmount1 + daa2[i].Amount
+
+                                    }
+
+                                    if (txt1 != "") {
+                                        $("#EmployeesTable1").append(txt1);
+
+                                    }
+                                }
+                                setControlValue("ttlamt1", totalAmount1);
+                                var finalAmount = totalAmount1 - totalAmount;
+                         
+                                setControlValue("totalCash", finalAmount);
+                            }
+                            
+                        },
+                        error: function (data) { alert("error" + data) }
+                    });
+                });
+
+            </script>

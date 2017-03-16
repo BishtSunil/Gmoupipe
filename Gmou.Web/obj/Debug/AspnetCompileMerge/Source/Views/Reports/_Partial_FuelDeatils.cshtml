@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Gmou.DomainModelEntities.FuleReopts>
+
+
+
+<table class="table1">
+    <tr>
+        <th>Date</th>
+        <th>Chit No.</th>
+        <th>Amount</th>
+        <th>Debit</th>
+        <th>Credit</th>
+    </tr>
+    @{
+
+        foreach (var item in Model)
+        {
+
+            <tr>
+
+                <td class="td1">@item.FuleDate</td>
+                <td class="td1"> @item.ChitNumber</td>
+                <td class="td1">@item.Amount</td>
+                <td class="td1">0.0</td>
+                <td class="td1">0.0</td>
+
+            </tr>
+        }
+    }
+
+</table>
+<span id="amountFue" style="padding-left:20%; font-weight:bold">Amount: @Model.Sum(m => m.Amount)</span>

@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.VivraniViewModel
+
+@using System.Web;
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/bootstrap.js"></script>
+ <style type="text/css">
+     .txt100{
+         width:100px
+     }
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+
+
+<div id="busInformation">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Other Expences</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                bus number
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlBusNumber", accesskey = "a", style = "width: 135px;" })
+                            </td>
+                            <td>
+                                Amount
+                            </td>
+                            <td>
+                                <input type="text" id="txteExpAmount" />
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div style="height:10px"></div>
+                Discrition <textarea id="txtExpDiscrition" rows="5" style="margin-left: 122px; width: 638px; height: 106px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="box-footer clearfix" style="padding-right:30px">
+    <input type="button" id="btnVivraniDetails" value="Save" class="pull-right btn btn-primary" onclick="saveOtherExpences()" style="padding:4px 22px 6px 15px;margin-left: 40px;" />
+</div>
+<div style="height:10px"></div>
+    <div class="PageContent">
+        <table cellpadding="0px" cellspacing="0px" width="100%">
+            <tr>
+                <td style="width: 6px;">
+                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                </td>
+                <td class="PageWindowHeader">
+                    <table width="100%" cellpadding="0px" cellspacing="0px">
+                        <tr>
+                            <td width="200px">
+                                &nbsp; <label>Other Expences</label>
+                            </td>
+                            <td align="right"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 6px;">
+                    <img src="~/Images/gridImages/RightCorner.png" />
+                </td>
+            </tr>
+        </table>
+        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+            <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                <thead>
+                    <tr>
+                   
+                        <th>
+                          Bus number
+                      </th>
+                        <th>
+                          Discrption
+                        </th>
+                        <th>
+                            Money
+                        </th>
+                    </tr>
+
+                </thead>
+            </table>
+            <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;" class="hide">Total Amount :- <span id="ttlamt">0</span></div>
+        </div>
+        <div style="height:10px"></div>
+        <button class="pull-right btn btn-primary" type="button" onclick="showChkOutCash()">
+            Submit All
+        </button>
+
+
+    </div>
+
+
+
+    
+
+ 
+ 
+<script type="text/javascript">
+    var vivraninumber;
+    $(function () {
+  
+        $(".datepicker").datepicker();
+
+    });
+    $(document).ready(function () {
+  
+        $("#checkbox").change(function () {
+            if (this.checked) {
+                alert("a");
+            }
+        });
+    });
+  
+    
+    function saveOtherExpences()
+    {
+        var obj = new Object();
+        obj.VechileNumber = getControlValueN("ddlBusNumber");
+        obj.ExpAmount = getControlValueN("txteExpAmount");
+        obj.ExpDiscription = getControlValueN("txtExpDiscrition");
+        $.ajax({
+            type: "POST",
+            url: '/WayBill/AddExpDetail',
+            data: JSON.stringify(obj),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert("Done");
+            }
+            
+        });
+  
+    }
+ 
+
+     function saveVivraniDetails()
+    {
+
+        var valid = validateTextBoxes('busInformation');
+        if (valid == true)
+        {
+            debugger;
+            var obj = new Object();
+
+
+            obj.vivraniSerialNumber = @ViewBag.serialnumber
+            obj.VechileNumber = getControlValueN("ddlBusNumber");
+            obj.OwnerName = getControlValueN("ddlownerName");
+            obj.ServiceName = getControlValueN("ddlDipoo");
+            obj.Detail = getControlValueN("txtDetail");
+            obj.DemoDate = getControlValueN("txtDate");
+            obj.WayBillNumber = getControlValueN("txtVbookNo");
+            obj.WayBillSerialNumber = getControlValueN("txtVSerialNo");
+            obj.TicketNumber = getControlValueN("txtTktBookNo");
+            obj.TicketSerailNumber = getControlValueN("txtTicketSerialNo");
+            obj.ServiceTo = getControlValueN("txtArrival");
+            obj.ServiceFrom = getControlValueN("txtDearture");
+            obj.Amount = getControlValueN("txtMoney");
+            obj.TotalAmount = getControlValueN("ttlamt");
+            obj.FuelDate = getControlValueN("txtFuelDate");
+            obj.FuelType = getControlValueN("ddlFuelType");
+            obj.ChttNo = getControlValueN("txtChttNo");
+            obj.FuelQuantity = getControlValueN("txtFuelQuantity");
+            obj.PumpName = getControlValueN("ddlPumpName");
+            obj.FuelPrice = getControlValueN("txtPrice");
+    
+
+           // obj.Reason = getControlValueN("txtReason");
+  $.ajax({
+                type: "POST",
+                url: '/WayBill/AddVivraniDeatil',
+                data: JSON.stringify(obj),
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) { 
+                    alert("Done");
+           
+                    setControlValue("ttlamt", data[0].TotalAmount);
+                    $("#ttlamtttxt").removeClass("hide")
+                    if (data) {
+                        var len = data.length;
+                        var txt = "";
+                        if (len > 0) {
+
+                            for (var i = 0; i < len; i++) {
+
+
+                                txt += "<tr><td>"+ data[i].VechileNumber + "</td>"
+                                        + "<td>" + data[i].WayBillNumber + "</td>" + "<td>" + data[i].TicketSerailNumber + "</td>"
+                                          + "<td>" + data[i].ServiceFrom + "</td>" + "<td>" + data[i].ServiceTo + "</td>"
+                                      + "<td>" + data[i].Amount + "</td></tr>";
+
+
+                            }
+                            
+                            if (txt != "") {
+                                $("#EmployeesTable").append(txt);
+
+                            }
+                        }
+                    }
+
+                },
+                error: OnError
+            });
+}}
+    function showOtherExpences()
+    {
+        var url = "/WayBill/AddOtherExpences";
+        window.location.href = url;
+    }
+    function showChkOutCash()
+    {
+        var url = "/WayBill/chkOutCashDetail";
+        window.location.href = url;
+    }
+</script>

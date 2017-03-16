@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "_busStation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.DipoViewModel
+<div>
+    
+    <table>
+        <tr>
+            <td>Station Name :</td><td>@Html.DropDownListFor(model => model.DipoList, Model.DipoList, new { @class = "txt100PValidBreak", id = "txtDipoo", accesskey = "a", style = "width: 135px;" })
+</td>
+        </tr>
+    </table>
+       
+</div>
+
+<div class="PageContent">
+    <table cellpadding="0px" cellspacing="0px" width="100%">
+        <tr>
+            <td style="width: 6px;">
+                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+            </td>
+            <td class="PageWindowHeader">
+                <table width="100%" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td width="200px">
+                            &nbsp; <label>Bus Transaction Details</label>
+                        </td>
+                        <td align="right"></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 6px;">
+                <img src="~/Images/gridImages/RightCorner.png" />
+            </td>
+        </tr>
+    </table>
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+        <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+            <thead>
+                <tr>
+                    <th>
+                        Bus Number
+                    </th>
+
+
+                    <th>
+                        Owner Name
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script>
+
+   
+    function getBusTransactionDetails( )
+    {
+
+        var StationID = getControlValue("txtDipoo");
+        $.ajax({
+            type: "GET",
+            url: '/Transaction/GetStationDetails?StationId=' + StationID,
+            data: { 'StationId': StationID },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+
+
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {
+                            var regDate = new Date(parseInt(data[i].Date.substr(6))).format("dd-mm-yyyy")
+                            txt += "<tr><td>" + data[i].BusNumber + "</td><td>" + data[i].Amount + "</td><td>" + regDate + "</td><td> " + data[i].Description + "</td></tr>";
+
+
+                        }
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+
+                        }
+                    }
+                }
+            },
+            error: OnError
+        });
+    }
+
+</script>
+

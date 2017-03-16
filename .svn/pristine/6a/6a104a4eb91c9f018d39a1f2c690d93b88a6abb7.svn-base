@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.VivraniViewModel
+
+@using System.Web;
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/bootstrap.js"></script>
+ <style type="text/css">
+     .txt100{
+         width:100px
+     }
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+
+
+ 
+ 
+<div style="height:10px"></div>
+    <div class="PageContent">
+        <table cellpadding="0px" cellspacing="0px" width="100%">
+            <tr>
+                <td style="width: 6px;">
+                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                </td>
+                <td class="PageWindowHeader">
+                    <table width="100%" cellpadding="0px" cellspacing="0px">
+                        <tr>
+                            <td width="200px">
+                                &nbsp; <label>Other Expences</label>
+                            </td>
+                            <td align="right"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 6px;">
+                    <img src="~/Images/gridImages/RightCorner.png" />
+                </td>
+            </tr>
+        </table>
+        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+            <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                <thead>
+                    <tr>
+                   
+                        <th>
+                            Vivrani Serial Number
+                        </th>
+                        <th>
+                            Bus number
+                        </th>
+                        <th>
+                             Amount
+                        </th>
+                    </tr>
+
+                </thead>
+            </table>
+            <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;" class="hide">Total Amount :- <span id="ttlamt">0</span></div>
+        </div>
+        <div style="height:10px"></div>
+        <button class="pull-right btn btn-primary" type="button" onclick="showOtherExpences()">
+            Submit All
+        </button>
+
+
+    </div>
+
+
+
+    
+
+ 
+ 
+<script type="text/javascript">
+    var vivraninumber;
+    $(function () {
+  
+        $(".datepicker").datepicker();
+
+    });
+    $(document).ready(function () {
+  
+        $("#checkbox").change(function () {
+            if (this.checked) {
+                alert("a");
+            }
+        });
+    });
+  
+ 
+ 
+
+    
+    $(document).ready(function () {
+
+        $.ajax({
+            type: "POST",
+            url: '/WayBill/AddVivraniDeatil',
+            data: JSON.stringify(obj),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert("Done");
+
+                setControlValue("ttlamt", data[0].TotalAmount);
+                $("#ttlamtttxt").removeClass("hide")
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+
+                        for (var i = 0; i < len; i++) {
+
+
+                            txt += "<tr><td>" + data[i].vivraniSerialNumber + "</td><td>" + data[i].VechileNumber + "</td>"
+                                  + "<td>" + data[i].Amount + "</td></tr>";
+
+
+                        }
+
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+
+                        }
+                    }
+                }
+
+            },
+            error: OnError
+        });
+    });
+ 
+</script>

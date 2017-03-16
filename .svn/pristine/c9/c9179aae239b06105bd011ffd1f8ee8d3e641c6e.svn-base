@@ -1,0 +1,109 @@
+﻿ @{
+      ViewBag.Title = "Employee1";
+      Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<style type="text/css">
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div class="PageContent">
+    <table cellpadding="0px" cellspacing="0px" width="100%">
+        <tr>
+            <td style="width: 6px;">
+                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+            </td>
+            <td class="PageWindowHeader">
+                <table width="100%" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td width="200px">
+                            &nbsp; <label>Employee</label>
+                        </td>
+                        <td align="right"></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 6px;">
+                <img src="~/Images/gridImages/RightCorner.png" />
+            </td>
+        </tr>
+    </table>
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+        <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+            <thead>
+                <tr>
+                    <th>
+                       Employee Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Department
+                    </th>
+                    <th>
+                        DOB
+                    </th>
+                    <th>
+                        Date Of Joining
+                    </th>
+                    <th style="width:30px">Edit</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dvLoading').fadeOut(2000);
+        $.ajax({
+            type: "POST",
+            url: "/Admin/ShowEmployee",
+            traditional: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                debugger;
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {  
+                            if (data[i].EmployeeID) {
+                                var formateddob = new Date(parseInt(data[i].BirthDate.substr(6))).format("dd/mm/yyyy")
+                              var dojDate = new Date(parseInt(data[i].JoiningDate.substr(6))).format("dd/mm/yyyy")
+                              txt += "<tr><td>" + data[i].Id + "</td>" +"<td>" + data[i].FirstName + " " + data[i].MiddleName + " " + data[i].LastName + "</td><td>" + data[i].LocalAddress + "</td>"
+                                  + "<td>" + data[i].WorkingDepartment + "</td>" + "<td>" + formateddob + "</td>"
+                                + "<td>" + dojDate + "</td>" + "<td><a href='javascript:void(0)' onclick= editEmployee(" +'"'+ data[i].encrpID +'"'+ ")><img src='../Images/edit.png' style='height:20px' /></a></td></tr>";
+                            }
+                        }
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+
+                        }
+                    }
+                }
+            },
+            error: function (data) { alert("error" + data) }
+        });
+
+    });
+
+    function editEmployee(id) {
+        var url = "/admin/EditEmployee?empId=" +id;
+        window.location.href = url;
+    }
+</script>

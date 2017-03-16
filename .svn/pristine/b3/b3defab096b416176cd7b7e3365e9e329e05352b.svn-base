@@ -1,0 +1,86 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Gmou.DomainModelEntities
+{
+    public class Vivirani
+    {
+        public int UserID { get; set; }
+        public int DepartmentId { get; set; }
+        public DateTime Date { get; set; }
+        public bool IsSubmitted { get; set; }
+
+    }
+    public class VivraniDetails
+    {
+        public int vivraniSerialNumber { get; set; }
+
+        public string VechileNumber { get; set; }
+        public string OwnerName { get; set; }
+        public string ServiceName { get; set; }
+        public int WayBillSerialNumber { get; set; }
+        public int WayBillNumber { get; set; }
+        public int TicketSerailNumber { get; set; }
+        public int TicketNumber { get; set; }
+        public string ServiceFrom { get; set; }
+        public string ServiceTo { get; set; }
+        public int Amount { get; set; }
+        public Decimal TotalAmount { get; set; }
+        
+    }
+    public class vivraniDomainModel
+    {
+        public int VivraniSerialNumber { get; set; }
+        public List<BusOwner> BusOwner { get; set; }
+        public List<Bus> bus { get; set; }
+    }
+    public class BusOwner
+    {
+        public int BusOwnerID { get; set; }
+        public string BusOwnerName { get; set; }
+    }
+    public class Bus
+    {
+        public int BusID { get; set; }
+        public string BusNumber { get; set; }
+    }
+    public class VivraniDetailsModel
+    {
+        public int vivraniSerialNumber { get; set; }
+
+        public string VechileNumber { get; set; }
+        public string OwnerName { get; set; }
+        public string ServiceName { get; set; }
+        public int WayBillSerialNumber { get; set; }
+        public int WayBillNumber { get; set; }
+        public int TicketSerailNumber { get; set; }
+        public int TicketNumber { get; set; }
+        public string ServiceFrom { get; set; }
+        public string ServiceTo { get; set; }
+        public Decimal Amount { get; set; }
+        public Decimal TotalAmount { get; set; }
+
+
+        public VivraniDetailsModel( decimal totalamount,int vivraniserialnumber,string vechilenumber ,string ownername,string servicename,int waybillserial, int waybillnumber, 
+            int ticketserial, int ticketnumber, string servicefrom, string serviceto, decimal amount)
+        {
+       
+            this.vivraniSerialNumber = vivraniserialnumber;
+            this.VechileNumber = vechilenumber;
+            this.OwnerName = ownername;
+            this.ServiceName = servicename;
+            this.WayBillSerialNumber = waybillserial;
+            this.WayBillNumber = waybillnumber;
+            this.TicketSerailNumber = ticketnumber;
+            this.ServiceFrom = servicefrom;
+            this.ServiceTo = serviceto;
+            this.Amount = amount;
+            this.TotalAmount = totalamount + amount;
+        }
+
+
+    }
+}

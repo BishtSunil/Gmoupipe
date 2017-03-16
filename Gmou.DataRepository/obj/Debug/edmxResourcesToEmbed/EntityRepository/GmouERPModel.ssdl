@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GMOUMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_bustransfer">
+    <Key>
+      <PropertyRef Name="bustransferid" />
+    </Key>
+    <Property Name="bustransferid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="busid" Type="int" Nullable="false" />
+    <Property Name="depoid" Type="int" Nullable="false" />
+    <Property Name="updateddate" Type="date" Nullable="false" />
+    <Property Name="updatedby" Type="int" Nullable="false" />
+    <Property Name="buscurenntdepo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_CashVivrani">
+    <Key>
+      <PropertyRef Name="vivrani_serial_id" />
+    </Key>
+    <Property Name="vivrani_serial_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vivrani_serial_number" Type="int" Nullable="false" />
+    <Property Name="emp_id" Type="int" Nullable="false" />
+    <Property Name="emp_department" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="Issubmited" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_ChitFuel">
+    <Key>
+      <PropertyRef Name="chitfuelid" />
+    </Key>
+    <Property Name="chitfuelid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vechilenumber" Type="int" Nullable="false" />
+    <Property Name="fueltype" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="price" Type="money" Nullable="false" />
+    <Property Name="otherfule" Type="nvarchar" MaxLength="50" />
+    <Property Name="otherprice" Type="nvarchar" MaxLength="50" />
+    <Property Name="dieselbookno" Type="int" Nullable="false" />
+    <Property Name="dieselchitno" Type="int" Nullable="false" />
+    <Property Name="stationid" Type="int" Nullable="false" />
+    <Property Name="insertedby" Type="int" Nullable="false" />
+    <Property Name="comment" Type="nvarchar" MaxLength="500" />
+    <Property Name="inserteddate" Type="date" />
+  </EntityType>
+  <EntityType Name="tbl_finalStock">
+    <Key>
+      <PropertyRef Name="dailyid" />
+    </Key>
+    <Property Name="dailyid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pumpid" Type="int" Nullable="false" />
+    <Property Name="smeter_petrol" Type="bigint" />
+    <Property Name="emeter_petrol" Type="bigint" />
+    <Property Name="ownersale_petrol" Type="money" />
+    <Property Name="cashsale_petrol" Type="money" />
+    <Property Name="staffsale_petrol" Type="money" />
+    <Property Name="othersale_petrol" Type="money" />
+    <Property Name="ownerquanity_petrol" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="cashquanity_petrol" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="staffquanity_petrol" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="otherquanity_petrol" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="smeter_diesel" Type="bigint" />
+    <Property Name="emeter_diesel" Type="bigint" />
+    <Property Name="ownersale_diesel" Type="money" />
+    <Property Name="cashsale_diesel" Type="money" />
+    <Property Name="staffsale_diesel" Type="money" />
+    <Property Name="othersale_diesel" Type="money" />
+    <Property Name="ownerquanity_diesel" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="cashquanity_diesel" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="staffquanity_diesel" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="otherquanity_diesel" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ownersale_lub" Type="money" />
+    <Property Name="cashsale_lub" Type="money" />
+    <Property Name="staffsale_lub" Type="money" />
+    <Property Name="othersale_lub" Type="money" />
+    <Property Name="ownerquanity_lub" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="cashquanity_lub" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="staffquanity_lub" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="otherquanity_lub" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="summary_date" Type="date" />
+    <Property Name="inserted_by" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_masterDepo">
+    <Key>
+      <PropertyRef Name="dipoid" />
+    </Key>
+    <Property Name="dipoid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="diponame" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_ShortName">
+    <Key>
+      <PropertyRef Name="shortID" />
+    </Key>
+    <Property Name="shortID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShrtName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBus">
+    <Key>
+      <PropertyRef Name="busid" />
+    </Key>
+    <Property Name="busid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bus_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="setid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBusDetails">
+    <Key>
+      <PropertyRef Name="busdetailid" />
+    </Key>
+    <Property Name="busdetailid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bus_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="bus_operating_center" Type="int" Nullable="false" />
+    <Property Name="registration_date" Type="date" Nullable="false" />
+    <Property Name="permit_number" Type="nvarchar" MaxLength="50" />
+    <Property Name="model" Type="nvarchar" MaxLength="50" />
+    <Property Name="seats" Type="int" Nullable="false" />
+    <Property Name="chesis_number" Type="nvarchar" MaxLength="50" />
+    <Property Name="engine_number" Type="nvarchar" MaxLength="50" />
+    <Property Name="road_tax" Type="nvarchar" MaxLength="50" />
+    <Property Name="fitness" Type="nvarchar" MaxLength="50" />
+    <Property Name="isDeleted" Type="bit" />
+    <Property Name="last_modified_by" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_modified_date" Type="date" Nullable="false" />
+    <Property Name="bus_id" Type="int" Nullable="false" />
+    <Property Name="bus_registration_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="bus_registration_number" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblBusInsuranceDeatils">
+    <Key>
+      <PropertyRef Name="insurance_details_id" />
+    </Key>
+    <Property Name="insurance_details_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="company_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="company_address" Type="nvarchar" MaxLength="500" />
+    <Property Name="validity" Type="date" Nullable="false" />
+    <Property Name="bus_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBusOwnerDetails">
+    <Key>
+      <PropertyRef Name="bus_owner_ID" />
+    </Key>
+    <Property Name="bus_owner_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bus_owner_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="owner_father_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="owner_address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="owner_contact_number" Type="bigint" />
+    <Property Name="bus_id" Type="int" Nullable="false" />
+    <Property Name="entry_amount" Type="int" />
+    <Property Name="entry_reciept_number" Type="nvarchar" MaxLength="50" />
+    <Property Name="payment_date" Type="date" />
+    <Property Name="security_amount" Type="int" />
+    <Property Name="security_money_reciept" Type="nvarchar" MaxLength="50" />
+    <Property Name="remaining_amount" Type="int" />
+    <Property Name="gauranter1" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gauranter1_bus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gauranter2" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gauranter2_bus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="building_fund" Type="nvarchar" MaxLength="50" />
+    <Property Name="old_bus_number" Type="nvarchar" MaxLength="50" />
+    <Property Name="old_bus_owner_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="previous_building_fund" Type="nvarchar" MaxLength="50" />
+    <Property Name="emi" Type="int" />
+  </EntityType>
+  <EntityType Name="tblEmployeeQuick">
+    <Key>
+      <PropertyRef Name="serial_id" />
+    </Key>
+    <Property Name="serial_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="middle_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="confirm_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="created_on" Type="date" Nullable="false" />
+    <Property Name="date_of_birth" Type="date" Nullable="false" />
+    <Property Name="Isdeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMasterDepartment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="department_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSets">
+    <Key>
+      <PropertyRef Name="setid" />
+    </Key>
+    <Property Name="setid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="setname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="station" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tmp_cashvivrani">
+    <Key>
+      <PropertyRef Name="vivrani_id" />
+    </Key>
+    <Property Name="vivrani_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="amount" Type="money" Nullable="false" />
+    <Property Name="cash_vivrani_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="bus_number" Type="int" Nullable="false" />
+    <Property Name="waybill_insertdate" Type="date" Nullable="false" />
+    <Property Name="waybillno" Type="int" Nullable="false" />
+    <Property Name="waybillserialno" Type="int" Nullable="false" />
+    <Property Name="ticket_from" Type="int" Nullable="false" />
+    <Property Name="ticket_to" Type="int" Nullable="false" />
+    <Property Name="station_from" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="station_to" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="vivrani_inserted_date" Type="date" Nullable="false" />
+    <Property Name="emp_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_CashVivrani_tblEmployeeQuick">
+    <End Role="tblEmployeeQuick" Type="Self.tblEmployeeQuick" Multiplicity="1" />
+    <End Role="tbl_CashVivrani" Type="Self.tbl_CashVivrani" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployeeQuick">
+        <PropertyRef Name="serial_id" />
+      </Principal>
+      <Dependent Role="tbl_CashVivrani">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_CashVivrani_tblMasterDepartment">
+    <End Role="tblMasterDepartment" Type="Self.tblMasterDepartment" Multiplicity="1" />
+    <End Role="tbl_CashVivrani" Type="Self.tbl_CashVivrani" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMasterDepartment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_CashVivrani">
+        <PropertyRef Name="emp_department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBus_tblSets">
+    <End Role="tblSets" Type="Self.tblSets" Multiplicity="1" />
+    <End Role="tblBus" Type="Self.tblBus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSets">
+        <PropertyRef Name="setid" />
+      </Principal>
+      <Dependent Role="tblBus">
+        <PropertyRef Name="setid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusDetails_tblBus">
+    <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+    <End Role="tblBusDetails" Type="Self.tblBusDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusDetails">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusInsuranceDeatils_tblBus">
+    <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+    <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusInsuranceDeatils">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusOwnerDetails_tblBus">
+    <End Role="tblBus" Type="Self.tblBus" Multiplicity="1" />
+    <End Role="tblBusOwnerDetails" Type="Self.tblBusOwnerDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusOwnerDetails">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployeeQuick_tblMasterDepartment">
+    <End Role="tblMasterDepartment" Type="Self.tblMasterDepartment" Multiplicity="1" />
+    <End Role="tblEmployeeQuick" Type="Self.tblEmployeeQuick" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMasterDepartment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblEmployeeQuick">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_GetButDebitStatusByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="GMOUMISModelStoreContainer">
+    <EntitySet Name="tbl_bustransfer" EntityType="Self.tbl_bustransfer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_CashVivrani" EntityType="Self.tbl_CashVivrani" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_ChitFuel" EntityType="Self.tbl_ChitFuel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_finalStock" EntityType="Self.tbl_finalStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_masterDepo" EntityType="Self.tbl_masterDepo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_ShortName" EntityType="Self.tbl_ShortName" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBus" EntityType="Self.tblBus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBusDetails" EntityType="Self.tblBusDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBusInsuranceDeatils" EntityType="Self.tblBusInsuranceDeatils" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBusOwnerDetails" EntityType="Self.tblBusOwnerDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmployeeQuick" EntityType="Self.tblEmployeeQuick" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMasterDepartment" EntityType="Self.tblMasterDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSets" EntityType="Self.tblSets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tmp_cashvivrani" EntityType="Self.tmp_cashvivrani" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_CashVivrani_tblEmployeeQuick" Association="Self.FK_tbl_CashVivrani_tblEmployeeQuick">
+      <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuick" />
+      <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_CashVivrani_tblMasterDepartment" Association="Self.FK_tbl_CashVivrani_tblMasterDepartment">
+      <End Role="tblMasterDepartment" EntitySet="tblMasterDepartment" />
+      <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBus_tblSets" Association="Self.FK_tblBus_tblSets">
+      <End Role="tblSets" EntitySet="tblSets" />
+      <End Role="tblBus" EntitySet="tblBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusDetails_tblBus" Association="Self.FK_tblBusDetails_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusDetails" EntitySet="tblBusDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusInsuranceDeatils_tblBus" Association="Self.FK_tblBusInsuranceDeatils_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusOwnerDetails_tblBus" Association="Self.FK_tblBusOwnerDetails_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusOwnerDetails" EntitySet="tblBusOwnerDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployeeQuick_tblMasterDepartment" Association="Self.FK_tblEmployeeQuick_tblMasterDepartment">
+      <End Role="tblMasterDepartment" EntitySet="tblMasterDepartment" />
+      <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuick" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

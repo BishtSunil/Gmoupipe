@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "_fuelentry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.FuelViewModel
+@using System.Web;
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+
+
+<div id="OtherExpences">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Cash Fuel Sale</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+
+
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tr>
+                        <td>Station Name</td>
+                        <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
+
+                        <td>Fuel Type:</td>
+                        <td>
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlfuellst", accesskey = "a", style = "width: 135px;" })
+
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Quantity:</td>
+                        <td><input id="txtfuelquantity" class="  txt100" /></td>
+                   
+                   
+                        <td>Price:</td>
+                        <td><input id="txtfuelprice" class="  txt100" /></td>
+                    </tr>
+                    <tr>
+                        <td>Vechile Number:</td>
+                        <td><input id="txtvechileno" class="  txt100" /></td>
+
+
+                        <td>Comment:</td>
+                        <td><input id="txtcomment" class="  txt100" /></td>
+                    </tr>
+
+                </table>
+              
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<button class="pull-right btn btn-primary" type="button" onclick="SaveFuelDetails()">
+    Save
+</button>
+
+
+<table cellpadding="0px" cellspacing="0px" width="100%">
+    <tr>
+        <td style="width: 6px;">
+            <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+        </td>
+        <td class="PageWindowHeader">
+            <table width="100%" cellpadding="0px" cellspacing="0px">
+                <tr>
+                    <td width="200px">
+                        &nbsp; <label>Fuel Recieving Entry</label>
+                    </td>
+                    <td align="right"></td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 6px;">
+            <img src="~/Images/gridImages/RightCorner.png" />
+        </td>
+    </tr>
+</table>
+
+<div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+    <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+        <thead>
+            <tr>
+                <th>
+                    Pump Name
+                </th>
+                <th>
+                    Fuel Type
+                </th>
+                <th>
+                    Price
+                </th>
+
+
+                <th>
+                    Inserted Date
+                </th>
+
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script>
+    var fuelprice;
+    $(function () {
+        debugger;
+        GetFuelDetails();
+        $(".datepicker").datepicker();
+
+
+    });
+    function SaveFuelDetails() {
+        debugger;
+ 
+        var obj = new Object();
+        obj.Pumpid = getControlValueN("ddlpumplst");
+        obj.FuelType = getControlValueN("ddlfuellst");
+        obj.PriceRecieved = getControlValueN("txtfuelprice");
+        obj.QuantityRecieved = getControlValueN("txtfuelquantity");
+        obj.VechileNumber = getControlValueN("txtvechileno");
+        obj.Comment = getControlValueN("txtcomment");
+
+        $.ajax({
+            type: "POST",
+            url: '/Fuel/SaveFuelRecievingDetails',
+            data: JSON.stringify(obj),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data) {
+                    alert("done");
+                }
+
+
+            }
+        });
+    }
+
+    function GetFuelDetails() {
+        debugger;
+
+        $.ajax({
+            type: "GET",
+            url: '/Fuel/GetAllFuelRateList',
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+
+                        for (var i = 0; i < len; i++) {
+
+                            var regDate = new Date(parseInt(data[i].UpdatedDate.substr(6))).format("dd/mm/yyyy")
+                            txt += "<tr><td>" + data[i].PumpName + "</td><td>" + data[i].FuelType + "</td>"
+                                  + "<td>" + data[i].Price + "</td><td>" + regDate + "</td>"
+                                  + "<td><a href='javascript:void(0)' onclick= editFuel(" + '"' + data[i].fueltypeid + '"' + ")><img src='../Images/edit.png' style='height:20px' /></a></td></tr>";
+
+                        }
+
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+
+                        }
+                    }
+                }
+
+
+            }
+        });
+    }
+    function editFuel(id) {
+        debugger;
+        var url = "/admin/EditFuel?fuelId=" +id;
+        window.location.href = url;
+    }
+</script>
+

@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GMOUMISModelStoreContainer" CdmEntityContainer="GMOUMISEntity">
+    <EntitySetMapping Name="tblBus">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBu">
+        <MappingFragment StoreEntitySet="tblBus">
+          <ScalarProperty Name="busid" ColumnName="busid" />
+          <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+          <ScalarProperty Name="setid" ColumnName="setid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBusInsuranceDeatils">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBusInsuranceDeatil">
+        <MappingFragment StoreEntitySet="tblBusInsuranceDeatils">
+          <ScalarProperty Name="insurance_details_id" ColumnName="insurance_details_id" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="company_address" ColumnName="company_address" />
+          <ScalarProperty Name="validity" ColumnName="validity" />
+          <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSets">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblSet">
+        <MappingFragment StoreEntitySet="tblSets">
+          <ScalarProperty Name="setid" ColumnName="setid" />
+          <ScalarProperty Name="setname" ColumnName="setname" />
+          <ScalarProperty Name="station" ColumnName="station" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployeeQuicks">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblEmployeeQuick">
+        <MappingFragment StoreEntitySet="tblEmployeeQuick">
+          <ScalarProperty Name="confirm_password" ColumnName="confirm_password" />
+          <ScalarProperty Name="Isdeleted" ColumnName="Isdeleted" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="serial_id" ColumnName="serial_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterDepartments">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblMasterDepartment">
+        <MappingFragment StoreEntitySet="tblMasterDepartment">
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_CashVivrani">
+      <EntityTypeMapping TypeName="GMOUMISModel.tbl_CashVivrani">
+        <MappingFragment StoreEntitySet="tbl_CashVivrani">
+          <ScalarProperty Name="vivrani_serial_number" ColumnName="vivrani_serial_number" />
+          <ScalarProperty Name="Issubmited" ColumnName="Issubmited" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="emp_department" ColumnName="emp_department" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="vivrani_serial_id" ColumnName="vivrani_serial_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_masterDepo">
+      <EntityTypeMapping TypeName="GMOUMISModel.tbl_masterDepo">
+        <MappingFragment StoreEntitySet="tbl_masterDepo">
+          <ScalarProperty Name="diponame" ColumnName="diponame" />
+          <ScalarProperty Name="dipoid" ColumnName="dipoid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ChitFuel">
+      <EntityTypeMapping TypeName="GMOUMISModel.tbl_ChitFuel">
+        <MappingFragment StoreEntitySet="tbl_ChitFuel">
+          <ScalarProperty Name="inserteddate" ColumnName="inserteddate" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="insertedby" ColumnName="insertedby" />
+          <ScalarProperty Name="stationid" ColumnName="stationid" />
+          <ScalarProperty Name="dieselchitno" ColumnName="dieselchitno" />
+          <ScalarProperty Name="dieselbookno" ColumnName="dieselbookno" />
+          <ScalarProperty Name="otherprice" ColumnName="otherprice" />
+          <ScalarProperty Name="otherfule" ColumnName="otherfule" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="fueltype" ColumnName="fueltype" />
+          <ScalarProperty Name="vechilenumber" ColumnName="vechilenumber" />
+          <ScalarProperty Name="chitfuelid" ColumnName="chitfuelid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBusDetails">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBusDetail">
+        <MappingFragment StoreEntitySet="tblBusDetails">
+          <ScalarProperty Name="bus_registration_number" ColumnName="bus_registration_number" />
+          <ScalarProperty Name="bus_registration_type" ColumnName="bus_registration_type" />
+          <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+          <ScalarProperty Name="last_modified_date" ColumnName="last_modified_date" />
+          <ScalarProperty Name="last_modified_by" ColumnName="last_modified_by" />
+          <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+          <ScalarProperty Name="fitness" ColumnName="fitness" />
+          <ScalarProperty Name="road_tax" ColumnName="road_tax" />
+          <ScalarProperty Name="engine_number" ColumnName="engine_number" />
+          <ScalarProperty Name="chesis_number" ColumnName="chesis_number" />
+          <ScalarProperty Name="seats" ColumnName="seats" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="permit_number" ColumnName="permit_number" />
+          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+          <ScalarProperty Name="bus_operating_center" ColumnName="bus_operating_center" />
+          <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+          <ScalarProperty Name="busdetailid" ColumnName="busdetailid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBusOwnerDetails">
+      <EntityTypeMapping TypeName="GMOUMISModel.tblBusOwnerDetail">
+        <MappingFragment StoreEntitySet="tblBusOwnerDetails">
+          <ScalarProperty Name="emi" ColumnName="emi" />
+          <ScalarProperty Name="previous_building_fund" ColumnName="previous_building_fund" />
+          <ScalarProperty Name="old_bus_owner_name" ColumnName="old_bus_owner_name" />
+          <ScalarProperty Name="old_bus_number" ColumnName="old_bus_number" />
+          <ScalarProperty Name="building_fund" ColumnName="building_fund" />
+          <ScalarProperty Name="gauranter2_bus" ColumnName="gauranter2_bus" />
+          <ScalarProperty Name="gauranter2" ColumnName="gauranter2" />
+          <ScalarProperty Name="gauranter1_bus" ColumnName="gauranter1_bus" />
+          <ScalarProperty Name="gauranter1" ColumnName="gauranter1" />
+          <ScalarProperty Name="remaining_amount" ColumnName="remaining_amount" />
+          <ScalarProperty Name="security_money_reciept" ColumnName="security_money_reciept" />
+          <ScalarProperty Name="security_amount" ColumnName="security_amount" />
+          <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+          <ScalarProperty Name="entry_reciept_number" ColumnName="entry_reciept_number" />
+          <ScalarProperty Name="entry_amount" ColumnName="entry_amount" />
+          <ScalarProperty Name="bus_id" ColumnName="bus_id" />
+          <ScalarProperty Name="owner_contact_number" ColumnName="owner_contact_number" />
+          <ScalarProperty Name="owner_address" ColumnName="owner_address" />
+          <ScalarProperty Name="owner_father_name" ColumnName="owner_father_name" />
+          <ScalarProperty Name="bus_owner_name" ColumnName="bus_owner_name" />
+          <ScalarProperty Name="bus_owner_ID" ColumnName="bus_owner_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_finalStock">
+      <EntityTypeMapping TypeName="GMOUMISModel.tbl_finalStock">
+        <MappingFragment StoreEntitySet="tbl_finalStock">
+          <ScalarProperty Name="inserted_by" ColumnName="inserted_by" />
+          <ScalarProperty Name="summary_date" ColumnName="summary_date" />
+          <ScalarProperty Name="otherquanity_lub" ColumnName="otherquanity_lub" />
+          <ScalarProperty Name="staffquanity_lub" ColumnName="staffquanity_lub" />
+          <ScalarProperty Name="cashquanity_lub" ColumnName="cashquanity_lub" />
+          <ScalarProperty Name="ownerquanity_lub" ColumnName="ownerquanity_lub" />
+          <ScalarProperty Name="othersale_lub" ColumnName="othersale_lub" />
+          <ScalarProperty Name="staffsale_lub" ColumnName="staffsale_lub" />
+          <ScalarProperty Name="cashsale_lub" ColumnName="cashsale_lub" />
+          <ScalarProperty Name="ownersale_lub" ColumnName="ownersale_lub" />
+          <ScalarProperty Name="otherquanity_diesel" ColumnName="otherquanity_diesel" />
+          <ScalarProperty Name="staffquanity_diesel" ColumnName="staffquanity_diesel" />
+          <ScalarProperty Name="cashquanity_diesel" ColumnName="cashquanity_diesel" />
+          <ScalarProperty Name="ownerquanity_diesel" ColumnName="ownerquanity_diesel" />
+          <ScalarProperty Name="othersale_diesel" ColumnName="othersale_diesel" />
+          <ScalarProperty Name="staffsale_diesel" ColumnName="staffsale_diesel" />
+          <ScalarProperty Name="cashsale_diesel" ColumnName="cashsale_diesel" />
+          <ScalarProperty Name="ownersale_diesel" ColumnName="ownersale_diesel" />
+          <ScalarProperty Name="emeter_diesel" ColumnName="emeter_diesel" />
+          <ScalarProperty Name="smeter_diesel" ColumnName="smeter_diesel" />
+          <ScalarProperty Name="otherquanity_petrol" ColumnName="otherquanity_petrol" />
+          <ScalarProperty Name="staffquanity_petrol" ColumnName="staffquanity_petrol" />
+          <ScalarProperty Name="cashquanity_petrol" ColumnName="cashquanity_petrol" />
+          <ScalarProperty Name="ownerquanity_petrol" ColumnName="ownerquanity_petrol" />
+          <ScalarProperty Name="othersale_petrol" ColumnName="othersale_petrol" />
+          <ScalarProperty Name="staffsale_petrol" ColumnName="staffsale_petrol" />
+          <ScalarProperty Name="cashsale_petrol" ColumnName="cashsale_petrol" />
+          <ScalarProperty Name="ownersale_petrol" ColumnName="ownersale_petrol" />
+          <ScalarProperty Name="emeter_petrol" ColumnName="emeter_petrol" />
+          <ScalarProperty Name="smeter_petrol" ColumnName="smeter_petrol" />
+          <ScalarProperty Name="pumpid" ColumnName="pumpid" />
+          <ScalarProperty Name="dailyid" ColumnName="dailyid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tmp_cashvivrani">
+      <EntityTypeMapping TypeName="GMOUMISModel.tmp_cashvivrani">
+        <MappingFragment StoreEntitySet="tmp_cashvivrani">
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="vivrani_inserted_date" ColumnName="vivrani_inserted_date" />
+          <ScalarProperty Name="station_to" ColumnName="station_to" />
+          <ScalarProperty Name="station_from" ColumnName="station_from" />
+          <ScalarProperty Name="ticket_to" ColumnName="ticket_to" />
+          <ScalarProperty Name="ticket_from" ColumnName="ticket_from" />
+          <ScalarProperty Name="waybillserialno" ColumnName="waybillserialno" />
+          <ScalarProperty Name="waybillno" ColumnName="waybillno" />
+          <ScalarProperty Name="waybill_insertdate" ColumnName="waybill_insertdate" />
+          <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+          <ScalarProperty Name="cash_vivrani_id" ColumnName="cash_vivrani_id" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="vivrani_id" ColumnName="vivrani_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetButDebitStatusByDate" FunctionName="GMOUMISModel.Store.sp_GetButDebitStatusByDate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GMOUMISModel.sp_GetButDebitStatusByDate_Result">
+          <ScalarProperty Name="bus_number" ColumnName="bus_number" />
+          <ScalarProperty Name="busid" ColumnName="busid" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tbl_ShortName">
+      <EntityTypeMapping TypeName="GMOUMISModel.tbl_ShortName">
+        <MappingFragment StoreEntitySet="tbl_ShortName">
+          <ScalarProperty Name="ShrtName" ColumnName="ShrtName" />
+          <ScalarProperty Name="shortID" ColumnName="shortID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bustransfer">
+      <EntityTypeMapping TypeName="GMOUMISModel.tbl_bustransfer">
+        <MappingFragment StoreEntitySet="tbl_bustransfer">
+          <ScalarProperty Name="buscurenntdepo" ColumnName="buscurenntdepo" />
+          <ScalarProperty Name="updatedby" ColumnName="updatedby" />
+          <ScalarProperty Name="updateddate" ColumnName="updateddate" />
+          <ScalarProperty Name="depoid" ColumnName="depoid" />
+          <ScalarProperty Name="busid" ColumnName="busid" />
+          <ScalarProperty Name="bustransferid" ColumnName="bustransferid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

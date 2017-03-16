@@ -1,0 +1,118 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.Sql;
+using Gmou.DomainModelEntities;
+using System.Data.SqlClient;
+
+namespace Gmou.DataRepository
+{
+    public class WayBillRepository
+    {
+        public static int GetVivraniSerial(Vivirani model)
+        {
+            int serialID;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_CashVivraniMaster", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("emp_id", model.UserID);
+                    cmd.Parameters.AddWithValue("emp_department", model.DepartmentId);
+                    cmd.Parameters.AddWithValue("Issubmited", model.IsSubmitted);
+                    conn.Open();
+                    serialID =(int) cmd.ExecuteScalar();
+                    conn.Close();
+                }
+            }
+            return serialID;
+        }
+        public static IEnumerable<VivraniDetailsModel> SaveVivraniDetails(VivraniDetails model)
+        {
+            int vivraniID;
+            decimal totalamount = model.TotalAmount;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_SaveVivraniDetails", conn))
+                {
+	
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("vivraniSerialNumber", model.vivraniSerialNumber);
+                    cmd.Parameters.AddWithValue("vechilenumber", model.VechileNumber);
+                    cmd.Parameters.AddWithValue("ownername", model.OwnerName);
+                     cmd.Parameters.AddWithValue("servicename", model.ServiceName);
+                    cmd.Parameters.AddWithValue("waybillseial", model.WayBillSerialNumber);
+                    cmd.Parameters.AddWithValue("waybillno", model.WayBillNumber);
+                     cmd.Parameters.AddWithValue("ticketno", model.TicketNumber);
+                    cmd.Parameters.AddWithValue("ticketserial", model.TicketSerailNumber);
+                    cmd.Parameters.AddWithValue("jfrom", model.ServiceFrom);
+                cmd.Parameters.AddWithValue("jto", model.ServiceTo);
+                cmd.Parameters.AddWithValue("amount", model.Amount);
+                    conn.Open();
+                    try
+                    {
+                        vivraniID = (int)cmd.ExecuteScalar();
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        throw;
+                    }
+                   
+                    conn.Close();
+                }
+            }
+            return GetUpdatedData(vivraniID, totalamount);
+        }
+        private static IEnumerable<VivraniDetailsModel> GetUpdatedData(int id, decimal totalamount)
+        {
+             int vivraniID;
+            
+             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+             {
+                 using (var cmd = new SqlCommand("sp_GetUpdatedVivrani", conn))
+                 {
+                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                     cmd.Parameters.AddWithValue("entryID", id);
+                     SqlDataReader dr;
+                     conn.Open();
+                     try
+                     {
+                          dr = cmd.ExecuteReader();
+                     }
+                     catch (Exception ex)
+                     {
+
+                         throw;
+                     }
+                    
+                     while (dr.Read())
+                     {
+                       
+                         yield return new VivraniDetailsModel(totalamount,
+                              (Convert.ToInt32(dr["vivraniSerialNumber"])),
+                            dr["vechilenumber"].ToString(),
+
+                            (dr["ownername"].ToString()),
+                            dr["servicename"].ToString(),
+                             (Convert.ToInt32(dr["waybillseial"])),
+                         (Convert.ToInt32(dr["waybillno"])),
+                          (Convert.ToInt32(dr["ticketno"])),
+                         (Convert.ToInt32(dr["ticketserial"])),
+                            (dr["jfrom"].ToString()),
+                            dr["jto"].ToString(),
+
+                            Convert.ToDecimal( (dr["amount"]))
+                        );
+                     }
+                     conn.Close();
+                 }
+             }
+	
+
+        }
+    }
+}

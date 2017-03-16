@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = "Buses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<script src="~/Scripts/jquery-2.1.4.js"></script>
+<script src="~/Scripts/Admin/general.js"></script>
+<script src="~/Scripts/Admin/validation.js"></script>
+<style type="text/css">
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div style="height:10px"></div>
+<div class="col-md-12 marT20">
+    <div class="panel panel-default box-success">
+        <div class="panel-body">
+            
+                 
+                    <div class="form-group">
+                        <label id="lblSearchbyseats"><input type="checkbox" id="Searchbyseats" onchange="showTextBox('Searchbyseats')" />Serch By seats</label>
+                        <input type="text" id="txtSearchbyseats" class="hide" />
+                    </div>
+                    <div class="form-group">
+                        <label id="lblSearchbymodelNo"><input type="checkbox" id="SearchbymodelNo" onchange="showTextBox('SearchbymodelNo')" />Serch By Model</label>
+                        <input type="text" id="txtSearchbymodelNo" class="hide" />
+
+                    </div>
+                    <div class="form-group">
+                        <label id="lblSearchbyArea"><input type="checkbox" id="SearchbyArea" onchange="showTextBox('SearchbyArea')" />Serch By Area </label>
+                        <select id="txtSearchbyArea" class="hide">
+                            <option>Select Set</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+            <div class="form-group"> 
+                <input type="button" id="btnsearch" value="Search"  class="hide" onclick="searchBuses()"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="PageContent hide" id="grdBuses">
+
+    <table cellpadding="0px" cellspacing="0px" width="100%">
+        <tr>
+            <td style="width: 6px;">
+                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+            </td>
+            <td class="PageWindowHeader">
+                <table width="100%" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td width="200px">
+                            &nbsp; <label>Buses</label>
+                        </td>
+                        <td align="right"></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 6px;">
+                <img src="~/Images/gridImages/RightCorner.png" />
+            </td>
+        </tr>
+    </table>
+
+
+
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+        <table id="BusTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+            <thead>
+                <tr>
+                    <th>
+                        Bus Number
+                    </th>
+                    <th>
+                        Station
+                    </th>
+                    <th>
+                        Owner Name
+                    </th>
+                    <th>
+                        Registartion Date
+                    </th>
+                    <th>
+                        Number of seats
+                    </th>
+
+                    <th style="width:30px">Edit</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div id="myModal" class="modal fade" style="padding-top:129px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Not Found!!</h4>
+            </div>
+            <div class="modal-body">
+
+                <p>No Record Found<span id="spnEmpID"></span></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function showTextBox(id)
+    {
+        if (!$("#" + id).is(':checked')) {
+            $("#lblSearchbymodelNo").removeClass("hide");
+            $("#lblSearchbyseats").removeClass("hide");
+            $("#lblSearchbyArea").removeClass("hide");
+            $("#txt" + id).addClass("hide");
+            $("#btnsearch").addClass("hide");
+            $("#btnsearch").removeAttr("findby", id);
+
+        }
+        else {
+            if (id == "Searchbyseats")
+            {
+                $("#lblSearchbymodelNo").addClass("hide");
+                $("#lblSearchbyArea").addClass("hide");
+            }
+            if (id == "SearchbymodelNo") {
+                $("#lblSearchbyArea").addClass("hide");
+                $("#lblSearchbyseats").addClass("hide");
+            }
+            if (id == "SearchbyArea") {
+                $("#lblSearchbymodelNo").addClass("hide");
+                $("#lblSearchbyseats").addClass("hide");
+            }
+         
+            $("#txt" + id).removeClass("hide");
+            $("#btnsearch").removeClass("hide");
+            $("#btnsearch").attr("findby", id);
+            
+            
+        }
+    }
+    function searchBuses()
+    {
+        var type =""
+        if ($("#btnsearch").attr("findby") == "Searchbyseats")
+        {
+             type = "seats"
+        }
+        else if ($("#btnsearch").attr("findby") == "SearchbymodelNo")
+        {
+            type = "model"
+        }
+        else
+        {
+            type = "setid"
+        }
+
+        var values = getControlValue("txt" + $("#btnsearch").attr("findby"));
+         
+  
+  
+            $.ajax({
+                type: "POST",
+                url: "/Buses/GetAllBusesBySearch",
+                data: JSON.stringify({ condition: values, type: type }),
+                traditional: true,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data) {
+                     
+                        var len = data.length;
+                        var txt = "";
+                        if (len > 0) {
+                            $("#grdBuses").removeClass('hide');
+                            for (var i = 0; i < len; i++) {
+                                if (data[i].bus_id) {
+                                    var regDate = new Date(parseInt(data[i].registration_date.substr(6))).format("dd/mm/yyyy")
+                                    txt += "<tr><td>" + data[i].bus_number + "</td>" + "<td>" + data[i].bus_operating_center + "</td><td>" + data[i].bus_owner_name + "</td>"
+                                        + "<td>" + regDate + "</td>" + "<td>" + data[i].seats + "</td>"
+                                     + "<td><a href='javascript:void(0)' onclick= editBuses(" + '"' + data[i].busEncrpId + '"' + ")><img src='../Images/edit.png' style='height:20px' /></a></td>"
+                                     + "<td><a href='javascript:void(0)' onclick= searchBus(" + '"' + data[i].busEncrpNumber + '"' + ")> <i class='fa fa-eye'></i></td></tr>";
+                                }
+                            }
+                            if (txt != "") {
+                                $("#BusTable").append(txt);
+
+                            }
+                        }
+                        else {
+                            $("#grdBuses").addClass('hide');
+
+                            $("#myModal").modal('show');
+                        }
+                    }
+                   
+
+                },
+                error: function (data) { alert("error" + data) }
+            });
+    }
+ 
+</script>

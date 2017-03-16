@@ -1,0 +1,92 @@
+﻿
+$(document).ready(function () {
+    loadMerchantAccount();
+
+});
+
+function loadMerchantAccount() {
+    debugger;
+    callJTemplateServiceMethod("", "/Admin", "getAllEmployee", "divBinBaseExist", "divBinBaseExistTemplateJS", true, formatData, "", "", "");
+}
+
+
+ 
+function editMerchantAccount(id) {
+    $("#ancMerchantAccount").click();
+    callServiceMethod("{'id':'" + id + "'}", "ManageMerchantAccounts.aspx", "getMerchantAccountDetail", successMethodAfterInsertUpdate, "", "", false, "", true, editMerchantAccount_scs, "", "", "");
+}
+
+function editMerchantAccount_scs(p1, p2, p3, datas) {
+    $("#txtMidBankMdl").focus();
+    setControlValue("spMrchantAccId", datas.d.encId);
+        setControlValue("txtMidBankMdl", datas.d.MIdBank);
+        setControlValue("txtPlatformMdl", datas.d.Platform);
+        setControlValue("txtGatewayIdMdl", datas.d.GatewayIdBank);
+        setControlValue("txtGatewayName", datas.d.GatewayName);
+        setControlValue("txtLogin", datas.d.Login);
+        setControlValue("txtTransactionKey", datas.d.TransactionKey);
+        setControlValue("ddlAccountType", datas.d.AccountType);
+        setControlValue("ddlMerchants", datas.d.MerchantId);
+        setControlValue("txtBankDBA", datas.d.BankDba);
+        setControlValue("txtBankDBAEmail", datas.d.BankDbaEmail);
+}
+
+function saveMerchantAccountDetails() {
+  
+    var obj = new Object();
+    obj.encId = getControlValue("spMrchantAccId");
+    obj.MIdBank = getControlValue("txtMidBankMdl");
+    obj.Platform = getControlValue("txtPlatformMdl");
+    obj.GatewayIdBank = getControlValue("txtGatewayIdMdl");
+    obj.GatewayName = getControlValue("txtGatewayName");
+    obj.Login = getControlValue("txtLogin");
+    obj.TransactionKey = getControlValue("txtTransactionKey");
+    obj.AccountType = getControlValue("ddlAccountType");
+    obj.MerchantId = getControlValue("ddlMerchants");
+    obj.BankDba = getControlValue("txtBankDBA");
+    obj.BankDbaEmail = getControlValue("txtBankDBAEmail");
+    callServiceMethod("{'ma':" + JSON.stringify(obj) + "}", "ManageMerchantAccounts.aspx", "saveMerchantAccountsDetails", successMethodAfterInsertUpdate, "", "", false, "", true, saveMerchantAccountDetails_scs, "", "", "");
+}
+
+function saveMerchantAccountDetails_scs(p1, p2, p3, datas) {
+    clearAllTextBoxes("mdlMarchantAccount");
+    document.getElementById("btnCloseMdl").click();
+    loadMerchantAccount();
+ }
+
+ 
+function getAllMerchants() {
+    callServiceMethodForDDl("", "ManageMerchantAccounts.aspx", "getAllMerchants", "ddlMerchants", true, getAllPlatform, "");
+}
+
+function getAllPlatform() {
+    callServiceMethodForDDl("", "ManageMerchantAccounts.aspx", "getAllPlatform", "txtPlatformMdl", false, "", "");
+}
+
+
+
+function changeLabelNames(thisId) {
+    var attr1 = getDDLSelectedAttr(thisId, "labelAttr");
+    var labelAttr = attr1.split(',');
+    $("#lblLogin").html(labelAttr[0]);
+    $("#lblKey").html(labelAttr[1]);
+}
+
+function getDDLSelectedAttr(ddlId, attrName) {
+    var ddl = document.getElementById(ddlId);
+    if (ddl.selectedIndex == -1) {
+        if (ddl[0].value == "0" || ddl[0].value == "") {
+            if (ddl[0].value) {
+                ddl[0].value
+            }
+            else return "";
+        }
+        else {
+            return "";
+        }
+    }
+    else {
+        return $("#" + ddlId + " option:nth-child(" + (parseInt(ddl.selectedIndex) + 1) + ")").attr(attrName);
+
+    }
+}

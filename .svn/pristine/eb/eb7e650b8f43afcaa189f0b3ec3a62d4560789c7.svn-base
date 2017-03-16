@@ -1,0 +1,451 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.DomainModelEntities.AllSalesModel
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<script src="~/Scripts/GmouScripts/autocompletedropdown.js"></script>
+
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+
+
+    <style type="text/css" > .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+<div id=" " style="height:100%;overflow-y:auto">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Patrol</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Start Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStart" />
+                            </td>
+                            <td>
+                                End Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolEnd" />
+                            </td>
+                            <td>
+                               <input type="button" id="btnpetrolshow" value="Show" onclick="GetPetrolCash(1);" />
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                Cash
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolCash" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolCashQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolCashAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Owner sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtPatrolOwner" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOwnerQty" value=@Model.PetrolQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOwnerAmount" value=@Model.PetrolAmount />
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Staff Sale
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStaff" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStaffQty" value=@Model.SPetrolQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStaffAmount" value=@Model.SPetrolAmount />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other Sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtPatrolOtherSale" class="" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOtherQty" value=@Model.OPetrolQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOtherAmount" value=@Model.OPetrolAmount />
+                            </td>
+                        </tr>
+                      
+                        <tr>
+                            <td>
+                                Water Dip
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolWaterDip" />
+                            </td>
+                            <td>
+                                Other Summary
+                            </td>
+                            <td>
+                                <input type="text" id="txtPatrolOther" />
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Diesel</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Start Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStart" />
+                            </td>
+                            <td>
+                                End Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselEnd" />
+                            </td>
+                            <td>
+                                <input type="button" id="btnpetrolshow" value="Show" onclick="GetDieselCash(2);" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cash
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselCash" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselCashQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselCashAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Owner sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtDieselOwner" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOwnerQty" value=@Model.DeiselQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOwnerAmount" value=@Model.DeiselAmount />
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Staff Sale
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStaff" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStaffQty" value=@Model.SDeiselQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStaffAmount" value=@Model.SDeiselAmount />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other Sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtDieselOtherSale" class="" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOtherQty" value=@Model.ODeiselQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOtherAmount" value=@Model.ODeiselAmount />
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td>
+                                Water Dip
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselWaterDip" />
+                            </td>
+                            <td>
+                                Other Summary
+                            </td>
+                            <td>
+                                <input type="text" id="txtDieselOther" />
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Lubricant</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                Cash
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtLubCash" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubCashQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubCashAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Owner sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtLubOwner" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOwnerQty" value=@Model.LubricantQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOwnerAmount" value=@Model.LubricantAmount />
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Staff Sale
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtLubStaff" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubStaffQty" value=@Model.SLubricantQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubStaffAmount" value=@Model.SLubricantAmount />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other Sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtLubOtherSale" class="" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOtherQty" value=@Model.OLubricantQuantity />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOtherAmount" value=@Model.OLubricantAmount />
+                            </td>
+                        </tr>
+                      
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default">Save</button>
+        @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+    </div>
+</div>
+<script>
+
+
+    function GetPetrolCash(fuelid)
+    {
+       
+        debugger;
+        var obj = new Object();
+        
+
+        
+
+
+       
+        obj.PumpId = 1;
+        obj.FuelType = fuelid;
+        obj.StartReading = getControlValueN("txtPatrolStart");
+        obj.EndReading = getControlValueN("txtPatrolEnd");
+        obj.ChitQuanity = getControlValueN("txtPatrolOwnerQty");
+        obj.StaffQuanity = getControlValueN("txtPatrolStaffQty");
+        obj.OtherQuanity = getControlValueN("txtPatrolOtherQty");
+        
+        
+        $.ajax({
+            type: "POST",
+            url: '/Fuel/GetCashDetails',
+
+            dataType: "json",
+            data: JSON.stringify(obj),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data) {
+                    $('#txtPatrolCashAmount').val(data.Price);
+                    $('#txtPatrolCashQty').val(data.Quantity);
+                }
+            }
+
+        });
+    }
+    function GetDieselCash(fuelid) {
+
+        debugger;
+        var obj = new Object();
+
+        obj.PumpId = 1;// getCongetControlValueN("ddlfuellst");trolValueN("ddlpumplst");
+        obj.FuelType = fuelid;
+        obj.StartReading = getControlValueN("txtDieselStart");
+        obj.EndReading = getControlValueN("txtDieselEnd");
+        obj.ChitQuanity = getControlValueN("txtDieselOwnerQty");
+        obj.StaffQuanity = getControlValueN("txtDieselStaffQty");
+        obj.OtherQuanity = getControlValueN("txtDieselOtherQty");
+
+        $.ajax({
+            type: "POST",
+            url: '/Fuel/GetCashDetails',
+
+            dataType: "json",
+            data: JSON.stringify(obj),
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data) {
+                    $('#txtDieselCashAmount').val(data.Price);
+                    $('#txtDieselCashQty').val(data.Quantity);
+                }
+            }
+
+        });
+    }
+</script>
+
+ 
+ 

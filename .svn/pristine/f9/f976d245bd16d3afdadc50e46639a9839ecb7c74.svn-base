@@ -1,0 +1,374 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.VivraniViewModel
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<script src="~/Scripts/GmouScripts/autocompletedropdown.js"></script>
+
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+
+
+    <style type="text/css" > .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+<div id=" " style="height:100px;overflow-y:auto">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Patrol</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                Cash
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolCash" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolCashQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolCashAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Owner sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtPatrolOwner" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOwnerQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOwnerAmount" />
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Staff Sale
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStaff" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStaffQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStaffAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other Sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtPatrolOtherSale" class="" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOtherQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolOtherAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Start Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolStart" />
+                            </td>
+                            <td>
+                                End Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolEnd" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Water Dip
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtPatrolWaterDip" />
+                            </td>
+                            <td>
+                                Other Summary
+                            </td>
+                            <td>
+                                <input type="text" id="txtPatrolOther" />
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Diesel</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                Cash
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselCash" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselCashQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselCashAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Owner sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtDieselOwner" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOwnerQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOwnerAmount" />
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Staff Sale
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStaff" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStaffQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStaffAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other Sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtDieselOtherSale" class="" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOtherQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtDieselOtherAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Start Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselStart" />
+                            </td>
+                            <td>
+                                End Meter Reading
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselEnd" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Water Dip
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtDieselWaterDip" />
+                            </td>
+                            <td>
+                                Other Summary
+                            </td>
+                            <td>
+                                <input type="text" id="txtDieselOther" />
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Lubricant</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                Cash
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtLubCash" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubCashQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubCashAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Owner sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtLubOwner" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOwnerQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOwnerAmount" />
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Staff Sale
+                            </td>
+                            <td>
+                                <input type="text" class="" id="txtLubStaff" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubStaffQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubStaffAmount" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other Sale
+                            </td>
+                            <td>
+                                <input type="text" id="txtLubOtherSale" class="" />
+                            </td>
+                            <td>Qty</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOtherQty" />
+                            </td>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="" id="txtLubOtherAmount" />
+                            </td>
+                        </tr>
+                      
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default">Save</button>
+        @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+    </div>
+</div>
+
+
+ 
+ 

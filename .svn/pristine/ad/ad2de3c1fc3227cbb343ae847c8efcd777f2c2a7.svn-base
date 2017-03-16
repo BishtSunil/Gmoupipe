@@ -1,0 +1,288 @@
+﻿@model Gmou.Web.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "RegisterEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ <style type="text/css">
+     .uploadButton {
+         align-items: flex-start;
+         text-align: center;
+         cursor: default;
+         color: buttontext;
+         -webkit-appearance: push-button;
+         border-image-source: initial;
+         border-image-slice: initial;
+         border-image-width: initial;
+         border-image-outset: initial;
+         border-image-repeat: initial;
+         background-color: buttonface;
+         box-sizing: border-box;
+         padding: 1px 6px;
+         border-style: outset;
+         border-color: buttonface;
+     }
+     .input-append, .input-prepend {
+         margin-bottom: 5px;
+         font-size: 0;
+         white-space: nowrap;
+     }
+ </style>
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+ <script src="~/Scripts/BlockUI/jquery.blockUI.js" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <link href="~/Content/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Uploader-style.css" type="text/css" rel="stylesheet" />
+
+    <script src="~/Scripts/bootstrap.js" type="text/javascript"></script>
+<script src="~/Scripts/Uploader/Uploader-Common.js" type="text/javascript"></script>
+<script src="~/Scripts/Uploader/Uploader-single.core.js" type="text/javascript"></script>
+<script src="~/Scripts/Uploader/Uploder-multiple.core.js" type="text/javascript"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+ <script src="~/Scripts/LTE/BlockUI/jquery.blockUI.js" type="text/javascript"></script>
+ <script src="~/Scripts/LTE/ui/date.format.js"></script>
+     <div id="employeeContainer" style="padding-top:10px">
+    <div class="box-footer clearfix" style="padding-right:30px">
+        <input type="button" id="btnClearEmployee" value="Cancel" class="pull-right btn btn-primary" style="padding:4px 22px 6px 15px" />
+        <input type="submit" id="btnSaveEmployeeRegistration" value="Register" class="pull-right btn btn-primary" style="padding:4px 22px 6px 15px;margin-right:25px" />
+        <input type="hidden" name="hiddenID" id="IDhidden">
+    </div>
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Register Employee</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <req>*</req> First Name
+                            </td>
+                            <td>
+                                <input type="text" class="txt100PValidBreak" accesskey="a" id="txtFirstName" onkeypress="return alphanumeric(event)">
+                            </td>
+                            <td class="alignR_PR5">
+                                Middle Name
+                            </td>
+                            <td>
+                                <input type="text" class="txt100PValidBreak" id="txtMiddleName" onkeypress="return alphanumeric(event)">
+                            </td>
+                            <td class="alignR_PR5">
+                                Last Name
+                            </td>
+                            <td>
+                                <input type="text" class="txt100PValidBreak" id="txtLastName" onkeypress="return alphanumeric(event)" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <req>*</req>  User Name
+                            </td>
+                            <td>
+                                <input id="txtUserName" type="text" accesskey="a" class="txt100PValidBreak" onkeypress="return alphanumeric(event)">
+                            </td>
+                            <td class="alignR_PR5">
+                                <req>*</req> Password
+                            </td>
+                            <td>
+                                <input id="txtPwd" type="text" accesskey="a" class="txt100PValidBreak">
+                            </td>
+                            <td class="alignR_PR5">
+                                <req>*</req> Confirm Password
+                            </td>
+                            <td>
+                                <input id="txtConfirmPassword" accesskey="a" type="text" onchange="chkPassword()" class="txt100PValidBreak">
+                                <div id="pwdMatch" class="alert-danger"></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="alignR_PR5">
+                                <req>*</req> Date Of Birth
+                            </td>
+                            <td>
+                                <input type="text" class="txt100PValidBreak datepicker" accesskey="a" id="txtDob">
+                                <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                            </td>
+                            <td>
+                                <req>*</req> Department
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(m => m.OfficeID, Model.lstDepartment, new { @class = "txt100PValidBreak", id = "ddlDepartMent", accesskey="a", style = "width: 135px;" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+  
+         <style type="text/css">
+             .modal-box {
+                 width: 650px;
+             }
+
+             .grdTrHoverEffect td, .grdTrHoverEffect th {
+                 text-align: left;
+                 line-height: 30px;
+             }
+
+             .grdTrHoverEffect tr:nth-child(2n+1) td {
+                 background-color: #eeeeee;
+             }
+         </style>
+         <div class="PageContent">
+             <table cellpadding="0px" cellspacing="0px" width="100%">
+                 <tr>
+                     <td style="width: 6px;">
+                         <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                     </td>
+                     <td class="PageWindowHeader">
+                         <table width="100%" cellpadding="0px" cellspacing="0px">
+                             <tr>
+                                 <td width="200px">
+                                     &nbsp; <label>Employee</label>
+                                 </td>
+                                 <td align="right"></td>
+                             </tr>
+                         </table>
+                     </td>
+                     <td style="width: 6px;">
+                         <img src="~/Images/gridImages/RightCorner.png" />
+                     </td>
+                 </tr>
+             </table>
+             <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+                 <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                     <thead>
+                         <tr>                      
+                             <th>
+                                 Name
+                             </th>
+                             <th>
+                                 User Name 
+                             </th>
+                             <th>
+                               Password
+                             </th>
+                             <th>
+                                 Department
+                             </th>
+                             <th>
+                                 DOB
+                             </th>
+                             
+                             <th>Edit</th>
+                             <th style="width:30px">View</th>
+                         </tr>
+                     </thead>
+                 </table>
+             </div>
+         </div>
+         <div style="height:20px"></div>
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#dvLoading').fadeOut(2000);
+                 $.ajax({
+                     type: "POST",
+                     url: "/Admin/GetAllRegisteredEmployees",
+                     traditional: true,
+                     contentType: 'application/json; charset=utf-8',
+                     success: function (data) {
+                         debugger;
+                         if (data) {
+                             var len = data.length;
+                             var txt = "";
+                             if (len > 0) {
+                                 for (var i = 0; i < len; i++) {
+                                     if (data[i].EmployeeID) {
+                                         var formateddob = new Date(parseInt(data[i].BirthDate.substr(6))).format("dd/mm/yyyy")
+                                         var dojDate = new Date(parseInt(data[i].JoiningDate.substr(6))).format("dd/mm/yyyy")
+                                         txt += "<tr><td>" + data[i].Id + "</td>" + "<td>" + data[i].FirstName + " " + data[i].MiddleName + " " + data[i].LastName + "</td><td>" + data[i].LocalAddress + "</td>"
+                                             + "<td>" + data[i].WorkingDepartment + "</td>" + "<td>" + formateddob + "</td>"
+                                        + "<td><a href='javascript:void(0)' onclick= editEmployee(" + '"' + data[i].encrpID + '"' + ")><img src='../Images/edit.png' style='height:20px' /></a></td>"
+                                              + "<td><a href='javascript:void(0)' onclick= searchEmployee(" + '"' + data[i].Id + '"' + ")> <i class='fa fa-eye'></i></td></tr>";
+                                     }
+                                 }
+                                 if (txt != "") {
+                                     $("#EmployeesTable").append(txt);
+
+                                 }
+                             }
+                         }
+                     },
+                     error: function (data) { alert("error" + data) }
+                 });
+
+             });
+
+             function editEmployee(id) {
+                 var url = "/admin/EditEmployee?empId=" + id;
+                 window.location.href = url;
+             }
+             function searchEmployee(id) {
+                 var url = "/admin/SearchEmployee?empId=" + id;
+                 window.location.href = url;
+             }
+         </script>
+</div>
+  <div id="createView">
+ </div>
+ <div id="myModal" class="modal fade" style="padding-top:129px">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <h4 class="modal-title">Success!!</h4>
+             </div>
+             <div class="modal-body">
+
+                 <p>Employee Has been Addedd Succfully<span id="spnEmpID"></span></p>
+
+             </div>
+         </div>
+     </div>
+     </div>
+
+  <script type="text/javascript">
+   
+      $(function () {
+          $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy', maxDate: new Date() });
+      });
+
+
+     $(document).ready(function () {
+
+     });
+ 
+     function chkPassword()
+     {
+         var pwd = getControlValueN('txtPwd');
+         var confirmPwd = getControlValueN('txtConfirmPassword');
+         if(pwd != confirmPwd)
+         {
+             $("#pwdMatch").removeClass("alert-success");
+             $("#pwdMatch").addClass("alert-danger");
+ 
+             setControlValue('pwdMatch',"Password does not match");
+         }
+         else
+         {
+             $("#pwdMatch").removeClass("alert-danger");
+             $("#pwdMatch").addClass("alert-success");
+             setControlValue('pwdMatch', "Password match");
+         }
+     }
+
+     $('#btnClearEmployee').click(function () {
+         resetTextBoxes();
+     });
+</script>
+ 

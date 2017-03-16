@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Gmou.DomainModelEntities
+{
+    public class SupportModel
+    {
+    }
+    public class PlacesModel
+    {
+        public int SerialNumber { get; set; }
+        public string Name { get; set; }
+
+        public PlacesModel(int serial, string places)
+        {
+            this.SerialNumber = serial;
+            this.Name = places;
+        }
+    }
+
+    public class CashSheetSummaryModel
+    {
+
+        public decimal Amount { get; set; }
+        public DateTime Dates { get; set; }
+
+
+        public CashSheetSummaryModel(decimal amount, DateTime dates)
+        {
+
+            this.Dates = dates;
+            this.Amount = amount;
+        }
+    }
+
+    public class ServiceRoute
+    {
+
+        public string StationFrom { get; set; }
+        public string StationTo { get; set; }
+        public decimal Fare { get; set; }
+        public int Distance { get; set; }
+        public int EmployeeID { get; set; }
+
+        public ServiceRoute(string stationfrom, string stationto, decimal fare, int distance)
+        {
+            this.StationFrom = stationfrom;
+            this.StationTo = stationto;
+            this.Fare = fare;
+            this.Distance = distance;
+
+        }
+    }
+}

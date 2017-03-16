@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GMOUMISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblBu">
+    <Key>
+      <PropertyRef Name="busid" />
+    </Key>
+    <Property Name="busid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bus_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="setid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblBusInsuranceDeatils" Relationship="Self.FK_tblBusInsuranceDeatils_tblBus" FromRole="tblBus" ToRole="tblBusInsuranceDeatils" />
+    <NavigationProperty Name="tblBusOwnerDetails" Relationship="Self.FK_tblBusOwnerDetails_tblBus" FromRole="tblBus" ToRole="tblBusOwnerDetails" />
+  </EntityType>
+  <EntityType Name="tblBusDetail">
+    <Key>
+      <PropertyRef Name="busdetailid" />
+    </Key>
+    <Property Name="busdetailid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bus_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="bus_operating_center" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="registration_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="permit_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="seats" Type="Int32" Nullable="false" />
+    <Property Name="chesis_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="engine_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="road_tax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fitness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isDeleted" Type="Boolean" />
+    <Property Name="last_modified_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="last_modified_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="insurance_details_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblBusDetails1" Relationship="Self.FK_tblBusDetails_tblBusDetails" FromRole="tblBusDetails" ToRole="tblBusDetails1" />
+    <NavigationProperty Name="tblBusDetail1" Relationship="Self.FK_tblBusDetails_tblBusDetails" FromRole="tblBusDetails1" ToRole="tblBusDetails" />
+    <NavigationProperty Name="tblBusInsuranceDeatil" Relationship="Self.FK_tblBusDetails_tblBusInsuranceDeatils" FromRole="tblBusDetails" ToRole="tblBusInsuranceDeatils" />
+  </EntityType>
+  <EntityType Name="tblBusInsuranceDeatil">
+    <Key>
+      <PropertyRef Name="insurance_details_id" />
+    </Key>
+    <Property Name="insurance_details_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="company_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="company_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="validity" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="bus_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblBu" Relationship="Self.FK_tblBusInsuranceDeatils_tblBus" FromRole="tblBusInsuranceDeatils" ToRole="tblBus" />
+    <NavigationProperty Name="tblBusDetails" Relationship="Self.FK_tblBusDetails_tblBusInsuranceDeatils" FromRole="tblBusInsuranceDeatils" ToRole="tblBusDetails" />
+  </EntityType>
+  <EntityType Name="tblBusOwnerDetail">
+    <Key>
+      <PropertyRef Name="bus_owner_ID" />
+    </Key>
+    <Property Name="bus_owner_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bus_owner_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="owner_father_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="owner_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="owner_contact_number" Type="Int64" />
+    <Property Name="bus_id" Type="Int32" Nullable="false" />
+    <Property Name="entry_amount" Type="Int32" Nullable="false" />
+    <Property Name="entry_reciept_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="payment_date" Type="DateTime" Precision="0" />
+    <Property Name="security_amount" Type="Int32" Nullable="false" />
+    <Property Name="security_money_reciept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="remaining_amount" Type="Int32" />
+    <Property Name="gauranter1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gauranter1_bus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gauranter2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gauranter2_bus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblBu" Relationship="Self.FK_tblBusOwnerDetails_tblBus" FromRole="tblBusOwnerDetails" ToRole="tblBus" />
+  </EntityType>
+  <Association Name="FK_tblBusInsuranceDeatils_tblBus">
+    <End Role="tblBus" Type="Self.tblBu" Multiplicity="1" />
+    <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusInsuranceDeatils">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusOwnerDetails_tblBus">
+    <End Role="tblBus" Type="Self.tblBu" Multiplicity="1" />
+    <End Role="tblBusOwnerDetails" Type="Self.tblBusOwnerDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusOwnerDetails">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusDetails_tblBusDetails">
+    <End Role="tblBusDetails" Type="Self.tblBusDetail" Multiplicity="1" />
+    <End Role="tblBusDetails1" Type="Self.tblBusDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblBusDetails">
+        <PropertyRef Name="busdetailid" />
+      </Principal>
+      <Dependent Role="tblBusDetails1">
+        <PropertyRef Name="busdetailid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusDetails_tblBusInsuranceDeatils">
+    <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatil" Multiplicity="1" />
+    <End Role="tblBusDetails" Type="Self.tblBusDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBusInsuranceDeatils">
+        <PropertyRef Name="insurance_details_id" />
+      </Principal>
+      <Dependent Role="tblBusDetails">
+        <PropertyRef Name="insurance_details_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GMOUMISEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblBus" EntityType="Self.tblBu" />
+    <EntitySet Name="tblBusDetails" EntityType="Self.tblBusDetail" />
+    <EntitySet Name="tblBusInsuranceDeatils" EntityType="Self.tblBusInsuranceDeatil" />
+    <EntitySet Name="tblBusOwnerDetails" EntityType="Self.tblBusOwnerDetail" />
+    <AssociationSet Name="FK_tblBusInsuranceDeatils_tblBus" Association="Self.FK_tblBusInsuranceDeatils_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusOwnerDetails_tblBus" Association="Self.FK_tblBusOwnerDetails_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusOwnerDetails" EntitySet="tblBusOwnerDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusDetails_tblBusDetails" Association="Self.FK_tblBusDetails_tblBusDetails">
+      <End Role="tblBusDetails" EntitySet="tblBusDetails" />
+      <End Role="tblBusDetails1" EntitySet="tblBusDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusDetails_tblBusInsuranceDeatils" Association="Self.FK_tblBusDetails_tblBusInsuranceDeatils">
+      <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+      <End Role="tblBusDetails" EntitySet="tblBusDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

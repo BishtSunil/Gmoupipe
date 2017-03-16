@@ -1,0 +1,244 @@
+﻿@model Gmou.Web.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ <script src="~/Scripts/LTE/jquery2.2.min.js" type="text/javascript"></script>
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Create Empolyee</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+               
+
+
+                    <div class="col-md-4">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">First Name</label>
+                                <input type="text" class="form-control" id="txtFirstName">
+                            </div>   
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"> Date Of Birth</label>
+                                <input type="text" class="form-control datepicker" id="txtDob">
+                            </div>    
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Qualification</label>
+                                <select class="form-control" id="ddlQualification">
+                                    <option>Select QualifiCation</option>
+                                    <option>Graduate</option>
+                                    <option>Post Graduate</option>
+
+                                </select>
+                            </div>  
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Pan</label>
+                                <input type="text" class="form-control" id="txtPAN">
+                            </div>
+                       
+
+                            <div class="form-group">
+                                <label for="lblVillage">Village</label>
+                                <input id="txtVillage" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblThana">Thana</label>
+                                <input id="txtThana" type="text" class="form-control">
+                            </div><div class="form-group">
+    <label for="lblTehsil">Tehsil</label>
+    <input id="txtTehsil" type="text" class="form-control">
+</div>
+                            <div class="form-group">
+                                <label for="lblState">State</label>
+                                <input id="txtState" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Working Office</label>
+                                @Html.DropDownListFor(m => m.OfficeID, Model.lstOffices, new { @class = "form-control",id="ddlWorkingOffice" })               </div>
+                            <div class="form-group">
+                                <label for="lblThana">Wife Name</label>
+                                <input id="txtWifeName" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblState">Next Kin</label>
+                                <input id="txtNextkin" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Middle Name</label>
+                                <input type="text" class="form-control" id="txtMiddleName">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Cast</label>
+                                <input id="txtCast" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" >Department</label>
+                                @Html.DropDownListFor(m => m.OfficeID, Model.lstDepartment, new { @class = "form-control",id="ddlDepartMent" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Date Of Joining</label>
+                                <input type="text" class="form-control" id="txtDoj">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblPostOffice">Post Office</label>
+                                <input id="txtPostOffice" type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblDistrict">District</label>
+                                <input id="txtDistrict" type="text" class="form-control">
+                            </div>
+
+                          
+                            <div class="form-group">
+                                <label for="lblLocalArea">Local Address</label>
+                                <textarea id="txtLocalAddress" class="form-control" cols="50" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblThana">Wife DOB</label>
+                                <input id="txtWifeDob" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblState">Nominee Name</label>
+                                <input id="txtNomineeName" type="text" class="form-control">
+                            </div>
+                      
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="lblIdentification1"> Identification Mark 1</label>
+                <input id="txtIdentificationmark1" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lblThana">Identification Mark 2</label>
+                <input id="txtIdentificationmark2" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input type="text" class="form-control" id="txtLastName" />
+            </div>
+
+            <div class="form-group">
+                <label for="lblfathername">Father/Husband Name</label>
+                <input id="txtFatherName" type="text" class="form-control">
+            </div>
+         
+            <div class="form-group">
+                <label for="exampleInputPassword1">Contact No</label>
+                <input type="text" class="form-control" id="txtContactNo">
+            </div> 
+
+            <div class="form-group">
+                <label for="lblPatti">Patti</label>
+                <input id="txtPatti" type="text" class="form-control">
+            </div>
+ 
+            <div class="form-group">
+                <label for="exampleInputEmail1">UAN</label>
+                <input type="text" class="form-control" id="txtUAN">
+            </div>
+           
+            <div class="form-group">
+                <label for="lblThana">Nominee Identification 1</label>
+                <input id="txtNominee1" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lblState">Nominee Identification 2</label>
+                <input id="txtNominee2" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lblThana">Relation Ship</label>
+                <input id="txtRelationShip" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lblState">Member Name</label>
+                <input id="txtMemberName" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+                    <div class="box-footer clearfix" style="padding-right:30px">
+                        <input type="submit" id="btnSaveEmployee" value="Save" class="pull-right btn btn-primary" style="padding:4px 22px 6px 15px" />
+                    </div>
+ 
+
+            </div>
+
+
+        </div>
+    </div>
+ 
+
+
+ <script type="text/javascript">
+     
+     $(document).ready(function () {
+         debugger;
+     var id = '@ViewBag.empId'
+         if(id != null)
+         {
+             $.ajax({
+                 type: 'GET',
+                 data: { 'empId': id },
+                 url: "/Admin/EditEmployeeDetail",
+
+                 success: function (data) {
+                     debugger;
+                     var dob = new Date(parseInt(data[0].BirthDate.substr(6)));
+                    
+                     //$("#employeedetails").removeClass("hidden");
+                     setControlValue("txtFirstName", data[0].FirstName)
+                     setControlValue("txtMiddleName", data[0].MiddleName)
+                     setControlValue("txtLastName", data[0].LastName)
+                     setControlValue("txtCast", data[0].Caste)
+                     setControlValue("txtFatherName", data[0].FatherName)
+                     setControlValue("txtVillage", data[0].Village)
+                     setControlValue("txtPostOffice", data[0].PostOffice)
+                     setControlValue("txtPatti", data[0].Patti)
+                     setControlValue("txtThana", data[0].thana)
+                     setControlValue("txtTehsil", data[0].Tehsil)
+                     setControlValue("txtDistrict", data[0].District)
+                     setControlValue("txtState", data[0].State)
+                     setControlValue("txtDob", dob)
+                     setControlValue("txtDoj", data[0].JoiningDate)
+                     setControlValue("txtContactNo", data[0].Contact)
+                     setControlValue("ddlQualification", data[0].Qaulification)
+                     setControlValue("txtLocalAddress", data[0].LocalAddress)
+                     setControlValue("txtIdentificationmark1", data[0].IdentificationMark1)
+                     setControlValue("txtIdentificationmark2", data.IdentificationMark2)
+                     setControlValue("txtUAN", data[0].UAN)
+                     setControlValue("txtPAN", data[0].PAN)
+                     setControlValue("ddlWorkingOffice", data[0].WorkingOffice)
+                    // setControlValue("lblretirementdate", data[0].UAN)
+                     setControlValue("ddlDepartMent", data[0].WorkingDepartment)
+                     setControlValue("txtWifeName", data[0].WifeName)
+                     setControlValue("txtNextkin", data[0].NextToKin)
+                     setControlValue("txtWifeDob", data[0].WifeDOB)
+                     setControlValue("txtNomineeName", data[0].NomineeName)
+                     setControlValue("txtNominee1", data[0].NomineeIdentificationMark1)
+                     setControlValue("txtNominee2", data[0].NomineeIdentificationMark2)
+                     setControlValue("txtRelationShip", data[0].RelationShip)
+                     setControlValue("txtMemberName", data[0].MemberName)
+                 }
+             });
+          
+         }
+     });
+ </script>
+ 

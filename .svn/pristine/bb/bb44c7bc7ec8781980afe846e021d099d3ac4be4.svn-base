@@ -1,0 +1,328 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.VivraniViewModel
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<script src="~/Scripts/GmouScripts/autocompletedropdown.js"></script>
+
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+
+
+    <style type="text/css" > .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+<div id="busInformation">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Bus Detail</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Date
+                            </td>
+                            <td>
+                                <h5>@DateTime.Now.ToString()</h5>
+                            </td>
+                            <td>
+                                bus number
+                            </td>
+                            <td>
+                                <h5>@Model.busId</h5>
+                            </td>
+                            <td>
+                                Waybill Book No
+                            </td>
+                            <td>
+                                <h5>@Model.WaybillNo</h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marT20">
+            <div class="box box-success">
+                <div class="boxHeading">
+                    <b> Fuel Detail</b>
+                    <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                </div>
+                <div class="box-body">
+                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Date
+                                </td>
+                                <td>
+                                    <input type="text" id="txtFuelDate" class="datepicker txt100" />
+                                    <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                                </td>
+                                <td>
+                                    Fuel Type
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlFuelType", accesskey = "a", style = "width: 135px;" })
+
+
+                                    @*<select id="ddlFuelType" class="txt100">
+                                            <option value="patrol ">Patrol </option>
+                                            <option value="disal">Disal</option>
+                                            <option value="mobioil">Mobioil</option>
+                                        </select>*@
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    Chit No
+                                </td>
+                                <td>
+                                    <input type="text" id="txtChttNo" class="txt100" />
+                                </td>
+                                <td>
+                                    Others
+                                </td>
+                                <td>
+                                    <input type="text" id="txtOthers" class="txt100" />
+                                </td>
+
+
+                            </tr>
+
+                            <tr>
+
+
+                                <td>
+                                    Fuel Station
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlPumpName", accesskey = "a", style = "width: 135px;" })
+
+
+                                    @*<select id="ddlPumpName" class="txt100">
+                                            <option value="a">A </option>
+                                            <option value="b">B</option>
+                                            <option value="c">C</option>
+                                        </select>*@
+                                </td>
+                                <td>
+                                    Quantity
+                                </td>
+                                <td>
+                                    <input type="text" id="txtFuelQuantity" class="txt100" value="0" onchange="calcTotalAmount()" onkeypress="return numbersonly(event)" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Price
+                                </td>
+                                <td>
+                                    <input type="text" id="txtPrice" class="txt100" value="0" onchange="calcTotalAmount()" onkeypress="return numbersonly(event)" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Amount
+                                </td>
+                                <td>
+                                    <input type="text" id="txtAmount" class="txt100" value="0" disabled="disabled" />
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer clearfix" style="padding-right:30px">
+        <input type="button" id="btnVivraniDetails" value="Save" class="pull-right btn btn-primary" onclick="saveVivraniDetails()" style="padding:4px 22px 6px 15px;margin-left: 40px;" />
+    </div>
+    <div style="height:10px"></div>
+
+    <div class="PageContent">
+        <table cellpadding="0px" cellspacing="0px" width="100%">
+            <tr>
+                <td style="width: 6px;">
+                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                </td>
+                <td class="PageWindowHeader">
+                    <table width="100%" cellpadding="0px" cellspacing="0px">
+                        <tr>
+                            <td width="200px">
+                                &nbsp; <label>Vivraani</label>
+                            </td>
+                            <td align="right"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 6px;">
+                    <img src="~/Images/gridImages/RightCorner.png" />
+                </td>
+            </tr>
+        </table>
+        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+            <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                <thead>
+                    <tr>
+                        <th>
+                            Vivrani Number
+                        </th>
+                        <th>
+                            Bus Number
+                        </th>
+
+                        <th>
+                            Waybill No
+                        </th>
+                        <th>
+                            Waybill Serial No
+                        </th>
+                        <th>
+                            Station From
+                        </th>
+
+                        <th>
+                            Station To
+                        </th>
+                        <th>
+                            Ticket Book No
+                        </th>
+                        <th>
+                            Ticket Series
+                        </th>
+
+                        <th>
+                            Fare
+                        </th>
+
+                    </tr>
+
+                </thead>
+            </table>
+            <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;" class="hide">Total Amount :- <span id="ttlamt">0</span></div>
+        </div>
+        <div style="height:10px"></div>
+        <button class="pull-right btn btn-primary" type="button" onclick="showOtherExpences()">
+            Submit All
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+ 
+    
+            <script type="text/javascript">
+
+                $(function () {
+                    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+
+                });
+                function DateTimeFunction(id) {
+                    var dt = getControlValueN(id);
+                    if (dt != null) {
+                        var day = dt.split("-");
+                        var d = new Date(day[2], day[1], day[0]);
+                        return d.toLocaleDateString();
+                    }
+                }
+                $(document).ready(function () {
+                 
+            
+                    $.ajax({
+                        type: "GET",
+                        url: '/WayBill/ShowCashVivrani?busId=' + '@Model.busId',
+                        //data: { 'busId': busId},
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                var len = data.length;
+                                var txt = "";
+                                if (len > 0) {
+
+                                    for (var i = 0; i < len; i++) {
+                                        
+                                    
+                                        txt += "<tr><td>" + data[i].VivraniNumber + "</td><td>" + data[i].BusNumber + "</td>"
+                                                + "<td>" + data[i].WayBillNo + "</td>"
+                                                  + "<td>" + data[i].WayBillSerialNumber + "</td>"
+                                                + "<td>" + data[i].StationFrom + "</td><td>" + data[i].StationTo + "</td>"
+                                                + "<td>" + data[i].TicketNumber + "</td><td>" + data[i].TicketSeries + "</td>>"
+                                                 + "<td>" + data[i].Fare + "</td></tr>"
+
+                                        
+
+
+                                    }
+
+                                    if (txt != "") {
+                                        $("#EmployeesTable").append(txt);
+
+                                    }
+                                }
+                            }
+                        },
+                       
+                    });
+                
+                });
+            </script>

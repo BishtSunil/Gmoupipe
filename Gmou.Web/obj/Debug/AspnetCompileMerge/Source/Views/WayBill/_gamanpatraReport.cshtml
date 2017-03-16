@@ -1,0 +1,124 @@
+﻿@model Gmou.DomainModelEntities.GamanPatraViewModel
+<div>
+ <style>
+     .newStyle1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:larger;
+            font-weight: bold;
+            white-space:pre;
+        }
+     .span{
+         padding-left:25%;
+
+
+     }
+     .span2{
+ padding-left:32%;
+
+     }
+ </style>
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <h2><span class="span">जी0  एम0  ओ0  यू0 लि0  प्रधान  कार्यालय  कोटद्वार</span></h2>
+               <h3><span class="span2"> गमन पत्र एवं  परमीशन  बारात /पार्टी</span></h3>
+                   
+                
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table style="width:100%">
+                    <tr>
+                        <td>न० :</td>
+                        <td>@Model.GamanPatraID </td>
+                        <td> दिनाक:</td>
+                        <td>@Model.IssueDate.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>संचालन केंद्र : </td>
+                        <td>@Model.StaionId  </td>
+                        <td> वाहन  संख्या :</td>
+                        <td>@Model.BusID </td>
+                    </tr>
+                    <tr>
+                        <td>कहाँ से :</td>
+                        <td>@Model.From</td>
+
+                        <td>प्रस्थान  की तिथि /समय</td>
+                        <td>@Model.DepartureDate.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>कहाँ तक </td>
+                        <td>@Model.To</td>
+
+                        <td>वापसी  की तिथि </td>
+                        <td>@Model.ReturnDate.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>एडवांस धनराशि </td>
+                        <td>@Model.AdvanceAmount</td>
+
+                        <td>शेष  धनराशि </td>
+                        <td>@Model.RemainingAmount</td>
+                    </tr>
+                    <tr>
+                        <td>परमिशन  (Free) </td>
+                        @{
+                            if (Model.PermissionType)
+                            {
+                                <td>फ्री </td>
+                            }
+                            else
+                            {
+                                <td>N/A </td>
+                            }
+}
+                        
+
+                        <td>परमिशन  (Discount)</td>
+                       @{ if (Model.PermissionType)
+                        {
+                        <td>डिस्काउंट  </td>
+                        }
+                        else
+                        {
+                        <td>N/A </td>
+                        }
+                        }
+                       
+                    </tr>
+                    <tr>
+                        <td>डेली सर्विस </td>
+                        @{
+                            if (Model.IsDailyService)
+                            {
+                                <td>डेली सर्विस</td>
+                            }
+                            else
+                            {
+                                <td>शादी/पार्टी </td>
+                            }
+                        }
+
+
+                        <td>कुल धनराशि :</td>
+                        <td>@Model.TotalAmount</td>
+                    </tr>
+                </table>
+               
+                <div style="padding-top:3%">
+                    नोट:
+                    <ul>
+                        <li>यह गमन पत्र/ केवल एक ट्रिप के लिए है वैद्य है तथा चेकिंग के समय प्रस्तुत करना होगा!</li>
+                        <li> दैनिक सेवाओ , यात्रा कॉन्ट्रैक्ट, पार्टी , विवाह , स्कूल, आदि पर लागू होगा !</li>
+                        <li>वापसी  में सर्विस/शादी /पार्टी का कॅश जमा होने पर गमन पत्र  भी जमा होगा एवं  इसी  के आधार  पर वाहन  की उपस्थिति ली जायेगी ! यह हाजीटी का टोकन माना  जायेगा !</li>
+                    </ul>
+                    <span style="padding-left:78%">स्टेशन अधीक्षक /इंचार्ज : @Model.SubmittedBy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+       
+    </div>
+    

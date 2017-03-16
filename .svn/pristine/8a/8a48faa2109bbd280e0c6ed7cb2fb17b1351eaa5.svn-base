@@ -1,0 +1,196 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using Gmou.DomainModelEntities;
+
+namespace Gmou.DataRepository
+{
+    public class FuelRepository
+    {
+        public static IEnumerable<FuelModel> GetAllLubricants()
+        {
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetLubricants", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    conn.Open();
+                    SqlDataReader rd = cmd.ExecuteReader();
+                   
+                    while (rd.Read())
+                    {
+                        yield return new FuelModel(
+                             (Convert.ToInt32(rd["lubricant_id"])),
+                              ((rd["lubricant_type"]).ToString()));
+
+                    }
+
+                    conn.Close();
+                }
+            }
+        }
+
+        public static IEnumerable<FuelStationModel> GetAllFuelStations()
+        {
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetFuelStation", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    conn.Open();
+                    SqlDataReader rd = cmd.ExecuteReader();
+
+                    while (rd.Read())
+                    {
+                        yield return new FuelStationModel(
+                             (Convert.ToInt32(rd["fuel_pump_id"])),
+                              ((rd["fuel_pump_name"]).ToString()));
+
+                    }
+
+                    conn.Close();
+                }
+            }
+        }
+
+
+        public static IEnumerable<FuelTypeModel> GetAllFuelList()
+        {
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("SP_getAllfuelTypes", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    conn.Open();
+                    SqlDataReader rd = cmd.ExecuteReader();
+
+                    while (rd.Read())
+                    {
+                        yield return new FuelTypeModel(
+                             (Convert.ToInt32(rd["fueltypeid"])),
+                              ((rd["fueltype"]).ToString()));
+
+                    }
+
+                    conn.Close();
+                }
+            }
+
+        }
+
+
+        public static IEnumerable<FuelCashMemoModel> InsertCashMemo(FuelCashMemo model)
+        {
+            int cashmemoid;
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_InsertCashMemo", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("vechilenumber", model.VechileNumber);
+                    cmd.Parameters.AddWithValue("fuletype", model.Fueltype);
+                    cmd.Parameters.AddWithValue("quantity", model.FuelQuantity);
+                    cmd.Parameters.AddWithValue("price", model.Price);
+                    cmd.Parameters.AddWithValue("otherfuel", model.OtherFule);
+                    cmd.Parameters.AddWithValue("otherprice", model.OtherPrice);
+                    cmd.Parameters.AddWithValue("station_id", model.FuelStationID);
+                    cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
+                    cmd.Parameters.AddWithValue("serial_no", model.SerialNumber);
+                    conn.Open();
+                    try
+                    {
+                        cashmemoid = (int)cmd.ExecuteScalar();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+                   
+                  
+                    conn.Close();
+
+
+                }
+            }
+            return GetUpdatedCashMemoData(cashmemoid);
+        }
+
+        private static IEnumerable<FuelCashMemoModel> GetUpdatedCashMemoData(int id)
+        {
+            
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetUpdatedCashFuel", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("cashfuelID", id);
+                    SqlDataReader dr;
+                    conn.Open();
+                    try
+                    {
+                        dr = cmd.ExecuteReader();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+
+                    while (dr.Read())
+                    {
+                        yield return new FuelCashMemoModel(
+                            
+                           dr["vechilenumber"].ToString(),
+                           
+                           (dr["fueltype"].ToString()),
+                           (dr["quantity"].ToString()),
+                         
+                            (Convert.ToDecimal(dr["price"])),
+                         (dr["fuel_pump_name"].ToString())     ,
+                        (Convert.ToInt32(dr["serial_no"]))
+                                              
+                       );
+                    }
+                    conn.Close();
+                }
+            }
+
+
+        }
+
+
+        public static decimal GetFuelPrice(int pumpid, int fueltypeid)
+        {
+            decimal fuelprice;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetFuelPrice", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("pumpid", pumpid);
+                    cmd.Parameters.AddWithValue("fuelid", fueltypeid);
+
+                    conn.Open();
+                    fuelprice = (decimal)cmd.ExecuteScalar();
+                    conn.Close();
+                }
+            }
+
+            return fuelprice;
+        }
+    }//end of class
+}//End of namespace

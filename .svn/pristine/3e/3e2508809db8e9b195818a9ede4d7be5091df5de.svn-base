@@ -1,0 +1,37 @@
+﻿
+function AddEmoployee()
+{
+    $.ajax({
+        url: "/Admin/CreateEmployee",
+        success: function (data) {
+            $('#divEmployee').html(data);
+
+        },
+    });
+}
+
+//Document Ready 
+$(document).ready(function ()
+{
+    $('#btnsignout').click(function () {
+        $.post("/Login/Logout", function () {
+            location.reload();  // prevents redirection
+        });
+    });
+    $('#btnEmployeeSearch').click(function () {
+        debugger;
+        var employeeID = $('#txtEmployeeSearch').val().trim();
+        $.ajax({
+            type: 'GET',
+            data:{'employeeID': employeeID},
+            url: "/Admin/GetEmployeeDetails",
+
+            success: function (data) {
+                $('#employeedetails').css("display:block");
+               
+
+            }
+        });
+    });
+   
+    });

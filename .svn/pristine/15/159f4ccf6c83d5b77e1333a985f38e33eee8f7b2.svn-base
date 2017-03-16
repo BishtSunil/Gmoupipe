@@ -1,0 +1,35 @@
+﻿using Gmou.DomainModelEntities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Gmou.Repository;
+using Gmou.DataRepository.CustomRepository;
+
+namespace Gmou.BusinessAccessLayer
+{
+    public class BusBAL
+    {
+
+        public static bool AddBusRecords(SaveBusModel model)
+        {
+           return BusRepository.AddBusDetails(model);
+          
+        }
+
+        public static List<BusListModel> GetAllDetails()
+        {
+            return BusRepository.GetAllBuses();
+        }
+
+        public static SaveBusModel GetBusDetailsByNumber(string busNumber)
+        {
+            return BusRepository.BusDetailsByNumber(busNumber);
+        }
+        public static SaveBusModel EditBusDetails(int id)
+        {
+            return BusRepository.EditBusDetails(id);
+        }
+    }
+}

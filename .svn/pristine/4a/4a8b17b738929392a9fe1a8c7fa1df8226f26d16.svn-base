@@ -1,0 +1,129 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Gmou.Repository;
+using Gmou.DomainModelEntities;
+using Gmou.DataRepository;
+
+namespace Gmou.BusinessAccessLayer
+{
+    public class WayBillBAL
+    {
+        public static vivraniDomainModel GetCashVivraiSerial(Vivirani model)
+        {
+
+            return WayBillRepository.GetVivraniSerial(model);
+        }
+        public static CashSheetModel GetCashSheetSerialNumber(Vivirani model)
+        {
+            return WayBillRepository.GetCashSheetSerial(model);
+        }
+        public static List<VivraniDetailsModel> AddVivraniDetails(VivraniDetails model)
+        {
+            model.vivranifuel.VivraniSerialID = model.vivraniSerialNumber;
+            SaveVivraniFuelDeatils(model.vivranifuel);
+            return WayBillRepository.SaveVivraniDetails(model).ToList();
+        }
+
+        public static int? GetPendingVivraniSerial(int empid, int department)
+        {
+            return WayBillRepository.GetPendingVivraniSerial(empid, department);
+        }
+        public static bool SaveVivraniFuelDeatils(FuelVivrani model)
+        {
+            return WayBillRepository.InsertVivraniFuleDetails(model);
+        }
+        public static List<CashSheetDetailsModel> AddCashsheetOtherExpenses(CashSheetDetails model)
+        {
+            return WayBillRepository.SaveCashOtherExpensesDetails(model).ToList();
+        }
+        public static GenerateCashSheetModel GetGeneratedCashSheet(int empId, int departmentid)
+        {
+            return WayBillRepository.GetCashSheetDetails(empId, departmentid);
+        }
+        public static BusOwnerName GetOwnerDetails(string busId)
+        {
+            return WayBillRepository.GetBusOwnNameDetails(busId).FirstOrDefault();
+        }
+        public static bool GetLastWayBill(int waybillbook, int waybillbookno, int busid)
+        {
+            var data = WayBillRepository.GetLastWayBillSerial(waybillbookno, busid);
+            if (data == 0) { return true; }
+            if (waybillbook - data == 1)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public static BusDetailsModel GetAllBusses()
+        {
+            BusDetailsModel obj = new BusDetailsModel();
+            obj.lstbusName = WayBillRepository.GetAllBuses().ToList();
+            return obj;
+        }
+        public static bool SaveWaybillDetails(WayBillBookDetailsModel model)
+        {
+            var result = WayBillRepository.SaveWayBillDetails(model);
+            if (result == 1)
+            {
+                return true;
+
+            }
+            return false;
+        }
+
+        public static List<BusJourneyHistory> GetBusHistory(int busID)
+        {
+            return WayBillRepository.GetBusjourneyDetails(busID).ToList();
+        }
+
+        public static bool BALSaveCouponDetails(CouponDetails model)
+        {
+
+            if( WayBillRepository.SaveCouponDetails(model)==0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static CouponDetails BALGetCouponDetails(string page)
+        {
+            return WayBillRepository.GetCouponDetails(page).FirstOrDefault();
+        }
+        public static List<CouponDetails> BALGetAllCouponDetails()
+        {
+            return WayBillRepository.GetAllCouponDetails().ToList();
+        }
+         
+        public static List<CouponDetails> BALSaveWayBillCouponDetails(CouponDetails model)
+        {
+            return WayBillRepository.SaveWayBillCouponDetails(model).ToList();
+        }
+          public static List<CouponDetails> BALGetAllWayBillCouponDetails(int waybillbookno, int waybillserialno)
+        {
+            return WayBillRepository.GetAllWayBillCouponDetails(waybillbookno,waybillserialno).ToList();
+        }
+
+        public  static List<WayBillViewModel> BALSaveWayBillEntry(WayBillModel model)
+          {
+              List<WayBillViewModel> lstwaybillmodel;
+            if(model.NumberOfTicket>1 )
+            {
+                lstwaybillmodel = new List<WayBillViewModel>();
+                for(int a=0; a<=model.NumberOfTicket;a++)
+                {
+                    lstwaybillmodel.Add(WayBillRepository.SaveWayBillDetailsEntry(model).FirstOrDefault());
+                }
+                return lstwaybillmodel;
+            }
+
+            return WayBillRepository.SaveWayBillDetailsEntry(model).ToList();
+          }
+    }
+}

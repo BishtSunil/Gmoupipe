@@ -1,0 +1,43 @@
+﻿using Gmou.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Gmou.Web.Controllers
+{
+    public class TransactionController : Controller
+    {
+        //
+        // GET: /Transaction/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult BusTransaction()
+        {
+            var data = BusinessAccessLayer.BALFuel.BALGetAllFuel();
+            var pumpfule = BusinessAccessLayer.BALFuel.BALGetAllStation();
+            var bus = BusinessAccessLayer.BALFuel.BALGetBuses();
+            FuelViewModel vivraniviewmodel = new FuelViewModel
+            {
+                fueltype = new SelectList(data, "FuelType", "FuelName"),
+                fuelpump = new SelectList(pumpfule, "StationID", "StationName"),
+                busnumber = new SelectList(bus, "BusID", "BusNumber")
+            };
+
+            return PartialView(@"~/Views\Reports\_busTransationReport.cshtml", vivraniviewmodel);
+
+        }
+        [HttpGet]
+        public ActionResult GetTransactionDetails(int pumpid)
+        {
+
+            var data = BusinessAccessLayer.BALReports.BALGetBusTransactionDetails(pumpid);
+            return Json(data, JsonRequestBehavior.AllowGet);
+           
+        }
+    }
+}

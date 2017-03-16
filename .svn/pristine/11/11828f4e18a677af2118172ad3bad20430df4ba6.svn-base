@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Gmou.DomainModelEntities.PlacesModel>
+@{
+    ViewBag.Title = "_addPlaces";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+   @Gmou.Web.Helpers.HelpersMVC.GenerateTable(Model.ToList());
+</div>

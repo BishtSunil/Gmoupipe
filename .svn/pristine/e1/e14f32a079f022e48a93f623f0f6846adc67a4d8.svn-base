@@ -1,0 +1,71 @@
+﻿using AutoMapper;
+using Gmou.DomainModelEntities;
+using Gmou.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+
+namespace Gmou.Web.Helpers
+{
+    public class Converter
+    {
+        public static TDest ModelConverter<TSource, TDest>(TSource viewModel)
+        {
+            Mapper.CreateMap<TSource, TDest>();
+            TDest result = Mapper.Map<TSource, TDest>(viewModel);
+
+            return result;
+        } 
+        
+        public static EmployeeDetails ConvertToDomainModel(SaveEmployeeModel model)
+        {
+            EmployeeDetails employeedetails = new EmployeeDetails();
+            EmployeeFamilyDetails employeeFamilydetails = new EmployeeFamilyDetails();
+            EmployeeFamliy employeeFamily = new EmployeeFamliy();
+            employeedetails.FirstName = model.FirstName;
+            employeedetails.MiddleName = model.MiddleName ;
+            employeedetails.LastName = model.LastName ;
+            employeedetails.Caste = model.Caste ;
+            employeedetails.FatherName = model.FatherName;
+            employeedetails.Village = model.Village;
+            employeedetails.PostOffice = model.PostOffice;
+            employeedetails.Patti = model.Patti;
+            employeedetails.Tehsil = model.Tehsil;
+            employeedetails.District = model.District;
+            employeedetails.State = model.State;
+            employeedetails.BirthDate = model.BirthDate;
+            employeedetails.JoiningDate = model.JoiningDate;
+            employeedetails.Contact = model.Contact;
+            employeedetails.Qaulification = model.Qaulification;
+            employeedetails.Qaulification = model.Qaulification;
+            employeedetails.IdentificationMark1 = model.IdentificationMark1;
+            employeedetails.IdentificationMark2 = model.IdentificationMark2;
+            employeedetails.UAN = model.UAN;
+            employeedetails.WorkingOffice = model.WorkingOffice;
+            employeedetails.WorkingDepartment = model.WorkingDepartment;
+            employeedetails.PAN = model.PAN;
+            employeedetails.Thana = model.Thana;
+            employeedetails.LocalAddress = model.LocalAddress;
+
+            employeeFamily.WifeName = model.employeeFamily.WifeName;
+            employeeFamily.NextToKin = model.employeeFamily.NextToKin;
+            employeeFamily.WifeDOB = model.employeeFamily.WifeDOB;
+            employeeFamily.NomineeName = model.employeeFamily.NomineeName;
+            employeeFamily.NomineeIdentificationMark1 = model.employeeFamily.NomineeIdentificationMark1;
+            employeeFamily.NomineeIdentificationMark2 = model.employeeFamily.NomineeIdentificationMark2;
+            employeeFamilydetails.RelationShip = model.employeeFamilyDetails.RelationShip;
+            employeeFamilydetails.MemberName = model.employeeFamilyDetails.MemberName;
+
+            employeedetails.employeeFamilyDetails = employeeFamilydetails;
+            employeedetails.employeeFamily = employeeFamily;
+            return employeedetails;
+
+
+        }
+
+    }
+
+   
+}

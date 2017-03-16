@@ -1,0 +1,151 @@
+﻿/// <reference path="../Admin/general.js" />
+/// <reference path="../Admin/general.js" />
+
+
+function AddEmoployee()
+{
+    $.ajax({
+        url: "/Admin/CreateEmployee",
+        success: function (data) {
+            $('#divEmployee').html(data);
+
+        },
+    });
+}
+
+//Document Ready 
+$(document).ready(function ()
+{
+    $.getScript("/Scripts/Admin/general.js", function(){
+
+        alert("Script loaded but not necessarily executed.");
+
+    });
+    $.getScript("/Scripts/Admin/jshelper.js", function () {
+
+        alert("Script loaded but not necessarily executed.");
+
+    });
+    $('#btnsignout').click(function () {
+        $.post("/Login/Logout", function () {
+            location.reload();  // prevents redirection
+        });
+    });
+    $('#btnEmployeeSearch').click(function () {
+      
+        var employeeID = $('#txtEmployeeSearch').val().trim();
+        $.ajax({
+            type: 'GET',
+            data:{'employeeID': employeeID},
+            url: "/Admin/GetEmployeeDetails",
+
+            success: function (data) {
+                $('#employeedetails').css("display:block");
+                debugger;
+           
+                setControlValue("lblfirstname", data[0].FirstName +" "+ data[0].MiddleName +" "+ data[0].LastName)
+                setControlValue("lblcast", data[0].Caste)
+                setControlValue("lblhusbandname", data[0].FatherName)
+                setControlValue("lblvillage", data[0].Village)
+                setControlValue("lblpostoffice", data[0].PostOffice)
+                setControlValue("lblpatti", data[0].Patti)
+                setControlValue("lblthana", data[0].thana)
+                setControlValue("lbltehsil", data[0].Tehsil)
+                setControlValue("lbldistrict", data[0].District)
+                setControlValue("lblstate", data[0].State)
+                setControlValue("lbldate_of_birth", data[0].BirthDate)
+                setControlValue("lbljoiningdate", data[0].JoiningDate)
+                setControlValue("lblcontactname", data[0].Contact)
+                setControlValue("lblqaulification", data[0].Qaulification)
+                setControlValue("lbllocaladdress", data[0].LocalAddress)
+                setControlValue("lblidentificationmark1", data[0].IdentificationMark1)
+                setControlValue("lblidentificationmark2", data.IdentificationMark2)
+                setControlValue("lbluan", data[0].UAN)
+                setControlValue("lblpan", data[0].PAN)
+                setControlValue("lbloffice", data[0].WorkingOffice)
+                setControlValue("lblretirementdate", data[0].UAN)
+                setControlValue("lbldepartment", data[0].WorkingDepartment)
+                setControlValue("lblwifename", data[0].WifeName)
+                setControlValue("lblnexttokin", data[0].NextToKin)
+                setControlValue("lblwifedob", data[0].WifeDOB)
+                setControlValue("lblnomineename", data[0].NomineeName)
+                setControlValue("lblwifename", data[0].NomineeIdentificationMark1)
+                setControlValue("lblnomineeIdentificationMark1", data[0].NomineeIdentificationMark1)
+                setControlValue("lblnomineeIdentificationMark2", data[0].NomineeIdentificationMark2)
+            }
+        });
+    });
+
+    $('#btnSaveEmployee').click(function () {
+        debugger;
+        saveEmployee();
+    });
+    function saveEmployee() {
+        debugger;
+        var familyobj = new Object();
+        familyobj.WifeName = getControlValueN("txtWifeName");
+        familyobj.NextToKin = getControlValueN("txtNextkin");
+        familyobj.WifeDOB = getControlValueN("txtWifeDob");
+        familyobj.NomineeName = getControlValueN("txtNomineeName");
+        familyobj.NomineeIdentificationMark1 = getControlValueN("txtNominee1");
+        familyobj.NomineeIdentificationMark2 = getControlValueN("txtNominee2");
+
+        var familydetails = new Object();
+        familydetails.Relationship = getControlValueN("txtRelationShip");
+        familydetails.MemberName = getControlValueN("txtMemberName");
+
+        var obj = new Object();
+        obj.FirstName = getControlValueN("txtFirstName");
+        obj.MiddleName = getControlValueN("txtMiddleName");
+        obj.LastName = getControlValueN("txtLastName");
+        obj.Caste = getControlValueN("txtCast");
+        obj.FatherName = getControlValueN("txtFatherName");
+        obj.Village = getControlValueN("txtVillage");
+        obj.PostOffice = getControlValueN("txtPostOffice");
+        obj.Patti = getControlValueN("txtPatti");
+        obj.Thana = getControlValueN("txtThana");
+        obj.Tehsil = getControlValueN("txtTehsil");
+        obj.District = getControlValueN("txtDistrict");
+        obj.State = getControlValueN("txtState");
+        obj.BirthDate = getControlValueN("txtDob");
+        obj.JoiningDate = getControlValueN("txtDoj");
+        obj.Contact = getControlValueN("txtContactNo");
+        obj.Qaulification = getControlValueN("ddlQualification");
+        obj.LocalAddress = getControlValueN("txtLocalAddress");
+        obj.IdentificationMark1 = getControlValueN("txtIdentificationmark1");
+        obj.IdentificationMark2 = getControlValueN("txtIdentificationmark2");
+        obj.UAN = getControlValueN("txtUAN");
+        obj.PAN = getControlValueN("txtPAN");
+        obj.WorkingOffice = getControlValueN("ddlWorkingOffice");
+        obj.WorkingDepartment = getControlValueN("ddlDepartMent");
+        obj.employeeFamily = familyobj;
+        obj.employeeFamilyDetails = familydetails;
+        //    callServiceMethod("{'or':" + JSON.stringify(obj) + "'}", "", "SaveEmpolyee", successMethodAfterInsertUpdate, "", "",
+        //                                    false, "", true, saveEmployee_scs, "", "", "");
+        //}
+
+        //function saveEmployee_scs() {
+        //    alert('success')
+        //}
+        $.ajax({
+            type: "POST",
+            url: '/Admin/SaveEmpolyee',
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                alert("Done");
+                //if (successMethodToCall != "") {
+                //    successMethodToCall(data, rowIdToDelete, rowParentContainerId, shallLoadTemplete, templeteToLoad, shallCallOtherMethod, otherMethodToCall, parameter1InOtherMethod, parameter2InOtherMethod, parameter3InOtherMethod);
+                //}
+                //else if (shallCallOtherMethod) {
+                //    if (otherMethodToCall != "") {
+                //        otherMethodToCall(parameter1InOtherMethod, parameter2InOtherMethod, parameter3InOtherMethod, data);
+                //    }
+                //}
+            },
+            error: OnError
+        });
+    }
+    });

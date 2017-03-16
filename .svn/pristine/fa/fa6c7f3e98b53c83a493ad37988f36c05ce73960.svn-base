@@ -1,0 +1,216 @@
+﻿@model Gmou.Web.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Create Empolyee</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+               
+
+
+                    <div class="col-md-4">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">First Name</label>
+                                <input type="text" class="form-control" id="txtFirstName">
+                            </div>   
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"> Date Of Birth</label>
+                                <input type="password" class="form-control datepicker" id="txtDob">
+                            </div>    
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Qualification</label>
+                                <select class="form-control" id="ddlQualification">
+                                    <option>Select QualifiCation</option>
+                                    <option>Graduate</option>
+                                    <option>Post Graduate</option>
+
+                                </select>
+                            </div>  
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Pan</label>
+                                <input type="text" class="form-control" id="txtPAN">
+                            </div>
+                       
+
+                            <div class="form-group">
+                                <label for="lblVillage">Village</label>
+                                <input id="txtVillage" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblThana">Thana</label>
+                                <input id="txtThana" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblState">State</label>
+                                <input id="txtState" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Working Office</label>
+                                <textarea class="form-control" cols="50" rows="5" id="txtWorkingOffice"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblThana">Wife Name</label>
+                                <input id="txtWifeName" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblState">Next Kin</label>
+                                <input id="txtNextkin" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Middle Name</label>
+                                <input type="text" class="form-control" id="txtMiddleName">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Cast</label>
+                                <input id="txtCast" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" >Department</label>
+                                @Html.DropDownListFor(m => m.OfficeID, Model.lstDepartment, new { @class = "form-control",id="ddlDepartMent" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Date Of Joining</label>
+                                <input type="text" class="form-control" id="txtDoj">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblPostOffice">Post Office</label>
+                                <input id="txtPostOffice" type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lblDistrict">District</label>
+                                <input id="txtDistrict" type="text" class="form-control">
+                            </div>
+
+                          
+                            <div class="form-group">
+                                <label for="lblLocalArea">Local Address</label>
+                                <textarea id="txtLocalAddress" class="form-control" cols="50" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblThana">Wife DOB</label>
+                                <input id="txtWifeDob" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lblState">Nominee Name</label>
+                                <input id="txtNomineeName" type="text" class="form-control">
+                            </div>
+                      
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input type="text" class="form-control" id="txtLastName" />
+            </div>
+
+            <div class="form-group">
+                <label for="lblfathername">Father/Husband Name</label>
+                <input id="txtFatherName" type="text" class="form-control">
+            </div>
+         
+            <div class="form-group">
+                <label for="exampleInputPassword1">Contact No</label>
+                <input type="text" class="form-control" id="txtContactNo">
+            </div> 
+
+            <div class="form-group">
+                <label for="lblPatti">Patti</label>
+                <input id="txtPatti" type="text" class="form-control">
+            </div>
+ 
+            <div class="form-group">
+                <label for="exampleInputEmail1">UAN</label>
+                <input type="text" class="form-control" id="txtUAN">
+            </div>
+           
+            <div class="form-group">
+                <label for="lblThana">Nominee notification 1</label>
+                <input id="txtNominee1" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lblState">Nominee notification 2</label>
+                <input id="txtNominee2" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lblThana">Relation Ship</label>
+                <input id="txtRelationShip" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lblState">Member Name</label>
+                <input id="txtMemberName" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+                    <div class="box-footer clearfix" style="padding-right:30px">
+                        <input type="submit" value="Save" class="pull-right btn btn-primary" onclick="saveEmployee()" style="padding:4px 22px 6px 15px" />
+                    </div>
+ 
+
+            </div>
+
+
+        </div>
+    </div>
+ 
+
+
+<script type="text/javascript">
+    function saveEmployee(){
+        var obj = new Object();
+        obj.FirstName = getControlValueN("txtFirstName");
+        obj.MiddleName = getControlValueN("txtMiddleName");
+        obj.LastName = getControlValueN("txtLastName");
+        obj.Cast = getControlValueN("txtCast");
+        obj.FatherHusbandName = getControlValueN("txtFatherName");
+        obj.Village = getControlValueN("txtVillage");
+        obj.PostOffice = getControlValueN("txtPostOffice");
+        obj.Patti = getControlValueN("txtPatti");
+        obj.Thana = getControlValueN("txtThana");
+        obj.Tehsil = getControlValueN("txtTehsil");
+        obj.District = getControlValueN("txtDistrict");
+        obj.State = getControlValueN("txtState");
+        obj.DOB = getControlValueN("txtDob");
+        obj.DOj = getControlValueN("txtDoj");
+        obj.ContactNumber = getControlValueN("txtContactNo");
+        obj.Qaulification = getControlValueN("ddlQualification");
+        obj.LocalAddress = getControlValueN("txtLocalAddress");
+        obj.IdentificationMark1 = getControlValueN("txtidentification_mark_1");
+        obj.IdentificationMark2 = getControlValueN("txtidentification_mark_2");
+        obj.UAN = getControlValueN("txtUAN");
+        obj.PAN = getControlValueN("txtPAN");
+        obj.WorkingOffice = getControlValueN("txtWorkingOffice");
+        obj.WorkingDepartment = getControlValueN("ddlDepartMent");
+        obj.Relationship = getControlValueN("txtRelationShip");
+        obj.MemberName = getControlValueN("txtMemberName");
+        obj.WifeName = getControlValueN("txtWifeName");
+        obj.NextKin = getControlValueN("txtNextkin");
+        obj.wife_dob = getControlValueN("txtWifeDob");
+        obj.NomineeName = getControlValueN("txtNomineeName");
+        obj.NomineeIdentification1 = getControlValueN("txtNominee1");
+        obj.NomineeIdentification2 = getControlValueN("txtNominee2");
+        callServiceMethod("{'or':" + JSON.stringify(obj) +"'}", "Controller", "Action", successMethodAfterInsertUpdate, "", "",
+                                        false, "", true, saveEmployee_scs, "", "", "");
+    }
+
+    function saveEmployee_scs() {
+        alert('success')
+    }
+</script>
+ 

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.BusOwnerViewModel
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<script src="~/Scripts/GmouScripts/autocompletedropdown.js"></script>
+<table>
+    <tr>
+        <td>Bus Number:</td>
+        <td>
+            @Html.DropDownListFor(model => model.busownername, Model.busownername, new { @class = "txt100PValidBreak", id = "ddlBusNumber", accesskey = "a", style = "width: 135px;" })
+
+    </td>
+        </tr></table>

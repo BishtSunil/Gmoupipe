@@ -1,0 +1,386 @@
+﻿@model Gmou.Web.Models.FuelViewModel
+@{
+    ViewBag.Title = "Bus Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+
+
+
+<div>
+    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+        <tr>
+            <td>Bus Number</td>
+            <td>@Html.DropDownListFor(model => model.busnumber, Model.busnumber, new { @class = "txt100PValidBreak", id = "ddlbusNumberlst", accesskey = "a", style = "width: 135px;" })</td>
+
+        </tr>
+        <tr>
+
+            <td>
+                <input type="button" value="Show" onclick="getBusTransactionDetails();"
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="height:20px"></div>
+<div class="PageContent">
+    <table cellpadding="0px" cellspacing="0px" width="100%">
+        <tr>
+            <td style="width: 6px;">
+                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+            </td>
+            <td class="PageWindowHeader">
+                <table width="100%" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td width="200px">
+                            &nbsp; <label>Enter Final Details</label>
+                        </td>
+                        <td align="right"></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 6px;">
+                <img src="~/Images/gridImages/RightCorner.png" />
+            </td>
+        </tr>
+    </table>
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+        <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+            <tr>
+                <td>Transipment</td>
+                <td><input type="text" id="txtTransipment" class="txt100" /></td>
+                <td>WayBill (Correction)</td>
+                <td><input type="text" id="txtwayCorrection" class="txt100" /></td>
+                <td>Fare Refund Dr.</td>
+                <td><input type="text" id="txtFareRefund" class="txt100" /></td>
+                <td>Deficiency</td>
+                <td><input type="text" id="txtDeficiency" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>Election Bill</td>
+                <td><input type="text" id="txtElectionBill" class="txt100" /></td>
+                <td>Free Seat</td>
+                <td><input type="text" id="txtFreeSeat" class="txt100" /></td>
+                <td>Road Warrant</td>
+                <td><input type="text" id="txtRoadWarrant" class="txt100" /></td>
+                <td>Commission (4%)</td>
+                <td><input type="text" id="txtCommission" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>Owner's A/C (2%)</td>
+                <td><input type="text" id="txtOwner" class="txt100" /></td>
+                <td>Balance (Last Month) Seat</td>
+                <td><input type="text" id="txtBalance" class="txt100" /></td>
+                <td>Payment (Last Month)</td>
+                <td><input type="text" id="txtPayment" class="txt100" /></td>
+                <td>Advance</td>
+                <td><input type="text" id="txtAdvance" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>Advance(Station)</td>
+                <td><input type="text" id="txtAdvanceStation" class="txt100" /></td>
+                <td>Toll/Parking/Yatra</td>
+                <td><input type="text" id="txtToll" class="txt100" /></td>
+                <td>Road Warrant</td>
+                <td><input type="text" id="txtTRoadWarrant" class="txt100" /></td>
+                <td>Road Tax</td>
+                <td><input type="text" id="txtRoadTax" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>TTC/Fine</td>
+                <td><input type="text" id="txtTTC" class="txt100" /></td>
+                <td>Paise Detain/Release</td>
+                <td><input type="text" id="txtPaiseDetain" class="txt100" /></td>
+                <td>Super V.charge DR/CR</td>
+                <td><input type="text" id="txtSuper" class="txt100" /></td>
+                <td>Fine on DR (2%)</td>
+                <td><input type="text" id="txtFine" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>Permit Fee DR/CR</td>
+                <td><input type="text" id="txtPermitFee" class="txt100" /></td>
+                <td>Insurance DR/CR</td>
+                <td><input type="text" id="txtInsurance" class="txt100" /></td>
+                <td>Advance (2%) DR/CR</td>
+                <td><input type="text" id="txtAdvance2" class="txt100" /></td>
+                <td>Building Fund</td>
+                <td><input type="text" id="txtBuildingFund" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>Loss</td>
+                <td><input type="text" id="txtLoss" class="txt100" /></td>
+                <td>2% Refund</td>
+                <td><input type="text" id="txt2Refund" class="txt100" /></td>
+                <td>Road Warrant Exp.</td>
+                <td><input type="text" id="txtRoadWarrantExp" class="txt100" /></td>
+                <td>Supply Mail</td>
+                <td><input type="text" id="txtSupplyMail" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>Correction</td>
+                <td><input type="text" id="txtCorrection" class="txt100" /></td>
+                <td>Free Seat</td>
+                <td><input type="text" id="txtFreeSeat" class="txt100" /></td>
+                <td>Road Warrant</td>
+                <td><input type="text" id="txtRoadWarrant" class="txt100" /></td>
+                <td>Owner's Security</td>
+                <td><input type="text" id="txtOwnerSecurity" class="txt100" /></td>
+            </tr>
+            <tr>
+                <td>Entree Fees</td>
+                <td><input type="text" id="txtEntreeFees" class="txt100" /></td>
+                <td>Vechile Tranfer</td>
+                <td><input type="text" id="txtVechileTranfer" class="txt100" /></td>
+                <td>Dist. Board</td>
+                <td><input type="text" id="txtDistBoard" class="txt100" /></td>
+               
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+
+    });
+    function SaveFinalDetails() {
+
+        var busId = getControlValue("ddlbusNumberlst");
+        var obj = new Object();
+        
+        obj.Transipment	=getControlValueN("txtTransipment");
+        obj.wayCorrection	         = getControlValueN("txtwayCorrection");
+        obj.FareRefund	        =getControlValueN("txtFareRefund");
+        obj.Deficiency	        =getControlValueN("txtDeficiency ");
+        obj.ElectionBill	        =getControlValueN("txtElectionBill");
+        obj.FreeSeat	        = getControlValueN("txtFreeSeat");
+        obj.RoadWarrant	        =getControlValueN("txtRoadWarrant");
+        obj.Commission	        =getControlValueN("txtCommission");
+        obj.Owner	        =getControlValueN("txtOwner");
+        obj.Balance	        = getControlValueN("txtBalance");
+        obj.Payment	        =getControlValueN("txtPayment");
+        obj.Advance	        =getControlValueN("txtAdvance");
+        obj.AdvanceStation=getControlValueN("txtAdvanceStation");
+        obj.Toll	        =getControlValueN("txtToll");
+        obj.TRoadWarrant	        =getControlValueN("txtTRoadWarrant");
+        obj.RoadTax	        = getControlValueN("txtRoadTax");
+        obj.TTC	        =getControlValueN("txtTTC");
+        obj.PaiseDetain	        =getControlValueN("txtPaiseDetain");
+        obj.Super	        = getControlValueN("txtSuper");
+        obj.Fine	        =getControlValueN("txtFine");
+        obj.PermitFee	        =getControlValueN("txtPermitFee");
+        obj.Insurance	        = getControlValueN("txtInsurance");
+        obj.Advance2	        =getControlValueN("txtAdvance2");
+        obj.BuildingFund	        =getControlValueN("txtBuildingFund");
+        obj.Loss	        =getControlValueN("txtLoss");
+        obj.Refund2	        =getControlValueN("txt2Refund");
+        obj.RoadWarrantExp	        =getControlValueN("txtRoadWarrantExp");
+        obj.SupplyMail	        =getControlValueN("txtSupplyMail");
+        obj.Correction	= getControlValueN("txtCorrection");
+        obj.FreeSeat	 =getControlValueN("txtFreeSeat");
+        obj.RoadWarrant	 =getControlValueN("txtRoadWarrant");
+        obj.OwnerSecurity=	 getControlValueN("txtOwnerSecurity");
+        obj.EntreeFees	 =getControlValueN("txtEntreeFees");
+        obj.VechileTranfer	= getControlValueN("txtVechileTranfer");
+        obj.DistBoard	 =getControlValueN("txtDistBoard");
+
+        
+        $.ajax({
+            type: "GET",
+            url: '/Transaction/GetTransactionDetails?pumpid=' + busId,
+            data: { 'busId': busId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+
+
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {
+                            var regDate = new Date(parseInt(data[i].Date.substr(6))).format("dd-mm-yyyy")
+                            txt += "<tr><td>" + data[i].BusNumber + "</td><td>" + data[i].Amount + "</td><td>" + regDate + "</td><td> " + data[i].Description + "</td></tr>";
+
+
+                        }
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+
+                        }
+                    }
+                }
+            },
+            error: OnError
+        });
+    }
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .tooltip()
+
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.data("ui-autocomplete").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $(function () {
+        $("#ddlbusNumberlst").combobox();
+        $("#toggle").click(function () {
+            $("#ddlbusNumberlst").toggle();
+        });
+
+
+
+
+    });
+</script>

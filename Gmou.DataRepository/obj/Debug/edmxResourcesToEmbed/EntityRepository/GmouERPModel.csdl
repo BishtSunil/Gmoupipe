@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GMOUMISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblBu">
+    <Key>
+      <PropertyRef Name="busid" />
+    </Key>
+    <Property Name="busid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bus_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="setid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblSet" Relationship="Self.FK_tblBus_tblSets" FromRole="tblBus" ToRole="tblSets" />
+    <NavigationProperty Name="tblBusInsuranceDeatils" Relationship="Self.FK_tblBusInsuranceDeatils_tblBus" FromRole="tblBus" ToRole="tblBusInsuranceDeatils" />
+    <NavigationProperty Name="tblBusDetails" Relationship="GMOUMISModel.FK_tblBusDetails_tblBus" FromRole="tblBu" ToRole="tblBusDetail" />
+    <NavigationProperty Name="tblBusOwnerDetails" Relationship="GMOUMISModel.FK_tblBusOwnerDetails_tblBus" FromRole="tblBu" ToRole="tblBusOwnerDetail" />
+  </EntityType>
+  <EntityType Name="tblBusInsuranceDeatil">
+    <Key>
+      <PropertyRef Name="insurance_details_id" />
+    </Key>
+    <Property Name="insurance_details_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="company_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="company_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="validity" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="bus_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblBu" Relationship="Self.FK_tblBusInsuranceDeatils_tblBus" FromRole="tblBusInsuranceDeatils" ToRole="tblBus" />
+  </EntityType>
+  <EntityType Name="tblSet">
+    <Key>
+      <PropertyRef Name="setid" />
+    </Key>
+    <Property Name="setid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="setname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="station" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblBus" Relationship="Self.FK_tblBus_tblSets" FromRole="tblSets" ToRole="tblBus" />
+  </EntityType>
+  <Association Name="FK_tblBus_tblSets">
+    <End Role="tblSets" Type="Self.tblSet" Multiplicity="1" />
+    <End Role="tblBus" Type="Self.tblBu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSets">
+        <PropertyRef Name="setid" />
+      </Principal>
+      <Dependent Role="tblBus">
+        <PropertyRef Name="setid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBusInsuranceDeatils_tblBus">
+    <End Role="tblBus" Type="Self.tblBu" Multiplicity="1" />
+    <End Role="tblBusInsuranceDeatils" Type="Self.tblBusInsuranceDeatil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBus">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusInsuranceDeatils">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GMOUMISEntity" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblBus" EntityType="Self.tblBu" />
+    <EntitySet Name="tblBusInsuranceDeatils" EntityType="Self.tblBusInsuranceDeatil" />
+    <EntitySet Name="tblSets" EntityType="Self.tblSet" />
+    <AssociationSet Name="FK_tblBus_tblSets" Association="Self.FK_tblBus_tblSets">
+      <End Role="tblSets" EntitySet="tblSets" />
+      <End Role="tblBus" EntitySet="tblBus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBusInsuranceDeatils_tblBus" Association="Self.FK_tblBusInsuranceDeatils_tblBus">
+      <End Role="tblBus" EntitySet="tblBus" />
+      <End Role="tblBusInsuranceDeatils" EntitySet="tblBusInsuranceDeatils" />
+    </AssociationSet>
+    <EntitySet Name="tblEmployeeQuicks" EntityType="GMOUMISModel.tblEmployeeQuick" />
+    <EntitySet Name="tblMasterDepartments" EntityType="GMOUMISModel.tblMasterDepartment" />
+    <AssociationSet Name="FK_tblEmployeeQuick_tblMasterDepartment" Association="GMOUMISModel.FK_tblEmployeeQuick_tblMasterDepartment">
+      <End Role="tblMasterDepartment" EntitySet="tblMasterDepartments" />
+      <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuicks" />
+    </AssociationSet>
+    <EntitySet Name="tbl_CashVivrani" EntityType="GMOUMISModel.tbl_CashVivrani" />
+    <AssociationSet Name="FK_tbl_CashVivrani_tblEmployeeQuick" Association="GMOUMISModel.FK_tbl_CashVivrani_tblEmployeeQuick">
+      <End Role="tblEmployeeQuick" EntitySet="tblEmployeeQuicks" />
+      <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_CashVivrani_tblMasterDepartment" Association="GMOUMISModel.FK_tbl_CashVivrani_tblMasterDepartment">
+      <End Role="tblMasterDepartment" EntitySet="tblMasterDepartments" />
+      <End Role="tbl_CashVivrani" EntitySet="tbl_CashVivrani" />
+    </AssociationSet>
+    <EntitySet Name="tbl_masterDepo" EntityType="GMOUMISModel.tbl_masterDepo" />
+    <EntitySet Name="tbl_ChitFuel" EntityType="GMOUMISModel.tbl_ChitFuel" />
+    <EntitySet Name="tblBusDetails" EntityType="GMOUMISModel.tblBusDetail" />
+    <AssociationSet Name="FK_tblBusDetails_tblBus" Association="GMOUMISModel.FK_tblBusDetails_tblBus">
+      <End Role="tblBu" EntitySet="tblBus" />
+      <End Role="tblBusDetail" EntitySet="tblBusDetails" />
+    </AssociationSet>
+    <EntitySet Name="tblBusOwnerDetails" EntityType="GMOUMISModel.tblBusOwnerDetail" />
+    <AssociationSet Name="FK_tblBusOwnerDetails_tblBus" Association="GMOUMISModel.FK_tblBusOwnerDetails_tblBus">
+      <End Role="tblBu" EntitySet="tblBus" />
+      <End Role="tblBusOwnerDetail" EntitySet="tblBusOwnerDetails" />
+    </AssociationSet>
+    <EntitySet Name="tbl_finalStock" EntityType="GMOUMISModel.tbl_finalStock" />
+    <EntitySet Name="tmp_cashvivrani" EntityType="GMOUMISModel.tmp_cashvivrani" />
+    <FunctionImport Name="sp_GetButDebitStatusByDate" ReturnType="Collection(GMOUMISModel.sp_GetButDebitStatusByDate_Result)" />
+    <EntitySet Name="tbl_ShortName" EntityType="GMOUMISModel.tbl_ShortName" />
+    <EntitySet Name="tbl_bustransfer" EntityType="GMOUMISModel.tbl_bustransfer" />
+  </EntityContainer>
+  <EntityType Name="tblEmployeeQuick">
+    <Key>
+      <PropertyRef Name="serial_id" />
+    </Key>
+    <Property Name="serial_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="created_by" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Isdeleted" Type="Boolean" />
+    <NavigationProperty Name="tblMasterDepartment" Relationship="GMOUMISModel.FK_tblEmployeeQuick_tblMasterDepartment" FromRole="tblEmployeeQuick" ToRole="tblMasterDepartment" />
+    <Property Name="confirm_password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_CashVivrani" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblEmployeeQuick" FromRole="tblEmployeeQuick" ToRole="tbl_CashVivrani" />
+  </EntityType>
+  <EntityType Name="tblMasterDepartment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="department_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblEmployeeQuicks" Relationship="GMOUMISModel.FK_tblEmployeeQuick_tblMasterDepartment" FromRole="tblMasterDepartment" ToRole="tblEmployeeQuick" />
+    <NavigationProperty Name="tbl_CashVivrani" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblMasterDepartment" FromRole="tblMasterDepartment" ToRole="tbl_CashVivrani" />
+  </EntityType>
+  <Association Name="FK_tblEmployeeQuick_tblMasterDepartment">
+    <End Type="GMOUMISModel.tblMasterDepartment" Role="tblMasterDepartment" Multiplicity="1" />
+    <End Type="GMOUMISModel.tblEmployeeQuick" Role="tblEmployeeQuick" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMasterDepartment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblEmployeeQuick">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbl_CashVivrani">
+    <Key>
+      <PropertyRef Name="vivrani_serial_id" />
+    </Key>
+    <Property Name="vivrani_serial_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_id" Type="Int32" Nullable="false" />
+    <Property Name="emp_department" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Issubmited" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tblEmployeeQuick" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblEmployeeQuick" FromRole="tbl_CashVivrani" ToRole="tblEmployeeQuick" />
+    <NavigationProperty Name="tblMasterDepartment" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblMasterDepartment" FromRole="tbl_CashVivrani" ToRole="tblMasterDepartment" />
+    <Property Name="vivrani_serial_number" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_CashVivrani_tblEmployeeQuick">
+    <End Type="GMOUMISModel.tblEmployeeQuick" Role="tblEmployeeQuick" Multiplicity="1" />
+    <End Type="GMOUMISModel.tbl_CashVivrani" Role="tbl_CashVivrani" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployeeQuick">
+        <PropertyRef Name="serial_id" />
+      </Principal>
+      <Dependent Role="tbl_CashVivrani">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_CashVivrani_tblMasterDepartment">
+    <End Type="GMOUMISModel.tblMasterDepartment" Role="tblMasterDepartment" Multiplicity="1" />
+    <End Type="GMOUMISModel.tbl_CashVivrani" Role="tbl_CashVivrani" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMasterDepartment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_CashVivrani">
+        <PropertyRef Name="emp_department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbl_masterDepo">
+    <Key>
+      <PropertyRef Name="dipoid" />
+    </Key>
+    <Property Name="dipoid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="diponame" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_ChitFuel">
+    <Key>
+      <PropertyRef Name="chitfuelid" />
+    </Key>
+    <Property Name="chitfuelid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vechilenumber" Type="Int32" Nullable="false" />
+    <Property Name="fueltype" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="otherfule" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="otherprice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dieselbookno" Type="Int32" Nullable="false" />
+    <Property Name="dieselchitno" Type="Int32" Nullable="false" />
+    <Property Name="stationid" Type="Int32" Nullable="false" />
+    <Property Name="insertedby" Type="Int32" Nullable="false" />
+    <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="inserteddate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblBusDetail">
+    <Key>
+      <PropertyRef Name="busdetailid" />
+    </Key>
+    <Property Name="busdetailid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bus_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bus_operating_center" Type="Int32" Nullable="false" />
+    <Property Name="registration_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="permit_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="seats" Type="Int32" Nullable="false" />
+    <Property Name="chesis_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="engine_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="road_tax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fitness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isDeleted" Type="Boolean" />
+    <Property Name="last_modified_by" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="last_modified_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="bus_id" Type="Int32" Nullable="false" />
+    <Property Name="bus_registration_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bus_registration_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblBu" Relationship="GMOUMISModel.FK_tblBusDetails_tblBus" FromRole="tblBusDetail" ToRole="tblBu" />
+  </EntityType>
+  <Association Name="FK_tblBusDetails_tblBus">
+    <End Type="GMOUMISModel.tblBu" Role="tblBu" Multiplicity="1" />
+    <End Type="GMOUMISModel.tblBusDetail" Role="tblBusDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBu">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusDetail">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblBusOwnerDetail">
+    <Key>
+      <PropertyRef Name="bus_owner_ID" />
+    </Key>
+    <Property Name="bus_owner_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bus_owner_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="owner_father_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="owner_address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="owner_contact_number" Type="Int64" />
+    <Property Name="bus_id" Type="Int32" Nullable="false" />
+    <Property Name="entry_amount" Type="Int32" />
+    <Property Name="entry_reciept_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="payment_date" Type="DateTime" Precision="0" />
+    <Property Name="security_amount" Type="Int32" />
+    <Property Name="security_money_reciept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="remaining_amount" Type="Int32" />
+    <Property Name="gauranter1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="gauranter1_bus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="gauranter2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="gauranter2_bus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="building_fund" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="old_bus_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="old_bus_owner_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="previous_building_fund" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="emi" Type="Int32" />
+    <NavigationProperty Name="tblBu" Relationship="GMOUMISModel.FK_tblBusOwnerDetails_tblBus" FromRole="tblBusOwnerDetail" ToRole="tblBu" />
+  </EntityType>
+  <Association Name="FK_tblBusOwnerDetails_tblBus">
+    <End Type="GMOUMISModel.tblBu" Role="tblBu" Multiplicity="1" />
+    <End Type="GMOUMISModel.tblBusOwnerDetail" Role="tblBusOwnerDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBu">
+        <PropertyRef Name="busid" />
+      </Principal>
+      <Dependent Role="tblBusOwnerDetail">
+        <PropertyRef Name="bus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbl_finalStock">
+    <Key>
+      <PropertyRef Name="dailyid" />
+    </Key>
+    <Property Name="dailyid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pumpid" Type="Int32" Nullable="false" />
+    <Property Name="smeter_petrol" Type="Int64" />
+    <Property Name="emeter_petrol" Type="Int64" />
+    <Property Name="ownersale_petrol" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="cashsale_petrol" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="staffsale_petrol" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="othersale_petrol" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ownerquanity_petrol" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="cashquanity_petrol" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="staffquanity_petrol" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="otherquanity_petrol" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="smeter_diesel" Type="Int64" />
+    <Property Name="emeter_diesel" Type="Int64" />
+    <Property Name="ownersale_diesel" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="cashsale_diesel" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="staffsale_diesel" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="othersale_diesel" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ownerquanity_diesel" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="cashquanity_diesel" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="staffquanity_diesel" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="otherquanity_diesel" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ownersale_lub" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="cashsale_lub" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="staffsale_lub" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="othersale_lub" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ownerquanity_lub" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="cashquanity_lub" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="staffquanity_lub" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="otherquanity_lub" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="summary_date" Type="DateTime" Precision="0" />
+    <Property Name="inserted_by" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tmp_cashvivrani">
+    <Key>
+      <PropertyRef Name="vivrani_id" />
+    </Key>
+    <Property Name="vivrani_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="cash_vivrani_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bus_number" Type="Int32" Nullable="false" />
+    <Property Name="waybill_insertdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="waybillno" Type="Int32" Nullable="false" />
+    <Property Name="waybillserialno" Type="Int32" Nullable="false" />
+    <Property Name="ticket_from" Type="Int32" Nullable="false" />
+    <Property Name="ticket_to" Type="Int32" Nullable="false" />
+    <Property Name="station_from" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="station_to" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vivrani_inserted_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="emp_id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <ComplexType Name="sp_GetButDebitStatusByDate_Result">
+    <Property Type="String" Name="bus_number" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="busid" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="false" MaxLength="500" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+  </ComplexType>
+  <EntityType Name="tbl_ShortName">
+    <Key>
+      <PropertyRef Name="shortID" />
+    </Key>
+    <Property Name="shortID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShrtName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_bustransfer">
+    <Key>
+      <PropertyRef Name="bustransferid" />
+    </Key>
+    <Property Name="bustransferid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="busid" Type="Int32" Nullable="false" />
+    <Property Name="depoid" Type="Int32" Nullable="false" />
+    <Property Name="updateddate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="updatedby" Type="Int32" Nullable="false" />
+    <Property Name="buscurenntdepo" Type="Boolean" Nullable="false" />
+  </EntityType>
+</Schema>

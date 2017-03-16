@@ -1,0 +1,356 @@
+﻿@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Admin/general.js"></script>
+ <script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<div id="searchContainer">
+    <label for="lblSearch">Enter Bus Number</label>
+    <div class="col-md-12">
+        <input type="text" id="txtBusSearch" accesskey="a" class="form-control" style="width:80%;display:inline-block">
+        <input type="button" id="btnBusSearch" value="Search" onclick="serachBusDetail()" class="pull-right btn btn-primary" />
+    </div>
+</div>
+   
+ 
+<div id="Busdetails" class="hidden">
+       
+    <h3 id="lblFormType" style="text-align:center"></h3>
+
+    <div class="col-md-12 marT20">
+        <div class="panel panel-default box-success">
+            <div class="panel-body">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label for="lblSearch">Bus Number:</label>
+                        <span id="lblBusNumber" for="lblfirstname"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lblSearch">Owner Name :</label>
+                        <span id="lblOwnerName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lblSearch">Father Name:</label>
+                        <span id="lblFatherName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lblSearch">Address :</label>
+                        <span id="lblAddress"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label for="lblSearch">Permit Number :</label>
+                        <span id="lblPermitNumber"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lblMember">Member of Company From:</label>
+                        <span id="lblMember"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lblSearch">Set:</label>
+                        <span id="lblSet"></span>
+                    </div>
+                    <div class="form-group" id="buildingFund">
+                        <label for="lblSearch">Building Fund:</label>
+                        <span id="lblBuildingFund"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 marT20" id="pnlTransfer">
+        <div class="panel panel-default box-success">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lblSearch">Old Bus Number:</label>
+                        <span id="lblOldBusNumber"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lblSearch">Owner Name :</label>
+                        <span id="lblOldBusOwner"></span>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lblSearch">Previous Building Fund:</label>
+                        <span id="lblOldBuildingFund"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-md-12 marT20" id="pnlSecurity">
+            <div class="panel panel-default box-success">
+                <div class="panel-body">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lblSearch">EntryDeposit:</label>
+                            <span id="lblEntryDeposit"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lblSearch">Caution Money:</label>
+                            <span id="lblCautionMoney"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lblSearch">Remaining Money:</label>
+                            <span id="lblRemainingMoney"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lblSearch">Recipt Number:</label>
+                            <span id="lblEntryDepositReciptNo"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">
+                                Recipt Number:
+                            </label>
+                            <span id="lblCautionMoneyReciptNo"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">
+                                EMI:
+                            </label>
+                            <span id="lblEmi"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label for="lblSearch" style="    margin-top: 40px;">
+                                Caution Money DepositDate:
+                            </label>
+                            <span id="lblCautionMoneyDate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-md-12 marT20">
+
+            <div class="col-md-6">
+                <div class="panel panel-default box-success">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="lblSearch">Bus guarantor1 Name :</label>
+                            <span id="lblguarantor1Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">guarantor1 Bus Number *:</label>
+                            <span id="lblguarantor1Bus"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">Bus guarantor2 Name :</label>
+                            <span id="lblguarantor2Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">guarantor2 Bus Number :</label>
+                            <span id="lblguarantor2Bus"></span>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default box-success">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="lblSearch">Dipoo :</label>
+                                <span id="lblDipoo"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblSearch">Registration Number :</label>
+                                <span id="lblRegistrationNo"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblSearch">Model :</label>
+                                <span id="lblModel"></span>
+                            </div>
+                            <label for="lblSearch">No Of Seats :</label>
+                            <span id="lblNoOfSeats"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lblSearch">Chassis Number :</label>
+                            <span id="lblChassisNo"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">Engine Number :</label>
+                            <span id="lblEngineNo"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">
+                                <div class="form-group">
+                                    <label for="lblSearch">Toll Tax:</label>
+                                    <span id="lblTollTax"></span>
+                                </div>
+                            </label>
+                            <span id="lblguarantor2Bus"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">Fitness :</label>
+                            <span id="lblFitness"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">Insorance Company:</label>
+                            <span id="lblInsorance"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">Insorance Company Address:</label>
+                            <span id="lblInsoranceCompanyAddress"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lblSearch">Valid :</label>
+                            <span id="lblValid"></span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                    <div id="myModal" class="modal fade" style="padding-top:129px">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Not Found!!</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <p>Employee Deatil Not Found<span id="spnEmpID"></span></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+
+                        $(document).ready(function () {
+
+                            var busNmbr = '@ViewBag.busNumber'
+                            if (busNmbr != null) {
+                                $("#txtBusSearch").val(busNmbr);
+                                serachBusDetail();
+                                 
+
+                            }
+                        });
+
+
+                        function serachBusDetail() {
+                          
+                            var abc = validateTextBoxes('searchContainer');
+                            if (abc == true) {
+                                var busnumver = $('#txtBusSearch').val().trim();
+                                $.ajax({
+                                    type: 'GET',
+                                    data: { 'BusNumber': busnumver },
+                                    url: "/Buses/GetBusDetails",
+
+                                    success: function (data) {
+                                        if (data != "") {
+                                            var paymentDate;
+                                            if(data.payment_date!=null)
+                                            {
+                                             paymentDate = new Date(parseInt(data.payment_date.substr(6))).format("dd/mm/yyyy")
+                                             }
+                                             else
+                                             {
+                                             paymentDate="N/A";
+                                             }
+                                            var member = new Date(parseInt(data.validity.substr(6))).format("dd/mm/yyyy")
+                                            var valid = new Date(parseInt(data.validity.substr(6))).format("dd/mm/yyyy")
+
+                                            $("#Busdetails").removeClass("hidden");
+                                            setControlValue("lblBusNumber", data.bus_number)
+                                            setControlValue("lblOwnerName", data.bus_owner_name)
+                                            setControlValue("lblMember", member)
+                                            setControlValue("lblPermitNumber", data.permit_number)
+                                            setControlValue("lblDipoo", data.bus_operating_center)
+                                            setControlValue("lblRegistrationNo", data.registration_number)
+                                            setControlValue("lblModel", data.model)
+                                            setControlValue("lblNoOfSeats", data.seats)
+                                            setControlValue("lblChassisNo", data.chesis_number)
+                                            setControlValue("lblEngineNo", data.engine_number)
+                                            setControlValue("lblFitness", data.fitness)
+                                            setControlValue("lblInsorance", data.company_name)
+                                            setControlValue("lblValid", valid)
+                                            setControlValue("lblTollTax", data.road_tax)
+                                            setControlValue("lblFatherName", data.owner_father_name)
+                                            setControlValue("lblInsoranceCompanyAddress", data.company_address)
+                                            setControlValue("lblAddress", data.owner_address)
+                                            setControlValue("lblSet", data.bus_operating_center);
+                                            setControlValue("lblEntryDeposit", data.entry_amount)
+                                            setControlValue("lblEntryDepositReciptNo", data.entry_reciept_number)
+                                            setControlValue("lblCautionMoney", data.security_amount)
+                                            setControlValue("lblCautionMoneyReciptNo", data.security_money_reciept)
+                                            setControlValue("lblCautionMoneyDate", paymentDate)
+                                            setControlValue("lblRemainingMoney", data.remaining_amount)
+                                            setControlValue("lblguarantor1Name", data.gauranter1)
+                                            setControlValue("lblguarantor2Name", data.gauranter2)
+                                            setControlValue("lblguarantor1Bus", data.gauranter1_bus)
+                                            setControlValue("lblguarantor2Bus", data.gauranter2_bus)
+                                            setControlValue("lblBuildingFund", data.building_fund);
+                                            setControlValue("lblOldBusNumber", data.old_bus_number);
+                                            setControlValue("lblOldBusOwner", data.old_bus_owner_name);
+                                            setControlValue("lblOldBuildingFund", data.previous_building_fund);
+                                            setControlValue("lblFormType", data.bus_registration_type);
+                                            debugger;
+                                            if (data.bus_registration_type == "Building")
+                                            {
+                                                $("#pnlTransfer").addClass("hide");
+                                                $("#pnlSecurity").addClass("hide");
+                                            }
+                                            else if (data.bus_registration_type == "Transfer")
+                                                {
+                                                $("#pnlSecurity").addClass("hide");
+                                            }
+                                            else{
+                                               $("#buildingFund").addClass("hide");
+                                                $("#pnlTransfer").addClass("hide");
+                                            }
+                                            var busno = '@ViewBag.busNumber'
+                                            if (busno != null) { $("#searchContainer").addClass("hidden"); }
+
+
+                                            
+                                        }
+                                        else {
+                                            $("#myModal").modal('show');
+                                        }
+                                    }
+
+                                });
+                            }
+                        }
+                    </script>

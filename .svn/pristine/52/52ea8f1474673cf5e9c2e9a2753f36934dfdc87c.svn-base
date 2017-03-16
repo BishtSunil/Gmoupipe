@@ -1,0 +1,286 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.VivraniViewModel
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<script src="~/Scripts/GmouScripts/autocompletedropdown.js"></script>
+
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+
+
+    <style type="text/css" > .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+<div id="busInformation">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Fuel Detail</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Pump
+                            </td>
+                            <td>
+                                <select>
+                                    <option>Select Pump </option>
+                                    <option>HPC Kotdwar</option>
+                                    <option>IOC Kotdwar</option>
+                                    <option>HPC Srinagar</option>
+                                    <option>HPC Karanpryag</option>
+                                    <option>HPC Rishikesh</option>
+                                     
+                                </select>
+                            </td>
+                            <td>
+                               Fuel Type
+                            </td>
+                            <td>
+                    
+                                <select  onchange="fuelType(this.value)">
+                                    <option>Select    Fuel Type</option>
+                                    <option>Patrol</option>
+                                    <option>Diesel</option>
+                                    <option>Lubricant</option>
+                                </select>
+                            </td>
+                            <td id="ddlLub" class="hide">
+
+                                <select onchange="fllDetalLub(this.value)">
+                                    <option>Select Lubricant</option>
+                                    <option>moboil</option>
+                                    <option>Greace</option>
+                                    <option>engineoil</option>
+                                </select>
+                            </td>
+                        </tr>
+               
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div  id="pnlFuelDetail" class="col-md-12 marT20 hide">
+         
+            <div class="box box-success">
+                <div class="boxHeading">
+                    <b id="txtType"></b>
+                    <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                </div>
+                <div class="box-body">
+                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                        <tbody>
+                            <tr>
+                                <td>
+                                   Opening Stock
+                                </td>
+                                <td>
+                                    <input type="text" id="txtOpenningStock" class="txt100" />
+                                   
+                                </td>
+                                <td>
+                                    Recived Stock
+                                </td>
+                                <td>
+                                    <input type="text" id="txtOpenningStock" class="txt100" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                   Sale Stock
+                                </td>
+                                <td>
+                                    <input type="text" id="txtVbookNo" class="txt100" />
+                                </td>
+                                <td>
+                                    Closing Stock
+                                </td>
+                                <td>
+                                    <input type="text" id="txtVSerialNo" class="txt100" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Sale Stock
+                                </td>
+                                <td>
+                                    <select onchange="ddlSaleTye(this.value)">
+                                        <option>Select sale type</option>
+                                        <option>Cash Sale</option>
+                                        <option>Credit sale</option>
+                                        <option>Owner Sale</option>
+                                    </select>
+                                </td>
+
+                            </tr>
+                    
+                   
+                  
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+      
+
+    <div class="col-md-12 marT20 hide" id="pnlCashSale">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Fuel Detail</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                               Quantity
+                            </td>
+                            <td>
+                                <input type="text" id="txtTktBookNo" class="txt100" />
+                            </td>
+                            <td> Price </td>
+
+                            <td>
+
+                                <input type="text" id="txtTicketSerialNo" class="txt100" />
+                            </td>
+                             
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 marT20 hide" id="pnlCreditOwnerSale">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Fuel Detail</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>Bus No / Department</td>
+                            <td>
+                                <input type="text" id="txtTktBookNo" class="txt100" />
+                            </td>
+                            <td>Chittno / billNo</td>
+                            <td>
+                                <input type="text" id="txtTktBookNo" class="txt100" />
+                            </td>
+                            </tr>
+                                <tr>
+                            <td>
+                                Quantity
+                            </td>
+                            <td>
+                                <input type="text" id="txtTktBookNo" class="txt100" />
+                            </td>
+                            <td> Price </td>
+
+                            <td>
+
+                                <input type="text" id="txtTicketSerialNo" class="txt100" />
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <button id="btnFuel" class="pull-right btn btn-primary hide" type="button" onclick="SaveFuelDetail()">
+     Save
+    </button>
+    </div>
+ 
+<script>
+    function ddlSaleTye(type) {
+        if (type == "Cash Sale")
+        {
+            $("#pnlCashSale").removeClass("hide");
+            
+        }
+        else {
+            
+            $("#pnlCreditOwnerSale").removeClass("hide");
+        }
+    }
+    function fuelType(type) {
+        if (type == "Lubricant") {
+            $("#ddlLub").removeClass("hide");
+            $("#pnlFuelDetail").removeClass("hide");
+            $("#btnFuel").removeClass("hide");
+            
+        }
+        else {
+
+            $("#pnlFuelDetail").removeClass("hide");
+            $("#btnFuel").removeClass("hide");
+        }
+    }
+    
+</script>
+
+
+ 
+ 
