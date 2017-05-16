@@ -195,13 +195,29 @@ namespace Gmou.BusinessAccessLayer
 
             return WayBillRepository.GetGamanPatra(id);
         }
+        public static decimal BALGetDistanceFare(string from, string to)
+        {
 
+            return WayBillRepository.DALGetDistanceFare( from,  to);
+        }
         public static List<RouteName> BALGetRouteName(string prefix)
         {
 
             return WayBillRepository.GetRouteName(prefix);
         }
+        public static OwnerVivraniSMSInfo BALGetOwnerVivraniInfo(string pumpid)
+        {
 
+            return WayBillRepository.DALGetOwnerVivraniInfo(pumpid);
 
-}
+        }
+        public static OwnerFuelSMSInfo BALGetOwnerFueliInfo(string pumpid)
+        {
+
+            return WayBillRepository.DALGetOwnerFueliInfo(pumpid);
+
+        }
+        
+
+    }
 }

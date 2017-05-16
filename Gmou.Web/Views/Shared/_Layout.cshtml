@@ -429,6 +429,11 @@
                                     <i class="fa fa-eye"></i>Bus Debit Report
                                 </a>
                             </li>
+                            <li class="active">
+                                <a href="@Url.Action("ShowPumpStockReport", "Transaction")">
+                                    <i class="fa fa-eye"></i>Fuel Stock Report
+                                </a>
+                            </li>
                             
                         </ul>
                     </li>
@@ -441,10 +446,10 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","WayBill")"><i class="fa fa-angle-double-right"></i> Cash Vivrabi</a></li>
-                            <li><a href="@Url.Action("AddVivrani","WayBill")"><i class="fa fa-angle-double-right"></i> Add Vivrani</a></li>
+                            @*<li><a href="@Url.Action("Index","WayBill")"><i class="fa fa-angle-double-right"></i> Cash Vivrabi</a></li>
+                            <li><a href="@Url.Action("AddVivrani","WayBill")"><i class="fa fa-angle-double-right"></i> Add Vivrani</a></li>*@
                             <li><a href="@Url.Action("BusHistory", "WayBill")"><i class="fa fa-angle-double-right"></i> Bus History</a></li>
-                            <li><a href="@Url.Action("Coupon", "WayBill")"><i class="fa fa-angle-double-right"></i> Coupon</a></li>
+                            @*<li><a href="@Url.Action("Coupon", "WayBill")"><i class="fa fa-angle-double-right"></i> Coupon</a></li>*@
                             <li><a href="@Url.Action("AddWaybill", "WayBill")"><i class="fa fa-angle-double-right"></i> Add Waybill</a></li>
                             <li><a href="@Url.Action("Fuel", "Chart")"><i class="fa fa-angle-double-right"></i> CashSheet Summary</a></li>
                             <li><a href="@Url.Action("GamanPatra", "WayBill")"><i class="fa fa-angle-double-right"></i> GamanPatra</a></li>

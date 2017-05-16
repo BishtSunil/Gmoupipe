@@ -4,6 +4,9 @@
 }
 @model Gmou.Web.Models.FuelViewModel
 @using System.Web;
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <script src="~/Scripts/Admin/validation.js"></script>
 <script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
 <link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
@@ -37,13 +40,13 @@
     <div class="col-md-12 marT20">
         <div class="box box-success">
             <div class="boxHeading">
-                <b>Cash Fuel Sale</b>
+                <b>Other Fuel Sale</b>
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
             </div>
             <div class="box-body">
 
 
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                <table id="tblAccount" >
                     <tr>
                         <td>Station Name</td>
                         <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
@@ -71,31 +74,10 @@
 
                 </table>
                 <div class="PageContent">
-                    <table cellpadding="0px" cellspacing="0px" width="100%">
-                        <tr>
-                            <td style="width: 6px;">
-                                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-                            </td>
-                            <td class="PageWindowHeader">
-                                <table width="100%" cellpadding="0px" cellspacing="0px">
-                                    <tr>
-                                        <td width="200px">
-                                            &nbsp; <label>Fuel Details</label>
-                                        </td>
-                                        <td align="right"></td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td style="width: 6px;">
-                                <img src="~/Images/gridImages/RightCorner.png" />
-                            </td>
-                        </tr>
-                    </table>
-
-
+                 
                     <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
-                        <table id="FuelTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
-                            <thead>
+                        <table id="FuelTable">
+                         
                                 <tr>
                                     <th>Fuel Type</th>
                                     <th>Quantity</th>
@@ -129,7 +111,7 @@
                                     <td><input type="text" id="txtLub2Qty" chailid="txtLub2Amt" class="txtH20" onchange="GetCalculate(this)" /></td>
                                     <td><input type="text" id="txtLub2Amt" class="txtH20" /></td>
                                 </tr>
-                            </thead>
+                           
                         </table>
                     </div>
                 </div>  
@@ -143,28 +125,9 @@
 
 </div>
 <div class="PageContent">
-    <table cellpadding="0px" cellspacing="0px" width="100%">
-        <tr>
-            <td style="width: 6px;">
-                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-            </td>
-            <td class="PageWindowHeader">
-                <table width="100%" cellpadding="0px" cellspacing="0px">
-                    <tr>
-                        <td width="200px">
-                            &nbsp; <label>Waybill</label>
-                        </td>
-                        <td align="right"></td>
-                    </tr>
-                </table>
-            </td>
-            <td style="width: 6px;">
-                <img src="~/Images/gridImages/RightCorner.png" />
-            </td>
-        </tr>
-    </table>
+   
     <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
-        <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+        <table id="EmployeesTable">
             <thead>
                 <tr>
                     <th>
@@ -242,6 +205,7 @@
             dataType: "json",
             success: function (data) {
                 if (data) {
+                    $('#EmployeesTable tbody').empty();
                     GetAllOtherfuleDetails();
                 }
             }

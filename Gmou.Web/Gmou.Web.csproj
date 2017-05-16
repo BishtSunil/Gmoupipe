@@ -70,6 +70,10 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -171,6 +175,7 @@
     <Compile Include="Controllers\BookStoreController.cs" />
     <Compile Include="Controllers\BusesController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\demo-koController.cs" />
     <Compile Include="Controllers\FuelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -205,14 +210,17 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\colorpicker\bootstrap-colorpicker.css" />
     <Content Include="Content\css\colorpicker\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\css\component.css" />
     <Content Include="Content\css\datatables\dataTables.bootstrap.css" />
     <Content Include="Content\css\datatables\images\sort_asc.png" />
     <Content Include="Content\css\datatables\images\sort_asc_disabled.png" />
     <Content Include="Content\css\datatables\images\sort_both.png" />
     <Content Include="Content\css\datatables\images\sort_desc.png" />
     <Content Include="Content\css\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\css\DataTable\style.css" />
     <Content Include="Content\css\datepicker\datepicker3.css" />
     <Content Include="Content\css\daterangepicker\daterangepicker-bs3.css" />
+    <Content Include="Content\css\demo.css" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\fullcalendar\fullcalendar.css" />
@@ -368,12 +376,16 @@
     <Content Include="Content\css\jQueryUI\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="Content\css\jvectormap\jquery-jvectormap-1.2.2.css" />
     <Content Include="Content\css\morris\morris.css" />
+    <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\timepicker\bootstrap-timepicker.css" />
     <Content Include="Content\css\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\Custom.css" />
     <Content Include="Content\css\DataTable\jquery-1.12.0.min.js" />
     <Content Include="Content\css\DataTable\jquery.dataTables.min.css" />
     <Content Include="Content\css\DataTable\jquery.dataTables.min.js" />
+    <Content Include="Content\fonts\blokk\BLOKKRegular.svg" />
+    <Content Include="Content\fonts\codropsicons\codropsicons.svg" />
+    <Content Include="Content\fonts\codropsicons\license.txt" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\ionicons.svg" />
@@ -503,6 +515,13 @@
     <Content Include="Images\searchicon.png" />
     <Content Include="Scripts\Admin\jquery.confirm.min.js" />
     <Content Include="Scripts\Admin\jquery.js" />
+    <Content Include="Content\fonts\codropsicons\codropsicons.eot" />
+    <Content Include="Content\fonts\codropsicons\codropsicons.ttf" />
+    <Content Include="Content\fonts\codropsicons\codropsicons.woff" />
+    <Content Include="Content\fonts\blokk\BLOKKRegular.eot" />
+    <Content Include="Content\fonts\blokk\BLOKKRegular.ttf" />
+    <Content Include="Content\fonts\blokk\BLOKKRegular.woff" />
+    <Content Include="Logs\test.log" />
     <None Include="Properties\PublishProfiles\GmouApp.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\accent.png" />
@@ -566,6 +585,7 @@
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.autocomplete.js" />
+    <Content Include="Scripts\jquery.stickyheader.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\LTE\BlockUI\jquery.blockUI.js" />
     <Content Include="Scripts\LTE\jquery.unobtrusive-ajax.min.js" />
@@ -1043,6 +1063,11 @@
     <Content Include="Views\Reports\_finalentry.cshtml" />
     <Content Include="Views\Reports\_FuleSaleReport.cshtml" />
     <Content Include="Views\Transaction\DebitStatus.cshtml" />
+    <Content Include="Views\Buses\BusDepoStatus.cshtml" />
+    <Content Include="Views\Fuel\_stocksummaryreports.cshtml" />
+    <Content Include="Views\Fuel\FuelFinalReport.cshtml" />
+    <Content Include="Views\Fuel\_finalsalesreport.cshtml" />
+    <Content Include="Views\Reports\_stocksReports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1054,6 +1079,10 @@
     <ProjectReference Include="..\Gmou.BusinessAccessLayer\Gmou.BusinessAccessLayer.csproj">
       <Project>{2a277f29-1898-40a7-831d-68bed14a4906}</Project>
       <Name>Gmou.BusinessAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gmou.DataRepository\Gmou.Repository.csproj">
+      <Project>{3d6b6aef-7eb9-49fe-9356-e7914fdcf943}</Project>
+      <Name>Gmou.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gmou.DomainModelEntities\Gmou.DomainModelEntities.csproj">
       <Project>{c68cdfcf-d598-4b03-b334-79849d6bc573}</Project>

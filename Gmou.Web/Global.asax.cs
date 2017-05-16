@@ -28,6 +28,7 @@ namespace Gmou.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            log4net.Config.XmlConfigurator.Configure();
         }
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {

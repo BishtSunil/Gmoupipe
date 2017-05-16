@@ -1,0 +1,39 @@
+﻿@model Gmou.Web.Models.SummaryStockFinalReports
+@{
+    ViewBag.Title = "FuelFinalReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+#parent_div_1, #parent_div_2, #parent_div_3{
+    width:100px;
+    height:100px;
+    border:1px solid red;
+    margin-right:10px;
+    float:left;
+}
+.child_div_1{
+    float:left;
+    margin-right:5px;
+}
+</style>
+<div style="width:100%">
+    <table>
+        <tr>
+            <td>User Name</td><td>@Model.stocks.Select(m => m.UserName).FirstOrDefault()</td>
+            <td>Station Name</td>
+            <td>@Model.stocks.Select(m => m.StationName).FirstOrDefault()</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>@Html.Partial(@"~/Views\\Fuel\\_stocksummaryreports.cshtml", Model.stocks)</td>
+            <td style="vertical-align:top">@Html.Partial(@"~/Views\\Fuel\\_finalsalesreport.cshtml", Model.srs)</td>
+
+        </tr>
+      
+    </table>
+  
+   
+  
+</div>

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable< Gmou.DomainModelEntities.VivraniReports>
-
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <style>
     /*.table{
     display:table;
@@ -10,7 +12,7 @@
     display:table-cell;
     width:100px;
     border:solid black 1px;
-}*/
+}
     .table1{
     width: 100%;
     border-collapse:collapse;
@@ -21,7 +23,7 @@
     text-align: left;
    
 }
-
+*/
 </style>
 
 
@@ -31,7 +33,7 @@
     <div class="table_cell">Cell-3Cell-3 Cell-3Cell-3 Cell-3Cell-3</div>
     <div class="table_cell">Cell-4Cell-4Cell-4 Cell-4Cell-4Cell-4 Cell-4Cell-4Cell-4Cell-4</div>
 </div>*@
-<table class="table1">
+<table >
     <tr>
         <th>Date</th>
         <th>Particulars</th>
@@ -46,11 +48,11 @@
 
             <tr>
 
-                <td class="td1">@item.VivraniDate</td>
-                <td class="td1"> @item.VivraniNumber</td>
-                <td class="td1">@item.Amount</td>
-                <td class="td1">0.0</td>
-                <td class="td1">0.0</td>
+                <td >@item.VivraniDate</td>
+                <td > @item.VivraniNumber</td>
+                <td >@item.Amount</td>
+                <td >0.0</td>
+                <td >0.0</td>
            
             </tr>
         

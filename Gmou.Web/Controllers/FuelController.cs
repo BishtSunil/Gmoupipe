@@ -129,19 +129,26 @@ namespace Gmou.Web.Controllers
             data.InsertedBy = user.LoginEmpID;
             var data_ = BusinessAccessLayer.BALFuel.BALInsertChit(data);
 
-            //if(data)
-            //{
             //    string message =String.Format("Fuel Filled by your Vechile Book/Chit{0}-{1}. Quantity:{2} Price{3} at Kotdwar IOC on {4}",model.DieselBookno,model.ChitNo,model.FuelQuantity,model.Price,DateTime.Now.ToString());
             //    Helpers.SMSGateway.SendSMS(message);
             //}
-            return Json(null, JsonRequestBehavior.AllowGet);
+          
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult GetAllChitDetailsByUser()
+        public ActionResult GetAllChitDetailsByUser(int usertype)
         {
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
           
-            var data = BusinessAccessLayer.BALFuel.BALGetAllChitDetailsByUser(user.LoginEmpID);
+            var data = BusinessAccessLayer.BALFuel.BALGetAllChitDetailsByUser(user.LoginEmpID, usertype);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetAllChitDetailsByBus()
+        {
+            var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+
+            var data = BusinessAccessLayer.BALFuel.BALGetAllChitDetailsByUser(user.LoginEmpID, 1);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -221,8 +228,28 @@ namespace Gmou.Web.Controllers
         [HttpPost]
         public ActionResult SaveDailySummary(FinalSummaryData model)
         {
+            var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+            model.inserted_by = user.LoginEmpID;
             BusinessAccessLayer.BALFuel.BALInsertDailySummary(Helpers.Converter.ConvertFinalSummary(model));
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ShowDailySummaryReport(int pumpid)
+        {
+            var data = BusinessAccessLayer.BALFuel.BALGetFuelFinalSumamry();
+            var result = BusinessAccessLayer.BALFuel.BALGetOtherStocksDetailsSummary(1);
+            SummaryStockFinalReports suumaryreport = new SummaryStockFinalReports()
+            {
+                stocks = data, 
+                srs = result
+        };
+            return View(@"~/Views\Fuel\FuelFinalReport.cshtml", suumaryreport);
+        }
+
+        public ActionResult GetStocksOtherDetails(int pumpid)
+        {
             return null;
+
         }
          public ActionResult StaffFuelEnrty()
         {

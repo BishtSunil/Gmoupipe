@@ -76,4 +76,20 @@ namespace Gmou.DomainModelEntities
         public string InsuranceCompany { get; set; }
         public DateTime InsuranceValidity { get; set; }
     }
+
+
+    public class BusListDepoModel
+    {
+
+        public int bus_id { get; set; }
+        public string busEncrpId { get; set; }
+        public string busEncrpNumber { get; set; }
+        public string bus_number { get; set; }
+       
+        public string bus_operating_center { get; set; }
+        public DateTime registration_date { get; set; }
+        public string bus_owner_name { get; set; }
+        public int seats { get; set; }
+        public string model { get; set; }
+    }
 }

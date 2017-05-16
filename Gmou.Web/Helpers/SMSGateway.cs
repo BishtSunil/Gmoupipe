@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -9,26 +10,93 @@ namespace Gmou.Web.Helpers
 {
     public class SMSGateway
     {
-        public static  int SendSMS(string Message)
+        public static void SendVivraniSMS(decimal amount, long? contact, string ownername, string bunumber, decimal totalamount, string vivranid)
         {
-            WebClient Client = new WebClient();
-            String RequestURL, RequestData;
 
-            RequestURL = "https://redoxygen.net/sms.dll?Action=SendSMS";
-
-            RequestData = "AccountId=" + "CI00174965"
-                + "&Email=" + System.Web.HttpUtility.UrlEncode("sonybulls@gmail.com")
-                + "&Password=" + System.Web.HttpUtility.UrlEncode("y8cqMEh4")
-                + "&Recipient=" + System.Web.HttpUtility.UrlEncode("9927543200")
-                + "&Message=" + System.Web.HttpUtility.UrlEncode(Message);
-
-            byte[] PostData = Encoding.ASCII.GetBytes(RequestData);
-            byte[] Response = Client.UploadData(RequestURL, PostData);
-
-            String Result = Encoding.ASCII.GetString(Response);
-            int ResultCode = System.Convert.ToInt32(Result.Substring(0, 4));
-
-            return ResultCode;
+            string sNumber = "9412965801";
+            // string sMessage = "Dear Sir, abcg12344 / abcdef Advance Amount has been taken for Rs.1200 on Date : 28/3/17 Thanks, GMOU LTD";
+            // string sSenderID = "SMSHUB";
+            string emaaseg = CreateMEssage(SMSMessage.Vivrani, amount, ownername, bunumber, contact, totalamount, vivranid);
+            string sURL = "http://103.16.142.110/vendorsms/pushsms.aspx?user=sbisht&password=P9890242125&msisdn=" + contact + "&sid=GMOULT&msg=" + emaaseg + "&fl=0&gwid=2";
+            //string sURL = "http://cloud.smsindiahub.in/vendorsms/pushsms.aspx?user=" + sUser + "&password=" +
+            //spwd + "&msisdn =" + sNumber + "&sid =" + sSenderID + "&msg =" + sMessage + "&fl =1 & gwid = 2";
+            string sResponse = GetResponse(sURL);
+            // Response.Write(sResponse);
         }
-    }
+        //public static void SendFuelSMS(decimal amount, long contact, string ownername, string bunumber, decimal quantity)
+        //{
+
+        //    string sNumber = "9412965801";
+        //    // string sMessage = "Dear Sir, abcg12344 / abcdef Advance Amount has been taken for Rs.1200 on Date : 28/3/17 Thanks, GMOU LTD";
+        //    // string sSenderID = "SMSHUB";
+        //   // string emaaseg = CreateMEssage(SMSMessage.Vivrani, amount, ownername, bunumber, contact, totalamount, vivranid);
+        //    string sURL = "http://103.16.142.110/vendorsms/pushsms.aspx?user=sbisht&password=P9890242125&msisdn=" + contact + "&sid=GMOULT&msg=" + emaaseg + "&fl=0&gwid=2";
+        //    //string sURL = "http://cloud.smsindiahub.in/vendorsms/pushsms.aspx?user=" + sUser + "&password=" +
+        //    //spwd + "&msisdn =" + sNumber + "&sid =" + sSenderID + "&msg =" + sMessage + "&fl =1 & gwid = 2";
+        //    string sResponse = GetResponse(sURL);
+        //    // Response.Write(sResponse);
+        //}
+        public static string CreateMEssage(SMSMessage op, decimal amount, string ownername, string busnumber, long? contact, decimal totalamount, string vivranid)
+        {
+            string vivraniamount = string.Format("Rs." + amount);
+            string vivranitotalamount = string.Format("Rs." + totalamount);
+
+            switch (op)
+            {
+                case SMSMessage.Advance:
+                    {
+                        string emssage = String.Format("Dear Sir, {0} / {1} Advance Amount has been taken for {2} on Date : {3} Thanks, GMOU LTD", "UK12PA-090", "Mr.Kamal kumar", "Rs.5000", DateTime.Now.ToShortDateString());
+                        return emssage;
+
+                    }
+                case SMSMessage.Vivrani:
+                    {
+                        string emssage = String.Format("Dear Sir, {0}/ {1} Vivrani No. {2} has been generated for {3} on Date : {4}. Total {5} Vivrani Generated till on this {6} Thanks, GMOU LTD", busnumber, ownername, vivranid, amount, DateTime.Now.ToShortDateString(), totalamount, DateTime.Now.Month.ToString());
+                        return emssage;
+
+                    }
+                case SMSMessage.Fuel:
+                    {
+                        string emssage = String.Format("Dear Sir, {0} / {1} Advance Amount has been taken for {2} on Date : {3} Thanks, GMOU LTD", "UK12PA-090", "Mr.Kamal kumar", "Rs.5000", DateTime.Now.ToShortDateString());
+                        return emssage;
+
+                    }
+
+            }
+            return null;
+
+        }
+        public static string GetResponse(string sURL)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest
+            .Create(sURL);
+            request.MaximumAutomaticRedirections = 4;
+            request.Credentials = CredentialCache.DefaultCredentials;
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request
+                .GetResponse();
+                Stream receiveStream = response.GetResponseStream(
+                );
+                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+                string sResponse = readStream.ReadToEnd();
+                response.Close();
+                readStream.Close();
+                return sResponse;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+        //public static string CreateMessage(string ownername, string busnumber, string staionname, string fueltype)
+        //{
+        //    string message = "{0}/ {1} You Account has been debited for {2} for {3} at {4} on Date : {5} Thanks, GMOU LTD";
+        //}
+
+
+        //    Dear Sir, 
+        public enum SMSMessage { Advance, Vivrani, Fuel }
+
 }
+    }

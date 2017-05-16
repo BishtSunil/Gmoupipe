@@ -478,5 +478,32 @@ namespace Gmou.DataRepository.CustomRepository
 
 
         }
+
+        public static List<BusListModel> GetAllBusesDepoStatus()
+        {
+
+            List<BusListModel> employeeList = new List<BusListModel>();
+            try
+            {
+                using (var item = new GMOUMISEntity())
+                {
+
+                    employeeList = (from b in item.tblBus
+                                    join bd in item.tblBusDetails on b.busid equals bd.bus_id
+                                    join bo in item.tblBusOwnerDetails on b.busid equals bo.bus_id
+                                    join bdeop in item.tbl_masterDepo on bd.bus_operating_center equals bdeop.dipoid
+                                    select new BusListModel { busEncrpNumber = b.bus_number, bus_number = b.bus_number, bus_id = b.busid, bus_operating_center = bd.bus_operating_center, seats = bd.seats, bus_owner_name = bo.bus_owner_name, registration_date = bd.registration_date }).ToList();
+                    return employeeList;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+                return employeeList;
+
+            }
+
+        }
+
     }
 }

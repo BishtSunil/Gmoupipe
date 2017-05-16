@@ -22,19 +22,20 @@ namespace Gmou.DataRepository.BulkInsert
             DataTable dt = new DataTable();
 
 
-            dt.Columns.AddRange(new DataColumn[7] { new DataColumn("waybillID", typeof(int)),
+            dt.Columns.AddRange(new DataColumn[8] { new DataColumn("waybillID", typeof(int)),
                         new DataColumn("stationfrom", typeof(string)),
                         new DataColumn("stationto",typeof(string)) ,
-            new DataColumn("ticketstart", typeof(string)),
-                        new DataColumn("ticketend", typeof(string)),
-                          new DataColumn("noofticket", typeof(string)),
-                        new DataColumn("ticketfare", typeof(string))
+            new DataColumn("ticketstart", typeof(int)),
+                        new DataColumn("ticketend", typeof(int)),
+                          new DataColumn("noofticket", typeof(int)),
+                        new DataColumn("ticketfare", typeof(int)),
+                         new DataColumn("iscoupon", typeof(bool))
             });
             foreach (var row in model)
             {
                
                    
-                    dt.Rows.Add(row.WayBillID, row.StationFrom, row.StationTo, row.StartTicket, row.EndTicket, row.NoofTicket, row.TicketFare);
+                    dt.Rows.Add(row.WayBillID, row.StationFrom, row.StationTo, row.StartTicket, row.EndTicket, row.NoofTicket, row.TicketFare,row.IsCoupon);
                
             }
             if (dt.Rows.Count > 0)
@@ -55,6 +56,7 @@ namespace Gmou.DataRepository.BulkInsert
                         sqlBulkCopy.ColumnMappings.Add("ticketend", "ticketend");
                         sqlBulkCopy.ColumnMappings.Add("noofticket", "noofticket");
                         sqlBulkCopy.ColumnMappings.Add("ticketfare", "fare");
+                        sqlBulkCopy.ColumnMappings.Add("iscoupon", "iscoupon");
                         con.Open();
                         sqlBulkCopy.WriteToServer(dt);
                         con.Close();

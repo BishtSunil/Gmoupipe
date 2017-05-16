@@ -83,7 +83,7 @@
         {
             var obj = new Object();
           
-            obj.pumpid = 5;
+            obj.pumpid =getControlValueN("ddlpumplst");
             obj.smeter_petrol =	 getControlValueN("txtPatrolStart");
             obj.emeter_petrol =	getControlValueN("txtPatrolEnd");
             obj. ownersale_petrol = 	getControlValueN("txtPatrolOwnerAmount");
@@ -126,6 +126,8 @@
                     if (data) {
                         $('#txtPatrolCashAmount').val(data.Price);
                         $('#txtPatrolCashQty').val(data.Quantity);
+                        var url = "/Fuel/ShowDailySummaryReport?pumpid=" + getControlValueN("ddlpumplst");
+                        window.location.href = url;
                     }
                 }
 

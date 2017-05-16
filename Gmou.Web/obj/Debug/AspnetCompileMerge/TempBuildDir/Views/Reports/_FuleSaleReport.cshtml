@@ -10,6 +10,9 @@
 <script src="~/Scripts/LTE/ui/date.format.js"></script>
 <link href="~/Content/jquery.loader.css" rel="stylesheet" />
 <script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 
 <style type="text/css">
     .txt100 {
@@ -37,7 +40,7 @@
     <div class="col-md-12 marT20">
         <div class="box box-success">
             <div class="boxHeading">
-                <b>Chit Fuel Sale</b>
+                <b>Pump Sale Report</b>
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
             </div>
             <div class="box-body">
@@ -64,29 +67,7 @@
 
 
     <div class="PageContent">
-        <table cellpadding="0px" cellspacing="0px" width="100%">
-            <tr>
-                <td style="width: 6px;">
-                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-                </td>
-                <td class="PageWindowHeader">
-                    <table width="100%" cellpadding="0px" cellspacing="0px">
-                        <tr>
-                            <td width="200px">
-                                &nbsp; <label>Fuel Details</label>
-                            </td>
-                            <td align="right"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 6px;">
-                    <img src="~/Images/gridImages/RightCorner.png" />
-                </td>
-            </tr>
-        </table>
-
-
-      
+     
     </div>
 
     <div style="padding-top:10px;"></div>
@@ -96,29 +77,10 @@
 </div>
 <div style="padding-top:10px;"></div>
 <div class="PageContent">
-    <table cellpadding="0px" cellspacing="0px" width="100%">
-        <tr>
-            <td style="width: 6px;">
-                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-            </td>
-            <td class="PageWindowHeader">
-                <table width="100%" cellpadding="0px" cellspacing="0px">
-                    <tr>
-                        <td width="200px">
-                            &nbsp; <label>Fule Pump Report</label>
-                        </td>
-                        <td align="right"></td>
-                    </tr>
-                </table>
-            </td>
-            <td style="width: 6px;">
-                <img src="~/Images/gridImages/RightCorner.png" />
-            </td>
-        </tr>
-    </table>
+  
     <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
-        <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
-            <thead>
+        <table id="EmployeesTable">
+           
 
                 <tr>
                     <th>
@@ -149,7 +111,7 @@
                         Date
                     </th>
                 </tr>
-            </thead>
+            </>
         </table>
     </div>
 </div>
@@ -399,7 +361,7 @@
             dataType: "json",
             success: function (data) {
 
-                    debugger;
+                $('#EmployeesTable tbody').empty();
                     GetAllChitDetails();
 
 
@@ -577,6 +539,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data) {
+                    $('#EmployeesTable tbody').empty();
                     var len = data.length;
                     var txt = "";
                     if (len > 0) {

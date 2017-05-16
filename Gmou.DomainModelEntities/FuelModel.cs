@@ -73,7 +73,7 @@ namespace Gmou.DomainModelEntities
 
     public string VechileNumber{get;set;}
     public int Fueltype { get; set; }
-    public int FuelQuantity { get; set; }
+    public decimal FuelQuantity { get; set; }
     public decimal Price { get; set; }
     public string OtherFule { get; set; }
     public decimal OtherPrice { get; set; }
@@ -124,7 +124,7 @@ namespace Gmou.DomainModelEntities
 
         public string VechileNumber { get; set; }
         public string Fueltype { get; set; }
-        public int FuelQuantity { get; set; }
+        public decimal FuelQuantity { get; set; }
         public decimal Price { get; set; }
         //public string OtherFule { get; set; }
         //public decimal OtherPrice { get; set; }
@@ -133,7 +133,7 @@ namespace Gmou.DomainModelEntities
         public int SerialNumber { get; set; }
 
 
-        public FuelCashMemoModel(string vechilenumber, string fueltype, int quantity, decimal price, string fuelstationid, int serialno)
+        public FuelCashMemoModel(string vechilenumber, string fueltype, decimal quantity, decimal price, string fuelstationid, int serialno)
         {
             this.VechileNumber = vechilenumber;
             this.Fueltype = fueltype;
@@ -218,7 +218,7 @@ namespace Gmou.DomainModelEntities
         public int      ChitNo           { get; set; }
         public string   Comment         { get; set; }
         public int      Fueltype        { get; set; }
-        public int      FuelQuantity         { get; set; }
+        public decimal      FuelQuantity         { get; set; }
         public decimal  Price       { get; set; }
       
     }
@@ -241,7 +241,7 @@ namespace Gmou.DomainModelEntities
     public class OtherFuel
     {
         public int Fueltype { get; set; }
-        public int FuelQuantity { get; set; }
+        public decimal FuelQuantity { get; set; }
         public decimal Price { get; set; }
       
     }
@@ -277,7 +277,7 @@ namespace Gmou.DomainModelEntities
   
         public string VechileNumber { get; set; }
         public string Fueltype { get; set; }
-        public int FuelQuantity { get; set; }
+        public decimal FuelQuantity { get; set; }
         public decimal Price { get; set; }
         //public string OtherFule { get; set; }
         //public decimal OtherPrice { get; set; }
@@ -289,7 +289,7 @@ namespace Gmou.DomainModelEntities
         public DateTime InsertedDate { get; set; }
        
 
-        public ChitFuelModel(string vechilenumber,string fueltype, int quantity, decimal price,string pumpname,int dieselbook, int chitnumber,string comment, DateTime inserteddate)
+        public ChitFuelModel(string vechilenumber,string fueltype, decimal quantity, decimal price,string pumpname,int dieselbook, int chitnumber,string comment, DateTime inserteddate)
         {
 
             this.VechileNumber = vechilenumber;
@@ -309,7 +309,7 @@ namespace Gmou.DomainModelEntities
         public int Pumpid { get; set; }
         public int FuelType { get; set; }
         public decimal PriceRecieved { get; set; }
-        public int QuantityRecieved { get; set; }
+        public decimal QuantityRecieved { get; set; }
         public string VechileNumber { get; set; }
         public String Comment { get; set; }
         public int InsertedBy { get; set; }
@@ -321,13 +321,13 @@ namespace Gmou.DomainModelEntities
         public string    Pumpid { get; set; }
         public string    FuelType { get; set; }
         public decimal PriceRecieved { get; set; }
-        public int QuantityRecieved { get; set; }
+        public decimal QuantityRecieved { get; set; }
         public string VechileNumber { get; set; }
         public String Comment { get; set; }
         public DateTime RecievedDate { get; set; }
         public decimal TotalPrice { get; set; }
-        public int TotalQuantity { get; set; }
-        public FuelRecieveModel(string pumpid, string fueltype, decimal price, int quantity, string vechilenumber, string comment, DateTime receiveddate, decimal totalprice, int totalquantity)
+        public decimal TotalQuantity { get; set; }
+        public FuelRecieveModel(string pumpid, string fueltype, decimal price, decimal quantity, string vechilenumber, string comment, DateTime receiveddate, decimal totalprice, decimal totalquantity)
         {
 
             this.Pumpid = pumpid;
@@ -349,17 +349,17 @@ namespace Gmou.DomainModelEntities
     //C.openingstock,C.quantity,C.closingstocki
 
         public string FuelType { get; set; }
-        public int  RecievingQuantity { get; set; }
+        public decimal RecievingQuantity { get; set; }
         public decimal RecievingPrice { get; set; }
         public DateTime RecievingDate { get; set; }
         public String VechileNumber { get; set; }
         public decimal TotalPrice { get; set; }
-        public int OpeningStock { get; set; }
-        public int CurrentQuantity { get; set; }
-        public int ClosingStock { get; set; }
+        public decimal OpeningStock { get; set; }
+        public decimal CurrentQuantity { get; set; }
+        public decimal ClosingStock { get; set; }
 
-        public StockModel(string fueltype,int recievingquantity, decimal receievedprice , DateTime receivedate, string vechilenumber,
-            decimal totalprice, int openingstock, int currentquantity, int closingstock)
+        public StockModel(string fueltype, decimal recievingquantity, decimal receievedprice , DateTime receivedate, string vechilenumber,
+            decimal totalprice, decimal openingstock, decimal currentquantity, decimal closingstock)
         {
             this.FuelType = fueltype;
             this.RecievingQuantity = recievingquantity;
@@ -375,40 +375,40 @@ namespace Gmou.DomainModelEntities
 
     public class AllSalesModel
     {
-        public int PetrolQuantity { get; set; }
+        public decimal PetrolQuantity { get; set; }
         public decimal PetrolAmount { get; set; }
-        public int DeiselQuantity { get; set; }
+        public decimal DeiselQuantity { get; set; }
         public decimal DeiselAmount { get; set; }
-        public int LubricantQuantity { get; set; }
+        public decimal LubricantQuantity { get; set; }
         public decimal LubricantAmount { get; set; }
 
-        public int OPetrolQuantity { get; set; }
+        public decimal OPetrolQuantity { get; set; }
         public decimal OPetrolAmount { get; set; }
-        public int ODeiselQuantity { get; set; }
+        public decimal ODeiselQuantity { get; set; }
         public decimal ODeiselAmount { get; set; }
-        public int OLubricantQuantity { get; set; }
+        public decimal OLubricantQuantity { get; set; }
         public decimal OLubricantAmount { get; set; }
 
-        public int SPetrolQuantity { get; set; }
+        public decimal SPetrolQuantity { get; set; }
         public decimal SPetrolAmount { get; set; }
-        public int SDeiselQuantity { get; set; }
+        public decimal SDeiselQuantity { get; set; }
         public decimal SDeiselAmount { get; set; }
-        public int SLubricantQuantity { get; set; }
+        public decimal SLubricantQuantity { get; set; }
         public decimal SLubricantAmount { get; set; }
          public SelectList fuelpump { get; set; }
     }
     public class ChitFuelSale
     {
 
-        public int PetrolQuantity { get; set; }
+        public decimal PetrolQuantity { get; set; }
         public decimal PetrolAmount { get; set; }
-        public int DeiselQuantity { get; set; }
+        public decimal DeiselQuantity { get; set; }
         public decimal DeiselAmount { get; set; }
-        public int LubricantQuantity { get; set; }
+        public decimal LubricantQuantity { get; set; }
         public decimal LubricantAmount { get; set; }
-        public int Fueltype { get; set; }
+        public decimal Fueltype { get; set; }
 
-        public ChitFuelSale(int pquantity, decimal pamount, int dquantity, decimal damount, int lquantity, decimal lamount,int fuletype)
+        public ChitFuelSale(decimal pquantity, decimal pamount, decimal dquantity, decimal damount, decimal lquantity, decimal lamount,int fuletype)
  {
      this.PetrolQuantity = pquantity;
      this.PetrolAmount = pamount;
@@ -426,16 +426,16 @@ namespace Gmou.DomainModelEntities
 
         public int PumpId { get; set; }
         public int FuelType { get; set; }
-        public int  ChitQuanity { get; set; }
-        public int StaffQuanity { get; set; }
-        public int OtherQuanity { get; set; }
+        public decimal ChitQuanity { get; set; }
+        public decimal StaffQuanity { get; set; }
+        public decimal OtherQuanity { get; set; }
         public int StartReading { get; set; }
         public int EndReading { get; set; }
     }
     public class FuelChashModel
     {
 
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public decimal Price { get; set; }
         public FuelChashModel() { }
     }
@@ -454,7 +454,7 @@ namespace Gmou.DomainModelEntities
 
         public string VechileNumber { get; set; }
         public int Fueltype { get; set; }
-        public int FuelQuantity { get; set; }
+        public decimal FuelQuantity { get; set; }
         public decimal Price { get; set; }
         public string OtherFule { get; set; }
         public decimal OtherPrice { get; set; }
@@ -479,17 +479,17 @@ namespace Gmou.DomainModelEntities
 
         public string VechileNumber { get; set; }
         public string Fueltype { get; set; }
-        public int FuelQuantity { get; set; }
+        public decimal FuelQuantity { get; set; }
         public decimal Price { get; set; }
         //public string OtherFule { get; set; }
         //public decimal OtherPrice { get; set; }
         public string FuelStationID { get; set; }
         //public int InsertedBy { get; set; }
-        public int SerialNumber { get; set; }
+        public decimal SerialNumber { get; set; }
         public string Comment { get; set; }
         public DateTime InsertDate { get; set; }
 
-        public FuelOtherModel(string vechilenumber, string fueltype, int quantity, decimal price, string fuelstationid, int serialno, string comment, DateTime insertdate)
+        public FuelOtherModel(string vechilenumber, string fueltype, decimal quantity, decimal price, string fuelstationid, int serialno, string comment, DateTime insertdate)
         {
             this.VechileNumber = vechilenumber;
             this.Fueltype = fueltype;
@@ -506,7 +506,7 @@ namespace Gmou.DomainModelEntities
 
         public string VechileNumber { get; set; }
         public int Fueltype { get; set; }
-        public int FuelQuantity { get; set; }
+        public decimal FuelQuantity { get; set; }
         public decimal Price { get; set; }
         public string OtherFule { get; set; }
         public decimal OtherPrice { get; set; }
@@ -515,25 +515,43 @@ namespace Gmou.DomainModelEntities
         public int DieselBookno { get; set; }
         public int ChitNo { get; set; }
         public string Comment { get; set; }
+        public List<OtherFuel> listFuel { get; set; }
     }
-    public class StaffFuelModel
+
+    public class FuelStafflModel
     {
 
         public string VechileNumber { get; set; }
+        public int Fueltype { get; set; }
+        public decimal FuelQuantity { get; set; }
+        public decimal Price { get; set; }
+        //public string OtherFule { get; set; }
+        //public decimal OtherPrice { get; set; }
+        public int FuelStationID { get; set; }
+        public int InsertedBy { get; set; }
+        public int BookNo { get; set; }
+        public int ChitNo { get; set; }
+        public string Comment { get; set; }
+        public DateTime InsertedDate { get; set; }
+    }
+    public class StaffFuelModel
+    {
+       
+        public string VechileNumber { get; set; }
         public string Fueltype { get; set; }
-        public int FuelQuantity { get; set; }
+        public decimal FuelQuantity { get; set; }
         public decimal Price { get; set; }
         //public string OtherFule { get; set; }
         //public decimal OtherPrice { get; set; }
         public string FuelStationID { get; set; }
-        //public int InsertedBy { get; set; }
+        public int InsertedBy { get; set; }
         public int BookNo { get; set; }
         public int ChitNo { get; set; }
         public string Comment { get; set; }
         public DateTime InsertedDate { get; set; }
        
 
-        public StaffFuelModel(string vechilenumber, string fueltype, int quantity, decimal price, string pumpname, int dieselbook, int chitnumber, string comment, DateTime inserteddate)
+        public StaffFuelModel(string vechilenumber, string fueltype, decimal quantity, decimal price, string pumpname, int dieselbook, int chitnumber, string comment, DateTime inserteddate)
         {
 
             this.VechileNumber = vechilenumber;
@@ -588,12 +606,12 @@ namespace Gmou.DomainModelEntities
        // F.fueltype,A.recievingprice,A.recievingquantity,A.recievingdate,A.vechileno
         public string FuelType { get; set; }
         public decimal Amount { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public DateTime Date { get; set; }
         public string VechileNo { get; set; }
         public decimal TotalAmount { get; set; }
 
-        public RecieveFuleModel(string fuletype, decimal amount, int quantity, DateTime date, string vechileno)
+        public RecieveFuleModel(string fuletype, decimal amount, decimal quantity, DateTime date, string vechileno)
         {
 
             this.FuelType = fuletype;
@@ -604,4 +622,89 @@ namespace Gmou.DomainModelEntities
             this.VechileNo = vechileno;
         }
     }
+
+    public class FuelStockReport
+    {
+        public decimal OpeningStock { get; set; }
+        public decimal ClosingStock { get; set; }
+
+        public string Fueltype { get; set; }
+        public string StationName { get; set; }
+        public double SalesPrice { get; set; }
+        public string UserName { get; set; }
+
+      
+        public FuelStockReport(decimal openingstock, decimal closingstock, string fueltype, string stationname, double saleprice , string username)
+        {
+            this.OpeningStock = openingstock; ;
+            this.ClosingStock = closingstock;
+            this.Fueltype = fueltype;
+            this.StationName = stationname;
+            this.SalesPrice = saleprice;
+            this.UserName = username;
+        }
+
+
+       
+
+    }
+
+
+    public class SaleReportFinal
+    {
+        public PetrolSaleReport petrolsale { get; set; }
+        public DieselSaleReport dieselsale { get; set; }
+        public LubSaleReport lubsale { get; set; }
+    }
+    public class PetrolSaleReport
+    {
+        public long ? StartMeter { get; set; }
+        public long ? EndMeter { get; set; }
+
+        public decimal ? OwnerSale { get; set; }
+        public decimal? CashSale { get; set; }
+
+        public decimal? StaffSale { get; set; }
+        public decimal? OtherSale { get; set; }
+        public decimal? OwnerQuanity { get; set; }
+        public decimal? CashQuantity { get; set; }
+
+        public decimal? StaffQuantity { get; set; }
+        public decimal? OtherQuantity { get; set; }
+
+    }
+
+    public class DieselSaleReport
+    {
+        public long? StartMeter { get; set; }
+        public long? EndMeter { get; set; }
+
+        public decimal? OwnerSale { get; set; }
+        public decimal? CashSale { get; set; }
+
+        public decimal? StaffSale { get; set; }
+        public decimal? OtherSale { get; set; }
+        public decimal? OwnerQuanity { get; set; }
+        public decimal? CashQuantity { get; set; }
+
+        public decimal? StaffQuantity { get; set; }
+        public decimal? OtherQuantity { get; set; }
+    }
+        public class LubSaleReport
+        {
+            public long? StartMeter { get; set; }
+            public long? EndMeter { get; set; }
+
+            public decimal? OwnerSale { get; set; }
+            public decimal? CashSale { get; set; }
+
+            public decimal? StaffSale { get; set; }
+            public decimal? OtherSale { get; set; }
+        public decimal? OwnerQuanity { get; set; }
+        public decimal? CashQuantity { get; set; }
+
+        public decimal? StaffQuantity { get; set; }
+        public decimal? OtherQuantity { get; set; }
+    }
+
 }

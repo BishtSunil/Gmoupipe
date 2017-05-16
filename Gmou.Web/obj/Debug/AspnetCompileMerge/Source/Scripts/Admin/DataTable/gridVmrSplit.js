@@ -12,7 +12,7 @@ function searchGridByBtn(tblId, isByHeader, thiss, scsMethodToCall) {
         var ddlId = this.id;
         $("#" + ddlId).datetimepicker({ useCurrent: false,
             viewMode: 'days',
-            format: 'MM/DD/YYYY'
+            format: 'dd/mm/yyyy'
         });
     });
 
@@ -655,10 +655,10 @@ var datesColumn = " <span class='pull-left'><a   href='javascript:void(0)' oncli
                                                        " </ul>" +
                                                   "  </div>" +
                                 " <div class='clearfix'></div>" +
-                                 " <input type='text' class='txt65 pull-left startDate'  id='txt[@column]Start1' onclick=displayCalendar(this.id,'mm/dd/yyyy',this) /> " +
+                                 " <input type='text' class='txt65 pull-left startDate'  id='txt[@column]Start1' onclick=displayCalendar(this.id,'dd/mm/yyyy',this) /> " +
                                    "   <button type='button' class='srchBtn' isSearchBtn='y' onclick=sortGrid('[@gridId]',this,false) >  <i class='fa fa-fw fa-search'  ></i>   </button>" +
                                  " <div style='clear:both;height:2px'></div>" +
-                               "  <input type='text'  id='txt[@column]End1'  class='txt65  pull-left endDate'  onclick=displayCalendar(this.id,'mm/dd/yyyy',this)  /> ";
+                               "  <input type='text'  id='txt[@column]End1'  class='txt65  pull-left endDate'  onclick=displayCalendar(this.id,'dd/mm/yyyy',this)  /> ";
 
 
 var boolColumn = " <span class='pull-left'><a   href='javascript:void(0)' onclick=sortGrid('[@gridId]',this,true)  class='headerName'>[@columnFriendlyName]</a></span>" +

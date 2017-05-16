@@ -179,7 +179,7 @@ namespace Gmou.DataRepository
                            dr["vechilenumber"].ToString(),
 
                            (dr["fueltype"].ToString()),
-                           (Convert.ToInt32(dr["quantity"])),
+                           (Convert.ToDecimal(dr["quantity"])),
 
                             (Convert.ToDecimal(dr["price"])),
                          (dr["fuel_pump_name"].ToString()),
@@ -359,7 +359,7 @@ namespace Gmou.DataRepository
         }
 
 
-        public static IEnumerable<ChitFuelModel> GetAllChitDetailsByUser(int userid)
+        public static IEnumerable<ChitFuelModel> GetAllChitDetailsByUser(int userid, int usertype)
         {
 
 
@@ -369,6 +369,7 @@ namespace Gmou.DataRepository
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("userid", userid);
+                    cmd.Parameters.AddWithValue("usertype", usertype);
                     SqlDataReader dr;
                     conn.Open();
                     try
@@ -387,10 +388,10 @@ namespace Gmou.DataRepository
 
                         yield return new ChitFuelModel(
 
-                           dr["bus_number"].ToString(),
+                           dr["vechilenumber"].ToString(),
 
                            (dr["fueltype"].ToString()),
-                           (Convert.ToInt32(dr["quantity"])),
+                           (Convert.ToDecimal(dr["quantity"])),
 
                             (Convert.ToDecimal(dr["price"])),
                          (dr["fuel_pump_name"].ToString()),
@@ -440,7 +441,7 @@ namespace Gmou.DataRepository
                            dr["bus_number"].ToString(),
 
                            (dr["fueltype"].ToString()),
-                           (Convert.ToInt32(dr["quantity"])),
+                           (Convert.ToDecimal(dr["quantity"])),
 
                             (Convert.ToDecimal(dr["price"])),
                          (dr["fuel_pump_name"].ToString()),
@@ -528,7 +529,7 @@ namespace Gmou.DataRepository
                         yield return new StockModel(
 
                            dr["fueltype"].ToString(),
-                            (Convert.ToInt32(dr["recievingquantity"])),
+                            (Convert.ToDecimal(dr["recievingquantity"])),
                              (Convert.ToDecimal(dr["recievingprice"])),
                               (Convert.ToDateTime(dr["recievingdate"])),
                            (dr["vechileno"].ToString()),
@@ -537,10 +538,10 @@ namespace Gmou.DataRepository
                             (Convert.ToDecimal(dr["totalprice"])),
 
 
-                        (Convert.ToInt32(dr["openingstock"])),
-                         (Convert.ToInt32(dr["quantity"])),
+                        (Convert.ToDecimal(dr["openingstock"])),
+                         (Convert.ToDecimal(dr["quantity"])),
 
-                            (Convert.ToInt32(dr["closingstock"]))
+                            (Convert.ToDecimal(dr["closingstock"]))
 
 
                        );
@@ -582,11 +583,11 @@ namespace Gmou.DataRepository
 
 
 
-                           (Convert.ToInt32(dr["PetrolQuantity"])),
+                           (Convert.ToDecimal(dr["PetrolQuantity"])),
                               (Convert.ToDecimal(dr["PetrolAmount"])),
-                              (Convert.ToInt32(dr["DeiselQuantity"])),
+                              (Convert.ToDecimal(dr["DeiselQuantity"])),
                               (Convert.ToDecimal(dr["DeiselAmount"])),
-                               (Convert.ToInt32(dr["LubricantQuantity"])),
+                               (Convert.ToDecimal(dr["LubricantQuantity"])),
                               (Convert.ToDecimal(dr["LubricantAmount"])),
                                (Convert.ToInt32(dr["fueltype"]))
                               );
@@ -623,7 +624,7 @@ namespace Gmou.DataRepository
                     {
                         objcash = new FuelChashModel
                         {
-                            Quantity = (Convert.ToInt32(rd["CashQuantity"])),
+                            Quantity = (Convert.ToDecimal(rd["CashQuantity"])),
 
                             Price = Convert.ToDecimal(rd["TotalPrice"])
                         };
@@ -635,7 +636,7 @@ namespace Gmou.DataRepository
             return objcash;
         }
 
-        public static bool InsertStaffFule(staffFuel model)
+        public static bool InsertStaffFule(FuelStafflModel model)
         {
             int cashmemoid;
 
@@ -649,13 +650,14 @@ namespace Gmou.DataRepository
                     cmd.Parameters.AddWithValue("fuletype", model.Fueltype);
                     cmd.Parameters.AddWithValue("quantity", model.FuelQuantity);
                     cmd.Parameters.AddWithValue("price", model.Price);
-                    cmd.Parameters.AddWithValue("otherfuel", model.OtherFule);
-                    cmd.Parameters.AddWithValue("otherprice", model.OtherPrice);
+                    //cmd.Parameters.AddWithValue("otherfuel", model.OtherFule);
+                    //cmd.Parameters.AddWithValue("otherprice", model.OtherPrice);
                     cmd.Parameters.AddWithValue("station_id", model.FuelStationID);
                     cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
-                    cmd.Parameters.AddWithValue("serial_no", 0);
-                    cmd.Parameters.AddWithValue("deiselbookno", model.DieselBookno);
+                   
+                    cmd.Parameters.AddWithValue("deiselbookno", model.BookNo);
                     cmd.Parameters.AddWithValue("chitno", model.ChitNo);
+
                     cmd.Parameters.AddWithValue("comment", model.Comment);
                     conn.Open();
                     try
@@ -690,12 +692,12 @@ namespace Gmou.DataRepository
                     cmd.Parameters.AddWithValue("fuletype", model.Fueltype);
                     cmd.Parameters.AddWithValue("quantity", model.FuelQuantity);
                     cmd.Parameters.AddWithValue("price", model.Price);
-                    cmd.Parameters.AddWithValue("otherfuel", model.OtherFule);
-                    cmd.Parameters.AddWithValue("otherprice", model.OtherPrice);
+                    //cmd.Parameters.AddWithValue("otherfuel", model.OtherFule);
+                    //cmd.Parameters.AddWithValue("otherprice", model.OtherPrice);
                     cmd.Parameters.AddWithValue("station_id", model.FuelStationID);
                     cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
                     cmd.Parameters.AddWithValue("serial_no", model.SerialNumber);
-
+                   
                     cmd.Parameters.AddWithValue("comment", model.Comment);
                     conn.Open();
                     try
@@ -748,7 +750,7 @@ namespace Gmou.DataRepository
                             //string fuletype, decimal amount, int quantity, DateTime date, string vechileno)
                             (dr["vechilenumber"]).ToString(),
                            (dr["fueltype"]).ToString(),
-                            (Convert.ToInt32(dr["quantity"])),
+                            (Convert.ToDecimal(dr["quantity"])),
                               (Convert.ToDecimal(dr["price"])),
                               (dr["fuel_pump_name"]).ToString(),
 (Convert.ToInt32(dr["serial_no"])),
@@ -797,7 +799,7 @@ namespace Gmou.DataRepository
                            //string fuletype, decimal amount, int quantity, DateTime date, string vechileno)
                            (dr["fueltype"]).ToString(),
                               (Convert.ToDecimal(dr["recievingprice"])),
-                              (Convert.ToInt32(dr["recievingquantity"])),
+                              (Convert.ToDecimal(dr["recievingquantity"])),
                               (Convert.ToDateTime(dr["recievingdate"])),
                                (dr["vechileno"]).ToString()
 
@@ -813,7 +815,8 @@ namespace Gmou.DataRepository
 
 
         {
-
+            decimal ?[] cashquantity = new decimal?[] { model.cashquanity_diesel, model.cashquanity_petrol };
+        // UpdaeCashQuantity(cashquantity,model.pumpid);
             try
             {
                 using (var item = new GMOUMISEntity())
@@ -828,6 +831,122 @@ namespace Gmou.DataRepository
             {
                 return false;
 
+            }
+        }
+
+        public static tbl_finalStock DALGetOtherStocksDetailsSummary(int pumpid)
+
+
+        {
+            tbl_finalStock tblobj = new tbl_finalStock();
+            //decimal?[] cashquantity = new decimal?[] { model.cashquanity_diesel, model.cashquanity_petrol };
+            // UpdaeCashQuantity(cashquantity,model.pumpid);
+            try
+            {
+                using (var item = new GMOUMISEntity())
+                { 
+                    DateTime startDate = DateTime.Now.Date;
+
+                    DateTime endDate = DateTime.Now.AddDays(1).Date;
+
+               
+                    tblobj  = item.tbl_finalStock.Where(m => m.pumpid == pumpid && m.summary_date >= startDate && m.summary_date< endDate).FirstOrDefault();
+
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+            return tblobj;
+        }
+
+        private static  void UpdaeCashQuantity(decimal?[] quantity,int pumpid)
+        {
+            for(int k = 0; k<quantity.Length; k++)
+            {
+                if(quantity!=null && k==0)
+                {
+                    UpdateCash((int)quantity[k], pumpid, 2);
+                }
+                if (quantity[k] != null && k == 1)
+                {
+                    UpdateCash((int)quantity[k], pumpid, 1);
+                }
+
+            }
+
+        }
+
+        private static void UpdateCash(int quantity, int stationid, int fueltype)
+        {
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_updateCashFuelQuanity", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("stationid", stationid);
+                    cmd.Parameters.AddWithValue("fueltypeid", fueltype);
+                    cmd.Parameters.AddWithValue("quanity", quantity);
+
+
+                    SqlDataReader dr;
+                    conn.Open();
+                    try
+                    {
+                        dr = cmd.ExecuteReader();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+
+                }
+            }
+        }
+
+        public static IEnumerable< FuelStockReport> GetStocksReport(int pumpid)
+        {
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_getFinalStocksReport", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("pumpid", pumpid);
+                 
+
+
+                    SqlDataReader dr;
+                    conn.Open();
+                  
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+
+                            yield return new FuelStockReport(
+                               
+                               //  F.fueltype, A., A., A., A.
+                               //string fuletype, decimal amount, int quantity, DateTime date, string vechileno)
+                           
+                                
+                                  (Convert.ToDecimal(dr["openingStock"])),
+                                     (Convert.ToDecimal(dr["closingstock"])),
+                                         (dr["fueltype"]).ToString(),
+                                             (dr["fuel_pump_name"]).ToString(),
+                                             (Convert.ToDouble(dr["Sales"])), 
+                                             (dr["username"].ToString())
+
+
+                                  );
+                        }
+                    
+
+                }
             }
         }
     }//end of class

@@ -16,6 +16,22 @@ namespace Gmou.BusinessAccessLayer
 
             return DataRepository.ReportsRepository.GetBusTransactionDetails(pumpid).ToList();
         }
+
+        
+             public static List<StationStocksInfo> BALGetStockReportsList(int pumpid, DateTime date)
+        {
+            try
+            {
+                return DataRepository.ReportsRepository.GetStockReportsList(pumpid, date).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
         public static List<VivraniReport> BALGetViraniList(int busid, DateTime date)
         {
             try

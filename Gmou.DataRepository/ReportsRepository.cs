@@ -180,7 +180,7 @@ namespace Gmou.DataRepository
         public static List<DebitStatus> GetBusDebitStatus()
         {
             List<DebitStatus> st = new List<DebitStatus>();
-            DebitStatus obj=null;
+            DebitStatus obj = null;
             DebitStatus resu = null;
             using (var item = new GMOUMISEntity())
 
@@ -209,9 +209,9 @@ namespace Gmou.DataRepository
                     }
                     else
                     {
-                       if(st.Where(m=>m.Busid== itema.busid).Count()>0)
+                        if (st.Where(m => m.Busid == itema.busid).Count() > 0)
                         {
-                             resu = st.Where(m => m.Busid == itema.busid).FirstOrDefault();
+                            resu = st.Where(m => m.Busid == itema.busid).FirstOrDefault();
                             if (itema.description.Equals("Fuel Filling"))
                             {
                                 resu.FuelFilling = itema.description;
@@ -224,7 +224,7 @@ namespace Gmou.DataRepository
                                 resu.Busid = itema.busid;
                                 resu.Busnumber = itema.bus_number;
                             }
-                            if(itema.description.Equals("Advance"))
+                            if (itema.description.Equals("Advance"))
                             {
                                 resu.Advance = itema.description; resu.AdvanceAmount = itema.Amount;
                                 resu.Busid = itema.busid;
@@ -241,13 +241,13 @@ namespace Gmou.DataRepository
                             {
                                 obj = new DebitStatus() { vivrani = itema.description, VivraniAmount = itema.Amount, Busid = itema.busid, Busnumber = itema.bus_number };
                             }
-                            if(itema.description.Equals("Advance"))
+                            if (itema.description.Equals("Advance"))
                             {
                                 obj = new DebitStatus() { Advance = itema.description, AdvanceAmount = itema.Amount, Busid = itema.busid, Busnumber = itema.bus_number };
                             }
 
                         }
-                        }
+                    }
                     if (resu != null)
                     {
                         st.Add(resu);
@@ -258,16 +258,46 @@ namespace Gmou.DataRepository
                         st.Add(obj);
                         resu = null;
                     }
-                   
+
                 }
                 var d = st.DistinctBy(m => m.Busid).ToList();
                 return st;
             }
+        }
+
+        public static IEnumerable<StationStocksInfo> GetStockReportsList(int pumpid, DateTime date)
+        {
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetStocksByPumpIDandDate", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@pumpid", pumpid);
+                    cmd.Parameters.AddWithValue("@date", date);
+
+                    conn.Open();
+                   
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        // cash_vivrani_id,waybillno,waybillserialno,ticket_from,ticket_to,station_from,station_to,amount,vivrani_inserted_date
+                        //int vivraniid, int wayserialnumb, int waybillnumber, int ticketfrom, int ticketto,string stationfrom, string stationto, decimal amount
+                        yield return new StationStocksInfo(
+
+                         (dr["fueltype"]).ToString(),
+                            Convert.ToDecimal((dr["openingstock"])),
+                          Convert.ToDecimal((dr["closingstock"])));
+
+                    }
+                    conn.Close();
+                }
             }
         }
-    
 
 
 
 
+
+    }
 }

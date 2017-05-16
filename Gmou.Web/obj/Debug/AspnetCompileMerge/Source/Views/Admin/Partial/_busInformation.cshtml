@@ -28,17 +28,18 @@
         white-space: nowrap;
     }
 </style>
-
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <script src="~/Scripts/Admin/general.js"></script>
 <script src="~/Scripts/Admin/validation.js"></script>
 <script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
 <link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
- 
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
 <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
 <link href="~/Content/Uploader-style.css" type="text/css" rel="stylesheet" />
 <script src="~/Scripts/Uploader/Uploader-Common.js" type="text/javascript"></script>
 <script src="~/Scripts/Uploader/Uploder-multiple.core.js" type="text/javascript"></script>
-<script src="~/Scripts/LTE/ui/date.format.js"></script>
 <link href="~/Content/jquery.loader.css" rel="stylesheet" />
 <script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
 <script src="~/Scripts/LTE/BlockUI/jquery.blockUI.js" type="text/javascript"></script>
@@ -59,7 +60,7 @@
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
             </div>
             <div class="box-body">
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                <table id="tblAccount">
                     <tbody>
                         <tr>
                             <td>
@@ -98,8 +99,7 @@
                             <td class="alignR">
                                Entry Date <req>*</req>
                             </td>
-                            <td><input type="date" class=".datepicker" id="txtMember" />
-                                
+                            <td> <input type="text" id="datepicker" placeholder="dd-mm-yyyy">
                             </td>
                         </tr>
                         <tr>
@@ -160,7 +160,7 @@
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
             </div>
             <div class="box-body">
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                <table id="tblAccount" >
                     <tbody>
                         <tr>
                             <td class="alignR">
@@ -193,8 +193,8 @@
                                 Caution Money Deposit Date <req>*</req>
                             </td>
                             <td>
-                                <input type="date" class=".datepicker" id="txtCautionMoneyDate" />
-                              
+                               
+                                <h5><input type="text" id="datepicker" placeholder="dd-mm-yyyy"></h5>
                             </td>
 
                         </tr>
@@ -225,7 +225,7 @@
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Old Bus Detail</a>
             </div>
             <div class="box-body">
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                <table id="tblAccount">
                     <tbody>
                         <tr>
                             <td>
@@ -260,11 +260,11 @@
         <div class="col-md-6 marT20">
             <div class="box box-success">
                 <div class="boxHeading">
-                    <b> Graunter Detail</b>
+                    <b> Gurranter Details</b>
                     <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
                 </div>
                 <div class="box-body">
-                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <table id="tblAccount" >
                         <tbody>
                             <tr>
                                 <td>
@@ -296,6 +296,12 @@
                                 </td>
                                 <td><input type="text" id="txtguarantor2BusNumber" accesskey="a" class="txt100P"></td>
                             </tr>
+                            <tr>
+                                <td class="alignR_PR5">
+                                    Note:- <req></req>
+                                </td>
+                                <td><textarea id="txtcomment" accesskey="a" class="txt100"  > </textarea></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -308,7 +314,7 @@
                     <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
                 </div>
                 <div class="box-body">
-                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <table id="tblAccount">
                         <tbody>
                             <tr>
                                 <td>
@@ -414,22 +420,24 @@
                                 <td>
                                     Valid <req>*</req>
                                 </td>
-                                <td><input type="date" class=".datepicker" id="txtValidity" />
-
+                                <td>
+                                    <h5><input type="text" id="datepicker" placeholder="dd-mm-yyyy"></h5>
                                    
                                 </td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
-                                    <span class="uploadButton" accesskey="a">@Ajax.ActionLink("Uplad Document", "UplodMultiple", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "createView", OnSuccess = "multipleFiles_addMode()", InsertionMode = InsertionMode.Replace })</span>
-                        </tbody>
+                                    <span class="uploadButton" accesskey="a">   @Ajax.ActionLink("Uplad Document", "Upload", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "createView", OnSuccess = "createMode()", InsertionMode = InsertionMode.Replace }) </span>     
+                                                      
                         </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
+    <div id="createView">
     </div>
     <div class="box-footer clearfix" style="padding-right:30px">
         <input type="button" id="btnSaveBusInformation" value="Save" class=" pull-right btn btn-primary"  style="padding:4px 22px 6px 15px;margin-left: 40px;" />
@@ -454,7 +462,7 @@
             <script type="text/javascript">
                 $(function () {
 
-                    $(".datepicker").datepicker();
+                    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
                 });
                 function ajaxindicatorstart(text) {
                     debugger;
@@ -555,15 +563,16 @@
                 function DateTimeFunction(id) {
                     var dt = getControlValueN(id);
                     if (dt != null) {
-                        var day = dt.split("-");
+                        var day = dt.split("/");
                         var d = new Date(day[2], day[1], day[0]);
                         return d.toLocaleDateString();
                     }
                 }
-                $(function () {
-                    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+                //$(function () {
+                //    debugger;
+                //    $(".datepicker").datepicker("option", "dateFormat", "dd/mm/yyyy");
 
-                });
+                //});
                 function fillPermit() {
                     setControlValue("txtPermitNo1", getControlValueN("txtPermitNo"))
                 }
@@ -640,6 +649,7 @@
                                 debugger;
                               
                                 ajaxindicatorstop();
+                                alert(data.status);
                                window.location.href = 'http://localhost:57387/buses'
                                // window.location.href ='http://www.himtrip.com/buses'
                             },
@@ -650,6 +660,9 @@
 
 
                 $(document).ready(function () {
+                    $(function () {
+                       $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
+                    });
                     $("#txtBuildingFund").removeAttr("accesskey");
                     $("#txtEntryDeposit").attr("accesskey", "a");
                     $("#txtReciptNo").attr("accesskey", "a");

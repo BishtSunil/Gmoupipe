@@ -5,6 +5,9 @@
 @model Gmou.Web.Models.VivraniViewModel
 
 @using System.Web;
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
 
 <script src="~/Scripts/Admin/validation.js"></script>
@@ -78,82 +81,84 @@
             <div class="boxHeading">
                 <b>Bus Detail</b>
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+                <div class="box-body table-responsive">
+                    <table id="tblAccount" class="table" style="width:100%" class="tbl20 alignROdd">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Waybill Date
+                                </td>
+                                <td>
+                                    <h5><input type="text" id="myVariable" name="myVariable" placeholder="dd-mm-yyyy"></h5>
+                                </td>
+                                <td>
+                                    Waybill NO
+                                </td>
+                                <td>
+                                    <input type="text" id="txtBookNo" />
+
+                                </td>
+                                <td>
+                                    Waybill serial  NO
+                                </td>
+                                <td>
+                                    <input type="text" id="txtBookserialNo" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    bus number
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlBusNumber", accesskey = "a", style = "width: 135px;", @onchange = "GetData(this)" })
+
+                                </td>
+                                <td class="alignR">
+                                    Dipoo
+                                </td>
+                                <td>
+                                    <select id="ddlDipoo">
+                                        <option value="1">Kotdwar</option>
+                                        <option value="2">Pauri</option>
+                                        <option value="3">Srinagar</option>
+                                        <option value="4">RudarPrayag</option>
+                                        <option value="5">Haridwar</option>
+                                        <option value="6">Rishikesh</option>
+                                    </select>
+
+                                </td>
+                                <td>
+                                    Reason
+                                </td>
+                                <td>
+                                    <textarea id="txtReason" rows="3"></textarea>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                   Station From
+                                </td>
+                                <td>
+                                    <input type="text" id="txtArrival" name="nametxtStationFrom" />
+                                </td>
+                                <td>
+                                    Station To
+                                </td>
+                                <td>
+                                    <input type="text" id="txtDeparture" name="nametxtStationFrom" />
+                                </td>
+                                <td><label id="lblmissing"></label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
-            <div class="box-body">
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
-                    <tbody>
-                        <tr>
-                            <td>
-                                Date
-                            </td>
-                            <td>
-                                <h5>@DateTime.Now.ToString()</h5>
-                            </td>
-                            <td>
-                                Waybill NO
-                            </td>
-                            <td>
-                                <input type="text" id="txtBookNo" />
 
-                            </td>
-                            <td>
-                                Waybill serial  NO
-                            </td>
-                            <td>
-                                <input type="text" id="txtBookserialNo" />
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                bus number
-                            </td>
-                            <td>
-                                @Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlBusNumber", accesskey = "a", style = "width: 135px;", @onchange = "GetData(this)"  })
-
-                            </td>
-                            <td class="alignR">
-                                Dipoo
-                            </td>
-                            <td>
-                                <select id="ddlDipoo">
-                                    <option value="1">Kotdwar</option>
-                                    <option value="2">Pauri</option>
-                                    <option value="3">Srinagar</option>
-                                    <option value="4">RudarPrayag</option>
-                                    <option value="5">Haridwar</option>
-                                    <option value="6">Rishikesh</option>
-                                </select>
-
-                            </td>
-                            <td>
-                                Reason
-                            </td>
-                            <td>
-                                <textarea id="txtReason" rows="3"></textarea>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-
-                            <td>
-                                Arrival
-                            </td>
-                            <td>
-                                <input type="text" id="txtArrival"  name="nametxtStationFrom"/>
-                            </td>
-                            <td>
-                                Departure
-                            </td>
-                            <td>
-                                <input type="text" id="txtDeparture" name="nametxtStationFrom"/>
-                            </td>
-                            <td><label id="lblmissing"></label></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
     <div class="col-md-12 marT20">
@@ -163,8 +168,8 @@
                 <b>Ticket Details</b>
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
             </div>
-            <div class="box-body">
-                <table id="tblWayBill" style="width:100%" class="tbl20 alignROdd">
+            <div class="box-body table-responsive">
+                <table id="tblWayBill" class="table">
                     <tr>
                         <th>Station From</th>
                         <th>Station To</th>
@@ -172,18 +177,82 @@
                         <th>Ticket End</th>
                         <th>Ticket Sold</th>
                         <th>Fare</th>
+                        <th>Coupon</th>
                     </tr>
                     <tbody>
 
                         <tr>
 
                             <td>
-                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-                                <input type="hidden" id="hfCustomer" name="CustomerId" />
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" autocomplete="on" />
+                              
                             </td>
 
                             <td>
-                                <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="txtNoofTicket" class="txt100" onfocusout="GetFareDistance(this);" />
+                            </td>
+
+
+                            <td>
+                                <input type="number" id="txtFare" class="txt100" onfocusout="Total(this);" />
+                            </td>
+                            <td>
+                                
+                                <input type="checkbox" id="chkcoupon" data-count="1" onclick="chkCoupon(this);" />
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="number" id="txtNoofTicket" class="txt100" onfocusout="GetFareDistance(this);" /> 
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this); "  />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
                             </td>
 
                             <td>
@@ -200,715 +269,734 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" />
-                            </td>
-
-                        </tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100"  />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr><tr>
-
-    <td>
-        <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-    </td>
-
-    <td>
-       <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
-    </td>
-
-    <td>
-        <input type="text" id="txtStartTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtEndTicket" class="txt100" />
-    </td>
-
-    <td>
-        <input type="text" id="txtNoofTicket" class="txt100" />
-    </td>
-
-
-    <td>
-        <input type="text" id="txtFare" class="txt100" />
-    </td>
-
-</tr>
-                        <tr><td>
-
-</td>
-
-<td>
-
-</td>
-
-<td>
-
-</td>
-
-<td>
-
-</td>
-
-<td>
-    <label for="lblshowAdd" id="lblShowFare"></label>
-</td>
-
-
-<td>
-    <input type="text" id="txtFare" class="txt100" />
-</td>
-</tr>
-                        @*<tr>
-                            <td>
-                                Ticket No
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
                             </td>
                             <td>
-                                <input type="text" id="txtFare" class="txt100" />
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                From
-                            </td>
+
                             <td>
                                 <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
                             </td>
+
                             <td>
-                                To
-                            </td>
-                            <td>
-                               <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
                             </td>
 
-                        </tr>
-                        <tr>
                             <td>
-                                Start(ticket No)
-                            </td>
-                            <td>
-                                <input type="text" id="txtTktStart" class="txt100" onkeyup="nooftckets(event)" />
-                            </td>
-                            <td>
-                                End(ticket No)
-                            </td>
-                            <td>
-                                <input type="text" id="txtTktEnd" class="txt100" onkeyup="nooftckets(event)" />
-                            </td>
-                            <td>
-                                Seats No.
-                            </td>
-                            <td>
-                                <select id="ddltotalseats">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                </select>
-                            </td>
-                            <td>
-                                No Of Ticket
-                            </td>
-                            <td>
-                                <label id="txtNoOfTicket"></label>
+                                <input type="text" id="txtStartTicket" class="txt100" />
                             </td>
 
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);" />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
                         </tr>
                         <tr>
 
                             <td>
-                                Fare
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
                             </td>
                             <td>
-                                <input type="text" id="txtAmount" class="txt100" />
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
                             </td>
-                            <td>
-                                Waybill Date
-                            </td>
-                            <td>
-                                <input type="text" id="txtWaybillDate" accesskey="a" class="txt100 datepicker" readonly="true">
-                                <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
-                            </td>
-                            <td><label id="lblticketmissing"></label></td>
                         </tr>
                         <tr>
-                            <td><label>Is Coupon <input type="checkbox" id="chkIsCoupon" /></label></td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Cuppon</button></td>
+
                             <td>
-                                Reason
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);" />
                             </td>
                             <td>
-                                <textarea id="txtTktReason" rows="3"></textarea>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
                             </td>
-                        </tr>*@
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+
+                            <td></td>
+
+                            <td></td>
+
+                            <td></td>
+
+                            <td></td>
+
+
+                            <td>
+                                <span> Total Amount Rs: </span> <label for="lblshowAdd" id="lblShowFare"></label>
+                            </td>
+                        </tr>
+                        @*<tr>
+                                <td>
+                                    Ticket No
+                                </td>
+                                <td>
+                                    <input type="text" id="txtFare" class="txt100" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    From
+                                </td>
+                                <td>
+                                    <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                                </td>
+                                <td>
+                                    To
+                                </td>
+                                <td>
+                                   <input type="text" id="txtStationTo" class="txt100"name="nametxtStationFrom" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Start(ticket No)
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTktStart" class="txt100" onkeyup="nooftckets(event)" />
+                                </td>
+                                <td>
+                                    End(ticket No)
+                                </td>
+                                <td>
+                                    <input type="text" id="txtTktEnd" class="txt100" onkeyup="nooftckets(event)" />
+                                </td>
+                                <td>
+                                    Seats No.
+                                </td>
+                                <td>
+                                    <select id="ddltotalseats">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    No Of Ticket
+                                </td>
+                                <td>
+                                    <label id="txtNoOfTicket"></label>
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    Fare
+                                </td>
+                                <td>
+                                    <input type="text" id="txtAmount" class="txt100" />
+                                </td>
+                                <td>
+                                    Waybill Date
+                                </td>
+                                <td>
+                                    <input type="text" id="txtWaybillDate" accesskey="a" class="txt100 datepicker" readonly="true">
+                                    <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                                </td>
+                                <td><label id="lblticketmissing"></label></td>
+                            </tr>
+                            <tr>
+                                <td><label>Is Coupon <input type="checkbox" id="chkIsCoupon" /></label></td>
+                                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Cuppon</button></td>
+                                <td>
+                                    Reason
+                                </td>
+                                <td>
+                                    <textarea id="txtTktReason" rows="3"></textarea>
+                                </td>
+                            </tr>*@
 
                     </tbody>
                 </table>
@@ -925,31 +1013,11 @@
     <div style="height:10px"></div>
 
     <div class="PageContent">
-        <table cellpadding="0px" cellspacing="0px" width="100%">
-            <tr>
-                <td style="width: 6px;">
-                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-                </td>
-                <td class="PageWindowHeader">
-                    <table width="100%" cellpadding="0px" cellspacing="0px">
-                        <tr>
-                            <td width="200px">
-                                &nbsp; <label>Waybill Detail</label>
-                            </td>
-                            <td align="right"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 6px;">
-                    <img src="~/Images/gridImages/RightCorner.png" />
-                </td>
-            </tr>
-        </table>
-        <input name="b_print" type="button" class="ipt" onclick="printdiv('dvPrintTable');" value=" Print ">
 
-        <div id="dvPrintTable"class="PageContentWindow" style="text-align: center; font-size: 12px;">
 
-            <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+        <div id="dvPrintTable" class="PageContentWindow" style="text-align: center; font-size: 18px;">
+
+            <table id="EmployeesTable">
                 <thead>
 
                     <tr>
@@ -960,9 +1028,7 @@
                         <th rowspan="2">
                             To
                         </th>
-                        <th rowspan="2">
-                            Ticket Book No
-                        </th>
+                        
 
                         <th colspan="2" style="text-align:center">TicketNo</th>
 
@@ -1155,456 +1221,542 @@
     </div>
 </div>
 <script type="text/javascript">
+    var total = 0;
+    function chkCoupon(e)
+    {
+        debugger;
 
+    }
+    function Total(e) {
+
+        debugger;
+        total = total + parseFloat(e.value);
+        $('#lblShowFare').text(total);
+    }
+    $(function () {
+        $('#myVariable').datepicker({ dateFormat: 'dd-mm-yy' });
+    });
+    function GetFareDistance(e) {
+        debugger;
+
+        var stationfrom = e.parentElement.parentElement.children[0].children.txtStationFrom.value;
+        var stationto = e.parentElement.parentElement.children[1].children.txtStationTo.value;
+
+        var ticketsold = parseInt(e.value);
+
+
+        $.ajax({
+            type: "GET",
+            url: '/WayBill/GetDistancePrice?from=' + stationfrom + '&to=' + stationto,
+
+            dataType: "json",
+
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                e.parentElement.parentElement.children[5].children.txtFare.value = ticketsold * data;
+            }
+
+        });
+    }
     var TottalFare = 0;
-                $(document).ready(function () {
-                    $("#btnVivraniDetails").click(function () {
-                        $.confirm({
-                            text: "Ticket Details will be Added",
-                            confirm: function (button) {
-                                saveWaybillDetail();
-                            },
-                            cancel: function (button) {
+    $(document).ready(function () {
+        $('input').on('ifChecked', function (event, e) {
+            debugger;
 
-                            }
-                        });
+            if (event.currentTarget.dataset.count == "1") {
+                var coupon = parseFloat(event.currentTarget.parentElement.parentElement.parentElement.children[5].children.txtFare.value);
+                var currenttotalfare = parseFloat($('#lblShowFare').text());
+                total = total - coupon;
+                $('#lblShowFare').text(total);
+            }
+            else {
+                var coupon = parseFloat(event.currentTarget.parentElement.parentElement.parentElement.children[5].children.txtFare.value);
+                var currenttotalfare = parseFloat($('#lblShowFare').text());
+                total = total - coupon;
+                $('#lblShowFare').text(total);
+            }
+        });
+       
+        $('input').on('ifUnchecked', function (event, e) {
+            debugger;
 
-                            $("#btnGenrate").click(function () {
-                                $.confirm({
-                                    text:   '<table><tr><td>Enter Vivrani Serial number</td><td>  <input type="text" id="txtvivraniNo" /></td></tr></table>',
-                                    confirm: function (button) {
-                                        genrateCasVivraani(getControlValue("txtvivraniNo"));
-                                    },
-                                    cancel: function (button) {
+            if (event.currentTarget.dataset.count == "1") {
+                var coupon = parseFloat(event.currentTarget.parentElement.parentElement.parentElement.children[5].children.txtFare.value);
+                var currenttotalfare = parseFloat($('#lblShowFare').text());
+                total = total - coupon;
+                $('#lblShowFare').text(total);
+            }
+            else {
+                var coupon = parseFloat(event.currentTarget.parentElement.parentElement.parentElement.children[5].children.txtFare.value);
+                var currenttotalfare = parseFloat($('#lblShowFare').text());
+                total = total +coupon;
+                $('#lblShowFare').text(total);
+            }
+        });
 
-                                    }
-                                });
-                            });
-                    });
-
-                    $('#txtBookserialNo').focusout(function () {
-                        CheckValidSerialno();
-                    });
-                    $('#txtBookserialNo').focusin(function () {
-                        HideErrorMessage();
-                    });
-                    $('#txtTktStart').focusout(function () {
-                        CheckValidTicketSerialno();
-                    });
-                    $('#txtTktStart').focusin(function () {
-                        HideTicketErrorMessage();
-                    });
-                    $('#txtFare').focusout(function (e) {
-                        debugger;
-                        TottalFare = Number( TottalFare) +Number( e.target.value)
-                        $('#lblShowFare').text(TottalFare);
-                    });
-                    $("[name='nametxtStationFrom']").autocomplete({
-                        source: function (request, response) {
-                            $.ajax({
-                                url: '/WayBill/AutoComplete/',
-                                data: "{ 'prefix': '" + request.term + "'}",
-                                dataType: "json",
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data) {
-                                    response($.map(data, function (item) {
-                                        return item;
-                                    }))
-                                },
-                                error: function (response) {
-                                    alert(response.responseText);
-                                },
-                                failure: function (response) {
-                                    alert(response.responseText);
-                                }
-                            });
-                        },
-                        select: function (e, i) {
-
-                        },
-                        minLength: 1
-                    });
-
-                        //source: function (request, response) {
-                        //    $.ajax({
-                        //        url: '/WayBill/AutoComplete/',
-                        //        data: "{ 'prefix': '" + request.term + "'}",
-                        //        dataType: "json",
-                        //        type: "POST",
-                        //        contentType: "application/json; charset=utf-8",
-                        //        success: function (data) {
-                        //            response($.map(data, function (item) {
-                        //                return { label: item.Country, value: item.Country };
-                        //            }))
-
-                        //        }
-                        //    })
-                        //},
-                        //messages: {
-                        //    noResults: "", results: ""
-                        //}
-                    });
-
-
-
-
-
-                function printdiv(printpage) {
-                    var headstr = "<html><head><title></title></head><body>";
-                    var footstr = "</body>";
-                    var newstr = document.all.item(printpage).innerHTML;
-                    var oldstr = document.body.innerHTML;
-                    document.body.innerHTML = headstr + newstr + footstr;
-                    window.print();
-                    document.body.innerHTML = oldstr;
-                    return false;
-                }
-                function CalculateFare()
-                {
-
+        
+        $("#btnVivraniDetails").click(function () {
+            $.confirm({
+                text: "Ticket Details will be Added",
+                confirm: function (button) {
+                    saveWaybillDetail();
+                },
+                cancel: function (button) {
 
                 }
-                function CheckValidTicketSerialno() {
-                    $.ajax({
-                        type: "GET",
-                        url: "/WayBill/ValidateTicketSerialNumber",
-                        data: { ticketstartno: $('#txtTktStart').val(), ticketno: $('#txtFare').val(), busID: $('#ddlBusNumber').val() },
-                        datatype: "json",
-                        traditional: true,
-                        success: function (data) {
-                            if (data != null) {
+            });
 
-                                if (data == true) {
-                                    HideTicketErrorMessage();
+            $("#btnGenrate").click(function () {
+                $.confirm({
+                    text: '<table><tr><td>Enter Vivrani Serial number</td><td>  <input type="text" id="txtvivraniNo" /></td></tr></table>',
+                    confirm: function (button) {
+                        genrateCasVivraani(getControlValue("txtvivraniNo"));
+                    },
+                    cancel: function (button) {
 
-                                }
-                                else {
-                                    ShowTicketErrorMessage();
-                                }
-
-
-                            }
-                        }
-                    });
-
-                }
-                function CheckValidSerialno() {
-                    $.ajax({
-                        type: "GET",
-                        url: "/WayBill/ValidateWayBillSerialNumber",
-                        data: { waybillserialno: $('#txtBookserialNo').val(), waybillbookno: $('#txtBookNo').val(), busID: $('#ddlBusNumber').val() },
-                        datatype: "json",
-                        traditional: true,
-                        success: function (data) {
-                            if (data != null) {
-
-                                if (data == true) {
-                                    HideErrorMessage();
-
-                                }
-                                else {
-                                    ShowErrorMessage();
-                                }
-
-
-                            }
-                        }
-                    });
-
-                }
-                function HideErrorMessage() {
-                    $('#txtVSerialNo').css('background-color', 'white')
-                    $('#lblmissing').css("color", "red");
-                    $('#lblmissing').hide();
-                    $('#lblmissing').text("")
-
-
-
-                }
-                function ShowErrorMessage() {
-                    $('#lblmissing').show();
-                    $('#txtVSerialNo').css('background-color', 'red')
-                    $('#lblmissing').css("color", "red");
-                    $('#lblmissing').text("Serial number is missing.Please Give the Reason")
-                }
-                function HideTicketErrorMessage() {
-                    $('#txtTktStart').css('background-color', 'white')
-                    $('#lblticketmissing').css("color", "red");
-                    $('#lblticketmissing').hide();
-                    $('#lblticketmissing').text("")
-
-
-
-                }
-                function ShowTicketErrorMessage() {
-                    $('#lblticketmissing').show();
-                    $('#txtTktStart').css('background-color', 'red')
-                    $('#lblticketmissing').css("color", "red");
-                    $('#lblticketmissing').text("Serial number is missing.Please Give the Reason")
-                }
-
-                $(function () {
-                    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
-
-                });
-                function DateTimeFunction(id) {
-                    var dt = getControlValueN(id);
-                    if (dt != null) {
-                        var day = dt.split("-");
-                        var d = new Date(day[2], day[1], day[0]);
-                        return d.toLocaleDateString();
                     }
-                }
+                });
+            });
+        });
+
+        $('#txtBookserialNo').focusout(function () {
+            CheckValidSerialno();
+        });
+        $('#txtBookserialNo').focusin(function () {
+            HideErrorMessage();
+        });
+        $('#txtTktStart').focusout(function () {
+            CheckValidTicketSerialno();
+        });
+        $('#txtTktStart').focusin(function () {
+            HideTicketErrorMessage();
+        });
+        $('#chkcoupon').change(function () {
+            alert($(this).prop('checked'))
+        })
+        $('#chkcoupon').change(function ()
+
+        {
+            debugger;
+        });
+        $("[name='nametxtStationFrom']").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '/WayBill/AutoComplete/',
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+
+            },
+            minLength: 1
+        });
+
+        //source: function (request, response) {
+        //    $.ajax({
+        //        url: '/WayBill/AutoComplete/',
+        //        data: "{ 'prefix': '" + request.term + "'}",
+        //        dataType: "json",
+        //        type: "POST",
+        //        contentType: "application/json; charset=utf-8",
+        //        success: function (data) {
+        //            response($.map(data, function (item) {
+        //                return { label: item.Country, value: item.Country };
+        //            }))
+
+        //        }
+        //    })
+        //},
+        //messages: {
+        //    noResults: "", results: ""
+        //}
+    });
 
 
-                function calcTotalAmount() {
 
-                    var calcAmount = parseFloat(getControlValue("txtPrice")) * parseFloat(getControlValue("txtFuelQuantity"));;
 
-                    setControlValue("txtAmount", calcAmount);
-                }
-                function nooftckets()
-                {
-                    debugger;
 
-                    var a = getControlValue("txtTktStart");
-                    var b = getControlValue("txtTktEnd");
-                    if ((a == "") || (b == "") || (a > b)) {
-                        setControlValue("txtNoOfTicket", 0)
+    function printdiv(printpage) {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+    function CalculateFare() {
+
+
+    }
+    function CheckValidTicketSerialno() {
+        $.ajax({
+            type: "GET",
+            url: "/WayBill/ValidateTicketSerialNumber",
+            data: { ticketstartno: $('#txtTktStart').val(), ticketno: $('#txtFare').val(), busID: $('#ddlBusNumber').val() },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+
+                    if (data == true) {
+                        HideTicketErrorMessage();
+
                     }
                     else {
-                        var noofticket = b - a+1;
-                        setControlValue("txtNoOfTicket", noofticket)
+                        ShowTicketErrorMessage();
                     }
-                }
 
-                function genrateCasVivraani(vivraniid)
-                {
-                    debugger;
-                    var busId = getControlValue("ddlBusNumber");
-                    $.ajax({
-                        type: "GET",
-                        url: '/WayBill/GenerateCashVivrani?busId=' + busId + "&vivraniid=" + vivraniid,
-                        //data: { 'busId': busId},
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            if(data == true)
-                            {
-                                $("#btnShow").removeClass("hide");
-                                $("#btnGenrate").addClass("hide");
-                            }
-                        },
-                        error: OnError
+
+                }
+            }
+        });
+
+    }
+    function CheckValidSerialno() {
+        $.ajax({
+            type: "GET",
+            url: "/WayBill/ValidateWayBillSerialNumber",
+            data: { waybillserialno: $('#txtBookserialNo').val(), waybillbookno: $('#txtBookNo').val(), busID: $('#ddlBusNumber').val() },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+
+                    if (data == true) {
+                        HideErrorMessage();
+
+                    }
+                    else {
+                        ShowErrorMessage();
+                    }
+
+
+                }
+            }
+        });
+
+    }
+    function HideErrorMessage() {
+        $('#txtVSerialNo').css('background-color', 'white')
+        $('#lblmissing').css("color", "red");
+        $('#lblmissing').hide();
+        $('#lblmissing').text("")
+
+
+
+    }
+    function ShowErrorMessage() {
+        $('#lblmissing').show();
+        $('#txtVSerialNo').css('background-color', 'red')
+        $('#lblmissing').css("color", "red");
+        $('#lblmissing').text("Serial number is missing.Please Give the Reason")
+    }
+    function HideTicketErrorMessage() {
+        $('#txtTktStart').css('background-color', 'white')
+        $('#lblticketmissing').css("color", "red");
+        $('#lblticketmissing').hide();
+        $('#lblticketmissing').text("")
+
+
+
+    }
+    function ShowTicketErrorMessage() {
+        $('#lblticketmissing').show();
+        $('#txtTktStart').css('background-color', 'red')
+        $('#lblticketmissing').css("color", "red");
+        $('#lblticketmissing').text("Serial number is missing.Please Give the Reason")
+    }
+
+    $(function () {
+        $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+
+    });
+    function DateTimeFunction(id) {
+        var dt = getControlValueN(id);
+        if (dt != null) {
+            var day = dt.split("-");
+            var d = new Date(day[2], day[1], day[0]);
+            return d.toLocaleDateString();
+        }
+    }
+
+
+    function calcTotalAmount() {
+
+        var calcAmount = parseFloat(getControlValue("txtPrice")) * parseFloat(getControlValue("txtFuelQuantity"));;
+
+        setControlValue("txtAmount", calcAmount);
+    }
+    function nooftckets() {
+        debugger;
+
+        var a = getControlValue("txtTktStart");
+        var b = getControlValue("txtTktEnd");
+        if ((a == "") || (b == "") || (a > b)) {
+            setControlValue("txtNoOfTicket", 0)
+        }
+        else {
+            var noofticket = b - a + 1;
+            setControlValue("txtNoOfTicket", noofticket)
+        }
+    }
+
+    function genrateCasVivraani(vivraniid) {
+        debugger;
+        var busId = getControlValue("ddlBusNumber");
+        $.ajax({
+            type: "GET",
+            url: '/WayBill/GenerateCashVivrani?busId=' + busId + "&vivraniid=" + vivraniid,
+            //data: { 'busId': busId},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data == true) {
+                    $("#btnShow").removeClass("hide");
+                    $("#btnGenrate").addClass("hide");
+                }
+            },
+            error: OnError
+        });
+    }
+
+    function showCashVivraani() {
+        debugger;
+        var busId = getControlValue("ddlBusNumber");
+        var wayBillNo = getControlValue("txtBookNo");
+        var url = "/waybill/showCashVivraani?busId=" + busId + "&waybillNo=" + wayBillNo;
+        window.location.href = url;
+    }
+    function saveWaybillDetail() {
+        debugger;
+        textboxes = $('#tblAccount').find('.txt100');
+        str = "";
+        var WayBillTicketModel = {
+
+
+            BusNumber: getControlValueN("ddlBusNumber"),
+            JourneyFrom: getControlValueN("txtDeparture"),
+            JourneyTo: getControlValueN("txtArrival"),
+            WayBillNo: getControlValueN("txtBookNo"),
+            WayBillSerialNo: getControlValueN("txtBookserialNo"),
+
+            ticketdetails: []
+
+        };
+
+        $('#tblWayBill tr').each(function (item, value) {
+            debugger;
+            var iscoupon;
+            if (item != 0) {
+
+                var test = $(this).find('input');
+                if (test.length != 0) {
+                    if (test[0].value == "") {
+                        return false;
+                    }
+                    if (test[6].parentElement.classList[1] == "checked") {
+                        iscoupon = true;
+                    }
+                    else {
+                        iscoupon = false;
+                    }
+                    WayBillTicketModel.ticketdetails.push({
+                        "StationFrom": test[0].value,
+                        "StationTo": test[1].value,
+                        "StartTicket": test[2].value,//   Issue here if you don't specify the decimal place
+                        "EndTicket": test[3].value,
+                        "NoofTicket": test[4].value,
+                        "TicketFare": test[5].value,
+                        "IsCoupon": iscoupon
                     });
                 }
+            }
 
-                function showCashVivraani()
-                {
+
+        });
+        debugger;
+
+
+        //var valid = validateTextBoxes('busInformation');
+        //if (valid == true) {
+        //    var obj = new Object();
+        //    if ($('#chkIsCoupon').is(':checked')) {
+        //        obj.IsCoupon = true;
+        //    }
+        //    else{
+        //        obj.IsCoupon = false;
+        //    }
+
+        //    obj.BusNumber = getControlValueN("ddlBusNumber");
+        //    obj.JourneyFrom = getControlValueN("txtStationFrom");
+        //    obj.JourneyTo = getControlValueN("txtStationTo");
+        //    obj.WayBillNo = getControlValueN("txtBookNo");
+        //    obj.WayBillSerialNo = getControlValueN("txtBookserialNo");
+        //    obj.TicketStart = getControlValueN("txtTktStart");
+        //    obj.TicketEnd = getControlValueN("txtTktEnd");
+        //    obj.StationFrom = getControlValueN("txtArrival");
+        //    obj.StationTo = getControlValueN("txtDeparture");
+        //    obj.Dipo = getControlValueN("ddlDipoo");
+        //    obj.Fare = getControlValueN("txtAmount");
+        //    obj.WayBillDate = getControlValueN("txtWaybillDate");
+        //    obj.TicketNo = getControlValueN("txtFare");
+        //    obj.IsCoupon = getControlValueN("chkIsCoupon");
+        //    obj.TotalAmount = getControlValueN("ttlamt");
+        //    obj.NumberOfTicket = getControlValueN("txtNoOfTicket");
+        //    obj.TotalSeats =getControlValueN("ddltotalseats");
+        //    obj.TicketNo = getControlValueN("txtFare");
+        //   // alert(obj.WayBillDate);
+
+        $.ajax({
+            type: "POST",
+            url: '/WayBill/SaveWayBillEntry',
+            data: JSON.stringify(WayBillTicketModel),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                alert("Done");
+                setControlValue("txtStationFrom", "");
+                setControlValue("txtStationTo", "");
+                setControlValue("txtTktStart", "");
+                setControlValue("txtTktEnd", "");
+                setControlValue("txtAmount", "");
+                setControlValue("txtNoOfTicket", "");
+
+                showWaybllDetail(result);
+
+
+            },
+            error: OnError
+        });
+    }
+
+    function AddClick() {
+
+    }
+    function showWaybllDetail(data) {
+        var totalamount = 0;
+        var couponamount = 0;
+
+        $("#ttlamtttxt").removeClass("hide")
+
+        if (data) {
+            var len = data.length;
+            var txt = "";
+            if (len > 0) {
+
+                for (var i = 0; i < len; i++) {
                     debugger;
-                    var busId = getControlValue("ddlBusNumber");
-                    var wayBillNo = getControlValue("txtBookNo");
-                    var url = "/waybill/showCashVivraani?busId=" + busId + "&waybillNo=" + wayBillNo;
-                    window.location.href = url;
-                }
-                function saveWaybillDetail() {
-                    debugger;
-                    textboxes = $('#tblAccount').find('.txt100');
-                    str = "";
-                    var WayBillTicketModel = {
+                    if (data[i].Iscoupon == true)
+                    {
+                       // couponamount = Number(couponamount) + Number(data[i].TicketFare);
+                    }
+                    else
+                    {
+                        totalamount = Number(totalamount) + Number(data[i].TicketFare);
+                       
+                        var noOftkt = data[i].TicketEnd - data[i].TicketStart + 1;
+                    }
+                   
+                    if (data[i].Iscoupon == true) {
+
+                     
+                        txt += "<tr><td class=couponcolor>" + data[i].StationFrom + "</td><td class=couponcolor>" + data[i].StationTo + "</td>"
+                           + "<td class=couponcolor>" + data[i].StartTicket + "</td><td class=couponcolor>" + data[i].EndTicket + "</td>"
+                           + "<td class=couponcolor>" + data[i].NoofTicket + "</td>"
+                           + "<td class=couponcolor>" + data[i].WayBillNo + "</td><td class=couponcolor>" + data[i].WayBillSerialNo + "</td>"
+                            + "<td class=couponcolor>" + data[i].TicketFare + "</td></tr>"
 
 
-                        BusNumber: getControlValueN("ddlBusNumber"),
-                        JourneyFrom: getControlValueN("txtDeparture"),
-                        JourneyTo: getControlValueN("txtArrival"),
-                    WayBillNo: getControlValueN("txtBookNo"),
-                    WayBillSerialNo: getControlValueN("txtBookserialNo"),
+                    }
+                    else {
+                        txt += "<tr><td>" + data[i].StationFrom + "</td><td>" + data[i].StationTo + "</td>"
+                            + "<td>" + data[i].StartTicket + "</td><td>" + data[i].EndTicket + "</td>"
+                            + "<td>" + data[i].NoofTicket + "</td>"
+                            + "<td>" + data[i].WayBillNo + "</td><td>" + data[i].WayBillSerialNo + "</td>"
+                             + "<td>" + data[i].TicketFare + "</td></tr>"
 
-                    ticketdetails: []
 
-                    };
-
-                    $('#tblWayBill tr').each(function (item, value) {
-                        if (item != 0)
-                            {
-
-                            var test = $(this).find('input');
-                            if (test[0].value == "")
-                            {
-                                return false;
-                            }
-                            WayBillTicketModel.ticketdetails.push({
-                            "StationFrom": test[0].value,
-                            "StationTo": test[1].value,
-                            "StartTicket": test[2].value,//   Issue here if you don't specify the decimal place
-                            "EndTicket": test[3].value,
-                            "NoofTicket": test[4].value,
-                            "TicketFare": test[5].value
-                        });
                     }
 
 
-                    });
-                    debugger;
-
-
-                    //var valid = validateTextBoxes('busInformation');
-                    //if (valid == true) {
-                    //    var obj = new Object();
-                    //    if ($('#chkIsCoupon').is(':checked')) {
-                    //        obj.IsCoupon = true;
-                    //    }
-                    //    else{
-                    //        obj.IsCoupon = false;
-                    //    }
-
-                    //    obj.BusNumber = getControlValueN("ddlBusNumber");
-                    //    obj.JourneyFrom = getControlValueN("txtStationFrom");
-                    //    obj.JourneyTo = getControlValueN("txtStationTo");
-                    //    obj.WayBillNo = getControlValueN("txtBookNo");
-                    //    obj.WayBillSerialNo = getControlValueN("txtBookserialNo");
-                    //    obj.TicketStart = getControlValueN("txtTktStart");
-                    //    obj.TicketEnd = getControlValueN("txtTktEnd");
-                    //    obj.StationFrom = getControlValueN("txtArrival");
-                    //    obj.StationTo = getControlValueN("txtDeparture");
-                    //    obj.Dipo = getControlValueN("ddlDipoo");
-                    //    obj.Fare = getControlValueN("txtAmount");
-                    //    obj.WayBillDate = getControlValueN("txtWaybillDate");
-                    //    obj.TicketNo = getControlValueN("txtFare");
-                    //    obj.IsCoupon = getControlValueN("chkIsCoupon");
-                    //    obj.TotalAmount = getControlValueN("ttlamt");
-                    //    obj.NumberOfTicket = getControlValueN("txtNoOfTicket");
-                    //    obj.TotalSeats =getControlValueN("ddltotalseats");
-                    //    obj.TicketNo = getControlValueN("txtFare");
-                    //   // alert(obj.WayBillDate);
-
-                        $.ajax({
-                            type: "POST",
-                            url: '/WayBill/SaveWayBillEntry',
-                            data: JSON.stringify(WayBillTicketModel),
-
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (result) {
-                                alert("Done");
-                                setControlValue("txtStationFrom", "");
-                                setControlValue("txtStationTo", "");
-                                setControlValue("txtTktStart", "");
-                                setControlValue("txtTktEnd", "");
-                                setControlValue("txtAmount", "");
-                                setControlValue("txtNoOfTicket", "");
-
-                                showWaybllDetail(result);
-
-
-                            },
-                            error: OnError
-                        });
-                    }
-
-                function AddClick() {
+                }
+                debugger;
+                setControlValue("ttlamt", totalamount);
+                if (txt != "") {
+                    $("#EmployeesTable").append(txt);
 
                 }
-                function showWaybllDetail(data)
-                {
-                    var totalamount = 0;
+            }
+        }
+    }
+
+    function saveCupponDetail() {
+
+        var obj = new Object();
+
+        obj.WayBillBookNo = getControlValueN("txtCpnWaybillBook");
+        obj.WayBillSerialNo = getControlValueN("txtCpnWaybillSerial");
+        obj.CouponBookNo = getControlValueN("txtCpnBook");
+        obj.CouponSerialNo = getControlValueN("txtCpnSerial");
+        obj.StationFrom = getControlValueN("txtCpnStationFrom");
+        obj.StationTo = getControlValueN("txtCpnStationTo");
+        obj.Fare = getControlValueN("txtCpnFare");
+        obj.TotalAmount = getControlValueN("ttlamt");
+        $.ajax({
+            type: "POST",
+            url: '/WayBill/SaveWayBillCouponDetails',
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                document.getElementById("btnClose").click();
+                showWaybllDetail(data);
+            },
+            error: OnError
+        });
+    }
+
+    function GetData(e) {
+        debugger;
+        var obj = new Object();
 
 
-                    $("#ttlamtttxt").removeClass("hide")
+        var busid = $(e).val();
+        $.ajax({
+            type: "GET",
+            url: '/WayBill/GetWayBillDetails?busid=' + busid,
 
-                    if (data) {
-                        var len = data.length;
-                        var txt = "";
-                        if (len > 0) {
+            dataType: "json",
+            data: JSON.stringify(obj),
 
-                            for (var i = 0; i < len; i++) {
-                                debugger;
-                                totalamount = Number(totalamount) + Number(data[i].TicketFare);
-                                setControlValue("ttlamt", totalamount);
-                                var noOftkt = data[i].TicketEnd - data[i].TicketStart +1;
-                                if (data[i].IsCoupon == true)
-                                {
-
-                                    txt += "<tr><td class=couponcolor>" + data[i].JourneyFrom + "</td><td class=couponcolor>" + data[i].JourneyTo + "</td>"
-                                        +"<td class=couponcolor>" + data[i].TicketNo + "</td>"
-                                          + "<td class=couponcolor>" + data[i].TicketStart + "</td><td class=couponcolor>" + data[i].TicketEnd + "</td>"
-                                        +"<td class=couponcolor>" + noOftkt + "</td>"
-                                        + "<td class=couponcolor>" + data[i].WayBillNo + "</td><td class=couponcolor>" + data[i].WayBillSerialNo + "</td>"
-                                         + "<td class=couponcolor>" + data[i].Fare + "</td></tr>"
-
-
-                                }
-                                else {
-                                    txt += "<tr><td>" + data[i].StationFrom + "</td><td>" + data[i].StationTo+ "</td>"
-                                        +"<td>" + data[i].TicketNo+ "</td>"
-                                          + "<td>" + data[i].StartTicket + "</td><td>" + data[i].EndTicket+ "</td>"
-                                        + "<td>" +data[i].NoofTicket+ "</td>"
-                                        + "<td>" + data[i].WayBillNo+ "</td><td>" + data[i].WayBillSerialNo+ "</td>"
-                                         + "<td>" + data[i].TicketFare+ "</td></tr>"
-
-
-                                }
-
-
-                            }
-
-                            if (txt != "") {
-                                $("#EmployeesTable").append(txt);
-
-                            }
-                        }
-                    }
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data) {
+                    //alert(data);
+                    $("#" + $(e).attr("chaildId")).val(data);
+                    $("#" + $(e).attr("chaildID2")).val("1");
                 }
+            }
 
-              function saveCupponDetail() {
-
-                    var obj = new Object();
-
-                    obj.WayBillBookNo = getControlValueN("txtCpnWaybillBook");
-                    obj.WayBillSerialNo = getControlValueN("txtCpnWaybillSerial");
-                    obj.CouponBookNo = getControlValueN("txtCpnBook");
-                    obj.CouponSerialNo = getControlValueN("txtCpnSerial");
-                    obj.StationFrom = getControlValueN("txtCpnStationFrom");
-                    obj.StationTo = getControlValueN("txtCpnStationTo");
-                    obj.Fare = getControlValueN("txtCpnFare");
-                    obj.TotalAmount = getControlValueN("ttlamt");
-                    $.ajax({
-                        type: "POST",
-                        url: '/WayBill/SaveWayBillCouponDetails',
-                        data: JSON.stringify(obj),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            document.getElementById("btnClose").click();
-                            showWaybllDetail(data);
-                        },
-                        error: OnError
-                    });
-                }
-
-              function GetData(e) {
-                  debugger;
-                  var obj = new Object();
-
-
-                 var busid = $(e).val();
-                  $.ajax({
-                      type: "GET",
-                      url: '/WayBill/GetWayBillDetails?busid='+busid ,
-
-                      dataType: "json",
-                      data: JSON.stringify(obj),
-
-                      contentType: 'application/json; charset=utf-8',
-                      success: function (data) {
-                          if (data) {
-                              //alert(data);
-                              $("#" + $(e).attr("chaildId")).val(data);
-                              $("#" + $(e).attr("chaildID2")).val("1");
-                          }
-                      }
-
-                  });
-              }
+        });
+    }
 </script>

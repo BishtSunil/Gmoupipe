@@ -13,7 +13,7 @@ namespace Gmou.Web.Controllers
     {
         //
         // GET: /WayBill/
-
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(WayBillController));
         public ActionResult Index()
         {
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
@@ -173,11 +173,20 @@ namespace Gmou.Web.Controllers
         [HttpPost]
         public ActionResult SaveWayBillEntry(WayBillTicketModel model)
       {
-          var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
-          model.InsertedBy = user.LoginEmpID;
-         var data= WayBillBAL.BALSaveWayBillEntry(model);
-         return Json(data, JsonRequestBehavior.AllowGet);
-      }
+            try
+            {
+                var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+                model.InsertedBy = user.LoginEmpID;
+                var data = WayBillBAL.BALSaveWayBillEntry(model);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                logger.Error(ex.ToString());
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public ActionResult ValidateTicketSerialNumber(string ticketstartno, string ticketno, string busID)
         {
@@ -217,7 +226,13 @@ namespace Gmou.Web.Controllers
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
             var empid = user.LoginEmpID;
             var result = WayBillBAL.BALShowCashVivrani(empid, busid);
+          var amount =   result.Sum(m => m.Fare);
+           
             var _vivraniid = result.Select(k => k.VivraniNumber).FirstOrDefault();
+            var busnumber = result.Select(k => k.BusNumber).FirstOrDefault().ToString();
+
+            var data = WayBillBAL.BALGetOwnerVivraniInfo(busnumber);
+            Helpers.SMSGateway.SendVivraniSMS(amount, data.Contact, data.OwnerName,busnumber, data.TotalAmount, _vivraniid);
             ViewBag.VivraniID = _vivraniid;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -284,6 +299,13 @@ namespace Gmou.Web.Controllers
             var data = WayBillBAL.BALGetGamanPatra(2);
             return PartialView(@"~/Views\\WayBill\_gamanpatraReport.cshtml", data);
 
+        }
+
+        [HttpGet]
+        public ActionResult GetDistancePrice(string from, string to)
+        {
+           var data =  BusinessAccessLayer.WayBillBAL.BALGetDistanceFare(from, to);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult AutoComplete(string prefix)

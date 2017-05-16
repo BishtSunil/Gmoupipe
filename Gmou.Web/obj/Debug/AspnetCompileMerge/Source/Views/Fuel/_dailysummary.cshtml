@@ -79,6 +79,62 @@
     </div>
     </div>
     <script>
+        function SaveSummary()
+        {
+            var obj = new Object();
+          
+            obj.pumpid =getControlValueN("ddlpumplst");
+            obj.smeter_petrol =	 getControlValueN("txtPatrolStart");
+            obj.emeter_petrol =	getControlValueN("txtPatrolEnd");
+            obj. ownersale_petrol = 	getControlValueN("txtPatrolOwnerAmount");
+            obj. cashsale_petrol =	getControlValueN("txtPatrolCashAmount");
+            obj. staffsale_petrol =	getControlValueN("txtPatrolStaffAmount");
+            obj. othersale_petrol =	getControlValueN("txtPatrolOtherSale");
+            obj. ownerquanity_petrol =	getControlValueN("txtPatrolOwnerQty");
+            obj. cashquanity_petrol= 	getControlValueN("txtPatrolCashQty");
+            obj. staffquanity_petrol =	 getControlValueN("txtPatrolStaffQty");
+            obj. otherquanity_petrol =	getControlValueN("txtPatrolOtherQty");
+            obj.smeter_diesel =	getControlValueN("txtDieselStart");
+            obj.emeter_diesel =	getControlValueN("txtDieselEnd");
+            obj. ownersale_diesel= 	getControlValueN("txtDieselOwnerAmount");
+            obj. cashsale_diesel=	getControlValueN("txtDieselCashAmount");
+            obj. staffsale_diesel =	getControlValueN("txtDieselStaffAmount");
+            obj. othersale_diesel =	getControlValueN("txtDieselOtherAmount");
+            obj. ownerquanity_diesel= 	getControlValueN("txtDieselOwnerQty");
+            obj. cashquanity_diesel =	getControlValueN("txtDieselCashQty");
+            obj. staffquanity_diesel =	getControlValueN("txtDieselStaffQty");
+            obj. otherquanity_diesel= 	getControlValueN("txtDieselOtherQty");
+            obj. ownersale_lub =	getControlValueN("txtLubOwnerAmount");
+            obj. cashsale_lub =	getControlValueN("txtLubCashAmount");
+            obj. staffsale_lub =	getControlValueN("txtLubStaffAmount");
+            obj. othersale_lub =	getControlValueN("txtLubOtherAmount");
+            obj. ownerquanity_lub =	getControlValueN("txtLubOwnerQty");
+            obj. cashquanity_lub= 	getControlValueN("txtLubCashQty");
+            obj. staffquanity_lub =	getControlValueN("txtLubStaffQty");
+            obj. otherquanity_lub =	getControlValueN("txtLubOtherQty");
+            $.ajax({
+
+
+                type: "POST",
+                url: '/Fuel/SaveDailySummary',
+
+                dataType: "json",
+                data: JSON.stringify(obj),
+
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data) {
+                        $('#txtPatrolCashAmount').val(data.Price);
+                        $('#txtPatrolCashQty').val(data.Quantity);
+                        var url = "/Fuel/ShowDailySummaryReport?pumpid=" + getControlValueN("ddlpumplst");
+                        window.location.href = url;
+                    }
+                }
+
+
+            })
+
+        }
         function ShowSummary()
         {
             $.ajax({

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gmou.DomainModelEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -52,5 +53,13 @@ namespace Gmou.Web.Models
         public Nullable<decimal> otherquanity_lub { get; set; }
         public Nullable<System.DateTime> summary_date { get; set; }
         public Nullable<int> inserted_by { get; set; }
+    }
+
+    public class SummaryStockFinalReports
+    {
+       
+        public List<FuelStockReport> stocks { get; set; }
+        public SaleReportFinal srs { get; set; }
+
     }
 }

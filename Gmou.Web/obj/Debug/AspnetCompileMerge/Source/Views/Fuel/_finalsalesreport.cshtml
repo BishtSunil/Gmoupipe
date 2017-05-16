@@ -1,0 +1,132 @@
+﻿@model Gmou.DomainModelEntities.SaleReportFinal
+
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
+
+<div class="component">
+
+
+    <table>
+        <thead>
+            <tr><th style="width:200px">Fuel Type</th>
+                <th>Petrol Sale</th>
+                <th>Diesel</th>
+                <th>Lubricants</th>
+              
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Owner's Sale</th>
+                <td>@Model.petrolsale.OwnerSale</td>
+                <td>@Model.dieselsale.OwnerSale</td>
+                <td>@Model.lubsale.OwnerSale</td>
+             
+            </tr>
+            <tr>
+                <th>Owner's Sale Qauntity</th>
+                <td>@Model.petrolsale.OwnerQuanity</td>
+                <td>@Model.dieselsale.OwnerQuanity</td>
+                <td>@Model.lubsale.OwnerQuanity</td>
+
+            </tr>
+            <tr>
+                <th>Cash Sale</th>
+                <td>@Model.petrolsale.CashSale</td>
+                <td>@Model.dieselsale.CashSale</td>
+                <td>@Model.lubsale.CashSale</td>
+            </tr>
+            <tr>
+                <th>Cash Sale Quantity</th>
+                <td>@Model.petrolsale.CashQuantity</td>
+                <td>@Model.dieselsale.CashQuantity</td>
+                <td>@Model.lubsale.CashQuantity</td>
+            </tr>
+            <tr>
+                <th>Staff Sale</th>
+                <td>@Model.petrolsale.StaffSale</td>
+                <td>@Model.dieselsale.StaffSale</td>
+                <td>@Model.lubsale.StaffSale</td>
+            </tr>
+            <tr>
+                <th>Staff Sale Quantity</th>
+                <td>@Model.petrolsale.StaffQuantity</td>
+                <td>@Model.dieselsale.StaffQuantity</td>
+                <td>@Model.lubsale.StaffQuantity</td>
+            </tr>
+            <tr>
+                <th>Other Sale</th>
+                <td>@Model.petrolsale.OtherSale</td>
+                <td>@Model.dieselsale.OtherSale</td>
+                <td>@Model.lubsale.OtherSale</td>
+            </tr>
+            <tr>
+                <th>Other Sale Quantity</th>
+                <td>@Model.petrolsale.OtherQuantity</td>
+                <td>@Model.dieselsale.OtherQuantity</td>
+                <td>@Model.lubsale.OtherQuantity</td>
+            </tr>
+            <tr>
+                @{
+                    if(Model.petrolsale.OtherSale==null)
+                    {
+                        Model.petrolsale.OtherSale = 0;
+                    }
+
+                    var petr1 = (@Model.petrolsale.OwnerSale + @Model.petrolsale.CashSale + @Model.petrolsale.OtherSale + @Model.petrolsale.StaffSale).ToString();
+
+                    var desi1 = (@Model.dieselsale.OwnerSale + @Model.dieselsale.CashSale + @Model.dieselsale.OtherSale + @Model.dieselsale.StaffSale).ToString();
+                    var lub1 = (@Model.lubsale.OwnerSale + @Model.lubsale.CashSale + @Model.lubsale.OtherSale + @Model.lubsale.StaffSale).ToString();
+
+                <th>Total Amount Sale </th>
+                <td>@petr1</td>
+                <td>@desi1</td>
+                <td>@lub1</td>
+                    }
+            </tr>
+            <tr>@{ 
+                var petro = (@Model.petrolsale.OwnerQuanity + @Model.petrolsale.CashQuantity + @Model.petrolsale.StaffQuantity + @Model.petrolsale.OtherQuantity).ToString();
+                var desi = (@Model.dieselsale.OwnerQuanity + @Model.dieselsale.CashQuantity + @Model.dieselsale.StaffQuantity + @Model.dieselsale.OtherQuantity).ToString();
+                var lub = (@Model.lubsale.OwnerQuanity + @Model.lubsale.OwnerQuanity + @Model.lubsale.OwnerQuanity + @Model.lubsale.OwnerQuanity).ToString();
+
+                <th>Total Quantity Sale </th>
+                <td>@petro</td>
+                <td>@desi</td>
+                <td>@lub</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        
+        <thead>
+            <tr>
+                <th style="width:200px">Meter Reading</th>
+                <th>Start Reading</th>
+                <th>End Reading</th>
+               
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Diesel  Reading</th>
+                
+                <td>@Model.dieselsale.StartMeter</td>
+                <td>@Model.dieselsale.EndMeter</td>
+                
+            </tr>
+            <tr>
+                <th>Petrol  Reading</th>
+
+                <td>@Model.petrolsale.StartMeter</td>
+                <td>@Model.petrolsale.EndMeter</td>
+
+            </tr>
+        </tbody>
+         
+    </table>
+</div>

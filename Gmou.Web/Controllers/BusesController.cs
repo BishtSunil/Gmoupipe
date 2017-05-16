@@ -162,6 +162,12 @@ namespace Gmou.Web.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult BusDepoStatus()
+        {
+            return null;
+         
+        }
        
     }
 }

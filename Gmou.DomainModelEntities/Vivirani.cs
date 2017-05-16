@@ -267,6 +267,7 @@ namespace Gmou.DomainModelEntities
         public string TicketSeries { get; set; }
         public string StationFrom { get; set; }
         public string StationTo { get; set; }
+        public decimal TotalAmount { get; set; }
 
         public CashVivraniDetails(decimal amount, string vivraniid, string busnumber, DateTime waybillinsertdate, int waybillno, int waybillserialnumber,
              int ticketfrom, int ticketto, string stationfrom, string stationto)
@@ -280,8 +281,9 @@ namespace Gmou.DomainModelEntities
             this.WayBillSerialNumber = waybillserialnumber;
            
             this.TicketSeries = string.Format("{0}/{1}", ticketfrom.ToString(), ticketto.ToString());
-            this.StationFrom = stationto;
+            this.StationFrom = StationFrom;
             this.StationTo = stationto;
+            this.TotalAmount = TotalAmount + amount;
         }
 
     }

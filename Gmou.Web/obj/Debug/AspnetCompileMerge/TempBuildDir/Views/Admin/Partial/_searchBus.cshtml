@@ -39,6 +39,10 @@
                         <label for="lblSearch">Address :</label>
                         <span id="lblAddress"></span>
                     </div>
+                    <div class="form-group">
+                        <label for="lblSearch">Contact No. :</label>
+                        <span id="lblcontact"></span>
+                    </div>
                 </div>
                 <div class="col-md-6">
 
@@ -325,6 +329,9 @@
                                             setControlValue("lblOldBusOwner", data.old_bus_owner_name);
                                             setControlValue("lblOldBuildingFund", data.previous_building_fund);
                                             setControlValue("lblFormType", data.bus_registration_type);
+                                            setControlValue("lblcontact", data.owner_contact_number);
+
+                                            
                                             debugger;
                                             if (data.bus_registration_type == "Building")
                                             {

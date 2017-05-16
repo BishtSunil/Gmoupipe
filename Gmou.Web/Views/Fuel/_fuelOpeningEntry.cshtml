@@ -10,7 +10,9 @@
 <script src="~/Scripts/LTE/ui/date.format.js"></script>
 <link href="~/Content/jquery.loader.css" rel="stylesheet" />
 <script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
-
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <style type="text/css">
     .txt100 {
         width: 100px;
@@ -42,7 +44,7 @@
             <div class="box-body">
 
 
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                <table id="tblAccount">
                     <tr>
                         <td>Station Name</td>
                         <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
@@ -87,32 +89,11 @@
 </button>
 
 
-<table cellpadding="0px" cellspacing="0px" width="100%">
-    <tr>
-        <td style="width: 6px;">
-            <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-        </td>
-        <td class="PageWindowHeader">
-            <table width="100%" cellpadding="0px" cellspacing="0px">
-                <tr>
-                    <td width="200px">
-                        &nbsp; <label>Fuel Recieving Entry</label>
-                    </td>
-                    <td align="right"></td>
-                </tr>
-            </table>
-        </td>
-        <td style="width: 6px;">
-            <img src="~/Images/gridImages/RightCorner.png" />
-        </td>
-    </tr>
-</table>
-
 <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
-    <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+    <table id="EmployeesTable">
        
       
-        <thead>
+       
             <tr>
                
                 <th>
@@ -134,7 +115,7 @@
 
 
             </tr>
-        </thead>
+    
     </table>
 </div>
 

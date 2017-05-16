@@ -184,7 +184,7 @@ namespace Gmou.Repository
             {
                 using (var cmd = new SqlCommand("sp_SaveEmployeeDetails", conn))
                 {
-                    //string dt = DateTime.Parse(txtDate.Text.Trim()).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    //string dt = DateTime.Parse(txtDate.Text.Trim()).ToString("dd/mm/yyyy", CultureInfo.InvariantCulture);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("firstname", employeeDetails.FirstName);
                     cmd.Parameters.AddWithValue("middlename", employeeDetails.MiddleName);

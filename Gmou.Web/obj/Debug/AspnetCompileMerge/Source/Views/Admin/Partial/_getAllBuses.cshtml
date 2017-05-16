@@ -43,16 +43,36 @@
     padding: 2px 12px;
     pointer-events: none;
 }
+#parent {
+  display: flex;
+}
+#narrow {
+  width: 200px;
+ 
+  /* Just so it's visible */
+}
+#wide {
+  flex: 1;
+  /* Grow to rest of container */
+  background: lightgreen;
+  /* Just so it's visible */
+}
 </style>
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <div class="PageContent">
-    <div class="col-xs-3" style="padding-left:0px">
-        <div class="right-inner-addon">
-            <i class="icon-search"><img src="~/Images/searchicon.png" /></i>
+
+   
+    <div id="parent" style="padding-left:0px">
+        <div class="right-inner-addon" id="wide">
+            <i class="icon-search" ><img src="~/Images/searchicon.png" /></i>
             <input type="search" class="form-control" id="txtSearch" placeholder="Enter Bus Number ...">
         </div>
+        <div id="narrow" style="width:50%"> <span id="buscount"style="padding-left:100px; font-size:xx-large"> </span></div>
        </div>
     <div style="height:40px"></div>
-        <table cellpadding="0px" cellspacing="0px" width="100%">
+        @*<table cellpadding="0px" cellspacing="0px" width="100%">
             <tr>
                 <td style="width: 6px;">
                     <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
@@ -71,10 +91,10 @@
                     <img src="~/Images/gridImages/RightCorner.png" />
                 </td>
             </tr>
-        </table>
-        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
-            <table id="BusTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
-                <thead>
+        </table>*@
+        <div class="PageContentWindow" style="text-align: center; font-size: 18px;">
+            <table id="BusTable" >
+                
                     <tr>
                         <th>
                             Bus Number
@@ -93,13 +113,15 @@
                         </th>
 
                         <th style="width:30px">Edit</th>
-                        
+                        <th style="width:30px">View</th>
+                        <th style="width:30px">Delete</th>
                     </tr>
-                </thead>
+                
             </table>
         </div>
     </div>
 <script type="text/javascript">
+    var totalcount = 1;
     $(document).ready(function () {
         $("#txtSearch").on("keyup", function() {
             var value = $(this).val();
@@ -141,6 +163,7 @@
                     if (len > 0) {
                         for (var i = 0; i < len; i++) {
                             if (data[i].bus_id) {
+                                totalcount = totalcount + 1;
                                 var regDate = new Date(parseInt(data[i].registration_date.substr(6))).format("dd/mm/yyyy")
                                 txt += "<tr><td>" + data[i].bus_number + "</td>" + "<td>" + data[i].bus_operating_center + "</td><td>" + data[i].bus_owner_name + "</td>"
                                     + "<td>" + regDate + "</td>" + "<td>" + data[i].seats + "</td>"
@@ -151,6 +174,7 @@
                         }
                         if (txt != "") {
                             $("#BusTable").append(txt);
+                            $('#buscount').text("Total Buses: " + totalcount);
 
                         }
                     }
@@ -159,6 +183,7 @@
             error: function (data) { alert("error" + data) }
         });
 
+      
     }
     function editBuses(id)
     {

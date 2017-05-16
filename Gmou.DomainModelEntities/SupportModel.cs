@@ -102,4 +102,38 @@ namespace Gmou.DomainModelEntities
 
         public bool IsDebit { get; set; }
     }
+
+    public class OwnerVivraniSMSInfo
+    {
+
+        public string OwnerName { get; set; }
+        public long? Contact { get; set; }
+
+        public decimal TotalAmount { get; set; }
+    }
+    public class OwnerFuelSMSInfo
+    {
+
+        public string OwnerName { get; set; }
+        public long Contact { get; set; }
+
+        public int busid { get; set; }
+    }
+
+    public class StationStocksInfo
+    {
+
+        public string FuleType { get; set; }
+        public decimal  OpeningStock  { get; set; }
+
+        public decimal ClosingStock { get; set; }
+
+        public StationStocksInfo( string fueltype, decimal opening, decimal closing)
+        {
+
+            FuleType = fueltype;
+            OpeningStock = opening;
+            ClosingStock = closing;
+        }
+    }
 }

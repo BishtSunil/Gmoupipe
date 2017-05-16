@@ -5,7 +5,9 @@
 @model Gmou.Web.Models.VivraniViewModel
 
 @using System.Web;
-
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <script src="~/Scripts/Admin/validation.js"></script>
 <script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
 <link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
@@ -65,8 +67,8 @@
                 <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
             </div>
             <div class="box-body">
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
-                    <tbody>
+                <table id="tblAccount">
+                  
                         <tr>
                             <td>
                                 Date
@@ -85,9 +87,9 @@
                             </td>
                             <td>
                                 <span id="spnVivraniNumber"></span>
-                            </td>V
+                            </td>
                         </tr>
-                    </tbody>
+                   
                 </table>
             </div>
         </div>
@@ -99,8 +101,8 @@
                     <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
                 </div>
                 <div class="box-body">
-                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
-                        <tbody>
+                    <table id="tblAccount">
+                        
                             <tr>
                                 <td>
                                     Date
@@ -182,7 +184,7 @@
                                 </td>
                             </tr>
 
-                        </tbody>
+                        
                     </table>
 
                 </div>
@@ -195,26 +197,7 @@
     <div style="height:10px"></div>
 
     <div class="PageContent">
-        <table cellpadding="0px" cellspacing="0px" width="100%">
-            <tr>
-                <td style="width: 6px;">
-                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-                </td>
-                <td class="PageWindowHeader">
-                    <table width="100%" cellpadding="0px" cellspacing="0px">
-                        <tr>
-                            <td width="200px">
-                                &nbsp; <label>Vivraani</label>
-                            </td>
-                            <td align="right"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 6px;">
-                    <img src="~/Images/gridImages/RightCorner.png" />
-                </td>
-            </tr>
-        </table>
+      
         <div>Round Off: <input type="text" id="txtextra"> <input type="submit" value="Update" onclick='calcTotalAmount();' /> </div>
         <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
           
@@ -258,7 +241,7 @@
  </div>
         <div style="height:10px"></div>
        
-        ShowCashSheetID
+       
         <button class="pull-right btn btn-primary" type="button" style="margin-left: 5px;" onclick="location.href='@Url.Action("AddOtherExpences", "waybill")'">
             Genrate Cash Sheet
         </button>&nbsp;&nbsp;
@@ -270,7 +253,7 @@
     </div>
 
 
-</div>
+
 
 
  

@@ -90,7 +90,7 @@ namespace Gmou.BusinessAccessLayer
             {
                 foreach (var item in model.listFuel)
                 {
-                    if (item.FuelQuantity > 0)
+                    if (item.FuelQuantity >Convert.ToDecimal( 0.0))
                     {
                         ChitFuelModelInsert chitmodel = new ChitFuelModelInsert()
                         {
@@ -119,9 +119,9 @@ namespace Gmou.BusinessAccessLayer
             }
             return true;
         }
-        public static List<ChitFuelModel> BALGetAllChitDetailsByUser(int userID)
+        public static List<ChitFuelModel> BALGetAllChitDetailsByUser(int userID, int usertype)
         {
-            return DataRepository.FuelRepository.GetAllChitDetailsByUser(userID).ToList();
+            return DataRepository.FuelRepository.GetAllChitDetailsByUser(userID, usertype).ToList();
 
         }
         public static List<ChitFuelModel> BALGetAllChitDetails(DateTime date, int pumpid)
@@ -191,7 +191,38 @@ namespace Gmou.BusinessAccessLayer
         }
         public static bool BALInsertStaffFule(staffFuel model)
         {
-            return FuelRepository.InsertStaffFule(model);
+            try
+            {
+                foreach (var item in model.listFuel)
+                {
+                    if (item.FuelQuantity > 0)
+                    {
+                        FuelStafflModel chitmodel = new FuelStafflModel()
+                        {
+                            VechileNumber = model.VechileNumber,
+                            //ChitNo = model.ChitNo,
+                            Comment = model.Comment,
+
+
+                            FuelStationID = model.FuelStationID,
+                            InsertedBy = model.InsertedBy,
+                            ChitNo = model.ChitNo,
+                            BookNo = model.DieselBookno,
+
+                            Fueltype = item.Fueltype,
+                            FuelQuantity = item.FuelQuantity,
+                            Price = item.Price
+                        };
+                        DataRepository.FuelRepository.InsertStaffFule(chitmodel);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            return true;
 
         }
         public static bool BALInsertOtherFule(OtherFuelModel model)
@@ -200,23 +231,26 @@ namespace Gmou.BusinessAccessLayer
             {
                 foreach (var item in model.listFuel)
                 {
-                    FuelOtherSale chitmodel = new FuelOtherSale()
+                    if (item.FuelQuantity > 0)
                     {
-                        VechileNumber = model.VechileNumber,
-                        //ChitNo = model.ChitNo,
-                        Comment = model.Comment,
-                        OtherFule = "",
-                        OtherPrice = 00,
+                        FuelOtherSale chitmodel = new FuelOtherSale()
+                        {
+                            VechileNumber = model.VechileNumber,
+                            //ChitNo = model.ChitNo,
+                            Comment = model.Comment,
+                            OtherFule = "",
+                            OtherPrice = 00,
 
-                        FuelStationID = model.FuelStationID,
-                        InsertedBy = model.InsertedBy,
-                        // DieselBookno = model.DieselBookno,
+                            FuelStationID = model.FuelStationID,
+                            InsertedBy = model.InsertedBy,
+                            // DieselBookno = model.DieselBookno,
 
-                        Fueltype = item.Fueltype,
-                        FuelQuantity = item.FuelQuantity,
-                        Price = item.Price
-                    };
-                    DataRepository.FuelRepository.InsertOtherFule(chitmodel);
+                            Fueltype = item.Fueltype,
+                            FuelQuantity = item.FuelQuantity,
+                            Price = item.Price
+                        };
+                        DataRepository.FuelRepository.InsertOtherFule(chitmodel);
+                    }
                 }
             }
             catch (Exception)
@@ -278,6 +312,70 @@ namespace Gmou.BusinessAccessLayer
            return FuelRepository.DALInsertDailySummary(obj);
         }
 
+        public static List<FuelStockReport> BALGetFuelFinalSumamry()
+        {
+            return FuelRepository.GetStocksReport(1).ToList();
 
+        }
+
+        public static SaleReportFinal BALGetOtherStocksDetailsSummary(int pumpid)
+        {
+
+            var data =  FuelRepository.DALGetOtherStocksDetailsSummary(pumpid);
+           return SalesReportCreation(data);
+        }
+
+        private static SaleReportFinal SalesReportCreation(tbl_finalStock model)
+        {
+            SaleReportFinal srf = new SaleReportFinal();
+             
+
+
+            PetrolSaleReport psr = new PetrolSaleReport()
+            {
+                StartMeter = model.smeter_petrol,
+                EndMeter = model.emeter_petrol,
+                CashSale = model.cashsale_petrol,
+                OwnerSale = model.ownersale_petrol,
+                OtherSale = model.othersale_petrol,
+                StaffSale = model.staffsale_petrol,
+                CashQuantity = model.cashquanity_petrol, 
+                StaffQuantity= model.staffquanity_petrol,
+                OtherQuantity = model.otherquanity_petrol, 
+                OwnerQuanity = model.ownerquanity_petrol
+                
+            };
+            srf.petrolsale = psr;
+            DieselSaleReport dsr = new DieselSaleReport()
+            {
+                StartMeter = model.smeter_diesel,
+                EndMeter = model.emeter_diesel,
+                CashSale = model.cashsale_diesel,
+                OwnerSale = model.ownersale_diesel,
+                OtherSale = model.othersale_diesel,
+                StaffSale = model.staffsale_diesel,
+                CashQuantity = model.cashquanity_diesel,
+                StaffQuantity = model.staffquanity_diesel,
+                OtherQuantity = model.otherquanity_diesel,
+                OwnerQuanity = model.ownerquanity_diesel
+            };
+            srf.dieselsale = dsr;
+            LubSaleReport lsr = new LubSaleReport()
+            {
+                
+                CashSale = model.cashsale_lub,
+                OwnerSale = model.ownersale_lub,
+                OtherSale = model.othersale_lub,
+                StaffSale = model.staffsale_lub,
+                CashQuantity = model.cashquanity_lub,
+                StaffQuantity = model.staffquanity_lub,
+                OtherQuantity = model.otherquanity_lub,
+                OwnerQuanity = model.ownerquanity_lub
+            };
+            srf.lubsale = lsr;
+
+            return srf;
+        }
+            
     }
 }

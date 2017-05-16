@@ -372,7 +372,7 @@ namespace Gmou.DataRepository
 
 
         }
-        public static GenerateCashSheetModel GetCashSheetDetails(int empId, int departmentid,DateTime date)
+        public static GenerateCashSheetModel GetCashSheetDetails(int empId, int departmentid, DateTime date)
         {
             GenerateCashSheetModel generateCashsheetmodel = new GenerateCashSheetModel();
             int serialID;
@@ -383,7 +383,7 @@ namespace Gmou.DataRepository
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("date", date);
                     cmd.Parameters.AddWithValue("empid", empId);
-                   
+
                     conn.Open();
                     SqlDataReader rd = cmd.ExecuteReader();
                     List<CashSheetVivraniDetails> lstCashSheetVivraniDetails = new List<CashSheetVivraniDetails>();
@@ -833,7 +833,7 @@ namespace Gmou.DataRepository
         public static IEnumerable<WayBillTicketViewModel> SaveWayBillDetailsEntry(WayBillTicketModel model)
         {
             int WayBillID;
-           int totalamount = model.TotalAmount;
+            int totalamount = model.TotalAmount;
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
                 using (var cmd = new SqlCommand("sp_InsertwayBillMaster", conn))
@@ -841,14 +841,14 @@ namespace Gmou.DataRepository
 
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("busnumber", model.BusNumber);
-                  
-                   
+
+
                     cmd.Parameters.AddWithValue("journeyfrom", model.JourneyFrom);
                     cmd.Parameters.AddWithValue("journeyto", model.JourneyTo);
                     cmd.Parameters.AddWithValue("waybillno", model.WayBillNo);
                     cmd.Parameters.AddWithValue("waybillserialno", model.WayBillSerialNo);
 
-                     
+
                     cmd.Parameters.AddWithValue("waybilldate", DateTime.Now);
                     cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
 
@@ -857,6 +857,9 @@ namespace Gmou.DataRepository
                     conn.Open();
                     try
                     {
+
+
+
                         WayBillID = (int)cmd.ExecuteScalar();
                         InsertTicketDetails(WayBillID, model.ticketdetails);
                     }
@@ -900,25 +903,26 @@ namespace Gmou.DataRepository
 
                                                             Convert.ToInt32(dr["waybillserialno"]),
                                                     (Convert.ToInt32(dr["waybillno"])),
-                                                 
+
                                                    (Convert.ToInt32(dr["fare"])),
 
                                                    (Convert.ToInt32(dr["noofticket"])),
                                                    (Convert.ToInt32(dr["ticketstart"])),
                                                      (Convert.ToInt32(dr["ticketend"])),
                                                      dr["stationfrom"].ToString(),
-                                                     (dr["stationto"].ToString()));
-                           
-                             
+                                                     (dr["stationto"].ToString()),
+                                                     ( Convert.ToBoolean(dr["iscoupon"])));
+
+
                     }
                 }
             }
 
         }
 
-        private static void InsertTicketDetails(int waybillID,List<TicketDetailsModel> model)
+        private static void InsertTicketDetails(int waybillID, List<TicketDetailsModel> model)
         {
-           
+
             model.ToList().ForEach(k => k.WayBillID = waybillID);
             BulkInsert.SQLBulkInsert.BulkInsertTicketDetails(model);
 
@@ -945,7 +949,7 @@ namespace Gmou.DataRepository
                         cmd.ExecuteScalar();
                         conn.Close();
                         return 1;
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -954,7 +958,7 @@ namespace Gmou.DataRepository
                     }
 
                 }
-            }   
+            }
 
         }
 
@@ -986,7 +990,7 @@ namespace Gmou.DataRepository
 
                     while (dr.Read())
                     {
-                        yield return new CashVivraniDetails (
+                        yield return new CashVivraniDetails(
                               (Convert.ToDecimal(dr["amount"])),
                                dr["cash_vivrani_id"].ToString(),
                                   dr["bus_number"].ToString(),
@@ -1010,9 +1014,9 @@ namespace Gmou.DataRepository
             {
                 using (var cmd = new SqlCommand("sp_GenerateCashVivrani", conn))
                 {
-                     
+
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("total_amount",model.TotalAmount);
+                    cmd.Parameters.AddWithValue("total_amount", model.TotalAmount);
                     cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
                     cmd.Parameters.AddWithValue("cashseetserialno", model.CashSheetSerialNo);
 
@@ -1061,7 +1065,7 @@ namespace Gmou.DataRepository
 
         public static bool UpdateVivrani(int vivraniid, decimal amount)
         {
-            
+
             int serialID;
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
@@ -1089,14 +1093,14 @@ namespace Gmou.DataRepository
         public static int GetGamanPatra()
         {
 
-            
+
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
                 using (var cmd = new SqlCommand("sp_GetGamanPatraSerial", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                                      conn.Open();
-                                      var result = (int)cmd.ExecuteScalar();
+                    conn.Open();
+                    var result = (int)cmd.ExecuteScalar();
                     conn.Close();
                     if (result > 0)
                     {
@@ -1116,8 +1120,8 @@ namespace Gmou.DataRepository
             {
                 using (var cmd = new SqlCommand("sp_InsertGamanPatra", conn))
                 {
-           
-	
+
+
 
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("gamanserialId", model.GamanPatraID);
@@ -1154,7 +1158,7 @@ namespace Gmou.DataRepository
                 }
             }
         }
-   
+
         public static GamanPatraViewModel GetGamanPatra(int gamanpatraID)
         {
             GamanPatraViewModel gamamodel = new GamanPatraViewModel(); ;
@@ -1163,18 +1167,32 @@ namespace Gmou.DataRepository
                 using (var cmd = new SqlCommand("sp_GetGamanPatra", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("gamanId",gamanpatraID);
+                    cmd.Parameters.AddWithValue("gamanId", gamanpatraID);
 
                     conn.Open();
                     SqlDataReader rd = cmd.ExecuteReader();
 
                     while (rd.Read())
                     {
-                        gamamodel = new GamanPatraViewModel{  AdvanceAmount= Convert.ToDecimal(rd["advance_amount"]), BusID=rd["bus_number"].ToString(), DepartureDate =Convert.ToDateTime(rd["departure_date"]) ,
-                             From= rd["bus_from"].ToString(), GamanPatraID= Convert.ToInt32(rd["gamanserialId"]), IsDailyService=Convert.ToBoolean(rd["IsDailyservice"]), IssueDate=Convert.ToDateTime(rd["issuedate"]), PermissionType=Convert.ToBoolean(rd["Permission_type"]),
-                         RemainingAmount= Convert.ToDecimal(rd["remaining_amount"]), ReturnDate=Convert.ToDateTime(rd["returning_date"]), Seats=Convert.ToInt32(rd["total_seats"]), StaionId=rd["diponame"].ToString(), To=rd["bus_to"].ToString(), TotalAmount= Convert.ToDecimal(rd["total_amount"]),
-                         SubmittedBy=rd["username"].ToString()};
-                      
+                        gamamodel = new GamanPatraViewModel
+                        {
+                            AdvanceAmount = Convert.ToDecimal(rd["advance_amount"]),
+                            BusID = rd["bus_number"].ToString(),
+                            DepartureDate = Convert.ToDateTime(rd["departure_date"]),
+                            From = rd["bus_from"].ToString(),
+                            GamanPatraID = Convert.ToInt32(rd["gamanserialId"]),
+                            IsDailyService = Convert.ToBoolean(rd["IsDailyservice"]),
+                            IssueDate = Convert.ToDateTime(rd["issuedate"]),
+                            PermissionType = Convert.ToBoolean(rd["Permission_type"]),
+                            RemainingAmount = Convert.ToDecimal(rd["remaining_amount"]),
+                            ReturnDate = Convert.ToDateTime(rd["returning_date"]),
+                            Seats = Convert.ToInt32(rd["total_seats"]),
+                            StaionId = rd["diponame"].ToString(),
+                            To = rd["bus_to"].ToString(),
+                            TotalAmount = Convert.ToDecimal(rd["total_amount"]),
+                            SubmittedBy = rd["username"].ToString()
+                        };
+
                     }
 
                     conn.Close();
@@ -1187,14 +1205,14 @@ namespace Gmou.DataRepository
 
         public static List<RouteName> GetRouteName(string prefix)
         {
-            
+
 
             using (var item = new GMOUMISEntity())
             {
 
                 var CityName = (from N in item.tbl_ShortName
                                 where N.ShrtName.StartsWith(prefix)
-                                select  new RouteName()
+                                select new RouteName()
                                 {
                                     RouteID = N.shortID,
                                     Route = N.ShrtName
@@ -1203,5 +1221,93 @@ namespace Gmou.DataRepository
 
             }
         }
-    }//end of class 
+
+
+        public static OwnerVivraniSMSInfo DALGetOwnerVivraniInfo(string busnumber)
+        {
+
+            OwnerVivraniSMSInfo gamamodel = new OwnerVivraniSMSInfo(); ;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetEmployeeInfoForSMSVivrani", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("busnumber", busnumber);
+
+                    conn.Open();
+                    SqlDataReader rd = cmd.ExecuteReader();
+
+                    while (rd.Read())
+                    {
+                        gamamodel = new OwnerVivraniSMSInfo
+                        {
+                            // contact bigint, OwnerName nvarchar(100), TotalAmount mone
+                            Contact =  ((rd["contact"])==null)?(long)(rd["contact"]):9890242125  ,
+                            OwnerName = (rd["OwnerName"]).ToString(),
+                            TotalAmount = Convert.ToDecimal(rd["TotalAmount"])
+
+                        };
+                    }
+                    return gamamodel;
+                }
+            }
+
+            //public static 
+        }//end of class 
+
+
+        public static OwnerFuelSMSInfo DALGetOwnerFueliInfo(string busnumber)
+        {
+
+            OwnerFuelSMSInfo gamamodel = new OwnerFuelSMSInfo(); ;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetEmployeeInfoForSMSFuel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("busnumber", busnumber);
+
+                    conn.Open();
+                    SqlDataReader rd = cmd.ExecuteReader();
+
+                    while (rd.Read())
+                    {
+                        gamamodel = new OwnerFuelSMSInfo
+                        {
+                            // contact bigint, OwnerName nvarchar(100), TotalAmount mone
+                            Contact = (long)(rd["contact"]),
+                            OwnerName = (rd["OwnerName"]).ToString(),
+                            busid = Convert.ToInt32(rd["BusNumber"])
+
+                        };
+                    }
+                    return gamamodel;
+                }
+            }
+
+            //public static 
+        }//end of 
+        public static decimal DALGetDistanceFare(string from, string to)
+        {
+            decimal fare;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_getDistanceFare", conn))
+                {
+
+
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("from", from);
+                    cmd.Parameters.AddWithValue("to", to);
+                    conn.Open();
+                    fare = Convert.ToDecimal(cmd.ExecuteScalar());
+
+                    conn.Close();
+                }
+
+                return fare;
+            }
+        }
+    }
 }//end of namespace

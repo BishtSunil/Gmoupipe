@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "_stocksummaryreports";
+}
+
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
+
+@model IEnumerable<Gmou.DomainModelEntities.FuelStockReport>
+<div class="component">
+   
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:200px">Fuel Type</th>
+                                <th>Opening Stock</th>
+                                <th>Closing Stock</th>
+                                <th>Sale Qauntity</th>
+                                <th>Sale Amount</th>
+
+                            </tr>
+                        </thead>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <th>@item.Fueltype</th>
+
+                                    <td>@item.OpeningStock</td>
+
+                                    <td>@item.ClosingStock</td>
+                                    @{ 
+                                        var amount = (@item.OpeningStock - @item.ClosingStock).ToString() ;
+
+                                    <td>@amount</td>
+                                    <td>@item.SalesPrice</td>
+                                    }
+                                </tr>
+                                        }
+                        }
+
+                        <tr></tr>
+                    </table>
+                </div>
+<script src="~/Scripts/jquery.stickyheader.js"></script>

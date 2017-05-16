@@ -4,6 +4,9 @@
 }
 @model Gmou.Web.Models.FuelViewModel
 @using System.Web;
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <script src="~/Scripts/Admin/validation.js"></script>
 <script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
 <link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
@@ -42,7 +45,7 @@
             <div class="box-body">
 
 
-                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                <table id="tblAccount" style="width:100%" >
                     <tr>
                         <td>Station Name</td>
                         <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
@@ -72,31 +75,10 @@
 
 
     <div class="PageContent">
-        <table cellpadding="0px" cellspacing="0px" width="100%">
-            <tr>
-                <td style="width: 6px;">
-                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-                </td>
-                <td class="PageWindowHeader">
-                    <table width="100%" cellpadding="0px" cellspacing="0px">
-                        <tr>
-                            <td width="200px">
-                                &nbsp; <label>Fuel Details</label>
-                            </td>
-                            <td align="right"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 6px;">
-                    <img src="~/Images/gridImages/RightCorner.png" />
-                </td>
-            </tr>
-        </table>
-
-
+      
         <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
-            <table id="FuelTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
-                <thead>
+            <table id="FuelTable" >
+               
                     <tr>
                         <th>Fuel Type</th>
                         <th>Quantity</th>
@@ -107,30 +89,30 @@
                             @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlPatrolfuellst", chaildID = "txtPatrolAmt", chaildID2 = "txtPatrolQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
                         <td><input type="text" id="txtPatrolQty" chailid="txtPatrolAmt" class="txtH20" onchange="GetCalculate(this)" /></td>
-                        <td><input type="text" id="txtPatrolAmt" class="txtH20" /></td>
+                        <td><input type="text" id="txtPatrolAmt" class="txtH20" onchange="GetQuantityCalculate(this)" /></td>
                     </tr>
                     <tr>
                         <td>
                             @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlDiselfuellst", chaildID = "txtDiselAmt", chaildID2 = "txtDiselQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
                         <td><input type="text" id="txtDiselQty" chailid="txtDiselAmt" class="txtH20" onchange="GetCalculate(this)" /></td>
-                        <td><input type="text" id="txtDiselAmt" class="txtH20" /></td>
+                        <td><input type="text" id="txtDiselAmt" class="txtH20"  onchange="GetQuantityCalculate(this)"/></td>
                     </tr>
                     <tr>
                         <td>
                             @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub1fuellst", chaildID = "txtLub1Amt", chaildID2 = "txtLub1Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
                         <td><input type="text" id="txtLub1Qty" chailid="txtLub1Amt" class="txtH20" onchange="GetCalculate(this)" /></td>
-                        <td><input type="text" id="txtLub1Amt" class="txtH20"  /></td>
+                        <td><input type="text" id="txtLub1Amt" class="txtH20"  onchange="GetQuantityCalculate(this)"  /></td>
                     </tr>
                     <tr>
                         <td>
                             @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub2fuellst", chaildID = "txtLub2Amt", chaildID2 = "txtLub2Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
                         <td><input type="text" id="txtLub2Qty" chailid="txtLub2Amt" class="txtH20" onchange="GetCalculate(this)" /></td>
-                        <td><input type="text" id="txtLub2Amt" class="txtH20" /></td>
+                        <td><input type="text" id="txtLub2Amt" class="txtH20"  onchange="GetQuantityCalculate(this)" /></td>
                     </tr>
-                </thead>
+                
             </table>
         </div>
     </div>
@@ -142,26 +124,7 @@
 </div>
 <div style="padding-top:10px;"></div>
     <div class="PageContent">
-        <table cellpadding="0px" cellspacing="0px" width="100%">
-            <tr>
-                <td style="width: 6px;">
-                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-                </td>
-                <td class="PageWindowHeader">
-                    <table width="100%" cellpadding="0px" cellspacing="0px">
-                        <tr>
-                            <td width="200px">
-                                &nbsp; <label>Fuel Chit Entry</label>
-                            </td>
-                            <td align="right"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 6px;">
-                    <img src="~/Images/gridImages/RightCorner.png" />
-                </td>
-            </tr>
-        </table>
+        
         <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
             <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
                 <thead>
@@ -202,6 +165,7 @@
  
 <script>
     var fuelprice;
+    var fuelPrice1;
     $(function () {
 
         $(".datepicker").datepicker();
@@ -470,6 +434,7 @@
             success: function (data) {
                 if (data) {
                     //alert(data);
+                    fuelPrice1 = data;
                     $("#" + $(e).attr("chaildId")).val(data);
                     $("#"+$(e).attr("chaildID2")).val("1");
                 }
@@ -480,6 +445,14 @@
 
     function GetCalculate(e) {
         $("#" + $(e).attr("chailid")).val(($(e).val()) * ($("#" + $(e).attr("chailid")).val()));    
+    }
+    function GetQuantityCalculate(e) {
+        debugger;
+     
+        var price = parseInt($(e).val());
+        $(e).parent().siblings()[1].children[0].value = price / fuelPrice1;
+        //(amount);
+        //$("#" + $(e).attr("chailid")).val(($(e).val()) * ($("#" + $(e).attr("chailid")).val()));
     }
     (function ($) {
         $.widget("custom.combobox", {
@@ -615,7 +588,7 @@
         $.ajax({
             type: "GET",
             url: '/Fuel/GetAllChitDetailsByUser',
-
+            data:{usertype:1},
             dataType: "json",
 
             contentType: 'application/json; charset=utf-8',
@@ -631,7 +604,7 @@
                             var regDate = new Date(parseInt(data[i].InsertedDate.substr(6))).format("dd/mm/yyyy")
                             txt += "<tr><td>" + data[i].VechileNumber + "</td><td>" + data[i].Fueltype + "</td>"
                                   + "<td>" + data[i].FuelQuantity + "</td><td>" + data[i].Price + "</td><td>" + data[i].FuelStationID + "</td><td>" + data[i].BookNo + "</td>"
-                                  + "<td>" + data[i].ChitNo + "</td><td>" + data[i].Comment + "</td><td>" + regDate + "</td></tr>";
+                                  + "<td>" + data[i].ChitNo + "</td><td>" + regDate + "</td></tr>";
 
                         }
 
@@ -657,7 +630,11 @@
             debugger;
             GetCalculate(getControlValueN("txtfuelquantity"))
         });
-
+        $('#txtfuelquantity').focusout(function () {
+            debugger;
+            GetQuantityCalculate(getControlValueN("txtfuelquantity"))
+        });
+        
     });
     $(function () {
         $("#ddlbusNumberlst").combobox();

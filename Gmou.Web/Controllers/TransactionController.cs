@@ -112,13 +112,14 @@ namespace Gmou.Web.Controllers
 
         }
         [HttpGet]
-        public ActionResult ShowMonthlySummary(int id, DateTime date)
+        public ActionResult ShowMonthlySummary()
+
         {
             try
             {
                 MonthlySummaryViewModel monthlysummary = new MonthlySummaryViewModel();
                 MontlyBusReport obj = new MontlyBusReport();
-                obj= BusinessAccessLayer.BALSupport.BALGetVivraniReports(id, date);
+                obj= BusinessAccessLayer.BALSupport.BALGetVivraniReports(19, DateTime.Now.Date);
              
                // monthlysummary.monthlyreport.VivraniSum = monthlysummary.monthlyreport.lstVivraniReports.Sum(m => m.Amount);
                 return PartialView(@"~/Views\\Reports\_MainSummary.cshtml", obj);
@@ -158,6 +159,33 @@ namespace Gmou.Web.Controllers
 
 
         }
+        public ActionResult ShowPumpStockReport()
+        {
+            var data = BusinessAccessLayer.BALFuel.BALGetAllFuel();
+            var pumpfule = BusinessAccessLayer.BALFuel.BALGetAllStation();
+            var bus = BusinessAccessLayer.BALFuel.BALGetBuses();
+            FuelViewModel vivraniviewmodel = new FuelViewModel
+            {
+                fueltype = new SelectList(data, "FuelType", "FuelName"),
+                fuelpump = new SelectList(pumpfule, "StationID", "StationName"),
+                busnumber = new SelectList(bus, "BusID", "BusNumber")
+            };
+            return PartialView(@"~/Views\Reports\_stocksReports.cshtml", vivraniviewmodel);
+
+        }
+        
+        [HttpGet]
+        public ActionResult getPumpstockReport( int pumpid, DateTime date)
+        {
+            var obj = BusinessAccessLayer.BALReports.BALGetStockReportsList(pumpid, date);
+
+            // monthlysummary.monthlyreport.VivraniSum = monthlysummary.monthlyreport.lstVivraniReports.Sum(m => m.Amount);
+            return Json(obj, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        
 
         public ActionResult DebitStatus()
         {
