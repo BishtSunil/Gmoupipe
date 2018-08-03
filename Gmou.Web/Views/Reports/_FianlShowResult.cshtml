@@ -1,0 +1,69 @@
+﻿@model Gmou.DomainModelEntities.MontlyBusReport
+
+<div>
+
+    <div>
+        @Html.Partial(@"~/Views\\Reports\_Partial_VivraniDetails.cshtml", Model.lstVivraniReports)
+
+    </div>
+
+    <div>
+        @Html.Partial(@"~/Views\\Reports\_Partial_FuelDeatils.cshtml", Model.lstFuleReposrts)
+
+        
+        <table>
+
+            <tr>
+
+                <td> Debit</td>
+
+                <td>  Total Amount:<span id="totalamountVivrani" style="padding-left:62%; font-weight:bold"> </span></td>
+                <td> Credit</td>
+
+                <td>  Total Amount:<span id="totalAmountCredit" style="padding-left:62%; font-weight:bold"> </span></td>
+
+            </tr>
+        </table>
+
+        <script>
+            $(document).ready(function () {
+               
+
+                $('#totalamountVivrani').text($('#amountVivrani').text());
+                $('#totalAmountCredit').text($('#amountFue').text());
+
+            });
+            var total = parseFloat($('#totalamountVivrani').text());
+            var prevvalue = 0;
+            function chkCoupon(e) {
+
+
+            }
+            function PreviousValue(e) {
+                debugger;
+                if (e.value != "") {
+                    prevvalue = parseFloat(e.value);
+                }
+            }
+            function Total(e) {
+
+
+                if (e.value != "") {
+                    if (prevvalue != 0) {
+                        total = total - prevvalue;
+                        prevvalue = 0;
+                    }
+
+                    total = total + parseFloat(e.value);
+                    $('#totalamountVivrani').text(total);
+
+                }
+                else {
+                    total = total - prevvalue;
+                    prevvalue = 0;
+                    $('#lblShowFare').text(total);
+                }
+            }
+        </script>
+    </div>
+</div>

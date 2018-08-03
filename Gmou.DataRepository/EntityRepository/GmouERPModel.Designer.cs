@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\GMOUOnline\GMOUOnline\Gmou.DataRepository\EntityRepository\GmouERPModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\EntityRepository\GmouERPModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

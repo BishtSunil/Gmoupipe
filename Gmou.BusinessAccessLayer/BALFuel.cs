@@ -83,6 +83,13 @@ namespace Gmou.BusinessAccessLayer
             return DataRepository.FuelRepository.UpdatefuelDetail(model);
 
         }
+
+        public static bool BALCheckDuplicate(int disel, int chitno, int busnumber)
+        {
+
+
+            return DataRepository.FuelRepository.CheckDuplicateEntry(disel, chitno, busnumber);
+        }
         public static bool BALInsertChit(ChitFuel model)
         {
 
@@ -106,11 +113,30 @@ namespace Gmou.BusinessAccessLayer
 
                             Fueltype = item.Fueltype,
                             FuelQuantity = item.FuelQuantity,
-                            Price = item.Price
+                            Price = item.Price,
+                            date = model.date.Date
+                          
                         };
                         DataRepository.FuelRepository.InsertChit(chitmodel);
                     }
                 }
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            return true;
+        }
+        public static bool BALInsertChitByVivrani(ChitFuelModelInsert model)
+        {
+
+            try
+            {
+                
+                        DataRepository.FuelRepository.InsertChit(model);
+                   
+             
             }
             catch (Exception)
             {
@@ -324,7 +350,12 @@ namespace Gmou.BusinessAccessLayer
             var data =  FuelRepository.DALGetOtherStocksDetailsSummary(pumpid);
            return SalesReportCreation(data);
         }
+        public static OwnerFuelSMSInfo BALGetOwnerFueliInfo(string busID, int fueltype, int staion)
+        {
 
+            return WayBillRepository.DALGetOwnerFueliInfo(busID, fueltype,staion);
+
+        }
         private static SaleReportFinal SalesReportCreation(tbl_finalStock model)
         {
             SaleReportFinal srf = new SaleReportFinal();

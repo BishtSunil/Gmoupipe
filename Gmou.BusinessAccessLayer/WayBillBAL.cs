@@ -25,7 +25,7 @@ namespace Gmou.BusinessAccessLayer
         {
             return WayBillRepository.GetGamanPatra();
         }
-        
+
         public static List<VivraniDetailsModel> AddVivraniDetails(VivraniDetails model)
         {
             model.vivranifuel.VivraniSerialID = model.vivraniSerialNumber;
@@ -47,7 +47,7 @@ namespace Gmou.BusinessAccessLayer
         }
         public static GenerateCashSheetModel GetGeneratedCashSheet(int empId, int departmentid, DateTime date)
         {
-            return WayBillRepository.GetCashSheetDetails(empId, departmentid,date);
+            return WayBillRepository.GetCashSheetDetails(empId, departmentid, date);
         }
         public static BusOwnerName GetOwnerDetails(string busId)
         {
@@ -149,10 +149,10 @@ namespace Gmou.BusinessAccessLayer
             return WayBillRepository.SaveWayBillDetailsEntry(model).ToList();
         }
 
-        public static bool BALGenerateCashVivrani(int empid, int busid,int vivraniid)
+        public static bool BALGenerateCashVivrani(int empid, int busid, int vivraniid)
         {
 
-            var _data = WayBillRepository.GenerateCashVivrani(empid, busid,vivraniid);
+            var _data = WayBillRepository.GenerateCashVivrani(empid, busid, vivraniid);
             if (_data == 1)
             { return true; }
             else { return false; }
@@ -177,9 +177,9 @@ namespace Gmou.BusinessAccessLayer
         {
 
             return WayBillRepository.CheckIfVivraniCreated(empid, busid);
-        
+
         }
-        public static bool BALUpdateVivrani(int vivraniid, decimal  amount)
+        public static bool BALUpdateVivrani(int vivraniid, decimal amount)
         {
 
             return WayBillRepository.UpdateVivrani(vivraniid, amount);
@@ -198,7 +198,7 @@ namespace Gmou.BusinessAccessLayer
         public static decimal BALGetDistanceFare(string from, string to)
         {
 
-            return WayBillRepository.DALGetDistanceFare( from,  to);
+            return WayBillRepository.DALGetDistanceFare(from, to);
         }
         public static List<RouteName> BALGetRouteName(string prefix)
         {
@@ -211,13 +211,43 @@ namespace Gmou.BusinessAccessLayer
             return WayBillRepository.DALGetOwnerVivraniInfo(pumpid);
 
         }
-        public static OwnerFuelSMSInfo BALGetOwnerFueliInfo(string pumpid)
+
+        public static List<WayBillEditModel> BALGetAllVivraniEdit(int vivranino)
+        {
+            return WayBillRepository.DALEditWayBill(vivranino).ToList();
+        }
+        public static List<WayBillEditModel> BALGetAllWaybillEdit(int waybill, int waybillserial)
+        {
+            return WayBillRepository.DALEditWayBillDetails(waybill, waybillserial).ToList();
+        }
+
+        public static int BALUpdateWayBillAmount(int vivraniid, decimal amount, decimal roundoff, int vivraninumber)
         {
 
-            return WayBillRepository.DALGetOwnerFueliInfo(pumpid);
+            return WayBillRepository.DALUpdateWayBillAmount(vivraniid, amount, roundoff, vivraninumber);
+        }
+
+        public static bool BALCheckIfWayBillCreated(int busid, int waybillno, int waybillserial)
+        {
+
+            return WayBillRepository.CheckIfWayBillCreated(busid, waybillno, waybillserial);
+        }
+        public static bool BALDeleteData(int vivraniid)
+        {
+            return WayBillRepository.DALDeleteWayBillData(vivraniid);
 
         }
-        
+        public static bool BALSaveTranshipment(Transhipment model)
+        {
+            int result;
 
+            result = DataRepository.WayBillRepository.DALSaveTranshipment(model);
+
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace Gmou.Web.Controllers
 
         }
         [HttpGet]
-      public ActionResult GetBusOwnerName(string busID)
+        public ActionResult GetBusOwnerName(string busID)
         {
             var data = WayBillBAL.GetOwnerDetails(busID);
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -51,7 +51,7 @@ namespace Gmou.Web.Controllers
         public ActionResult ValidateWayBillSerialNumber(string waybillserialno, string waybillbookno, string busID)
         {
             var data = WayBillBAL.GetLastWayBill(Convert.ToInt32(waybillserialno), Convert.ToInt32(waybillbookno), Convert.ToInt32(busID));
-         return Json(data, JsonRequestBehavior.AllowGet);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult AddVivraniDeatil(VivraniDetails model)
@@ -98,7 +98,7 @@ namespace Gmou.Web.Controllers
         {
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
 
-            var data = WayBillBAL.GetGeneratedCashSheet(user.LoginEmpID, user.DepartmentID,DateTime.Now);
+            var data = WayBillBAL.GetGeneratedCashSheet(user.LoginEmpID, user.DepartmentID, DateTime.Now);
             var cashSheetId = data.otherexepnseslist.Select(k => k.CashSheetSerial).FirstOrDefault();
             ViewBag.CashSheetID = cashSheetId;
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -112,7 +112,7 @@ namespace Gmou.Web.Controllers
 
 
             return PartialView(@"~/Views\WayBill\_bushistory.cshtml", bo);
-         
+
         }
         [HttpGet]
         public ActionResult GetBusJourneyHistory(string busId)
@@ -121,7 +121,7 @@ namespace Gmou.Web.Controllers
             var result = WayBillBAL.GetBusHistory(busID);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult  Coupon(CouponDetails model)
+        public ActionResult Coupon(CouponDetails model)
         {
             return PartialView(@"~/Views\WayBill\_addCuppon.cshtml");
         }
@@ -147,34 +147,38 @@ namespace Gmou.Web.Controllers
             var data = WayBillBAL.BALSaveWayBillCouponDetails(model);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-      [HttpGet]
+        [HttpGet]
         public ActionResult GetAllWayBillCouponDetails(int waybillbookno, int waybillserialno)
         {
             var data = WayBillBAL.BALGetAllWayBillCouponDetails(waybillbookno, waybillserialno);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-      public ActionResult AddWaybill()
-      {
-          var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
-          Vivirani model = new Vivirani { UserID = user.LoginEmpID, DepartmentId = user.DepartmentID, IsSubmitted = false };
-          var data = WayBillBAL.GetCashVivraiSerial(model);
-          VivraniViewModel vivraniviewmodel = new VivraniViewModel
-          {
-              busowner = new SelectList(data.BusOwner, "BusOwnerID", "BusOwnerName"),
-              bus = new SelectList(data.bus, "BusID", "BusNumber"),
-              fuelpump = new SelectList(data.fuelpump, "FuelPumpID", "PumpName"),
-              fueltype = new SelectList(data.fueltype, "FuelTypeID", "FuelTypeName"),
-              VivraniSerialNumber = data.VivraniSerialNumber
-          };
-          ViewBag.serialnumber = data.VivraniSerialNumber;
-          return PartialView(@"~/Views\\WayBill\demoWayBill.cshtml", vivraniviewmodel);
+        public ActionResult AddWaybill()
+        {
+            var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+            Vivirani model = new Vivirani { UserID = user.LoginEmpID, DepartmentId = user.DepartmentID, IsSubmitted = false };
+            var data = WayBillBAL.GetCashVivraiSerial(model);
+            VivraniViewModel vivraniviewmodel = new VivraniViewModel
+            {
+                busowner = new SelectList(data.BusOwner, "BusOwnerID", "BusOwnerName"),
+                bus = new SelectList(data.bus, "BusID", "BusNumber"),
+                fuelpump = new SelectList(data.fuelpump, "FuelPumpID", "PumpName"),
+                fueltype = new SelectList(data.fueltype, "FuelTypeID", "FuelTypeName"),
+                VivraniSerialNumber = data.VivraniSerialNumber
+            };
+            ViewBag.serialnumber = data.VivraniSerialNumber;
+            return PartialView(@"~/Views\\WayBill\demoWayBill.cshtml", vivraniviewmodel);
 
-      }
+        }
         [HttpPost]
         public ActionResult SaveWayBillEntry(WayBillTicketModel model)
-      {
+        {
             try
             {
+                if (!CheckWayBillDuplicacy(model.BusNumber, model.WayBillNo, model.WayBillSerialNo))
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
                 var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
                 model.InsertedBy = user.LoginEmpID;
                 var data = WayBillBAL.BALSaveWayBillEntry(model);
@@ -187,6 +191,28 @@ namespace Gmou.Web.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
+
+        private bool CheckWayBillDuplicacy(string busnumber, string waybillbook, string waybillserialno)
+        {
+            if (WayBillBAL.BALCheckIfWayBillCreated(Convert.ToInt32(busnumber), Convert.ToInt32(waybillbook), Convert.ToInt32(waybillserialno)))
+            {
+                return false;
+
+            }
+            else
+            {
+                return true;
+            }
+        }
+        [HttpGet]
+
+
+        public ActionResult CheckWayBillExistence(string busid, string waybillBookNo, string waybillSerrialNo)
+        {
+            return Json(CheckWayBillDuplicacy(busid, waybillBookNo, waybillSerrialNo), JsonRequestBehavior.AllowGet);
+
+        }
         [HttpGet]
         public ActionResult ValidateTicketSerialNumber(string ticketstartno, string ticketno, string busID)
         {
@@ -196,7 +222,7 @@ namespace Gmou.Web.Controllers
         [HttpGet]
         public ActionResult showCashVivraani(int busId)
         {
-             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+            var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
             Vivirani model = new Vivirani { UserID = user.LoginEmpID, DepartmentId = user.DepartmentID, IsSubmitted = false };
             var data = WayBillBAL.GetCashVivraiSerial(model);
             VivraniViewModel vivraniviewmodel = new VivraniViewModel
@@ -206,19 +232,19 @@ namespace Gmou.Web.Controllers
                 fuelpump = new SelectList(data.fuelpump, "FuelPumpID", "PumpName"),
                 fueltype = new SelectList(data.fueltype, "FuelTypeID", "FuelTypeName"),
                 busId = busId,
-              
-                
+
+
             };
             return PartialView(@"~/Views\\WayBill\_showCashVivrani.cshtml", vivraniviewmodel);
         }
         [HttpGet]
 
-        public ActionResult GenerateCashVivrani(int busid,int vivraniid)
+        public ActionResult GenerateCashVivrani(int busid, int vivraniid)
         {
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
             var empid = user.LoginEmpID;
-          var result=  WayBillBAL.BALGenerateCashVivrani(empid, busid,vivraniid);
-          return Json(result, JsonRequestBehavior.AllowGet);
+            var result = WayBillBAL.BALGenerateCashVivrani(empid, busid, vivraniid);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult ShowCashVivrani(int busid)
@@ -226,13 +252,13 @@ namespace Gmou.Web.Controllers
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
             var empid = user.LoginEmpID;
             var result = WayBillBAL.BALShowCashVivrani(empid, busid);
-          var amount =   result.Sum(m => m.Fare);
-           
+            var amount = result.Sum(m => m.Fare);
+
             var _vivraniid = result.Select(k => k.VivraniNumber).FirstOrDefault();
             var busnumber = result.Select(k => k.BusNumber).FirstOrDefault().ToString();
 
             var data = WayBillBAL.BALGetOwnerVivraniInfo(busnumber);
-            Helpers.SMSGateway.SendVivraniSMS(amount, data.Contact, data.OwnerName,busnumber, data.TotalAmount, _vivraniid);
+            Helpers.SMSGateway.SendVivraniSMS(amount, data.Contact, data.OwnerName, busnumber, data.TotalAmount, _vivraniid);
             ViewBag.VivraniID = _vivraniid;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -249,8 +275,8 @@ namespace Gmou.Web.Controllers
         public ActionResult GetVivraniStatus(int busid)
         {
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
-           
-            var data = WayBillBAL.BALCheckIfVivraniCreated(user.LoginEmpID,busid);
+
+            var data = WayBillBAL.BALCheckIfVivraniCreated(user.LoginEmpID, busid);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -263,22 +289,22 @@ namespace Gmou.Web.Controllers
         [HttpGet]
         public ActionResult UpdateVivraniAmount(int vivraniid, decimal amount)
         {
-          var data =  WayBillBAL.BALUpdateVivrani(vivraniid, amount);
-          return Json(data, JsonRequestBehavior.AllowGet);
-                
+            var data = WayBillBAL.BALUpdateVivrani(vivraniid, amount);
+            return Json(data, JsonRequestBehavior.AllowGet);
+
         }
 
         public ActionResult GamanPatra()
         {
-          
+
             var bus = BusinessAccessLayer.BALFuel.BALGetBuses();
             var dipotype = BusinessAccessLayer.BusBAL.BALGetAllDipo();
-           
+
             GamanViewModel gamanmodel = new GamanViewModel
             {
 
-               bus = new SelectList(bus, "BusID", "BusNumber"),
-               dipo= new SelectList(dipotype.DipoList, "DipoID", "DipoName"),
+                bus = new SelectList(bus, "BusID", "BusNumber"),
+                dipo = new SelectList(dipotype.DipoList, "DipoID", "DipoName"),
                 GamanPatraSerialNumber = WayBillBAL.BALGetGamanPatra()
             };
 
@@ -304,7 +330,7 @@ namespace Gmou.Web.Controllers
         [HttpGet]
         public ActionResult GetDistancePrice(string from, string to)
         {
-           var data =  BusinessAccessLayer.WayBillBAL.BALGetDistanceFare(from, to);
+            var data = BusinessAccessLayer.WayBillBAL.BALGetDistanceFare(from, to);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -314,19 +340,100 @@ namespace Gmou.Web.Controllers
             //Searching records from list using LINQ query  
             var CityName = (from N in data
                             where N.Route.StartsWith(prefix)
-                            select new {
+                            select new
+                            {
                                 label = N.Route,
                                 val = N.RouteID
                             });
             return Json(CityName, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+        [HttpPost]
+        public JsonResult SaveData(EditWayBillData model)
+        {
+            int index = 0;
+            String result = String.Empty;
+
+            if (BusinessAccessLayer.WayBillBAL.BALUpdateWayBillAmount(model.VivraniID, model.Amount, model.roundOff,model.vivraninumber) == -1)
+            {
+                result = "1";
+
+            }
+            else
+            {
+                result = "0";
+            }
+
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public  ActionResult DeleteData(string vivranid)
+        {
+            int vivraniid = Convert.ToInt32(vivranid);
+            return Json(WayBillBAL.BALDeleteData(vivraniid), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UpdateWayBill()
+        {
+
+            return PartialView(@"~/Views\\WayBill\UpdateWayBill.cshtml");
+
+        }
+        public ActionResult UpdateWayBillDetails()
+        {
+
+            return PartialView(@"~/Views\\WayBill\_UpdateWaybillDetails.cshtml");
+
+        }
+
+
+        [HttpGet]
+        public ActionResult GetVivrani(int vivid)
+        {
+            var result = WayBillBAL.BALGetAllVivraniEdit(vivid);
+            ViewBag.Buses = BusinessAccessLayer.BALFuel.BALGetBuses();
+
+            return PartialView(@"~/Views\\WayBill\EditWayBill.cshtml", result);
+        }
+        [HttpGet]
+        public ActionResult GetWayBillEditDetails(int waybill, int waybillserial)
+        {
+            var result = WayBillBAL.BALGetAllWaybillEdit(waybill, waybillserial);
+            return PartialView(@"~/Views\\WayBill\EditWayBillDetails.cshtml", result);
+        }
+        [HttpPost]
+        public ActionResult SaveTranshipmentDetails(Transhipment model)
+        {
            
+            model.InsertedBy = 18;
+            var data = WayBillBAL.BALSaveTranshipment(model);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+       
+
+        public class City
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+        public class Student
+        {
+            public int ID { get; set; }
+            public String Name { get; set; }
+            public String Demo { get; set; }
+        }
+        public class EditWayBillData
+        {
+            public int VivraniID { get; set; }
+            public decimal Amount { get; set; }
+            public decimal roundOff { get; set; }
+            public int vivraninumber { get; set; }
         }
     }
-    public class City
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
 }
+
 
 

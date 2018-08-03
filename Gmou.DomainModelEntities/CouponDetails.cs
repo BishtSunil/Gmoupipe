@@ -67,4 +67,21 @@ namespace Gmou.DomainModelEntities
         }
         
     }
+
+    public class Transhipment
+    {
+
+        public int BusFrom { get; set; }
+        public int BusTo { get; set; }
+        public int WaybillFrom { get; set; }
+        public int waybillserialfrom { get; set; }
+        public decimal Amountfrom { get; set; }
+        public int WaybilTo { get; set; }
+        public int waybillserialTo { get; set; }
+        public decimal AmountTo { get; set; }
+
+        public int InsertedBy { get; set; }
+
+        public DateTime InsertDate { get; set; }
+    }
 }

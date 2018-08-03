@@ -32,11 +32,25 @@ namespace Gmou.BusinessAccessLayer
 
 
         }
-        public static List<VivraniReport> BALGetViraniList(int busid, DateTime date)
+        public static List<VivraniReportUpdated> BALGetViraniList(int busid, DateTime date, DateTime enddate)
         {
             try
             {
-                return DataRepository.ReportsRepository.GetViraniList(busid, date).ToList();
+                return DataRepository.ReportsRepository.GetViraniList(busid, date, enddate).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
+        public static List<VivraniAllReportUpdated> BALGetViraniListAll( DateTime date, DateTime enddate)
+        {
+            try
+            {
+                return DataRepository.ReportsRepository.GetAllViraniList( date, enddate).ToList();
             }
             catch (Exception ex)
             {
@@ -105,6 +119,23 @@ namespace Gmou.BusinessAccessLayer
                 }
             }
             return result;
+        }
+
+
+        public static List<FuelReportDateWise> BALGetFuelReportDate(DateTime  sdate, DateTime edate)
+        {
+            return DataRepository.ReportsRepository.DALGetFuelReportDateWide(sdate, edate).ToList();
+
+        }
+        public static List<BusPerformanceReport> BALDALGetBusPerformance(DateTime sdate, string order,int range)
+        {
+            return DataRepository.ReportsRepository.DALGetBusPerformance(sdate, order,range).ToList();
+
+        }
+        
+        public static bool BALInsertRaodWarrent(RoadWarrent model)
+        {
+            return DataRepository.ReportsRepository.DALInsertRaodWarrent(model);
         }
     }
 }

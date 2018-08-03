@@ -281,7 +281,7 @@ namespace Gmou.DomainModelEntities
             this.WayBillSerialNumber = waybillserialnumber;
            
             this.TicketSeries = string.Format("{0}/{1}", ticketfrom.ToString(), ticketto.ToString());
-            this.StationFrom = StationFrom;
+            this.StationFrom = stationfrom;
             this.StationTo = stationto;
             this.TotalAmount = TotalAmount + amount;
         }
@@ -326,6 +326,52 @@ namespace Gmou.DomainModelEntities
             this.Amount = amount;
             this.VivraniDate = date;
             this.BusNumber = busnumber;
+        }
+    }
+
+    public class VivraniReportUpdated
+    {
+
+        // cash_vivrani_id,waybillno,waybillserialno,ticket_from,ticket_to,station_from,station_to,amount,vivrani_inserted_date FROM dbo.tmp_cashvivrani
+        public int VivraniNumber { get; set; }
+
+      
+        public Decimal WayBillAmount { get; set; }
+        public Decimal VivraniAmount { get; set; }
+        public Decimal RoundOff { get; set; }
+        // public Decimal TotalAmount { get; set; }
+
+
+        public VivraniReportUpdated(int vivraniid, decimal WayBillAmount, decimal vivraniamount, decimal roundoff)
+        {
+            this.VivraniNumber = vivraniid;
+            this.WayBillAmount = WayBillAmount;
+            this.VivraniAmount = vivraniamount;
+            this.RoundOff = roundoff;
+           
+        }
+    }
+
+    public class VivraniAllReportUpdated
+    {
+
+        // cash_vivrani_id,waybillno,waybillserialno,ticket_from,ticket_to,station_from,station_to,amount,vivrani_inserted_date FROM dbo.tmp_cashvivrani
+        public int VivraniNumber { get; set; }
+
+        public DateTime Date { get; set; }
+        public string BusNumber { get; set; }
+       
+        public Decimal VivraniAmount { get; set; }
+
+       
+
+        public VivraniAllReportUpdated( int vivraninumber, DateTime date,string busnumber, decimal vivraniamount )
+        {
+            this.VivraniNumber = vivraninumber;
+            this.BusNumber = busnumber;
+            this.VivraniAmount = vivraniamount;
+            this.Date = date;
+
         }
     }
     public class StationDetailModel

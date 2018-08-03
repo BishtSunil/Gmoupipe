@@ -29,7 +29,7 @@ function Init_Upload() {
 }
 
 function singleFileSelected(evt) {
-    debugger;
+    ;
     //var selectedFile = evt.target.files can use this  or select input file element and access it's files object
     var selectedFile = ($("#UploadedFile"))[0].files[0];//FileControl.files[0];
     if (selectedFile) {
@@ -69,7 +69,7 @@ function UploadFile() {
     //or creating it manually using append function  but please note file file name should be same like the action Paramter
     //var dataString = new FormData();
     //dataString.append("UploadedFile", selectedFile);
-    debugger;
+    ;
     var form = $('#FormUpload')[0];
     var dataString = new FormData(form);
     $.ajax({

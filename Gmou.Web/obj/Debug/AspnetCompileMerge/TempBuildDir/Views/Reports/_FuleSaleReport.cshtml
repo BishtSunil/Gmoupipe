@@ -94,7 +94,7 @@
                         Quantity
                     </th>
                     <th>
-                        Price
+                        Date
                     </th>
 
 
@@ -108,7 +108,7 @@
                         Chit Number
                     </th>
                     <th>
-                        Date
+                        Amount
                     </th>
                 </tr>
             </>
@@ -261,7 +261,7 @@
         });
     });
     function SavChitdetails() {
-        debugger;
+        ;
         var fueldata = {
             VechileNumber: getControlValueN("ddlbusNumberlst"),
             FuelStationID: getControlValueN("ddlpumplst"),
@@ -361,7 +361,7 @@
             dataType: "json",
             success: function (data) {
 
-                $('#EmployeesTable tbody').empty();
+              
                     GetAllChitDetails();
 
 
@@ -370,7 +370,7 @@
         });
     }
     function GetPrice(e) {
-        debugger;
+        ;
         var obj = new Object();
 
         obj.pumpid = $("#ddlpumplst").val();
@@ -526,7 +526,7 @@
     })(jQuery);
 
     function GetAllChitDetails() {
-        debugger;
+        ;
         var id = getControlValueN("ddlpumplst");
         var date = getControlValueN("txtDate");
 
@@ -537,11 +537,15 @@
             dataType: "json",
 
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {
+			success: function (data) {
+
+				$('#EmployeesTable td').remove();
                 if (data) {
-                    $('#EmployeesTable tbody').empty();
+                  
                     var len = data.length;
-                    var txt = "";
+					var txt = "";
+					var result = "";
+					var total = 0;
                     if (len > 0) {
 
 
@@ -549,13 +553,16 @@
 
                             var regDate = new Date(parseInt(data[i].InsertedDate.substr(6))).format("dd/mm/yyyy")
                             txt += "<tr><td>" + data[i].VechileNumber + "</td><td>" + data[i].Fueltype + "</td>"
-                                  + "<td>" + data[i].FuelQuantity + "</td><td>" + data[i].Price + "</td><td>" + data[i].FuelStationID + "</td><td>" + data[i].BookNo + "</td>"
-                                  + "<td>" + data[i].ChitNo + "</td><td>" + data[i].Comment + "</td><td>" + regDate + "</td></tr>";
-
-                        }
-
-                        if (txt != "") {
-                            $("#EmployeesTable").append(txt);
+								+ "<td>" + data[i].FuelQuantity + "</td><td>" + regDate + "</td><td>" + data[i].FuelStationID + "</td><td>" + data[i].BookNo + "</td>"
+								+ "<td>" + data[i].ChitNo + "</td><td>" + data[i].Price + "</td></tr>";
+							total += parseInt(data[i].Price);
+						}
+						result += "<tr><td>"  + +"</td><td>" + + "</td>"
+							+ "<td>" + + "</td><td>" + + "</td><td>" + + "</td><td>" + + "</td>"
+							+ "<td>" + + "</td><td>" + total + "</td></tr>";
+						
+						if (txt != "") {
+							$("#EmployeesTable").append(txt + result);
 
                         }
                     }
@@ -568,12 +575,12 @@
     }
 
     $(document).ready(function () {
-        debugger;
+        ;
 
         $("select[name='fueltype']").trigger("change");
   //GetPrice($("select[name='fueltype']").html());
         $('#txtfuelquantity').focusout(function () {
-            debugger;
+            ;
             GetCalculate(getControlValueN("txtfuelquantity"))
         });
 

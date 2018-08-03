@@ -41,6 +41,7 @@ namespace Gmou.DataRepository.EntityRepository
         public virtual DbSet<tmp_cashvivrani> tmp_cashvivrani { get; set; }
         public virtual DbSet<tbl_ShortName> tbl_ShortName { get; set; }
         public virtual DbSet<tbl_bustransfer> tbl_bustransfer { get; set; }
+        public virtual DbSet<tbl_backDepo> tbl_backDepo { get; set; }
     
         public virtual ObjectResult<sp_GetButDebitStatusByDate_Result> sp_GetButDebitStatusByDate()
         {

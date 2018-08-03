@@ -6,7 +6,9 @@
 }
 
 @using System.Web;
-
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
 <script src="~/Scripts/Admin/validation.js"></script>
 <script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
 <link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
@@ -46,13 +48,16 @@
 
 
 <div>
-    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+    <table id="tblAccount" >
         <tr>
             <td>Bus Number</td>
             <td>@Html.DropDownListFor(model => model.busnumber, Model.busnumber, new { @class = "txt100PValidBreak", id = "ddlbusNumberlst", accesskey = "a", style = "width: 135px;" })</td>
-            <td>Date </td>
+            <td>From Date </td>
         
             <td><input type="date" class=".datepicker" id="txtDate" /></td>
+            <td>End Date </td>
+
+            <td><input type="date" class=".datepicker" id="txtendDate" /></td>
         </tr>
         <tr>
 
@@ -69,28 +74,9 @@
 
   
     <div class="PageContent">
-        <table cellpadding="0px" cellspacing="0px" width="100%">
-            <tr>
-                <td style="width: 6px;">
-                    <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
-                </td>
-                <td class="PageWindowHeader">
-                    <table width="100%" cellpadding="0px" cellspacing="0px">
-                        <tr>
-                            <td width="200px">
-                                &nbsp; <label>Bus Vivrani Details</label>
-                            </td>
-                            <td align="right"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="width: 6px;">
-                    <img src="~/Images/gridImages/RightCorner.png" />
-                </td>
-            </tr>
-        </table>
-        <div class="PageContentWindow" style="background-color:pink ;text-align: center; font-size: 12px;">
-            <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+    
+        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+            <table id="EmployeesTable" >
                 <thead>
                     <tr>
                         <th>
@@ -99,17 +85,14 @@
 
 
                         <th>
-                            WayBill No.
+                            WayBill Amount
                         </th>
                         <th>
-                            WayBill Serial No.
+                            Total Amount
                         </th>
-                        <th>Ticket From</th>
-                        <th>Ticket To</th>
-                        <th>Station From</th>
-                        <th>Station To</th>
-                        <th>Amount</th>
-                        <th>Date</th>
+                        <th>Round Off</th>
+
+
                     </tr>
                 </thead>
             </table>
@@ -137,7 +120,7 @@
         $.ajax({
             type: "GET",
             url: '/Transaction/GetViraniList',
-            data: { 'busid': busId, 'date': getControlValueN("txtDate") },
+            data: { 'busid': busId, 'date': getControlValueN("txtDate"), 'enddate': getControlValueN ("txtendDate")},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -159,10 +142,10 @@
                     var txt = "";
                     if (len > 0) {
                         for (var i = 0; i < len; i++) {
-                            $('#lblbusnumber').text(data[2].BusNumber)
-                            var regDate = new Date(parseInt(data[i].VivraniDate.substr(6))).format("dd-mm-yyyy")
-                            txt += "<tr><td>" + data[i].VivraniNumber + "</td><td>" + data[i].WayBillSerialNumber + "</td><td>" + data[i].WayBillNumber + "</td>"
-                                + "<td> " + data[i].TicketFrom + "</td><td> " + data[i].TicketTo + "</td><td> " + data[i].StationFrom + "</td><td> " + data[i].StationTo + "</td><td> " + data[i].Amount + "</td><td> " + regDate + "</td><td></tr> ";
+                           // $('#lblbusnumber').text(data[2].BusNumber)
+                           // var regDate = new Date(parseInt(data[i].VivraniDate.substr(6))).format("dd-mm-yyyy")
+                            txt += "<tr><td>" + data[i].VivraniNumber + "</td><td>" + data[i].WayBillAmount + "</td><td>" + data[i].VivraniAmount + "</td>"
+                                + "<td> " + data[i].RoundOff + "</td></tr> ";
 
 
                         }

@@ -100,6 +100,7 @@
     <FunctionImport Name="sp_GetButDebitStatusByDate" ReturnType="Collection(GMOUMISModel.sp_GetButDebitStatusByDate_Result)" />
     <EntitySet Name="tbl_ShortName" EntityType="GMOUMISModel.tbl_ShortName" />
     <EntitySet Name="tbl_bustransfer" EntityType="GMOUMISModel.tbl_bustransfer" />
+    <EntitySet Name="tbl_backDepo" EntityType="GMOUMISModel.tbl_backDepo" />
   </EntityContainer>
   <EntityType Name="tblEmployeeQuick">
     <Key>
@@ -119,6 +120,7 @@
     <NavigationProperty Name="tblMasterDepartment" Relationship="GMOUMISModel.FK_tblEmployeeQuick_tblMasterDepartment" FromRole="tblEmployeeQuick" ToRole="tblMasterDepartment" />
     <Property Name="confirm_password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbl_CashVivrani" Relationship="GMOUMISModel.FK_tbl_CashVivrani_tblEmployeeQuick" FromRole="tblEmployeeQuick" ToRole="tbl_CashVivrani" />
+    <Property Name="fuelAdminID" Type="Int32" />
   </EntityType>
   <EntityType Name="tblMasterDepartment">
     <Key>
@@ -331,6 +333,7 @@
     <Property Name="station_to" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="vivrani_inserted_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="emp_id" Type="Int32" Nullable="false" />
+    <Property Name="roundOffAmount" Type="Decimal" Precision="19" Scale="4" />
   </EntityType>
   <ComplexType Name="sp_GetButDebitStatusByDate_Result">
     <Property Type="String" Name="bus_number" Nullable="false" MaxLength="50" />
@@ -355,5 +358,17 @@
     <Property Name="updateddate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="updatedby" Type="Int32" Nullable="false" />
     <Property Name="buscurenntdepo" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_backDepo">
+    <Key>
+      <PropertyRef Name="serialid" />
+    </Key>
+    <Property Name="serialid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="busid" Type="Int32" />
+    <Property Name="bus_numer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ownername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bankaccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bankname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

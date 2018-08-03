@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "UpdateWayBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UpdateWayBill</h2>
+
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+
+
+
+<div>
+    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+        <tr>
+            <td>Waybill Number</td>
+            <td> <input type="text" id="txtwaybill" /></td>
+            <td>Waybill serial Number</td>
+            <td> <input type="text" id="txtwaybillserial" /></td>
+
+        </tr>
+        <tr>
+
+            <td>
+                <input type="button" value="Show" onclick="GetVivraniDetails();"
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="dvVivrani"></div>
+<script>
+
+    $(function () {
+        $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+
+    });
+    function GetVivraniDetails()
+    {
+
+        var waybill = getControlValue("txtwaybill");
+        var waybillserial = getControlValue("txtwaybillserial");
+        $.ajax({
+            type: "GET",
+            url: '/WayBill/GetWayBillEditDetails?waybill=' + waybill + '&waybillserial=' + waybillserial,
+            //data: { 'waybill': waybill, 'waybillserial': waybillserial },
+            contentType: "application/html; charset=utf-8",
+
+            success: function (data) {
+                debugger;
+
+                $('#dvVivrani').html(data);
+
+            },
+            error: OnError
+        });
+    }
+</script>

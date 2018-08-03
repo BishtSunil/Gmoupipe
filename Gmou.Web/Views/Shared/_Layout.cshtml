@@ -373,7 +373,7 @@
                        
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-bus"></i><span>Buses Deatil</span> 
+                            <i class="fa fa-bus"></i><span>Bus Details</span> 
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -385,7 +385,7 @@
                             <li class="active">
 
                                 <a href="@Url.Action("businformation", "buses")">
-                                    <i class="fa fa-eye"></i>Add New Buses
+                                    <i class="fa fa-eye"></i>Add New Bus
                                 </a>
                             </li>
                             <li class="active">
@@ -416,7 +416,12 @@
                             </li>
                             <li class="active">
                                 <a href="@Url.Action("VivraniDetails", "Transaction")">
-                                    <i class="fa fa-eye"></i>Vivrani Details
+                                    <i class="fa fa-eye"></i>Vivrani Details by Bus
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="@Url.Action("AllVivrani", "Transaction")">
+                                    <i class="fa fa-eye"></i>Vivrani Details All
                                 </a>
                             </li>
                             <li class="active">
@@ -424,6 +429,12 @@
                                     <i class="fa fa-eye"></i>Fuel Pump Report
                                 </a>
                             </li>
+                            <li class="active">
+                                <a href="@Url.Action("FuelReportsByDate", "Transaction")">
+                                    <i class="fa fa-eye"></i>Fuel  Report Dates
+                                </a>
+                            </li>
+                            
                             <li class="active">
                                 <a href="@Url.Action("DebitStatus", "Transaction")">
                                     <i class="fa fa-eye"></i>Bus Debit Report
@@ -434,6 +445,12 @@
                                     <i class="fa fa-eye"></i>Fuel Stock Report
                                 </a>
                             </li>
+                            <li class="active">
+                                <a href="@Url.Action("BusPerformance", "Transaction")">
+                                    <i class="fa fa-eye"></i>Bus Performance Report
+                                </a>
+                            </li>
+                            
                             
                         </ul>
                     </li>
@@ -452,8 +469,10 @@
                             @*<li><a href="@Url.Action("Coupon", "WayBill")"><i class="fa fa-angle-double-right"></i> Coupon</a></li>*@
                             <li><a href="@Url.Action("AddWaybill", "WayBill")"><i class="fa fa-angle-double-right"></i> Add Waybill</a></li>
                             <li><a href="@Url.Action("Fuel", "Chart")"><i class="fa fa-angle-double-right"></i> CashSheet Summary</a></li>
+                            <li><a href="@Url.Action("UpdateWayBill", "WayBill")"><i class="fa fa-angle-double-right"></i> Update Waybill</a></li>
+
                             <li><a href="@Url.Action("GamanPatra", "WayBill")"><i class="fa fa-angle-double-right"></i> GamanPatra</a></li>
-                            
+                           
                             @*<li><a href="../examples/login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
                             <li><a href="../examples/register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>
                             <li><a href="../examples/lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>

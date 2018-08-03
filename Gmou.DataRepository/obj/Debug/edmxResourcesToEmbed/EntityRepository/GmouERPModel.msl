@@ -33,6 +33,7 @@
     <EntitySetMapping Name="tblEmployeeQuicks">
       <EntityTypeMapping TypeName="GMOUMISModel.tblEmployeeQuick">
         <MappingFragment StoreEntitySet="tblEmployeeQuick">
+          <ScalarProperty Name="fuelAdminID" ColumnName="fuelAdminID" />
           <ScalarProperty Name="confirm_password" ColumnName="confirm_password" />
           <ScalarProperty Name="Isdeleted" ColumnName="Isdeleted" />
           <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
@@ -186,6 +187,7 @@
     <EntitySetMapping Name="tmp_cashvivrani">
       <EntityTypeMapping TypeName="GMOUMISModel.tmp_cashvivrani">
         <MappingFragment StoreEntitySet="tmp_cashvivrani">
+          <ScalarProperty Name="roundOffAmount" ColumnName="roundOffAmount" />
           <ScalarProperty Name="emp_id" ColumnName="emp_id" />
           <ScalarProperty Name="vivrani_inserted_date" ColumnName="vivrani_inserted_date" />
           <ScalarProperty Name="station_to" ColumnName="station_to" />
@@ -229,6 +231,19 @@
           <ScalarProperty Name="depoid" ColumnName="depoid" />
           <ScalarProperty Name="busid" ColumnName="busid" />
           <ScalarProperty Name="bustransferid" ColumnName="bustransferid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_backDepo">
+      <EntityTypeMapping TypeName="GMOUMISModel.tbl_backDepo">
+        <MappingFragment StoreEntitySet="tbl_backDepo">
+          <ScalarProperty Name="bankname" ColumnName="bankname" />
+          <ScalarProperty Name="bankaccount" ColumnName="bankaccount" />
+          <ScalarProperty Name="dipo" ColumnName="dipo" />
+          <ScalarProperty Name="ownername" ColumnName="ownername" />
+          <ScalarProperty Name="bus_numer" ColumnName="bus_numer" />
+          <ScalarProperty Name="busid" ColumnName="busid" />
+          <ScalarProperty Name="serialid" ColumnName="serialid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

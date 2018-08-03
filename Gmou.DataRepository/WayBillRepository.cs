@@ -852,7 +852,9 @@ namespace Gmou.DataRepository
                     cmd.Parameters.AddWithValue("waybilldate", DateTime.Now);
                     cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
 
-
+                    cmd.Parameters.AddWithValue("gamanpatar", model.GamanPatar);
+                    cmd.Parameters.AddWithValue("miscplus", model.MiscPlus);
+                    cmd.Parameters.AddWithValue("miscminus", model.MiscMinus);
 
                     conn.Open();
                     try
@@ -911,7 +913,10 @@ namespace Gmou.DataRepository
                                                      (Convert.ToInt32(dr["ticketend"])),
                                                      dr["stationfrom"].ToString(),
                                                      (dr["stationto"].ToString()),
-                                                     ( Convert.ToBoolean(dr["iscoupon"])));
+                                                     (Convert.ToBoolean(dr["iscoupon"])),
+                                                     (Convert.ToInt32(dr["miscplus"])),
+                                                     (Convert.ToInt32(dr["miscminus"])),
+                                                     (Convert.ToInt32(dr["gamanpatra"])));
 
 
                     }
@@ -1242,7 +1247,7 @@ namespace Gmou.DataRepository
                         gamamodel = new OwnerVivraniSMSInfo
                         {
                             // contact bigint, OwnerName nvarchar(100), TotalAmount mone
-                            Contact =  ((rd["contact"])==null)?(long)(rd["contact"]):9890242125  ,
+                            Contact = Convert.ToInt64(rd["contact"]),
                             OwnerName = (rd["OwnerName"]).ToString(),
                             TotalAmount = Convert.ToDecimal(rd["TotalAmount"])
 
@@ -1256,7 +1261,7 @@ namespace Gmou.DataRepository
         }//end of class 
 
 
-        public static OwnerFuelSMSInfo DALGetOwnerFueliInfo(string busnumber)
+        public static OwnerFuelSMSInfo DALGetOwnerFueliInfo(string busnumber, int fueltype, int station)
         {
 
             OwnerFuelSMSInfo gamamodel = new OwnerFuelSMSInfo(); ;
@@ -1266,6 +1271,8 @@ namespace Gmou.DataRepository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("busnumber", busnumber);
+                    cmd.Parameters.AddWithValue("fuelType", fueltype);
+                    cmd.Parameters.AddWithValue("fuelStation", station);
 
                     conn.Open();
                     SqlDataReader rd = cmd.ExecuteReader();
@@ -1277,7 +1284,9 @@ namespace Gmou.DataRepository
                             // contact bigint, OwnerName nvarchar(100), TotalAmount mone
                             Contact = (long)(rd["contact"]),
                             OwnerName = (rd["OwnerName"]).ToString(),
-                            busid = Convert.ToInt32(rd["BusNumber"])
+                            busid = Convert.ToInt32(rd["BusNumber"]),
+                            FuelName = (rd["FuleName"]).ToString(),
+                            StationName = (rd["StationName"]).ToString()
 
                         };
                     }
@@ -1309,5 +1318,216 @@ namespace Gmou.DataRepository
                 return fare;
             }
         }
+
+        public static IEnumerable<WayBillEditModel> DALEditWayBill(int vivraninumber)
+        {
+
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+
+                using (var cmd = new SqlCommand("sp_EditWayBill", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("vivraninumber", vivraninumber);
+
+                    SqlDataReader dr;
+                    conn.Open();
+                    try
+                    {
+                        dr = cmd.ExecuteReader();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+
+                    while (dr.Read())
+                    {
+
+                        yield return new WayBillEditModel(
+                           
+                                            (Convert.ToInt32(dr["vivrani_id"])),
+                                            (Convert.ToInt32(dr["cash_vivrani_id"])),
+                                             (Convert.ToDecimal(dr["amount"])),
+                                               (Convert.ToInt32(dr["waybillno"])),
+                                                 (Convert.ToDecimal(dr["roundOffAmount"]))
+                         );
+                    }
+                }
+            }
+        }
+
+      
+        public static IEnumerable<WayBillEditModel> DALEditWayBillDetails(int waybill, int waybillserial)
+        {
+
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+
+                using (var cmd = new SqlCommand("sp_EditWayBillDetails", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("waybillno", waybill);
+                    cmd.Parameters.AddWithValue("waybillserialno", waybillserial);
+                    SqlDataReader dr;
+                    conn.Open();
+                    try
+                    {
+                        dr = cmd.ExecuteReader();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+
+                    while (dr.Read())
+                    {
+
+                        yield return new WayBillEditModel(
+                                            (Convert.ToInt32(dr["vivrani_id"])),
+                                            (Convert.ToInt32(dr["cash_vivrani_id"])),
+                                             (Convert.ToDecimal(dr["amount"])),
+                                               (Convert.ToInt32(dr["waybillno"])),
+                                                (Convert.ToInt32(dr["WayBillSerialNo"])),
+                                                 (Convert.ToDecimal(dr["roundOffAmount"]))
+                         );
+                    }
+                }
+            }
+        }
+
+
+
+        public static int DALUpdateWayBillAmount(int vivraniidm, decimal amount, decimal roundoff, int vivraninumber)
+        {
+            int count;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+
+                using (var cmd = new SqlCommand("sp_EditByVivrani", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("vivraniid", vivraniidm);
+                    cmd.Parameters.AddWithValue("AMOUNT", amount);
+                    cmd.Parameters.AddWithValue("roundoffamoutn", roundoff);
+                    cmd.Parameters.AddWithValue("cashvivrani", vivraninumber);
+                    
+
+
+                    conn.Open();
+                    try
+                    {
+                        count = cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+                    conn.Close();
+
+                }
+            }
+            return count;
+        }
+
+        public static bool CheckIfWayBillCreated(int busid, int waybillno, int waybillserialno)
+        {
+
+            int serialID;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_CheckWayBillAlreadyCreated", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("busid", busid);
+                    cmd.Parameters.AddWithValue("waybillno", waybillno);
+                    cmd.Parameters.AddWithValue("waybillserial", waybillserialno);
+                    conn.Open();
+                    var result = (int)cmd.ExecuteScalar();
+                    conn.Close();
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            }
+
+        }
+
+        public static bool DALDeleteWayBillData(int vivraniid)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+                {
+                    using (var cmd = new SqlCommand("sp_DeleteWayBillData", conn))
+                    {
+
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("vivraniId", vivraniid);
+
+                        conn.Open();
+                        var result = cmd.ExecuteNonQuery();
+                        conn.Close();
+                        if (result < 0)
+                            return true;
+                        else
+                            return false;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public static int DALSaveTranshipment(Transhipment model)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+                {
+                    using (var cmd = new SqlCommand("sp_insertTranshipment", conn))
+                    {
+
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("busfrom", model.BusFrom);
+                        cmd.Parameters.AddWithValue("waybillnofrom", model.WaybillFrom);
+                        cmd.Parameters.AddWithValue("waybillserialfrom", model.waybillserialfrom);
+                        cmd.Parameters.AddWithValue("amountfrom", model.Amountfrom);
+                        cmd.Parameters.AddWithValue("busto", model.BusTo);
+                        cmd.Parameters.AddWithValue("waybillnoto", model.WaybilTo);
+                        cmd.Parameters.AddWithValue("waybillserialto", model.waybillserialTo);
+                        cmd.Parameters.AddWithValue("amountto", model.AmountTo);
+                        cmd.Parameters.AddWithValue("insertdate", DateTime.UtcNow);
+                        cmd.Parameters.AddWithValue("reason", string.Empty);
+                        cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
+                        conn.Open();
+                        var result = cmd.ExecuteScalar();
+
+                        conn.Close();
+                        return 1;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }        
+          
+
+        }
     }
+    
 }//end of namespace

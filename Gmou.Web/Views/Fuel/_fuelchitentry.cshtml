@@ -48,8 +48,8 @@
                 <table id="tblAccount" style="width:100%" >
                     <tr>
                         <td>Station Name</td>
-                        <td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>
-
+                        @*<td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>*@
+                        <td>@ViewBag.StationName</td>
                         <td>Vechile No.</td>
                         <td>@Html.DropDownListFor(model => model.busnumber, Model.busnumber, new { @class = "txt100PValidBreak", id = "ddlbusNumberlst", accesskey = "a", style = "width: 135px;" })</td>
 
@@ -58,7 +58,7 @@
                         <td>Diesel Book No.</td>
                         <td><input id="txtdieselbookno" class="  txt100" /></td>
                         <td>Date:</td>
-                        <td>@DateTime.Now.ToString() </td>
+                        <td><input type="date" class=".datepicker" id="txtfuelDate" /> </td>
                     </tr>
                     <tr>
                    
@@ -86,30 +86,39 @@
                     </tr>
                     <tr>
                         <td>
-                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlPatrolfuellst", chaildID = "txtPatrolAmt", chaildID2 = "txtPatrolQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlPatrolfuellst", chaildID = "lbl1", chaildID2 = "txtPatrolQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
-                        <td><input type="text" id="txtPatrolQty" chailid="txtPatrolAmt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td><input type="text" id="txtPatrolQty" chailid="lbl1" chailid2="txtPatrolAmt" class="txtH20" onchange="GetCalculate(this)" />
+                         <span style="font-weight:800">Price Per Litre : <span id="lbl1"></span></span></td>
                         <td><input type="text" id="txtPatrolAmt" class="txtH20" onchange="GetQuantityCalculate(this)" /></td>
                     </tr>
                     <tr>
                         <td>
-                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlDiselfuellst", chaildID = "txtDiselAmt", chaildID2 = "txtDiselQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlDiselfuellst", chaildID = "lbl2", chaildID2 = "txtDiselQty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
-                        <td><input type="text" id="txtDiselQty" chailid="txtDiselAmt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td><input type="text" id="txtDiselQty" chailid="lbl2" chailid2="txtDiselAmt" class="txtH20" onchange="GetCalculate(this)" />
+                        <span style="font-weight:800">Price Per Litre : <span id="lbl2"></span></span></td>
+                          
                         <td><input type="text" id="txtDiselAmt" class="txtH20"  onchange="GetQuantityCalculate(this)"/></td>
                     </tr>
                     <tr>
                         <td>
-                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub1fuellst", chaildID = "txtLub1Amt", chaildID2 = "txtLub1Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub1fuellst", chaildID = "lbl3", chaildID2 = "txtLub1Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
-                        <td><input type="text" id="txtLub1Qty" chailid="txtLub1Amt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td>
+                            <input type="text" id="txtLub1Qty" chailid="lbl3" chailid2="txtLub1Amt" class="txtH20" onchange="GetCalculate(this)" />
+                            <span style="font-weight:800">Price Per Litre : <span id="lbl3"></span></span>
+                        </td></td>
                         <td><input type="text" id="txtLub1Amt" class="txtH20"  onchange="GetQuantityCalculate(this)"  /></td>
                     </tr>
                     <tr>
                         <td>
-                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub2fuellst", chaildID = "txtLub2Amt", chaildID2 = "txtLub2Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlLub2fuellst", chaildID = "lbl4", chaildID2 = "txtLub2Qty", accesskey = "a", style = "width: 135px;", @onchange = "GetPrice(this)" })
                         </td>
-                        <td><input type="text" id="txtLub2Qty" chailid="txtLub2Amt" class="txtH20" onchange="GetCalculate(this)" /></td>
+                        <td>
+                            <input type="text" id="txtLub2Qty"chailid ="lbl4chailid" chailid2 ="txtLub2Amt" class="txtH20" onchange="GetCalculate(this)" />
+                            <span style="font-weight:800">Price Per Litre : <span id="lbl4"></span></span>
+                        </td>
                         <td><input type="text" id="txtLub2Amt" class="txtH20"  onchange="GetQuantityCalculate(this)" /></td>
                     </tr>
                 
@@ -170,7 +179,7 @@
 
         $(".datepicker").datepicker();
         GetAllChitDetails();
- 
+
     });
 
     (function ($) {
@@ -306,20 +315,50 @@
             $("#ddlbusNumberlst").toggle();
         });
     });
-    function SavChitdetails() {
+    function calcAvgHeight(data) {
+        // Calculate average height from received data. If no data, return null.
         debugger;
+        var height = 0;
+        var count = 0;
+      
+        for (var k in data) {
+            debugger;
+            console.log(k, data[k]);
+            height = height+ data[k].height;
+            count = count + 1;
+            }
+        if (count == 0) {
+            return null;
+        }
+        return height / count;
+    }
+
+
+   
+
+    function Test() {
+        debugger;
+        var avgHeight = calcAvgHeight({
+        });
+        console.log(avgHeight);
+    }
+    function SavChitdetails() {
+        ; Test();
+        debugger;
+
         var fueldata = {
             VechileNumber: getControlValueN("ddlbusNumberlst"),
-            FuelStationID: getControlValueN("ddlpumplst"),
+            FuelStationID:  '@ViewBag.StationID',
             InsertedBy: 0,
             DieselBookno: getControlValueN("txtdieselbookno"),
             ChitNo: getControlValueN("txtchitnumber"),
             Comment: getControlValueN("txtcomment"),
+            date: getControlValueN('txtfuelDate'),
             listFuel: []
-         
+
         };
-      
-       
+
+
        // var obj = new Object();
        // obj.VechileNumber = getControlValueN("ddlbusNumberlst");
        //// obj.Fueltype = getControlValueN("ddlfuellst");
@@ -345,12 +384,12 @@
                 "Fueltype": $("#ddlPatrolfuellst").val(),
                 "FuelQuantity": $("#txtPatrolQty").val(),
                 "Price": $("#txtPatrolAmt").val()//   Issue here if you don't specify the decimal place
-               
+
             });
-            
+
            // queue.push({ Fueltype: $("#ddlPatrolfuellst").val(), FuelQuantity: $("#txtPatrolQty").val(), Price: $("#txtPatrolAmt").val() });
             //obj['Fueltype'] = $("#ddlPatrolfuellst").val()
-            //obj.FuelType = 
+            //obj.FuelType =
            // obj['FuelQuantity'] = $("#txtPatrolQty").val()
           //  obj['Price'] = $("#txtPatrolAmt").val()
            // queue.push(obj)
@@ -400,25 +439,31 @@
         $.ajax({
             type: "POST",
             url: '/Fuel/SaveChitFuelDetails',
-          
+
             data: JSON.stringify( fueldata),
 
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (data) {
-               
-                    $('#EmployeesTable tbody').empty();
-                    GetAllChitDetails();
-                  //  ajaxindicatorstop();
-               
-                   
+			success: function (data) {
+				if (data == false) {
+					window.location.reload();
+
+					alert("Entry Already Exist");
+				} else {
+					$('#EmployeesTable tbody').empty();
+					GetAllChitDetails();
+
+					//  ajaxindicatorstop();
+					window.location.reload();
+				}
+
 
 
             }
         });
     }
     function GetPrice(e) {
-        debugger;
+        ;
         var obj = new Object();
 
         obj.pumpid = $("#ddlpumplst").val();
@@ -433,10 +478,12 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data) {
+                    ;
                     //alert(data);
                     fuelPrice1 = data;
-                    $("#" + $(e).attr("chaildId")).val(data);
-                    $("#"+$(e).attr("chaildID2")).val("1");
+                   // $('#lbl1').text(data)
+                    $("#" + $(e).attr("chaildId")).text(data);
+                   // $("#"+$(e).attr("chaildID2")).val("1");
                 }
             }
 
@@ -444,11 +491,12 @@
     }
 
     function GetCalculate(e) {
-        $("#" + $(e).attr("chailid")).val(($(e).val()) * ($("#" + $(e).attr("chailid")).val()));    
+        ;
+        $("#" + $(e).attr("chailid2")).val(($(e).val()) * ($("#" + $(e).attr("chailid")).text()));
     }
     function GetQuantityCalculate(e) {
-        debugger;
-     
+        ;
+
         var price = parseInt($(e).val());
         $(e).parent().siblings()[1].children[0].value = price / fuelPrice1;
         //(amount);
@@ -583,7 +631,7 @@
     })(jQuery);
 
     function GetAllChitDetails() {
-        debugger;
+        ;
 
         $.ajax({
             type: "GET",
@@ -622,19 +670,19 @@
     }
 
     $(document).ready(function () {
-        debugger;
+        ;
 
         $("select[name='fueltype']").trigger("change");
   //GetPrice($("select[name='fueltype']").html());
         $('#txtfuelquantity').focusout(function () {
-            debugger;
+            ;
             GetCalculate(getControlValueN("txtfuelquantity"))
         });
         $('#txtfuelquantity').focusout(function () {
-            debugger;
+            ;
             GetQuantityCalculate(getControlValueN("txtfuelquantity"))
         });
-        
+
     });
     $(function () {
         $("#ddlbusNumberlst").combobox();
@@ -648,7 +696,7 @@
     });
 
     function ajaxindicatorstart(text) {
-        debugger;
+        ;
         if (jQuery('body').find('#resultLoading').attr('id') != 'resultLoading') {
 
             jQuery('body').append('<div id="resultLoading" style="display:none"><div><img src="/Images/ajax-loader.gif"><div>' + text + '</div></div><div class="bg"></div></div>');

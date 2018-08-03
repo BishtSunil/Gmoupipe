@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GMOUMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_backDepo">
+    <Key>
+      <PropertyRef Name="serialid" />
+    </Key>
+    <Property Name="serialid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="busid" Type="int" />
+    <Property Name="bus_numer" Type="nvarchar" MaxLength="50" />
+    <Property Name="ownername" Type="nvarchar" MaxLength="50" />
+    <Property Name="dipo" Type="nvarchar" MaxLength="50" />
+    <Property Name="bankaccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="bankname" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tbl_bustransfer">
     <Key>
       <PropertyRef Name="bustransferid" />
@@ -29,7 +41,7 @@
     <Property Name="chitfuelid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="vechilenumber" Type="int" Nullable="false" />
     <Property Name="fueltype" Type="int" Nullable="false" />
-    <Property Name="quantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="quantity" Type="decimal" Precision="18" Scale="3" Nullable="false" />
     <Property Name="price" Type="money" Nullable="false" />
     <Property Name="otherfule" Type="nvarchar" MaxLength="50" />
     <Property Name="otherprice" Type="nvarchar" MaxLength="50" />
@@ -173,6 +185,7 @@
     <Property Name="created_on" Type="date" Nullable="false" />
     <Property Name="date_of_birth" Type="date" Nullable="false" />
     <Property Name="Isdeleted" Type="bit" />
+    <Property Name="fuelAdminID" Type="int" />
   </EntityType>
   <EntityType Name="tblMasterDepartment">
     <Key>
@@ -206,6 +219,7 @@
     <Property Name="station_to" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="vivrani_inserted_date" Type="date" Nullable="false" />
     <Property Name="emp_id" Type="int" Nullable="false" />
+    <Property Name="roundOffAmount" Type="money" />
   </EntityType>
   <Association Name="FK_tbl_CashVivrani_tblEmployeeQuick">
     <End Role="tblEmployeeQuick" Type="Self.tblEmployeeQuick" Multiplicity="1" />
@@ -293,6 +307,7 @@
   </Association>
   <Function Name="sp_GetButDebitStatusByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="GMOUMISModelStoreContainer">
+    <EntitySet Name="tbl_backDepo" EntityType="Self.tbl_backDepo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_bustransfer" EntityType="Self.tbl_bustransfer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_CashVivrani" EntityType="Self.tbl_CashVivrani" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_ChitFuel" EntityType="Self.tbl_ChitFuel" Schema="dbo" store:Type="Tables" />

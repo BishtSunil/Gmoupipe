@@ -67,7 +67,7 @@ namespace Gmou.Web.Controllers
             Gmou.Web.Models.EmployeeViewModel employeemodel = new Models.EmployeeViewModel
             {
                 lstDepartment = new SelectList(Gmou.BusinessAccessLayer.EmployeeBAL.GetDepartmentList(), "DepartmentID", "DepartmentName"),
-                 
+                 lststation  = new SelectList(Gmou.BusinessAccessLayer.BALFuel.BALGetAllStation(),"StationID","StationName")
             };
 
 

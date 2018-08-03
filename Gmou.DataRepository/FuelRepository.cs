@@ -12,6 +12,41 @@ namespace Gmou.DataRepository
 {
     public class FuelRepository
     {
+
+        public static bool CheckDuplicateEntry(int diselbook, int chitno, int busnumber)
+        {
+            int count = 0;
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_checkDuplicateEntry", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("dieselbook", diselbook);
+                    cmd.Parameters.AddWithValue("chitcho", chitno);
+                    cmd.Parameters.AddWithValue("busnumber", busnumber);
+
+                    conn.Open();
+                    try
+                    {
+                        count = (int)cmd.ExecuteScalar();
+                        if (count > 0)
+                        {
+                            return true;
+                        }
+                        return false;
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+
+
+                    
+        }
         public static IEnumerable<FuelModel> GetAllLubricants()
         {
 
@@ -338,6 +373,7 @@ namespace Gmou.DataRepository
                     cmd.Parameters.AddWithValue("comment", model.Comment);
                     cmd.Parameters.AddWithValue("dieselbookno", model.DieselBookno);
                     cmd.Parameters.AddWithValue("dieselchitno", model.ChitNo);
+                    cmd.Parameters.AddWithValue("date", model.date);
                     conn.Open();
                     try
                     {
@@ -898,7 +934,9 @@ namespace Gmou.DataRepository
                     try
                     {
                         dr = cmd.ExecuteReader();
+                        conn.Close();
                     }
+                   
                     catch (Exception ex)
                     {
 
@@ -949,5 +987,38 @@ namespace Gmou.DataRepository
                 }
             }
         }
-    }//end of class
+
+        public static FuelStationModel GetFuelAdmin(string username)
+        {
+            int stationid; 
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetFuelAdmin", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("username", username);
+                    conn.Open();
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    try
+                    {
+                        while (rd.Read())
+                        {
+                            return new FuelStationModel(
+                            (Convert.ToInt32(rd["fuel_pump_id"])),
+                             ((rd["fuel_pump_name"]).ToString()));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                       
+                    }
+                    return null;
+                }
+            }
+
+         
+                }
+            }//end of class
 }//End of namespace

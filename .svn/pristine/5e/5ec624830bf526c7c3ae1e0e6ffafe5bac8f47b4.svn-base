@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<repositories>
-  
-  <repository path="..\Gmou.DataRepository\packages.config" />
-  <repository path="..\Gmou.Web\packages.config" />
-</repositories>

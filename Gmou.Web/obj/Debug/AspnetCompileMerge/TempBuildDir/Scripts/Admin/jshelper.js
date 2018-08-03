@@ -64,7 +64,7 @@ function successMethodAfterDelete(data, rowIdToDelete, rowParentContainerId, sha
 }
 
 function successMethodAfterInsertUpdate(data, rowIdToUpdate, rowParentContainerId, shallLoadTemplete, templeteToLoad, shallCallOtherMethod, otherMethodToCall, parameter1InOtherMethod, parameter2InOtherMethod, parameter3InOtherMethod) {
-    debugger;
+    ;
     if (data.toString().indexOf("***") > -1) {
         var datas = data.split('***');
         // showScsMsgWithMsg('Data cannot  successfully', 'warningErr');
@@ -140,7 +140,7 @@ function callJTemplateServiceMethod(datas, webservicepath, methodname, container
     }
 }
 function bindTemplateSuccess(containerId, data, templateId, shallCallOtherMethod, otherMethodToCall, parameter1InOtherMethod, parameter2InOtherMethod, parameter3InOtherMethod) {
-    debugger;
+    ;
     alert(data);
     $('#' + containerId).setTemplate($("#" + templateId).html());
     $('#' + containerId).processTemplate(data.d);

@@ -36,7 +36,9 @@
     .couponcolor {
         background-color: gold !important;
     }
-
+    .ui-autocomplete {
+  z-index:2147483647;
+}
     .custom-combobox-toggle {
         position: absolute;
         top: 0;
@@ -111,9 +113,11 @@
                                     bus number
                                 </td>
                                 <td>
-                                    @Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlBusNumber", accesskey = "a", style = "width: 135px;", @onchange = "GetData(this)" })
+
+                                    @Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlBusNumber", accesskey = "a", style = "width: 135px;" })
 
                                 </td>
+                                
                                 <td class="alignR">
                                     Dipoo
                                 </td>
@@ -125,6 +129,8 @@
                                         <option value="4">RudarPrayag</option>
                                         <option value="5">Haridwar</option>
                                         <option value="6">Rishikesh</option>
+                                        <option value="7">Karanprayag</option>
+                                        <option value="8">Gopeshwar</option>
                                     </select>
 
                                 </td>
@@ -201,12 +207,12 @@
                             </td>
 
                             <td>
-                                <input type="number" id="txtNoofTicket" class="txt100" onfocusout="GetFareDistance(this);" />
+                                <input type="number" id="txtNoofTicket" class="txt100"  />
                             </td>
 
 
                             <td>
-                                <input type="number" id="txtFare" class="txt100" onfocusout="Total(this);" />
+                                <input type="number" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 
@@ -238,7 +244,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this); "  />
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -269,7 +275,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -300,7 +306,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);" />
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -331,7 +337,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -361,38 +367,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);" />
-                            </td>
-                            <td>
-                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
-
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtStartTicket" class="txt100" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtEndTicket" class="txt100" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtNoofTicket" class="txt100" />
-                            </td>
-
-
-                            <td>
-                                <input type="text" id="txtFare" onfocusout="Total(this)" ; />
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -423,38 +398,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
-                            </td>
-                            <td>
-                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
-
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtStartTicket" class="txt100" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtEndTicket" class="txt100" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtNoofTicket" class="txt100" onfocusout="Total(this)" ; />
-                            </td>
-
-
-                            <td>
-                                <input type="text" id="txtFare" class="txt100" />
+                                <input type="text" id="txtFare" onfocusout="Total(this)" onfocus="PreviousValue(this);"/> 
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -485,7 +429,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -511,43 +455,12 @@
                             </td>
 
                             <td>
-                                <input type="text" id="txtNoofTicket" class="txt100" onfocusout="Total(this)" ; />
+                                <input type="text" id="txtNoofTicket" class="txt100"  />
                             </td>
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" />
-                            </td>
-                            <td>
-                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
-
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtStartTicket" class="txt100" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtEndTicket" class="txt100" />
-                            </td>
-
-                            <td>
-                                <input type="text" id="txtNoofTicket" class="txt100" />
-                            </td>
-
-
-                            <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -578,7 +491,38 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100"  />
+                            </td>
+
+
+                            <td>
+                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -609,7 +553,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -640,7 +584,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -671,7 +615,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -702,7 +646,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -733,7 +677,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -764,7 +708,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -795,7 +739,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -826,7 +770,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -857,7 +801,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -888,7 +832,7 @@
 
 
                             <td>
-                                <input type="text" id="txtFare" class="txt100" onfocusout="Total(this)" ; />
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
                             </td>
                             <td>
                                 <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
@@ -896,16 +840,79 @@
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
 
-                            <td></td>
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
 
-                            <td></td>
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
 
-                            <td></td>
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
 
-                            <td></td>
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
 
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="text" id="txtStationFrom" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStationTo" class="txt100" name="nametxtStationFrom" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtStartTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtEndTicket" class="txt100" />
+                            </td>
+
+                            <td>
+                                <input type="text" id="txtNoofTicket" class="txt100" />
+                            </td>
+
+
+                            <td>
+                                 <input type="text" id="txtFare" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="chkcoupon" onclick="chkCoupon(this);"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span> Mics.(+)</span></td>
+
+                            <td><input type="text" id="txtMiscadd" class="txt100" onfocusout="Total(this);"  onfocus="PreviousValue(this);"/></td>
+
+                            <td><span> Mics.(-)</span></td>
+
+                            <td><input type="text" id="txtMiscsub" class="txt100" onfocusout="MinusTotal(this)" onfocus="PreviousValue(this);"; /></td>
+
+                            <td>Gaman Patra</td>
+
+                            <td><input type="text" id="txtGaman" class="txt100" onfocus="PreviousValue(this);" onfocusout="GamanPatra(this)" ; /></td>
 
                             <td>
                                 <span> Total Amount Rs: </span> <label for="lblshowAdd" id="lblShowFare"></label>
@@ -1062,6 +1069,7 @@
                 </thead>
             </table>
             <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;" class="hide">Total Amount :- <span id="ttlamt">0</span></div>
+           
         </div>
         <div style="height:10px"></div>
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Cuppon</button>
@@ -1088,75 +1096,74 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content">
+            <div class="modal-content" style="width: 148%">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" onclick="clearAllTextBoxes('tblAccount')">&times;</button>
                     <h4 class="modal-title">Cuppon</h4>
 
                 </div>
-                <div class="modal-body" id="pnlCoupon">
-                    <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                <div class="modal-body box-body table-responsive" id="pnlCoupon">
+                    <table id="tblAccount" style="width:80%" class="tbl20 alignROdd">
                         <tbody>
+                           
                             <tr>
+                              
+                                <td>Bus
+                                    @Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlBusNumber_trans_from", accesskey = "a", style = "width: 135px;" })
+
+
+                                </td>
                                 <td>
                                     WayBill Book No
-                                </td>
-                                <td>
-                                    <input type="text" id="txtCpnWaybillBook" />
-                                </td>
-                                <td>
-                                    WayBill  Serial No
-                                </td>
+                              
 
-                                <td>
-                                    <input type="text" id="txtCpnWaybillCpnSerial" />
+                               
+                                    <input type="text" id="txtwaybillno_from" />
                                 </td>
-                            </tr>
-                            <tr>
+                           
                                 <td>
-                                    Cuppon Book No
-                                </td>
-                                <td>
-                                    <input type="text" id="txtCpnBook" />
+                                    WayBill Serial No
+                                                                   <input type="text" id="txtwaybillserial_from" />
                                 </td>
                                 <td>
-                                    Cuppon  Serial No
-                                </td>
-
-                                <td>
-                                    <input type="text" id="txtCpnSerial" />
+                                    Amount
+                                
+                                    <input type="text" id="txtamount_from" />
                                 </td>
                             </tr>
 
                             <tr>
+
                                 <td>
-                                    Station From
-                                </td>
-                                <td>
-                                    <input type="text" id="txtCpnStationFrom" />
-                                </td>
-                                <td class="alignR">
-                                    Station To
+                                    Bus
+                                    @Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlBusNumber_trans_to", accesskey = "a", style = "width: 135px;" })
+
+
                                 </td>
                                 <td>
-                                    <input type="text" id="txtCpnStationTo" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="alignR">
-                                    Fare
-                                </td>
-                                <td>
-                                    <input type="text" id="txtCpnFare" />
+                                    WayBill Book No
+
+
+
+                                    <input type="text" id="txtwaybillno_to" />
                                 </td>
 
+                                <td>
+                                    WayBill Serial No
+                                    <input type="text" id="txtwaybillserial_to" />
+                                </td>
+                                <td>
+                                    Amount
+
+                                    <input type="text" id="txtamount_to" />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div style="height:10px"></div>
                     <div style="text-align:right">
-                        <button type="button" class="btn btn-default" onclick="saveCupponDetail()">Save</button>
+                        <button type="button" class="btn btn-default" onclick="saveTranshipmentDetail()">Save</button>
                         <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal" onclick="clearAllTextBoxes('tblAccount')">Close</button>
                     </div>
                 </div>
@@ -1222,22 +1229,84 @@
 </div>
 <script type="text/javascript">
     var total = 0;
+    var prevvalue = 0;
     function chkCoupon(e)
     {
-        debugger;
+      
 
+    }
+    function PreviousValue(e)
+    {
+      
+        if(e.value!="")
+        {
+            prevvalue = parseFloat(e.value);
+        }
     }
     function Total(e) {
 
-        debugger;
-        total = total + parseFloat(e.value);
-        $('#lblShowFare').text(total);
+       
+        if (e.value != "") {
+            if (prevvalue != 0)
+            {
+                total = total - prevvalue;
+                prevvalue = 0;
+            }
+            
+            total = total + parseFloat(e.value);
+            $('#lblShowFare').text(total);
+           
+        }
+        else {
+            total = total - prevvalue;
+            prevvalue = 0;
+            $('#lblShowFare').text(total);
+        }
+    }
+    function MinusTotal(e) {
+
+      
+        if (e.value != "") {
+            if (prevvalue != 0) {
+                total = total + prevvalue;
+                prevvalue = 0;
+            }
+
+            total = total - parseFloat(e.value);
+            $('#lblShowFare').text(total);
+
+        }
+        else {
+            total = total + prevvalue;
+            prevvalue = 0;
+            $('#lblShowFare').text(total);
+        }
+    }
+    function GamanPatra(e) {
+
+       
+        if (e.value != "") {
+            if (prevvalue != 0) {
+                total = total + prevvalue;
+
+            }
+            total = total - parseFloat(e.value);
+            $('#lblShowFare').text(total);
+
+        }
+        else {
+            total = total + prevvalue;
+            prevvalue = 0;
+            $('#lblShowFare').text(total);
+        }
     }
     $(function () {
         $('#myVariable').datepicker({ dateFormat: 'dd-mm-yy' });
     });
+
+    
     function GetFareDistance(e) {
-        debugger;
+       
 
         var stationfrom = e.parentElement.parentElement.children[0].children.txtStationFrom.value;
         var stationto = e.parentElement.parentElement.children[1].children.txtStationTo.value;
@@ -1262,9 +1331,14 @@
     }
     var TottalFare = 0;
     $(document).ready(function () {
-        $('input').on('ifChecked', function (event, e) {
-            debugger;
 
+        $('#txtArrival').focusout(function () {
+
+           // CheckValidWayBill();
+          
+        });
+        $('input').on('ifChecked', function (event, e) {
+           
             if (event.currentTarget.dataset.count == "1") {
                 var coupon = parseFloat(event.currentTarget.parentElement.parentElement.parentElement.children[5].children.txtFare.value);
                 var currenttotalfare = parseFloat($('#lblShowFare').text());
@@ -1280,7 +1354,7 @@
         });
        
         $('input').on('ifUnchecked', function (event, e) {
-            debugger;
+            ;
 
             if (event.currentTarget.dataset.count == "1") {
                 var coupon = parseFloat(event.currentTarget.parentElement.parentElement.parentElement.children[5].children.txtFare.value);
@@ -1299,7 +1373,7 @@
         
         $("#btnVivraniDetails").click(function () {
             $.confirm({
-                text: "Ticket Details will be Added",
+                text: "WayBill is Rs." + $('#lblShowFare').val() + " will be added",
                 confirm: function (button) {
                     saveWaybillDetail();
                 },
@@ -1339,7 +1413,7 @@
         $('#chkcoupon').change(function ()
 
         {
-            debugger;
+            ;
         });
         $("[name='nametxtStationFrom']").autocomplete({
             source: function (request, response) {
@@ -1389,7 +1463,26 @@
     });
 
 
+    function Validate()
+    {
 
+        if( getControlValue("myVariable")=="" && getControlValue("txtBookNo")=="" && getControlValue("txtBookserialNo")=="" && getControlValue("txtArrival")=="" && getControlValue("txtDeparture")=="" )
+
+
+        {
+
+            alert('Some Value are Missing');
+        }
+        else
+        {
+            return true;
+        }
+        
+
+        
+
+        
+    }
 
 
     function printdiv(printpage) {
@@ -1423,6 +1516,29 @@
                     else {
                         ShowTicketErrorMessage();
                     }
+
+
+                }
+            }
+        });
+
+    }
+
+    function CheckValidWayBill() {
+        $.ajax({
+            type: "GET",
+            url: "/WayBill/CheckWayBillExistence",
+            data: { busid: $('#ddlBusNumber').val(), waybillBookNo: $('#txtBookNo').val(), waybillSerrialNo: $('#txtBookserialNo').val() },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+
+                    if (data == false) {
+                       alert("WayBill Already Exist")
+
+                    }
+                   
 
 
                 }
@@ -1506,7 +1622,7 @@
         setControlValue("txtAmount", calcAmount);
     }
     function nooftckets() {
-        debugger;
+        ;
 
         var a = getControlValue("txtTktStart");
         var b = getControlValue("txtTktEnd");
@@ -1520,7 +1636,7 @@
     }
 
     function genrateCasVivraani(vivraniid) {
-        debugger;
+        ;
         var busId = getControlValue("ddlBusNumber");
         $.ajax({
             type: "GET",
@@ -1539,114 +1655,125 @@
     }
 
     function showCashVivraani() {
-        debugger;
+        ;
         var busId = getControlValue("ddlBusNumber");
         var wayBillNo = getControlValue("txtBookNo");
         var url = "/waybill/showCashVivraani?busId=" + busId + "&waybillNo=" + wayBillNo;
         window.location.href = url;
     }
     function saveWaybillDetail() {
-        debugger;
-        textboxes = $('#tblAccount').find('.txt100');
-        str = "";
-        var WayBillTicketModel = {
+        ;
+
+        if (Validate()) {
+            textboxes = $('#tblAccount').find('.txt100');
+            str = "";
+            var WayBillTicketModel = {
 
 
-            BusNumber: getControlValueN("ddlBusNumber"),
-            JourneyFrom: getControlValueN("txtDeparture"),
-            JourneyTo: getControlValueN("txtArrival"),
-            WayBillNo: getControlValueN("txtBookNo"),
-            WayBillSerialNo: getControlValueN("txtBookserialNo"),
+                BusNumber: getControlValueN("ddlBusNumber"),
+                JourneyFrom: getControlValueN("txtDeparture"),
+                JourneyTo: getControlValueN("txtArrival"),
+                WayBillNo: getControlValueN("txtBookNo"),
+                WayBillSerialNo: getControlValueN("txtBookserialNo"),
+                GamanPatar: $('#txtGaman').val(),
+                MiscPlus: $('#txtMiscadd').val(),
+                MiscMinus: $('#txtMiscsub').val(),
+                ticketdetails: []
 
-            ticketdetails: []
+            };
 
-        };
+            $('#tblWayBill tr').each(function (item, value) {
+                ;
+                var iscoupon;
+                if (item != 0) {
 
-        $('#tblWayBill tr').each(function (item, value) {
-            debugger;
-            var iscoupon;
-            if (item != 0) {
+                    var test = $(this).find('input');
+                    if (test.length != 0) {
+                        if (test[0].value == "") {
+                            return false;
+                        }
+                        if (test[6].parentElement.classList[1] == "checked") {
+                            iscoupon = true;
+                        }
+                        else {
+                            iscoupon = false;
+                        }
+                        WayBillTicketModel.ticketdetails.push({
+                            "StationFrom": test[0].value,
+                            "StationTo": test[1].value,
+                            "StartTicket": test[2].value,//   Issue here if you don't specify the decimal place
+                            "EndTicket": test[3].value,
+                            "NoofTicket": test[4].value,
+                            "TicketFare": test[5].value,
+                            "IsCoupon": iscoupon,
 
-                var test = $(this).find('input');
-                if (test.length != 0) {
-                    if (test[0].value == "") {
-                        return false;
+                        });
                     }
-                    if (test[6].parentElement.classList[1] == "checked") {
-                        iscoupon = true;
+                }
+
+
+            });
+            ;
+
+
+            //var valid = validateTextBoxes('busInformation');
+            //if (valid == true) {
+            //    var obj = new Object();
+            //    if ($('#chkIsCoupon').is(':checked')) {
+            //        obj.IsCoupon = true;
+            //    }
+            //    else{
+            //        obj.IsCoupon = false;
+            //    }
+
+            //    obj.BusNumber = getControlValueN("ddlBusNumber");
+            //    obj.JourneyFrom = getControlValueN("txtStationFrom");
+            //    obj.JourneyTo = getControlValueN("txtStationTo");
+            //    obj.WayBillNo = getControlValueN("txtBookNo");
+            //    obj.WayBillSerialNo = getControlValueN("txtBookserialNo");
+            //    obj.TicketStart = getControlValueN("txtTktStart");
+            //    obj.TicketEnd = getControlValueN("txtTktEnd");
+            //    obj.StationFrom = getControlValueN("txtArrival");
+            //    obj.StationTo = getControlValueN("txtDeparture");
+            //    obj.Dipo = getControlValueN("ddlDipoo");
+            //    obj.Fare = getControlValueN("txtAmount");
+            //    obj.WayBillDate = getControlValueN("txtWaybillDate");
+            //    obj.TicketNo = getControlValueN("txtFare");
+            //    obj.IsCoupon = getControlValueN("chkIsCoupon");
+            //    obj.TotalAmount = getControlValueN("ttlamt");
+            //    obj.NumberOfTicket = getControlValueN("txtNoOfTicket");
+            //    obj.TotalSeats =getControlValueN("ddltotalseats");
+            //    obj.TicketNo = getControlValueN("txtFare");
+            //   // alert(obj.WayBillDate);
+
+            $.ajax({
+                type: "POST",
+                url: '/WayBill/SaveWayBillEntry',
+                data: JSON.stringify(WayBillTicketModel),
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result == false) {
+                        alert("Waybill Aready Exist")
                     }
                     else {
-                        iscoupon = false;
+                        alert("Done");
+                        setControlValue("txtStationFrom", "");
+                        setControlValue("txtStationTo", "");
+                        setControlValue("txtTktStart", "");
+                        setControlValue("txtTktEnd", "");
+                        setControlValue("txtAmount", "");
+                        setControlValue("txtNoOfTicket", "");
+
+                        showWaybllDetail(result);
                     }
-                    WayBillTicketModel.ticketdetails.push({
-                        "StationFrom": test[0].value,
-                        "StationTo": test[1].value,
-                        "StartTicket": test[2].value,//   Issue here if you don't specify the decimal place
-                        "EndTicket": test[3].value,
-                        "NoofTicket": test[4].value,
-                        "TicketFare": test[5].value,
-                        "IsCoupon": iscoupon
-                    });
-                }
-            }
 
 
-        });
-        debugger;
-
-
-        //var valid = validateTextBoxes('busInformation');
-        //if (valid == true) {
-        //    var obj = new Object();
-        //    if ($('#chkIsCoupon').is(':checked')) {
-        //        obj.IsCoupon = true;
-        //    }
-        //    else{
-        //        obj.IsCoupon = false;
-        //    }
-
-        //    obj.BusNumber = getControlValueN("ddlBusNumber");
-        //    obj.JourneyFrom = getControlValueN("txtStationFrom");
-        //    obj.JourneyTo = getControlValueN("txtStationTo");
-        //    obj.WayBillNo = getControlValueN("txtBookNo");
-        //    obj.WayBillSerialNo = getControlValueN("txtBookserialNo");
-        //    obj.TicketStart = getControlValueN("txtTktStart");
-        //    obj.TicketEnd = getControlValueN("txtTktEnd");
-        //    obj.StationFrom = getControlValueN("txtArrival");
-        //    obj.StationTo = getControlValueN("txtDeparture");
-        //    obj.Dipo = getControlValueN("ddlDipoo");
-        //    obj.Fare = getControlValueN("txtAmount");
-        //    obj.WayBillDate = getControlValueN("txtWaybillDate");
-        //    obj.TicketNo = getControlValueN("txtFare");
-        //    obj.IsCoupon = getControlValueN("chkIsCoupon");
-        //    obj.TotalAmount = getControlValueN("ttlamt");
-        //    obj.NumberOfTicket = getControlValueN("txtNoOfTicket");
-        //    obj.TotalSeats =getControlValueN("ddltotalseats");
-        //    obj.TicketNo = getControlValueN("txtFare");
-        //   // alert(obj.WayBillDate);
-
-        $.ajax({
-            type: "POST",
-            url: '/WayBill/SaveWayBillEntry',
-            data: JSON.stringify(WayBillTicketModel),
-
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-                alert("Done");
-                setControlValue("txtStationFrom", "");
-                setControlValue("txtStationTo", "");
-                setControlValue("txtTktStart", "");
-                setControlValue("txtTktEnd", "");
-                setControlValue("txtAmount", "");
-                setControlValue("txtNoOfTicket", "");
-
-                showWaybllDetail(result);
-
-
-            },
-            error: OnError
-        });
+                },
+                error: OnError
+            });
+        }
     }
 
     function AddClick() {
@@ -1662,9 +1789,9 @@
             var len = data.length;
             var txt = "";
             if (len > 0) {
-
+                ;
                 for (var i = 0; i < len; i++) {
-                    debugger;
+                    ;
                     if (data[i].Iscoupon == true)
                     {
                        // couponamount = Number(couponamount) + Number(data[i].TicketFare);
@@ -1693,43 +1820,222 @@
                             + "<td>" + data[i].NoofTicket + "</td>"
                             + "<td>" + data[i].WayBillNo + "</td><td>" + data[i].WayBillSerialNo + "</td>"
                              + "<td>" + data[i].TicketFare + "</td></tr>"
+                            
 
 
                     }
 
 
                 }
-                debugger;
+                ;
                 setControlValue("ttlamt", totalamount);
                 if (txt != "") {
                     $("#EmployeesTable").append(txt);
-
+                    if (data[0].MiscPlus != 0) {
+                        var txtmic = "<tr><td></td><td></td>"
+                                + "<td></td><td></td>"
+                                + "<td></td>"
+                                + "<td></td><td>Misc(+)</td>"
+                                 + "<td>" + data[0].MiscPlus + "</td></tr>"
+                        $("#EmployeesTable").append(txtmic);
+                        totalamount = Number(totalamount) + Number(data[0].MiscPlus);
+                        setControlValue("ttlamt", totalamount);
+                    }
+                    if (data[0].MiscMinus != 0) {
+                        var txtmicminus = "<tr><td></td><td></td>"
+                              + "<td></td><td></td>"
+                              + "<td></td>"
+                              + "<td></td><td>Misc(-)</td>"
+                               + "<td>" + data[0].MiscMinus + "</td></tr>"
+                        $("#EmployeesTable").append(txtmicminus);
+                        totalamount = Number(totalamount) - Number(data[0].MiscMinus);
+                        setControlValue("ttlamt", totalamount);
+                    }
+                    if (data[0].GamanPatar != 0) {
+                        var gaman = "<tr><td></td><td></td>"
+                              + "<td></td><td></td>"
+                              + "<td></td>"
+                              + "<td></td><td>Gaman Patar</td>"
+                               + "<td>" + data[0].GamanPatra + "</td></tr>"
+                        $("#EmployeesTable").append(gaman);
+                        totalamount = Number(totalamount) - Number(data[0].GamanPatar);
+                        setControlValue("ttlamt", totalamount);
+                    }
                 }
             }
         }
     }
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
 
-    function saveCupponDetail() {
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .tooltip()
+
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.data("ui-autocomplete").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $(function () {
+        $("#ddlBusNumber_trans_to").combobox();
+        $("#ddlBusNumber_trans_from").combobox();
+        $("#ddlBusNumber").combobox();
+        $("#toggle").click(function () {
+            $("#ddlBusNumber").toggle();
+            $("#ddlBusNumber_trans_to").toggle();
+            $("#ddlBusNumber_trans_from").toggle();
+           
+        });
+
+
+
+
+    });
+  
+
+    function saveTranshipmentDetail() {
 
         var obj = new Object();
 
-        obj.WayBillBookNo = getControlValueN("txtCpnWaybillBook");
-        obj.WayBillSerialNo = getControlValueN("txtCpnWaybillSerial");
-        obj.CouponBookNo = getControlValueN("txtCpnBook");
-        obj.CouponSerialNo = getControlValueN("txtCpnSerial");
-        obj.StationFrom = getControlValueN("txtCpnStationFrom");
-        obj.StationTo = getControlValueN("txtCpnStationTo");
-        obj.Fare = getControlValueN("txtCpnFare");
-        obj.TotalAmount = getControlValueN("ttlamt");
+        obj.BusFrom = getControlValueN("ddlBusNumber_trans_from");
+        obj.BusTo = getControlValueN("ddlBusNumber_trans_to");
+        obj.WaybillFrom = getControlValueN("txtwaybillno_from");
+        obj.waybillserialfrom = getControlValueN("txtwaybillserial_from");
+        obj.WaybilTo = getControlValueN("txtwaybillno_to");
+        obj.waybillserialTo = getControlValueN("txtwaybillserial_to");
+        obj.AmountTo = getControlValueN("txtamount_to");
+        obj.AmountFrom = getControlValueN("txtamount_from");
+
         $.ajax({
             type: "POST",
-            url: '/WayBill/SaveWayBillCouponDetails',
+            url: '/WayBill/SaveTranshipmentDetails',
             data: JSON.stringify(obj),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                document.getElementById("btnClose").click();
-                showWaybllDetail(data);
+                if (data == true) {
+                    document.getElementById("btnClose").click();
+                    alert("Done");
+                }
+                else {
+                    alert("Error");
+                }
             },
             error: OnError
         });

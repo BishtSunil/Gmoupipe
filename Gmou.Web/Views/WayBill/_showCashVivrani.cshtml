@@ -108,9 +108,8 @@
                                     Date
                                 </td>
                                 <td>
-                                    <input type="text" id="txtFuelDate" class="datepicker txt100" />
-                                    <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
-                                </td>
+                                <input type="date" class=".datepicker" id="txtfuelDate" /> 
+                                                               </td>
                                 <td>
                                     Fuel Type
                                 </td>
@@ -134,13 +133,15 @@
                                 <td>
                                     <input type="text" id="txtChttNo" class="txt100" />
                                 </td>
+
                                 <td>
-                                    Others
+                                    Fuel Book 
                                 </td>
                                 <td>
-                                    <input type="text" id="txtOthers" class="txt100" />
+                                    <input type="text" id="txtBookno" class="txt100" />
                                 </td>
 
+                              
 
                             </tr>
 
@@ -177,11 +178,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Amount
+                                    Others
                                 </td>
                                 <td>
-                                    <input type="text" id="txtAmount" class="txt100" value="0" disabled="disabled" />
+                                    <input type="text" id="txtOthers" class="txt100" />
                                 </td>
+
                             </tr>
 
                         
@@ -248,6 +250,9 @@
         <button class="pull-right btn btn-primary" type="button"  onclick="location.href='@Url.Action("AddWaybill", "waybill")'">
             Add Waybill
         </button>
+        <button class="pull-right btn btn-primary" type="button" onclick="">
+            Send Message
+        </button>
 
 
     </div>
@@ -266,7 +271,7 @@
                     $.ajax({
                         type: "GET",
                         url: '/WayBill/UpdateVivraniAmount',
-                        data: { 'vivraniid': getControlValue("spnVivraniNumber"), 'amount':parseFloat(getControlValue("ttlamt")) },
+                        data: { 'vivraniid': getControlValue("spnVivraniNumber"), 'amount': parseFloat(getControlValue("txtextra")) },
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
@@ -304,7 +309,7 @@
                                 var txt = "";
                                 if (len > 0) {
                                     var totalfare = 0;
-
+                                    ;
                                     $("#spnVivraniNumber").text(data[0].VivraniNumber);
                                     for (var i = 0; i < len; i++) {
                                         totalfare = totalfare + data[i].Fare;
@@ -312,7 +317,7 @@
                                         txt += "<tr><td>" + data[i].BusNumber + "</td>"
                                                 + "<td>" + data[i].WayBillNo + "</td>"
                                                   + "<td>" + data[i].WayBillSerialNumber + "</td>"
-                                                + "<td>" + data[i].StationFrom + "</td><td>" + data[i].StationTo + "</td>"
+                                                + "<td>" + data[i].StationTo + "</td><td>" + data[i].StationFrom + "</td>"
                                                 + "<td>" + data[i].TicketNumber + "</td><td>" + data[i].TicketSeries + "</td>>"
                                                  + "<td>" + data[i].Fare + "</td></tr>"
                                     }
@@ -343,38 +348,74 @@
                                     }
                                 });
                             }
-                            function saveFuelDetail() {
+
+                           
+                            function saveVivraniDetails() {
+                                debugger;
                                 var fuelobj = new Object();
-                                fuelobj.FuelDate = getControlValueN("txtFuelDate");
-                                if (getControlValueN("txtOthers") != "") {
+                                fuelobj.VechileNumber= @Model.busId;
+                                fuelobj.date = getControlValueN("txtfuelDate");
+                                fuelobj.FuelStationID = getControlValueN("ddlPumpName");
+                                fuelobj.InsertedBy="";
+                                fuelobj.DieselBookno =getControlValueN("txtBookno");
+                                fuelobj.ChitNo = getControlValueN("txtChttNo");
+                                fuelobj. Comment="";
+                                if (getControlValueN("txtOthers") != null) {
                                     fuelobj.Fueltype = getControlValueN("txtOthers");
                                 }
                                 else {
                                     fuelobj.Fueltype = getControlValueN("ddlFuelType");
                                 }
 
-                                fuelobj.ChitNumber = getControlValueN("txtChttNo");
-                                fuelobj.Quantity = getControlValueN("txtFuelQuantity");
-                                fuelobj.FuelStation = getControlValueN("ddlPumpName");
-                                fuelobj.FuelPrice = getControlValueN("txtPrice");
-                                fuelobj.Amount = getControlValueN("txtAmount");
-                                fuelobj.FuelTypeOther = getControlValueN("txtOthers");
-                                obj.vivranifuel = fuelobj;
+                                
+                                fuelobj.FuelQuantity = getControlValueN("txtFuelQuantity");
+                               
+                                fuelobj.Price = getControlValueN("txtPrice");
+                                
+                                
                                 $.ajax({
                                     type: "POST",
-                                    url: '/WayBill/saveFuelDetail',
-                                    data: JSON.stringify(obj),
+                                    url: '/Fuel/saveFuelDetail1',
+                                    data: JSON.stringify(fuelobj),
 
                                     contentType: "application/json; charset=utf-8",
                                     dataType: "json",
                                     success: function (data) {
-                                        alert("Done");
+                                        if(data==true)
+                                        {
+                                            alert("Fuel Added Succesfully");
+                                            ClearFuel();
+                                        }
+                                        else
+                                            alert("Already Exist");
                                     }
                                 });
                             }
                             function showOtherExpences() {
                                 var url = "/WayBill/AddOtherExpences";
                                 window.location.href = url;
+                                
+                            }
+
+                            function ClearFuel()
+                            {
+                                
+                               
+                                setControlValue("txtfuelDate","");
+                                
+                               
+                               setControlValue("txtBookno","");
+                               setControlValue("txtChttNo","");
+                               
+                                
+                               fsetControlValue("txtOthers","");
+                                
+
+                                
+                               setControlValue("txtFuelQuantity","");
+                               
+                               setControlValue("txtPrice","");
+
                             }
 
             </script>

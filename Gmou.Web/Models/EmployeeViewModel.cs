@@ -24,6 +24,7 @@ namespace Gmou.Web.Models
         public int? OfficeID { get; set; }
         public SelectList lstEmployee { get; set; }
 
+        public SelectList lststation { get; set; }
     }
 
     public class BusesModel

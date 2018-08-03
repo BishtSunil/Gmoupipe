@@ -112,6 +112,12 @@
                             <td>
                                 @Html.DropDownListFor(m => m.OfficeID, Model.lstDepartment, new { @class = "txt100PValidBreak", id = "ddlDepartMent", accesskey="a", style = "width: 135px;" })
                             </td>
+                            <td>
+                                Fuel Station 
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(m => m.OfficeID, Model.lststation, new { @class = "txt100PValidBreak", id = "ddlFuelStation", accesskey = "a", style = "width: 135px;" })
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -196,7 +202,7 @@
                              if (len > 0) {
                                  for (var i = 0; i < len; i++) {
                                      if (data[i].SerialID) {
-                                         debugger;
+                                         ;
                                          txt += "<tr><td>" + data[i].FirstName + " " + data[i].MiddleName + " " + data[i].LastName + "</td><td>" + data[i].UserName + "</td>"
                                              + "<td>" + data[i].Password + "</td>" + "<td>" + data[i].DepartmentName + "</td></tr>";
                                      }
@@ -213,6 +219,40 @@
 
              });
 
+             function SaveEmployee()
+             {
+
+                 $(document).ready(function () {
+                     $('#dvLoading').fadeOut(2000);
+                     $.ajax({
+                         type: "POST",
+                         url: "/Admin/SaveEmployee",
+                         traditional: true,
+                         contentType: 'application/json; charset=utf-8',
+                         success: function (data) {
+                             if (data) {
+                                 var len = data.length;
+                                 var txt = "";
+                                 if (len > 0) {
+                                     for (var i = 0; i < len; i++) {
+                                         if (data[i].SerialID) {
+                                             ;
+                                             txt += "<tr><td>" + data[i].FirstName + " " + data[i].MiddleName + " " + data[i].LastName + "</td><td>" + data[i].UserName + "</td>"
+                                                 + "<td>" + data[i].Password + "</td>" + "<td>" + data[i].DepartmentName + "</td></tr>";
+                                         }
+                                     }
+                                     if (txt != "") {
+                                         $("#EmployeesTable").append(txt);
+
+                                     }
+                                 }
+                             }
+                         },
+                         error: function (data) { alert("error" + data) }
+                     });
+
+                 });
+             }
              function editEmployee(id) {
                  var url = "/admin/EditEmployee?empId=" + id;
                  window.location.href = url;
@@ -249,7 +289,19 @@
 
 
      $(document).ready(function () {
+         $("#ddlFuelStation").prop("disabled", true);
 
+
+         $("#ddlDepartMent").on("change", function () {
+            
+             ;
+             if (this.value == 5) {
+                 $("#ddlFuelStation").prop("disabled", false);
+             }
+             else {
+                 $("#ddlFuelStation").prop("disabled", true);
+             }
+             });
      });
  
      function chkPassword()

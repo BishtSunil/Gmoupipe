@@ -116,14 +116,14 @@
             success: function (data) {
 
                
-                debugger;
+                ;
                 if (data) {
                     var len = data.length;
                     var txt = "";
                     if (len > 0) {
                         for (var i = 0; i < len; i++) {
                             if (data[i].bus_id) {
-                                debugger;
+                                ;
                                 var regDate = new Date(parseInt(data[i].InsuranceValidity.substr(6))).format("dd/mm/yyyy")
                                 txt += "<tr><td>" + data[i].bus_number + "</td><td>" + data[i].bus_owner_name + "</td><td>" + regDate + "</td>"
                                     + "<td>" + data[i].InsuranceCompany + "</td>"

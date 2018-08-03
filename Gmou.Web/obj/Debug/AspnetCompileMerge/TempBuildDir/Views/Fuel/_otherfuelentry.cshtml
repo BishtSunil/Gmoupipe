@@ -166,7 +166,7 @@
 
     });
     function SaveCashMemoDetails() {
-        debugger;
+        ;
         var fueldata = {
             VechileNumber: getControlValueN("txtvechileno"),
             FuelStationID: getControlValueN("ddlpumplst"),
@@ -212,7 +212,7 @@
         });
     }
     function GetPrice(e) {
-        debugger;
+        ;
         var obj = new Object();
 
         obj.pumpid = $("#ddlpumplst").val();
@@ -236,7 +236,7 @@
         });
     }
     function GetAllOtherfuleDetails() {
-        debugger;
+        ;
 
         $.ajax({
             type: "GET",
@@ -406,11 +406,11 @@
 
 
     $(document).ready(function () {
-        debugger;
+        ;
         $("select[name='fueltype']").trigger("change");
         //GetPrice($("select[name='fueltype']").html());
         $('#txtfuelquantity').focusout(function () {
-            debugger;
+            ;
             GetCalculate(getControlValueN("txtfuelquantity"))
         });
     });
@@ -420,7 +420,7 @@
         //});
         //$('#txtfuelquantity').focusout(function ()
         //{
-        //    debugger;
+        //    ;
         //    GetCalculate(getControlValueN("txtfuelquantity"))
         //});
 

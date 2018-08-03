@@ -92,7 +92,7 @@
 
 
     AmCharts.ready(function () {
-        debugger;
+        ;
         // SERIAL CHART
         var chartData;
         $.ajax({
@@ -101,7 +101,7 @@
             traditional: true,
             contentType: 'application/json; charset=utf-8',
             success: function (chartdata) {
-                debugger;
+                ;
                 ShowChartData(chartdata);
             }
         });
@@ -109,7 +109,7 @@
     });
     function ShowChartData(chartData)
     {
-        debugger;
+        ;
         chart = new AmCharts.AmSerialChart();
         chart.dataProvider = chartData;
         chart.categoryField = "Dates";

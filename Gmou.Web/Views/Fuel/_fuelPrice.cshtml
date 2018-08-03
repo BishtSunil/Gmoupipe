@@ -125,14 +125,14 @@
 <script>
     var fuelprice;
     $(function () {
-        debugger;
+        ;
         GetFuelDetails();
         $(".datepicker").datepicker();
         
 
     });
     function SaveFuelDetails() {
-        debugger;
+        ;
         var obj = new Object();
         obj.FuelID = getControlValueN("ddlfuellst");
         obj.Price = getControlValueN("txtfuelprice");
@@ -155,7 +155,7 @@
     }
 
     function GetFuelDetails() {
-        debugger;
+        ;
     
         $.ajax({
             type: "GET",
@@ -191,7 +191,7 @@
         });
     }
     function editFuel(id) {
-        debugger;
+        ;
         var url = "/admin/EditFuel?fuelId=" +id;
         window.location.href = url;
     }

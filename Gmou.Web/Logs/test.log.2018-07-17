@@ -1,0 +1,144 @@
+2018-07-17 12:28:25,880 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16
+2018-07-17 12:28:35,871 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16
+2018-07-17 12:28:46,019 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16
+2018-07-17 12:31:23,935 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16
+2018-07-17 12:31:41,518 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16
+2018-07-17 12:31:52,541 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16
+2018-07-17 12:32:16,522 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16
+2018-07-17 12:32:35,422 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\Users\subis\Downloads\Expedia_documents\Expedia_documents\GMOUOnline_2018_latest\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:25e92ee9-2d52-41b4-9318-6b7ec9e887eb
+Error Number:2812,State:62,Class:16

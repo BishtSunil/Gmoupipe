@@ -27,5 +27,6 @@ namespace Gmou.DataRepository.EntityRepository
         public string station_to { get; set; }
         public System.DateTime vivrani_inserted_date { get; set; }
         public int emp_id { get; set; }
+        public Nullable<decimal> roundOffAmount { get; set; }
     }
 }

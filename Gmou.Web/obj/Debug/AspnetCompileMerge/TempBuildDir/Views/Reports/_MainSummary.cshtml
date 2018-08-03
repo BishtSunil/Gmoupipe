@@ -1,17 +1,51 @@
 ﻿@model Gmou.DomainModelEntities.MontlyBusReport
-
+@using System.Globalization
 <div>
-
     <div>
-@Html.Partial(@"~/Views\\Reports\_Partial_VivraniDetails.cshtml",Model.lstVivraniReports)
+        <span style="display: inline-block; width: 234px; background: #6af; vertical-align: top;">
+            <span style="font-size:larger">Garhwal Motor Owners Union LTD. kotdwar </span>
+            @{
+
+            String dt = DateTime.Today.Month.ToString("MMM", CultureInfo.InvariantCulture);
+
+
+            string month = String.Format("{0:MMMM}", DateTime.Now).ToString();
+
+            <span> Account Statement For the Period of @month</span>
+            }
+            </span>
+            <table>
+                <tr>
+                    <td>Bus Number</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.BusNumber</td>
+
+                    <td>Owner Name</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.OwnerName</td>
+                </tr>
+                <tr>
+                    <td>Bank Name</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.BankName</td>
+
+                    <td>Account Number</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.AccountName</td>
+                </tr>
+                <tr>
+                    <td> Dipo Name</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.Dipo</td>
+                </tr>
+            </table>
+    </div>
+    
+    <div>
+        @Html.Partial(@"~/Views\\Reports\_Partial_VivraniDetails.cshtml", Model.lstVivraniReports)
 
     </div>
 
     <div>
         @Html.Partial(@"~/Views\\Reports\_Partial_FuelDeatils.cshtml", Model.lstFuleReposrts)
 
-        <table >
-           <tr>
+        <table>
+            <tr>
                 <th>Particulars</th>
                 <th>Debit</th>
                 <th>Credit</th>
@@ -19,27 +53,37 @@
             <tbody>
                 <tr>
                     <td>Transipment</td>
-                    <td><input type="text" id="txtTransipment" class="txt100" /></td>
+                    <td>
+                        <input type="text" id="dbttxtTransipment" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
                     <td><input type="text" id="txtTransipment" class="txt100" /></td>
                 </tr>
                 <tr>
                     <td>WayBill (Correction)</td>
-                    <td><input type="text" id="txtwayCorrection" class="txt100" /></td>
+                    <td>
+                        <input type="text" id="dbttxtwayCorrection" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
                     <td><input type="text" id="txtwayCorrection" class="txt100" /></td>
                 </tr>
                 <tr>
                     <td>Fare Refund Dr.</td>
-                    <td><input type="text" id="txtFareRefund" class="txt100" /></td>
+                    <td>
+                        <input type="text" id="dbttxtFareRefund" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
                     <td><input type="text" id="txtFareRefund" class="txt100" /></td>
                 </tr>
                 <tr>
                     <td>Deficiency</td>
-                    <td><input type="text" id="txtDeficiency" class="txt100" /></td>
+                    <td>
+                        <input type="text" id="dbttxtDeficiency" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
                     <td><input type="text" id="txtDeficiency" class="txt100" /></td>
                 </tr>
                 <tr>
                     <td>Election Bill</td>
-                    <td><input type="text" id="txtElectionBill" class="txt100" /></td>
+                    <td>
+                        <input type="text" id="txtElectionBill" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
                     <td><input type="text" id="txtElectionBill" class="txt100" /></td>
                 </tr>
                 <tr>
@@ -55,11 +99,11 @@
                 <tr>
                     <td>Commission (4%)</td>
                     <td><input type="text" id="txtCommission" class="txt100" /></td>
-                     <td><input type="text" id="txtCommission" class="txt100" /></td>
+                    <td><input type="text" id="txtCommission" class="txt100" /></td>
                 </tr>
                 <tr>
                     <td>Owner's A/C (2%)</td>
-                    <td><input  type="text" id="txtOwner" class="txt100" /></td>
+                    <td><input type="text" id="txtOwner" class="txt100" /></td>
                     <td><input type="text" id="txtOwner" class="txt100" /></td>
                 </tr>
                 <tr>
@@ -196,13 +240,70 @@
                 </tr>
             </tbody>
         </table>
+        <table>
+
+            <tr>
+
+                <td> Debit</td>
+
+                <td>  Total Amount:<span id="totalamountVivrani" style="padding-left:62%; font-weight:bold"> </span></td>
+                <td> Credit</td>
+
+                <td>  Total Amount:<span id="totalAmountCredit" style="padding-left:62%; font-weight:bold"> </span></td>
+
+            </tr>
+        </table>
 
         <script>
+
+            function getMonth() {
+
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+
+                const d = new Date();
+                return monthNames[d.getMonth()]);
+            }
             $(document).ready(function () {
                 alert($('#amountVivrani').text().split(":")[1]);
                 $('#txtOwner').val("Hello");
-            });
 
+                $('#totalamountVivrani').text($('#amountVivrani').text());
+                $('#totalAmountCredit').text($('#amountFue').text());
+
+            });
+            var total = parseFloat($('#totalamountVivrani').text());
+            var prevvalue = 0;
+            function chkCoupon(e) {
+
+
+            }
+            function PreviousValue(e) {
+                debugger;
+                if (e.value != "") {
+                    prevvalue = parseFloat(e.value);
+                }
+            }
+            function Total(e) {
+
+
+                if (e.value != "") {
+                    if (prevvalue != 0) {
+                        total = total - prevvalue;
+                        prevvalue = 0;
+                    }
+
+                    total = total + parseFloat(e.value);
+                    $('#totalamountVivrani').text(total);
+
+                }
+                else {
+                    total = total - prevvalue;
+                    prevvalue = 0;
+                    $('#lblShowFare').text(total);
+                }
+            }
         </script>
     </div>
 </div>

@@ -220,7 +220,23 @@ namespace Gmou.DomainModelEntities
         public int      Fueltype        { get; set; }
         public decimal      FuelQuantity         { get; set; }
         public decimal  Price       { get; set; }
-      
+      public DateTime date { get; set; }
+    }
+
+    public class ChitFuelSMSDetails
+    {
+
+        public long Contact { get; set; }
+
+        public String OwnerName { get; set; }
+
+
+        public ChitFuelSMSDetails(long contact, string ownername)
+        {
+
+            this.Contact = contact;
+            this.OwnerName = ownername;
+        }
     }
     public class ChitFuel
     {
@@ -236,6 +252,8 @@ namespace Gmou.DomainModelEntities
         public int DieselBookno { get; set; }
         public int ChitNo { get; set; }
         public string Comment { get; set; }
+
+        public DateTime date { get; set; }
         public List<OtherFuel> listFuel { get; set; }
     }
     public class OtherFuel
@@ -707,4 +725,6 @@ namespace Gmou.DomainModelEntities
         public decimal? OtherQuantity { get; set; }
     }
 
+
+ 
 }

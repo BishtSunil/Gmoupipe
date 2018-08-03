@@ -54,6 +54,10 @@ namespace Gmou.DomainModelEntities
         public string JourneyTo { get; set; }
         public string WayBillNo { get; set; }
         public string WayBillSerialNo { get; set; }
+       
+        public decimal GamanPatar { get; set; }
+        public decimal MiscMinus { get; set; }
+        public decimal MiscPlus { get; set; }
         public int InsertedBy { get; set; }
         public int TotalAmount { get; set; }
         public List<TicketDetailsModel> ticketdetails{ get; set; }
@@ -72,6 +76,8 @@ namespace Gmou.DomainModelEntities
         public string TicketFare { get; set; }
         public int WayBillID { get; set; }
       public bool IsCoupon { get; set; }
+      
+       
 
     }
     public class GamanPatraModel
@@ -157,8 +163,13 @@ namespace Gmou.DomainModelEntities
 
             public bool Iscoupon { get; set; }
 
+            public int MiscPlus { get; set; }
+
+            public int MiscMinus { get; set; }
+
+            public int GamanPatar { get; set; }
             public WayBillTicketViewModel(int totalamount, int waybillserialno, int waybillno, int fare,
-                int noofticket, int ticketstart, int ticketend, string stationfrom, string stationto, bool iscoupon)
+                int noofticket, int ticketstart, int ticketend, string stationfrom, string stationto, bool iscoupon,int miscplus,int miscminus, int gamanpatar)
             {
 
 
@@ -175,6 +186,9 @@ namespace Gmou.DomainModelEntities
                 this.NoofTicket = noofticket;
                 this.TotalAmount = totalamount + fare;
                 this.Iscoupon = iscoupon;
+                this.MiscPlus = miscplus;
+                this.MiscMinus = miscminus;
+                this.GamanPatar = gamanpatar;
 
 
             }

@@ -12,7 +12,7 @@ namespace Gmou.Web.Controllers
     {
         //
         // GET: /Fuel/
-
+       
         public ActionResult Index()
         {
             return PartialView(@"~/Views\Fuel\_FuelDetail.cshtml");
@@ -54,9 +54,13 @@ namespace Gmou.Web.Controllers
         }
         public ActionResult FuelChitEntry()
         {
+         string username=   ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User.Username;
             var data = BusinessAccessLayer.BALFuel.BALGetAllFuel();
             var pumpfule = BusinessAccessLayer.BALFuel.BALGetAllStation();
               var bus = BusinessAccessLayer.BALFuel.BALGetBuses();
+         var stationdetails=   BusinessAccessLayer.BALSupport.BALGetFuelStationNo(username);
+            ViewBag.StationName = stationdetails.StationName;
+            ViewBag.StationID= stationdetails.StationID;
             FuelViewModel vivraniviewmodel = new FuelViewModel
             {
                 fueltype = new SelectList(data, "FuelType", "FuelName"),
@@ -77,8 +81,10 @@ namespace Gmou.Web.Controllers
         [HttpPost]
         public ActionResult GetFuelPrice(FuelPriceModel model)
         {
+            string username = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User.Username;
 
-            var data = BusinessAccessLayer.BALFuel.BALGetFuelPrice(model.pumpid, model.fuelid);
+            var stationdetails = BusinessAccessLayer.BALSupport.BALGetFuelStationNo(username);
+            var data = BusinessAccessLayer.BALFuel.BALGetFuelPrice(stationdetails.StationID, model.fuelid);
           
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -127,14 +133,34 @@ namespace Gmou.Web.Controllers
 
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
             data.InsertedBy = user.LoginEmpID;
-            var data_ = BusinessAccessLayer.BALFuel.BALInsertChit(data);
-
+            data.date= Helpers.GMOUHelper.ConvertTOIST(data.date);
+            if (!BusinessAccessLayer.BALFuel.BALCheckDuplicate(data.DieselBookno, data.ChitNo, Convert.ToInt32(data.VechileNumber)))
+            {
+                var data_ = BusinessAccessLayer.BALFuel.BALInsertChit(data);
+                var info = BusinessAccessLayer.BALFuel.BALGetOwnerFueliInfo(data.VechileNumber, data.FuelStationID, data.listFuel.Select(m => m.Fueltype).FirstOrDefault());
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+            // Helpers.SMSGateway.SendFuelSMS()
             //    string message =String.Format("Fuel Filled by your Vechile Book/Chit{0}-{1}. Quantity:{2} Price{3} at Kotdwar IOC on {4}",model.DieselBookno,model.ChitNo,model.FuelQuantity,model.Price,DateTime.Now.ToString());
             //    Helpers.SMSGateway.SendSMS(message);
             //}
-          
-            return Json(true, JsonRequestBehavior.AllowGet);
+
+
         }
+        [HttpPost]
+        public ActionResult saveFuelDetail1(ChitFuelModelInsert fuelobj)
+        {
+            if (!BusinessAccessLayer.BALFuel.BALCheckDuplicate(fuelobj.DieselBookno, fuelobj.ChitNo, Convert.ToInt32(fuelobj.VechileNumber)))
+            {
+                fuelobj.date = Helpers.GMOUHelper.ConvertTOIST(fuelobj.date);
+                var data_ = BusinessAccessLayer.BALFuel.BALInsertChitByVivrani(fuelobj);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+       
         [HttpGet]
         public ActionResult GetAllChitDetailsByUser(int usertype)
         {

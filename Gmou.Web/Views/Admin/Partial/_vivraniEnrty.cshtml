@@ -245,9 +245,7 @@
                                     Date
                                 </td>
                                 <td>
-                                    <input type="text" id="txtFuelDate" class="datepicker txt100" />
-                                    <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
-                                </td>
+                                <td><input type="date" class=".datepicker" id="txtfuelDate" /> </td>                              
                                 <td>
                                     Fuel Type
                                 </td>
@@ -608,8 +606,8 @@
             <script type="text/javascript">
 
                 $(function () {
-                    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
-
+                   
+                        $(".datepicker").datepicker();
                 });
                 function DateTimeFunction(id) {
                     var dt = getControlValueN(id);
@@ -735,9 +733,9 @@
                         obj.TotalAmount = getControlValueN("ttlamt");
 
                         var fuelobj = new Object();
+                        debugger;
 
-
-                        fuelobj.FuelDate = getControlValueN("txtFuelDate");
+                        fuelobj.FuelDate = getControlValueN("txtfuelDate");
                         if (getControlValueN("txtOthers") != "") {
                             fuelobj.Fueltype = getControlValueN("txtOthers");
                         }

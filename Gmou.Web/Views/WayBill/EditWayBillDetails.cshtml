@@ -1,0 +1,248 @@
+﻿
+@using System.Web.Helpers
+
+@model IEnumerable<Gmou.DomainModelEntities.WayBillEditModel>
+
+<div id="ajaxgrid">
+    @{
+        var grid = new System.Web.Helpers.WebGrid(Model, ajaxUpdateContainerId: "ajaxgrid");
+
+        IEnumerable<WebGridColumn> cols =
+            new List<WebGridColumn> {
+                new WebGridColumn{
+                    Format = @<text>
+        <a href='#' class="display edit-btn">Edit</a>
+        <a href="#" class="edit save-btn">Save</a>
+        <a href="#" class="edit cancel-btn">Close</a>
+        <a href="#" class="display delete-btn">Delete</a>
+                    </text>
+
+
+        },
+                new WebGridColumn{
+                    Header="ID",
+                    Format = @<text>
+        <span class="display"><label id="lblID">@item.ViviraniSerial</label></span>
+        <input type="text" id="inserialID" value="@item.ViviraniSerial" class="edit" readonly="true" />
+                    </text>
+                },
+                new WebGridColumn{
+                    Header="Vivrani Number",
+                    Format = @<text>
+        <span class="display"><label id="lblcashvivrani">@item.Cash_Vivrani</label></span>
+        <input type="text" id="inCashVivrani" value="@item.Cash_Vivrani" class="edit" />
+                    </text>
+                },
+                new WebGridColumn{
+                    Header="Amount",
+                    Format = @<text>
+        <span class="display"><label id="lblamount">@item.Amount</label></span>
+        <input type="text" id="inAmount" value="@item.Amount" class="edit" />
+                    </text>
+
+                },
+             new WebGridColumn{
+                    Header="WayBill Number",
+                    Format = @<text>
+        <span class="display"><label id="lblwaybillno">@item.WayBillNo</label></span>
+        <input type="text" id="inWayBillNumber" value="@item.WayBillNo" class="edit" />
+                    </text>
+
+                },
+                 new WebGridColumn{
+                    Header="WayBill Serial Number",
+                    Format = @<text>
+        <span class="display"><label id="lblwaybillno">@item.WayBillSerialNo</label></span>
+        <input type="text" id="inWayBillNumber" value="@item.WayBillSerialNo" class="edit" />
+                    </text>
+
+                }, new WebGridColumn{
+                    Header="Round Off",
+                    Format = @<text>
+        <span class="display"><label id="lblroundoff">@item.RoundOff</label></span>
+        <input type="text" id="inRoundOff" value="@item.RoundOff" class="edit" />
+                    </text>
+
+                }
+            };
+    }
+</div>
+
+@grid.GetHtml(columns: cols, rowStyle: "oddRowStyle", alternatingRowStyle: "evenRowStyle")
+
+<script type="text/javascript">
+    $(function () {
+
+        var tfootAdd = "<tr class='tfootrow'>" +
+                            "<td> " +
+                                "<a href='#' class='display ins-btn' >Insert</a>" +
+                                "<a href='#' class='edit inssave-btn'>Save</a>" +
+                                "<a href='#' class='edit cancel-btn'>Close</a>" +
+                            "</td>" +
+                            "<td>" +
+                                "<span class='display'/>" +
+                                "<input type='text' id='inserialID' value='' class = 'edit'/> " +
+                                "</td>" +
+                            "<td>" +
+                                "<span class='display'/>" +
+                                "<input type='text' id='inCashVivrani' value='' class = 'edit'/>" +
+                            "</td>" +
+                            "<td>" +
+                                "<span class='display'/>" +
+                                "<input type='text' id='inAmount' value='' class = 'edit'/>" +
+                            "</td>" +
+                        "</tr>"
+        $("table tfoot tr:first").before(tfootAdd);
+
+        $('.edit').hide();  // default is display
+
+        $('.ins-btn, .edit-btn, .cancel-btn').on("click", function () {
+            var tr = $(this).parents('tr:first');
+            tr.find('.edit, .display').toggle();
+        });
+
+        $('.inssave-btn').on("click", function () {
+            var tr = $(this).parents('tr:first');
+            var name = tr.find("#inName").val();
+            var id = tr.find("#inID").val();
+            var email = tr.find("#inEmail").val();
+            var isSuccess = -1;
+
+            var Student =
+            {
+                "ID": id,
+                "Name": name,
+                "email": email
+            };
+
+            $.ajax({
+
+                url: '/Home/InsertData/',       // HomeController and InsertData method
+
+                data: JSON.stringify(Student),
+
+                type: 'POST',
+
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (result) {
+                    isSuccess = result;
+                    debugger;
+
+                },
+                error: function(result){
+                    isSuccess = result;
+                }
+
+            }).done(function () {
+                if (isSuccess == "1") {           // Successfully saved
+                    tr.find('.edit, .display').toggle();
+                    alert("Successfully Saved");
+                    location.reload();      // refresh the page
+                }
+                else {                      // Data Error
+                    alert("Error. Please, check the data");
+                }
+            });
+        });
+
+        $('.save-btn').on("click", function () {
+            debugger;
+            var tr = $(this).parents('tr:first');
+            var amount = tr.find("#inAmount").val();
+            var id = tr.find("#inserialID").val();
+            var roundoff = tr.find("#inRoundOff").val();
+            var cashvivrani = tr.find('#inCashVivrani').val();
+            var isSuccess = -1;
+
+            tr.find("#lblamount").text(amount);
+            tr.find("#lblroundoff").text(roundoff);
+
+            var model = new Object();
+
+            model.VivraniID = id;
+
+            model.Amount = amount;
+            model.roundOff = roundoff;
+            model.vivraninumber = cashvivrani;
+
+
+            $.ajax({
+
+                url: '/WayBill/SaveData',
+
+                data: JSON.stringify(model),
+
+                type: 'POST',
+
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (result) {
+                    isSuccess = result;
+
+                },
+                error: function (result) {
+                    isSuccess = result;
+                }
+
+            }).done(function () {
+                debugger;
+                if (isSuccess == "1") {           // Successfully saved
+                    tr.find('.edit, .display').toggle();
+                    alert("Successfully Saved");
+                }
+                else {                      // Data Error
+                    alert("Error. Please, check the data");
+                }
+            });
+
+        });
+
+
+        $('.delete-btn').on("click", function () {
+
+
+            var id = tr.find("#inserialID").val();
+            var email = tr.find("#inEmail").val();
+            var isSuccess = -1;
+
+            var Student =
+            {
+                "ID": id,
+                "Name": name,
+                "email": email
+            };
+
+            $.ajax({
+
+                url: '/WayBill/DeleteData/',
+
+                data: JSON.stringify(Student),
+
+                type: 'POST',
+
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (result) {
+                    isSuccess = result;
+
+                },
+                error: function (result) {
+                    isSuccess = result;
+                }
+
+            }).done(function () {
+                if (isSuccess == "1") {           // Successfully Deleted
+                    alert("Successfully Deleted");
+                    location.reload();      // refresh the page
+                }
+                else {                      // Data Error
+                    alert("Error. Please, check the data");
+                }
+
+            });
+
+
+        });
+    });
+</script>

@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 
 function loadMerchantAccount() {
-    debugger;
+    ;
         $.ajax({
             type: 'GET',
             data: {},

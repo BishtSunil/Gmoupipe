@@ -1,0 +1,34 @@
+2017-07-25 12:12:46,683 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'sp_InsertwayBillMaster' expects parameter '@journeyfrom', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in C:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in C:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 180
+ClientConnectionId:75785e85-17fb-40b8-848e-fdc033ef1457
+Error Number:201,State:4,Class:16
+2017-07-25 12:22:58,613 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'sp_InsertwayBillMaster' expects parameter '@journeyfrom', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in C:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in C:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in C:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 180
+ClientConnectionId:678ef41a-0106-4c95-a055-17482c09bd5c
+Error Number:201,State:4,Class:16

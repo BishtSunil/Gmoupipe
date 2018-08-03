@@ -28,5 +28,11 @@ namespace Gmou.BusinessAccessLayer
 
           return ReportsRepository.GetVivraniReports(id, dt.Month, dt.Year);
       }
+
+        public static FuelStationModel BALGetFuelStationNo(string UserName)
+        {
+            return FuelRepository.GetFuelAdmin(UserName);
+
+        }
     }
 }

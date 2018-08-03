@@ -42,16 +42,17 @@ namespace Gmou.DataRepository
 
         }
 
-        public static IEnumerable<VivraniReport> GetViraniList(int busid, DateTime date)
+        public static IEnumerable<VivraniReportUpdated> GetViraniList(int busid, DateTime date,DateTime enddate)
         {
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
-                using (var cmd = new SqlCommand("sp_GetVivraniByDateandBus", conn))
+                using (var cmd = new SqlCommand("sp_GetVivraniByDateandBus1", conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@busid", busid);
-                    cmd.Parameters.AddWithValue("@vivranidate", date);
+                    cmd.Parameters.AddWithValue("@vivranistartdate", date);
+                    cmd.Parameters.AddWithValue("@vivranisenddate", enddate);
 
                     conn.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
@@ -59,19 +60,50 @@ namespace Gmou.DataRepository
                     {
                         // cash_vivrani_id,waybillno,waybillserialno,ticket_from,ticket_to,station_from,station_to,amount,vivrani_inserted_date
                         //int vivraniid, int wayserialnumb, int waybillnumber, int ticketfrom, int ticketto,string stationfrom, string stationto, decimal amount
-                        yield return new VivraniReport(
+                        yield return new VivraniReportUpdated(
                               Convert.ToInt32((dr["cash_vivrani_id"])),
 
-                          Convert.ToInt32((dr["waybillno"])),
-                             Convert.ToInt32((dr["waybillserialno"])),
+                          Convert.ToDecimal((dr["WayBillAmount"])),
+                             Convert.ToDecimal((dr["VivraniAmount"])),
 
-                                 Convert.ToInt32((dr["ticket_from"])),
-                                 Convert.ToInt32(dr["ticket_to"]),
-                                  (dr["station_from"]).ToString(),
-                         (dr["station_to"]).ToString(),
-                            Convert.ToDecimal((dr["amount"])),
+                                 Convert.ToDecimal((dr["RoundOff"]))
+                                );
+
+
+                    }
+                    conn.Close();
+
+                }
+            }
+
+        }
+
+        public static IEnumerable<VivraniAllReportUpdated> GetAllViraniList( DateTime date, DateTime enddate)
+        {
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetVivraniByDateandBus1_all", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                   
+                    cmd.Parameters.AddWithValue("@vivranistartdate", date);
+                    cmd.Parameters.AddWithValue("@vivranisenddate", enddate);
+
+                    conn.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        // cash_vivrani_id,waybillno,waybillserialno,ticket_from,ticket_to,station_from,station_to,amount,vivrani_inserted_date
+                        //int vivraniid, int wayserialnumb, int waybillnumber, int ticketfrom, int ticketto,string stationfrom, string stationto, decimal amount
+                        yield return new VivraniAllReportUpdated(
+                              Convert.ToInt32((dr["cash_vivrani_id"])),
+
                           Convert.ToDateTime((dr["vivrani_inserted_date"])),
-                        dr["bus_number"].ToString());
+                             (dr["bus_number"]).ToString(),
+
+                                 Convert.ToDecimal((dr["VivraniAmount"]))
+                                );
 
 
                     }
@@ -102,6 +134,7 @@ namespace Gmou.DataRepository
             using (var item = new GMOUMISEntity())
             {
 
+
                 lstreports = (from r in item.tmp_cashvivrani
                               where r.bus_number == busnumber && r.vivrani_inserted_date.Month == month && r.vivrani_inserted_date.Year == year
                               group r by new
@@ -115,8 +148,10 @@ namespace Gmou.DataRepository
                               {
                                   VivraniNumber = g.Key.cash_vivrani_id,
                                   VivraniDate = g.Key.vivrani_inserted_date,
-                                  Amount = g.Sum(m => m.amount)
+                                  Amount = g.Sum(m => m.amount) + ( g.Max(k=>k.roundOffAmount)==null?0:g.Max(k=>k.roundOffAmount))
 
+                                 
+                                  
                               }).ToList();            //  lstreports = item.tmp_cashvivrani.Where(m => m.bus_number == busnumber && m.vivrani_inserted_date.Month == month && m.vivrani_inserted_date.Year == year).GroupBy(m => m.cash_vivrani_id).Select(ml => new VivraniReports { Amount = ml.Sum(c => c.amount),  VivraniNumber = ml.First().cash_vivrani_id }).ToList();
 
                 montllybusreoprt.lstVivraniReports = lstreports;
@@ -148,17 +183,24 @@ namespace Gmou.DataRepository
                                 join bd in item.tblBusDetails on b.busid equals bd.bus_id
                                 join bo in item.tblBusOwnerDetails on b.busid equals bo.bus_id
                                 join bins in item.tblBusInsuranceDeatils on b.busid equals bins.bus_id
+                               join ba in  item.tbl_backDepo on b.busid equals ba.busid
 
-                                where b.busid == 205
+                                where b.busid == busnumber
                                 select new MontlyBusReport
                                 {
                                     BusNumber = b.bus_number,
-                                    AccountName = "",
-                                    AccountNumber = "",
-                                    BankName = "",
+                                    AccountName = ba.bankaccount,
+                                    AccountNumber =ba.bankname,
+                                    BankName = ba.bankname,
+                                    OwnerName= bo.bus_owner_name,
                                     Dipo = item.tblSets.Where(m => m.setid == bd.bus_operating_center).Select(m => m.station).FirstOrDefault()
                                 }).FirstOrDefault();
                     montllybusreoprt.BusNumber = data.BusNumber;
+                    montllybusreoprt.OwnerName = data.OwnerName;
+                    montllybusreoprt.AccountName = data.AccountName;
+                    montllybusreoprt.BankName = data.BankName;
+                    montllybusreoprt.AccountName = data.AccountName;
+                    montllybusreoprt.AccountNumber = data.AccountNumber;
                     montllybusreoprt.Dipo = data.Dipo;
                 }
             }
@@ -296,8 +338,91 @@ namespace Gmou.DataRepository
         }
 
 
+        public static IEnumerable<FuelReportDateWise> DALGetFuelReportDateWide(DateTime startdate , DateTime enddate)
+        {
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetFuelReportsbyDates", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@startDate", startdate);
+                    cmd.Parameters.AddWithValue("@endDate", enddate);
+                    conn.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        // cash_vivrani_id,waybillno,waybillserialno,ticket_from,ticket_to,station_from,station_to,amount,vivrani_inserted_date
+                        //int vivraniid, int wayserialnumb, int waybillnumber, int ticketfrom, int ticketto,string stationfrom, string stationto, decimal amount
+                        yield return new FuelReportDateWise(
+                             (dr["StationName"].ToString()),
+                        
+                         
+                         (dr["FuelType"].ToString()),
+                          (Convert.ToDecimal(dr["Total"])));
+
+                    }
+                    conn.Close();
+                }
+            }
+        }
 
 
+
+        public static IEnumerable<BusPerformanceReport> DALGetBusPerformance(DateTime startdate,string order, int range)
+        {
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetBusPerformance", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@sdate", startdate);
+                    cmd.Parameters.AddWithValue("@order", order);
+                    cmd.Parameters.AddWithValue("@range", range);
+                    conn.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        // cash_vivrani_id,waybillno,waybillserialno,ticket_from,ticket_to,station_from,station_to,amount,vivrani_inserted_date
+                        //int vivraniid, int wayserialnumb, int waybillnumber, int ticketfrom, int ticketto,string stationfrom, string stationto, decimal amount
+                        yield return new BusPerformanceReport(
+                             (dr["BusNumber"].ToString()),
+                             (Convert.ToDecimal(dr["VivraniAmount"])),
+                             (Convert.ToDecimal(dr["FuelAmount"])),
+
+
+                          (Convert.ToDecimal(dr["Diff"])));
+
+                    }
+                    conn.Close();
+                }
+            }
+        }
+
+
+        public static bool DALInsertRaodWarrent(RoadWarrent model)
+        {
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_InsertRoadWarrent", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@bus_id", model.BusNumber);
+                    cmd.Parameters.AddWithValue("@amount", model.Amount);
+                    cmd.Parameters.AddWithValue("@inserttedby", model.InsertedBy);
+                    cmd.Parameters.AddWithValue("@datetime", model.InsertDate);
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            return true;
+        }
 
     }
 }
