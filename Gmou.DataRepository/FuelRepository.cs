@@ -946,7 +946,39 @@ namespace Gmou.DataRepository
                 }
             }
         }
+        public static void DALUpdateFuelEdit(UpdateEditFuelModel model)
+        {
 
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_UpdateEditFuel", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("fuelID", model.FuelID);
+                    cmd.Parameters.AddWithValue("diselbookno", model.ChitNo);
+                    cmd.Parameters.AddWithValue("dieselchino", model.ChitSerialNo);
+                    cmd.Parameters.AddWithValue("price", model.Price);
+                    cmd.Parameters.AddWithValue("quantity", model.Quantity);
+                    cmd.Parameters.AddWithValue("stationid", model.StationID);
+
+                 
+                    SqlDataReader dr;
+                    conn.Open();
+                    try
+                    {
+                        var dt = cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+
+                }
+            }
+        }
         public static IEnumerable< FuelStockReport> GetStocksReport(int pumpid)
         {
 
@@ -983,6 +1015,50 @@ namespace Gmou.DataRepository
                                   );
                         }
                     
+
+                }
+            }
+        }
+
+        public static IEnumerable<FuelEditDetailsModel> DALGetFuelEdit( EditFuelModelViewModel model)
+        {
+
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_GetFuelEditDetails", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("busid", model.BusID);
+                    cmd.Parameters.AddWithValue("diselbookno", model.ChitNo);
+                    cmd.Parameters.AddWithValue("dieselchino", model.ChitSerialNo);
+
+                    cmd.Parameters.AddWithValue("stationid", model.StationFuleID);
+
+
+
+
+                    SqlDataReader dr;
+                    conn.Open();
+
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+
+                        yield return new FuelEditDetailsModel(
+
+
+                              (Convert.ToInt32(dr["chitfuelid"])),
+                                 (Convert.ToInt32(dr["fueltype"])),
+                                    (Convert.ToDecimal(dr["quantity"])),
+                                        (Convert.ToDecimal(dr["price"])),
+                                         (Convert.ToInt32(dr["dieselbookno"])),
+                                          (Convert.ToInt32(dr["dieselchitno"]))
+                                          );
+
+
+                              
+                    }
+
 
                 }
             }

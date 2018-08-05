@@ -330,6 +330,7 @@ namespace Gmou.DataRepository.CustomRepository
                 {
                     var resulytblbus = item.tblBus.Single(c => c.busid == model.busId);
                     resulytblbus.setid = model.setid;
+                    resulytblbus.bus_number = model.bus_number;
 
 
 

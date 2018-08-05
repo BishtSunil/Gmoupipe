@@ -63,7 +63,7 @@ namespace Gmou.Web.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AddOtherExpences()
+        public ActionResult AddOtherExpences(int cashid)
         {
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
             Vivirani model = new Vivirani { UserID = user.LoginEmpID, DepartmentId = user.DepartmentID, IsSubmitted = false };
@@ -72,9 +72,9 @@ namespace Gmou.Web.Controllers
             {
 
                 bus = new SelectList(data.bus, "BusID", "BusNumber"),
-                VivraniSerialNumber = data.CashSheetSerialNumber
+                VivraniSerialNumber = cashid
             };
-            ViewBag.Cashserialnumber = data.CashSheetSerialNumber;
+            ViewBag.Cashserialnumber = cashid;
             return PartialView(@"~/Views\Admin\Partial\_otherExpences.cshtml", vivraniviewmodel);
 
         }
@@ -257,11 +257,24 @@ namespace Gmou.Web.Controllers
             var _vivraniid = result.Select(k => k.VivraniNumber).FirstOrDefault();
             var busnumber = result.Select(k => k.BusNumber).FirstOrDefault().ToString();
 
-            var data = WayBillBAL.BALGetOwnerVivraniInfo(busnumber);
-            Helpers.SMSGateway.SendVivraniSMS(amount, data.Contact, data.OwnerName, busnumber, data.TotalAmount, _vivraniid);
+           // var data = WayBillBAL.BALGetOwnerVivraniInfo(busnumber);
+           // Helpers.SMSGateway.SendVivraniSMS(amount, data.Contact, data.OwnerName, busnumber, data.TotalAmount, _vivraniid);
             ViewBag.VivraniID = _vivraniid;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public ActionResult SendSMS(int vivraninumber, int busid)
+        {
+            var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+            var empid = user.LoginEmpID;
+           
+
+            var data = WayBillBAL.BALGetOwnerVivraniInfo(busid, vivraninumber);
+            Helpers.SMSGateway.SendVivraniSMS(data.TotalAmount, data.Contact, data.OwnerName, data.Busnumber, data.TotalAmount, vivraninumber.ToString());
+           // ViewBag.VivraniID = _vivraniid;
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult SaveCashSheetSummary(CashSheetSummary model)
         {
@@ -294,6 +307,14 @@ namespace Gmou.Web.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult GenerateCashSheet(int CashID)
+        {
+            var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+            var empid = user.LoginEmpID;
+          var data=  BusinessAccessLayer.WayBillBAL.BALInsertChashMaster(empid, CashID);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GamanPatra()
         {
 

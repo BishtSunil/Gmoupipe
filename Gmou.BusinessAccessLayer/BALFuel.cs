@@ -356,6 +356,20 @@ namespace Gmou.BusinessAccessLayer
             return WayBillRepository.DALGetOwnerFueliInfo(busID, fueltype,staion);
 
         }
+        public static List<FuelEditDetailsModel> BALGetFuelEdit(EditFuelModelViewModel model)
+        {
+
+            return FuelRepository.DALGetFuelEdit(model).ToList();
+
+        }
+        public static void BALUpdateFuelEdit(UpdateEditFuelModel model)
+        {
+
+             FuelRepository.DALUpdateFuelEdit(model);
+
+        }
+        
+
         private static SaleReportFinal SalesReportCreation(tbl_finalStock model)
         {
             SaleReportFinal srf = new SaleReportFinal();

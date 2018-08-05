@@ -849,7 +849,7 @@ namespace Gmou.DataRepository
                     cmd.Parameters.AddWithValue("waybillserialno", model.WayBillSerialNo);
 
 
-                    cmd.Parameters.AddWithValue("waybilldate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("waybilldate", model.InsertedDate);
                     cmd.Parameters.AddWithValue("insertedby", model.InsertedBy);
 
                     cmd.Parameters.AddWithValue("gamanpatar", model.GamanPatar);
@@ -942,7 +942,7 @@ namespace Gmou.DataRepository
                 {
 
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("waybilldate", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("waybilldate", DateTime.Now);
                     cmd.Parameters.AddWithValue("empId", empid);
                     cmd.Parameters.AddWithValue("bus_id", busid);
                     cmd.Parameters.AddWithValue("vivraniid", vivraniid);
@@ -951,7 +951,7 @@ namespace Gmou.DataRepository
                     try
                     {
                         conn.Open();
-                        cmd.ExecuteScalar();
+                      var dat=  cmd.ExecuteScalar();
                         conn.Close();
                         return 1;
 
@@ -978,7 +978,7 @@ namespace Gmou.DataRepository
                 using (var cmd = new SqlCommand("sp_ShowCashVivrani", conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("waybilldate", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("waybilldate", DateTime.Now);
                     cmd.Parameters.AddWithValue("empId", empid);
                     cmd.Parameters.AddWithValue("bus_id", busid);
                     SqlDataReader dr;
@@ -1228,7 +1228,7 @@ namespace Gmou.DataRepository
         }
 
 
-        public static OwnerVivraniSMSInfo DALGetOwnerVivraniInfo(string busnumber)
+        public static OwnerVivraniSMSInfo DALGetOwnerVivraniInfo(int busnumber, int vivraninumber)
         {
 
             OwnerVivraniSMSInfo gamamodel = new OwnerVivraniSMSInfo(); ;
@@ -1238,6 +1238,7 @@ namespace Gmou.DataRepository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("busnumber", busnumber);
+                    cmd.Parameters.AddWithValue("vivraninumber", vivraninumber);
 
                     conn.Open();
                     SqlDataReader rd = cmd.ExecuteReader();
@@ -1249,8 +1250,8 @@ namespace Gmou.DataRepository
                             // contact bigint, OwnerName nvarchar(100), TotalAmount mone
                             Contact = Convert.ToInt64(rd["contact"]),
                             OwnerName = (rd["OwnerName"]).ToString(),
-                            TotalAmount = Convert.ToDecimal(rd["TotalAmount"])
-
+                            TotalAmount = Convert.ToDecimal(rd["TotalAmount"]),
+                            Busnumber = rd["busnumber"].ToString()
                         };
                     }
                     return gamamodel;
@@ -1435,6 +1436,31 @@ namespace Gmou.DataRepository
             return count;
         }
 
+        public static bool DALInsertChashMaster(int empid, int cashid)
+        {
+
+            
+            using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("sp_InsertCashMaster", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("empid", empid);
+                    cmd.Parameters.AddWithValue("cashid", cashid);
+                    
+                    conn.Open();
+               int data=     cmd.ExecuteNonQuery();
+                    conn.Close();
+                    if (data > 0)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            }
+
+        }
         public static bool CheckIfWayBillCreated(int busid, int waybillno, int waybillserialno)
         {
 

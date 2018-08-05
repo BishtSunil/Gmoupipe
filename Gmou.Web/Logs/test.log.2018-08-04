@@ -1,0 +1,43 @@
+2018-08-04 01:21:59,817 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:e870bce9-1043-44a8-8a45-172ff1431116
+Error Number:2812,State:62,Class:16
+2018-08-04 01:31:12,235 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'sp_CheckWayBillAlreadyCreated'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1451
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 233
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 198
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:9f8a002a-b0e6-46bb-8f69-31139e6d9943
+Error Number:2812,State:62,Class:16
+2018-08-04 17:14:33,357 ERROR Gmou.Web.Controllers.WayBillController - System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Gmou.DataRepository.WayBillRepository.InsertTicketDetails(Int32 waybillID, List`1 model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 931
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 184

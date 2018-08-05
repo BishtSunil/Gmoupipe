@@ -244,13 +244,13 @@
         <div style="height:10px"></div>
        
        
-        <button class="pull-right btn btn-primary" type="button" style="margin-left: 5px;" onclick="location.href='@Url.Action("AddOtherExpences", "waybill")'">
+        <button class="pull-right btn btn-primary" type="button" style="margin-left: 5px;" onclick="CashSheet();"@*location.href='@Url.Action("AddOtherExpences", "waybill")'"*@>
             Genrate Cash Sheet
         </button>&nbsp;&nbsp;
-        <button class="pull-right btn btn-primary" type="button"  onclick="location.href='@Url.Action("AddWaybill", "waybill")'">
+        <button class="pull-right btn btn-primary" type="button"  onclick= "demohit();">@*//"location.href='@Url.Action("AddWaybill", "waybill")'">*@
             Add Waybill
         </button>
-        <button class="pull-right btn btn-primary" type="button" onclick="">
+        <button class="pull-right btn btn-primary" type="button" onclick="SendSMS();">
             Send Message
         </button>
 
@@ -264,6 +264,82 @@
  
     
             <script type="text/javascript">
+                function demohit() {
+                    $.confirm({
+                        text: "क्या आप SMS भेजना चाहते हैं??",
+                        confirm: function (button) {
+                            alert("oh!! Yes oh yes!!!");
+                            SendSMSToOwnwer();
+                        },
+                        cancel: function (button) {
+                            window.location.href = '/waybill/AddWaybill'
+                        }
+                    });
+                   
+                  
+                }
+                function SendSMSToOwnwer() {
+
+                    var vivraninumber = $('#spnVivraniNumber').text();
+                    $.ajax({
+                        type: "GET",
+                        url: '/WayBill/SendSMS?&vivraninumber=' + vivraninumber+'&busid='+ @Model.busId,
+                        //data: { 'busId': busId},
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data == true) {
+                                //window.location.href = '/waybill/AddOtherExpences?&cashid=' + vivraniid
+                                alert("SMS sent");
+                            }
+                        },
+                        error: OnError
+                    });
+
+                }
+                function CashSheet() {
+                    $.confirm({
+                        text: '<table><tr><td>कृपया यहां कैशशीट संख्या दर्ज करें</td><td>  <input type="text" id="txtvivraniNo" /></td></tr></table>',
+                        confirm: function (button) {
+                           genrateCasVivraani(getControlValue("txtvivraniNo"));
+                        },
+                        cancel: function (button) {
+
+                        }
+                    });
+
+
+                }
+
+                function genrateCasVivraani(vivraniid) {
+                    ;
+                    var busId = getControlValue("ddlBusNumber");
+                    $.ajax({
+                        type: "GET",
+                        url: '/WayBill/GenerateCashSheet?&cashid=' + vivraniid,
+                        //data: { 'busId': busId},
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data == true) {
+                                window.location.href = '/waybill/AddOtherExpences?&cashid=' + vivraniid
+                            }
+                        },
+                        error: OnError
+                    });
+                }
+                function SendSMS() {
+                    $.confirm({
+                        text: "How are you HEri!!",
+                        confirm: function (button) {
+                            alert("oh!! Yes oh yes!!!");
+                        },
+                        cancel: function (button) {
+                            alert("oh!! no oh no!!!");
+                        }
+                    });
+
+                }
                 function calcTotalAmount() {
                     var calcAmount = parseFloat(getControlValue("txtextra")) + parseFloat(getControlValue("ttlamt"));;
 

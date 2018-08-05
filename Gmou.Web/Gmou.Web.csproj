@@ -1090,6 +1090,9 @@
     <Content Include="Views\Reports\_busPerformance.cshtml" />
     <Content Include="Views\Result\Demo.cshtml" />
     <Content Include="Views\Transaction\RoadWarrent.cshtml" />
+    <Content Include="Views\Fuel\EditFuel.cshtml" />
+    <Content Include="Views\Fuel\EditFuelData.cshtml" />
+    <Content Include="Views\Fuel\Partial1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

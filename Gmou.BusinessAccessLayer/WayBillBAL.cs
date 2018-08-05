@@ -164,6 +164,12 @@ namespace Gmou.BusinessAccessLayer
             return WayBillRepository.ShowCashVivrani(empid, busid).ToList();
 
         }
+        public static bool BALInsertChashMaster(int empid, int cashid)
+        {
+
+            return WayBillRepository.DALInsertChashMaster(empid, cashid);
+
+        }
 
         public static bool BALSaveCashSheetSummary(CashSheetSummary model)
         {
@@ -205,10 +211,10 @@ namespace Gmou.BusinessAccessLayer
 
             return WayBillRepository.GetRouteName(prefix);
         }
-        public static OwnerVivraniSMSInfo BALGetOwnerVivraniInfo(string pumpid)
+        public static OwnerVivraniSMSInfo BALGetOwnerVivraniInfo(int busid, int vivraniid)
         {
 
-            return WayBillRepository.DALGetOwnerVivraniInfo(pumpid);
+            return WayBillRepository.DALGetOwnerVivraniInfo(busid,vivraniid);
 
         }
 

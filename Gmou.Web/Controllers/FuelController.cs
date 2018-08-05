@@ -339,6 +339,63 @@ namespace Gmou.Web.Controllers
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        //
+
+      public ActionResult EditFuelData()
+
+
+
+        {
+            string username = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User.Username;
+            var data = BusinessAccessLayer.BALFuel.BALGetAllFuel();
+            var pumpfule = BusinessAccessLayer.BALFuel.BALGetAllStation();
+            var bus = BusinessAccessLayer.BALFuel.BALGetBuses();
+            var stationdetails = BusinessAccessLayer.BALSupport.BALGetFuelStationNo(username);
+            ViewBag.StationName = stationdetails.StationName;
+            ViewBag.StationID = stationdetails.StationID;
+            FuelViewModel vivraniviewmodel = new FuelViewModel
+            {
+                fueltype = new SelectList(data, "FuelType", "FuelName"),
+                fuelpump = new SelectList(pumpfule, "StationID", "StationName"),
+                busnumber = new SelectList(bus, "BusID", "BusNumber")
+            };
+            return View(vivraniviewmodel);
+        }
+        public ActionResult EditFuel()
+        {
+            var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
+            int userid = user.LoginEmpID;
+
+            var data = BusinessAccessLayer.BALFuel.BALGetOtherFuelDetails(userid);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult GetFuelEdit(EditFuelModelViewModel model)
+        {
+            string username = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User.Username;
+          
+            var stationdetails = BusinessAccessLayer.BALSupport.BALGetFuelStationNo(username);
+          
+            model.StationFuleID = stationdetails.StationID;
+
+         var data =   BusinessAccessLayer.BALFuel.BALGetFuelEdit(model);
+            return PartialView(@"~/Views\Fuel\Partial1.cshtml", data);
+        }
+
+        [HttpPost]
+        public ActionResult SaveEditFuel(UpdateEditFuelModel model)
+        {
+            string username = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User.Username;
+
+            var stationdetails = BusinessAccessLayer.BALSupport.BALGetFuelStationNo(username);
+
+            model.StationID = stationdetails.StationID;
+
+            BusinessAccessLayer.BALFuel.BALUpdateFuelEdit(model);
+            return Json(true, JsonRequestBehavior.AllowGet);
+            
+                  
+        }
+        
     }
 }

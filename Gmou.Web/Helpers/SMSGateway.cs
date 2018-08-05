@@ -14,7 +14,7 @@ namespace Gmou.Web.Helpers
         public static void SendVivraniSMS(decimal amount, long? contact, string ownername, string bunumber, decimal totalamount, string vivranid)
         {
 
-            string sNumber = "9412965801";
+            string sNumber = "7536865966";
             // string sMessage = "Dear Sir, abcg12344 / abcdef Advance Amount has been taken for Rs.1200 on Date : 28/3/17 Thanks, GMOU LTD";
             // string sSenderID = "SMSHUB";
             if(contact==null)
@@ -22,7 +22,7 @@ namespace Gmou.Web.Helpers
                 contact = 9890242125;
             }
             string emaaseg = CreateMEssage(SMSMessage.Vivrani, amount, ownername, bunumber, contact, totalamount, vivranid);
-            string sURL = "http://cloud.smsindiahub.in/vendorsms/pushsms.aspx?user=sbisht&password=P9890242125&msisdn=" + contact + "&sid=GMOULT&msg=" + emaaseg + "&fl=0&gwid=2";
+            string sURL = "http://cloud.smsindiahub.in/vendorsms/pushsms.aspx?user=sbisht&password=P9890242125&msisdn=" + sNumber + "&sid=GMOULT&msg=" + emaaseg + "&fl=0&gwid=2";
             //string sURL = "http://cloud.smsindiahub.in/vendorsms/pushsms.aspx?user=" + sUser + "&password=" +
             //spwd + "&msisdn =" + sNumber + "&sid =" + sSenderID + "&msg =" + sMessage + "&fl =1 & gwid = 2";
             string sResponse = GetResponse(sURL);
@@ -63,9 +63,10 @@ namespace Gmou.Web.Helpers
                     }
                 case SMSMessage.Vivrani:
                     {
-                        string emssage = String.Format("Dear Sir, {0}/ {1} Vivrani No. {2} has been generated for {3} on Date : {4}. Total {5} Vivrani Generated till on this {6} Thanks, GMOU LTD", busnumber, ownername, vivranid, String.Format("Rs. {0:0.00}", amount), DateTime.Now.ToShortDateString(), String.Format("Rs. {0:0.00}", totalamount), CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month));
+                        // string emssage = String.Format("Dear Sir, {0}/ {1} Vivrani No. {2} has been generated for {3} on Date : {4}. Total {5} Vivrani Generated till on this {6} Thanks, GMOU LTD", busnumber, ownername, vivranid, String.Format("Rs. {0:0.00}", amount), DateTime.Now.ToShortDateString(), String.Format("Rs. {0:0.00}", totalamount), CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month));
+                        string emssage = string.Format(" Dear Sir, {0}/ {1} Vivrani No. {2} generated for {3} on Date : {4}. Total {5} Vivrani Thanks, GMOU LTD", busnumber, ownername, vivranid, String.Format("Rs. {0:0.00}", amount), DateTime.Now.ToShortDateString(), String.Format("Rs. {0:0.00}", totalamount));
                         return emssage;
-
+                        //Dear Sir, ##VechileNumber##/ ##Owner's Name ## Vivrani No. ##Vivrani number## generated for ##Rs.1200## on Date : ##Date##. Total ##Total## Vivrani Thanks, GMOU LTD
                     }
                 case SMSMessage.Fuel:
                     {

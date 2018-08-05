@@ -111,6 +111,8 @@ namespace Gmou.DomainModelEntities
         public long? Contact { get; set; }
 
         public decimal TotalAmount { get; set; }
+
+        public string Busnumber { get; set; }
     }
     public class OwnerFuelSMSInfo
     {

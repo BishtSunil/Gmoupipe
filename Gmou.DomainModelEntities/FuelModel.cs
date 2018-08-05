@@ -536,6 +536,15 @@ namespace Gmou.DomainModelEntities
         public List<OtherFuel> listFuel { get; set; }
     }
 
+    public class EditFuelModelViewModel
+    {
+        public int BusID { get; set; }
+        public int ChitNo { get; set; }
+        public int ChitSerialNo { get; set; }
+        public int StationFuleID { get; set; }
+
+       
+    }
     public class FuelStafflModel
     {
 
@@ -666,8 +675,42 @@ namespace Gmou.DomainModelEntities
        
 
     }
+    public class UpdateEditFuelModel
+    {
+        public int FuelID { get; set; }
+       
+        public decimal Quantity { get; set; }
+        public decimal Price { get; set; }
+        public int ChitNo { get; set; }
+        public int ChitSerialNo { get; set; }
+        public int StationID { get; set; }
+
+    }
+    public class FuelEditDetailsModel
+    {
+        public int FuelID { get; set; }
+        public int FuelType { get; set; }
+
+        public decimal Quantity { get; set; }
+        public decimal Price { get; set; }
+        public int  ChitNo { get; set; }
+        public int ChitSerialNo { get; set; }
 
 
+        public FuelEditDetailsModel(int  fuelid, int fueltype, decimal quantity, decimal price, int chitno, int chitserial)
+        {
+            this.FuelID = fuelid; ;
+            this.FuelType = fueltype;
+            this.Quantity = quantity;
+            this.Price = price;
+            this.ChitNo = chitno;
+            this.ChitSerialNo = chitserial;
+        }
+
+
+
+
+    }
     public class SaleReportFinal
     {
         public PetrolSaleReport petrolsale { get; set; }

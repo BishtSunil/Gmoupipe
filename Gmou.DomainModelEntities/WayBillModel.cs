@@ -60,6 +60,7 @@ namespace Gmou.DomainModelEntities
         public decimal MiscPlus { get; set; }
         public int InsertedBy { get; set; }
         public int TotalAmount { get; set; }
+        public DateTime InsertedDate { get; set; }
         public List<TicketDetailsModel> ticketdetails{ get; set; }
 
         

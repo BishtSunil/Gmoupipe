@@ -315,8 +315,37 @@
             $("#ddlbusNumberlst").toggle();
         });
     });
+    function calcAvgHeight(data) {
+        // Calculate average height from received data. If no data, return null.
+        debugger;
+        var height = 0;
+        var count = 0;
+      
+        for (var k in data) {
+            debugger;
+            console.log(k, data[k]);
+            height = height+ data[k].height;
+            count = count + 1;
+            }
+        if (count == 0) {
+            return null;
+        }
+        return height / count;
+    }
+
+
+   
+
+    function Test() {
+        debugger;
+        var avgHeight = calcAvgHeight({
+        });
+        console.log(avgHeight);
+    }
     function SavChitdetails() {
-        ;
+        ; Test();
+        debugger;
+
         var fueldata = {
             VechileNumber: getControlValueN("ddlbusNumberlst"),
             FuelStationID:  '@ViewBag.StationID',

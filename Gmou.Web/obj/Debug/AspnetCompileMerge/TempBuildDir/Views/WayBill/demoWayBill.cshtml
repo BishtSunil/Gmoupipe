@@ -1091,7 +1091,7 @@
 
 
 
-    <!-- Cuppon -->
+    <!-- Cuppon -->`
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
@@ -1334,7 +1334,7 @@
 
         $('#txtArrival').focusout(function () {
 
-            CheckValidWayBill();
+           // CheckValidWayBill();
           
         });
         $('input').on('ifChecked', function (event, e) {
@@ -1678,6 +1678,7 @@
                 GamanPatar: $('#txtGaman').val(),
                 MiscPlus: $('#txtMiscadd').val(),
                 MiscMinus: $('#txtMiscsub').val(),
+                InsertedDate: getControlValueN("myVariable"),
                 ticketdetails: []
 
             };
