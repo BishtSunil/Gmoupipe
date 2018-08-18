@@ -49,3 +49,14 @@ G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\obj\Debug\Gmou.BusinessAccessL
 G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\obj\Debug\Gmou.BusinessAccessLayer.csproj.CopyComplete
 G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\obj\Debug\Gmou.BusinessAccessLayer.dll
 G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\obj\Debug\Gmou.BusinessAccessLayer.pdb
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.Razor.dll
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.WebPages.Razor.dll
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.WebPages.dll
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.dll
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.Razor.xml
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.WebPages.Razor.xml
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.WebPages.xml
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\System.Web.WebPages.Deployment.xml
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\GMOULogger.dll
+G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\bin\Debug\GMOULogger.pdb

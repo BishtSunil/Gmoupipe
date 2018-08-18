@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Gmou.DomainModelEntities.FuelEditDetailsModel>
+
+
+<style type="text/css">
+    .edit-mode {
+    }
+
+    .edit-user {
+    }
+
+        .edit-user display-mode {
+        }
+
+    .save-user edit-mode {
+    }
+
+    .display-mode {
+    }
+
+    .cancel-user {
+    }
+
+    .webgrid-table {
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        width: 650px;
+        display: table;
+        border-collapse: collapse;
+        border: solid px #C5C5C5;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #C5C5C5;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header, .webgrid-header a {
+        background-color: #E3E3E3;
+        color: black;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #F5F5F5;
+        padding: 3px 7px 2px;
+    }
+
+    .col1Width {
+        width: 50px;
+    }
+
+    .col2Width {
+        width: 200px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('.edit-mode').hide();
+        $('.edit-user, .cancel-user').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            tr.find('.edit-mode, .display-mode').toggle();
+        });
+
+        $('.save-user').on('click', function () {
+            debugger;
+            var tr = $(this).parents('tr:first');
+            var Price = tr.find("#Price").val();
+            var Quantity = tr.find("#Quantity").val();
+            var FuelID = tr.find("#UserID").html();
+            var ChitNo = tr.find("#ChitNo").val();
+            var ChitSerialNo = tr.find("#ChitSerialNo").val();
+            tr.find("#lblQuantity").text(Quantity);
+            tr.find("#lblPrice").text(Price);
+            tr.find("#lblChitNo").text(ChitNo);
+            tr.find("#lblChitSerialNo").text(ChitSerialNo);
+            tr.find('.edit-mode, .display-mode').toggle();
+            var UserModel =
+                {
+                    "FuelID": FuelID,
+                    "Quantity": Quantity,
+                    "Price": Price,
+                    "ChitNo": ChitNo,
+                    "ChitSerialNo": ChitSerialNo
+
+                };
+            debugger;
+            $.ajax({
+                url: '/Fuel/SaveEditFuel/',
+                data: JSON.stringify(UserModel),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert(data);
+                }
+            });
+
+        });
+    })
+</script>
+
+<h2></h2>
+@{
+    var grid = new WebGrid(Model);
+}
+
+<div id="gridContent" style=" padding:20px; ">
+    @grid.GetHtml(
+            tableStyle: "webgrid-table",
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+            mode: WebGridPagerModes.All,
+            columns:
+                grid.Columns(
+                 grid.Column("ID", format: @<text>  <span class="display-mode">@item.FuelID </span> <label id="UserID" class="edit-mode">@item.FuelID</label> </text>, style: "col1Width"),
+                                             grid.Column("Quantity(Ltr)", "Quantity(Ltr)", format: @<text>  <span class="display-mode"> <label id="lblQuantity">@item.Quantity</label> </span> <input type="text" id="Quantity" value="@item.Quantity" class="edit-mode" /></text>, style: "col2Width"),
+                                                                       grid.Column("Price", "Price", format: @<text> <span class="display-mode"> <label id="lblPrice">@item.Price</label> </span>  <input type="text" id="Price" value="@item.Price" class="edit-mode" /> </text>, style: "col2Width"),
+                                                                                grid.Column("Diesel Book", "Diesel Book", format: @<text> <span class="display-mode"> <label id="lblChitNo">@item.ChitNo</label> </span>  <input type="text" id="ChitNo" value="@item.ChitNo" class="edit-mode" /> </text>, style: "col2Width"),
+                                                                            grid.Column("Diesel Serial", "Diesel Serial", format: @<text> <span class="display-mode"> <label id="lblChitSerialNo">@item.ChitSerialNo</label> </span>  <input type="text" id="ChitSerialNo" value="@item.ChitSerialNo" class="edit-mode" /> </text>, style: "col2Width"),
+
+                                                                                                                                        grid.Column("Action", format: @<text>
+                                                                                                                                            <button class="edit-user display-mode">Edit</button>
+                                                                                                                                            <button class="save-user edit-mode">Save</button>
+                                                                                                                                            <button class="cancel-user edit-mode">Cancel</button>
+                                                                                                                                        </text>, style: "col3Width", canSort: false)
+                                                                                                                                                                  ))
+
+
+

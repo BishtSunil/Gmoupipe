@@ -1,0 +1,47 @@
+2018-08-08 11:22:47,124 ERROR Gmou.Web.Controllers.WayBillController - System.InvalidOperationException: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1476
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 239
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 199
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+2018-08-08 11:22:53,515 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Gmou.DataRepository.BulkInsert.SQLBulkInsert.BulkInsertTicketDetails(List`1 model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\BulkInsert\SQLBulkInsert.cs:line 60
+   at Gmou.DataRepository.WayBillRepository.InsertTicketDetails(Int32 waybillID, List`1 model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 932
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 185
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+2018-08-08 11:22:54,117 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Gmou.DataRepository.WayBillRepository.CheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 1476
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALCheckIfWayBillCreated(Int32 busid, Int32 waybillno, Int32 waybillserial) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 239
+   at Gmou.Web.Controllers.WayBillController.CheckWayBillDuplicacy(String busnumber, String waybillbook, String waybillserialno) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 199
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 178
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20

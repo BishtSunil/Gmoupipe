@@ -175,10 +175,12 @@ namespace Gmou.Web.Controllers
         {
             try
             {
+                GMOULogger.Logger.Log(String.Format("Way Bill contoller method {0} ", model.InsertedDate));
                 if (!CheckWayBillDuplicacy(model.BusNumber, model.WayBillNo, model.WayBillSerialNo))
                 {
                     return Json(false, JsonRequestBehavior.AllowGet);
                 }
+             // model.InsertedDate=  Helpers.GMOUHelper.ConvertTOIST(model.InsertedDate);
                 var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
                 model.InsertedBy = user.LoginEmpID;
                 var data = WayBillBAL.BALSaveWayBillEntry(model);
@@ -186,9 +188,11 @@ namespace Gmou.Web.Controllers
             }
             catch (Exception ex)
             {
-
+               GMOULogger.Logger.Log("Error Exception");
+                GMOULogger.Logger.Log(ex.ToString());
                 logger.Error(ex.ToString());
             }
+            Helpers.GMOUHelper.Log("Retun To actionREsult");
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
@@ -243,7 +247,7 @@ namespace Gmou.Web.Controllers
         {
             var user = ((UserValidation.CustomPrincipal)(HttpContext.Request.RequestContext.HttpContext.User)).User;
             var empid = user.LoginEmpID;
-            var result = WayBillBAL.BALGenerateCashVivrani(empid, busid, vivraniid);
+            var result = WayBillBAL.BALGenerateCashVivrani(empid, busid, vivraniid,DateTime.Now);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -416,8 +420,8 @@ namespace Gmou.Web.Controllers
         {
             var result = WayBillBAL.BALGetAllVivraniEdit(vivid);
             ViewBag.Buses = BusinessAccessLayer.BALFuel.BALGetBuses();
-
-            return PartialView(@"~/Views\\WayBill\EditWayBill.cshtml", result);
+            return PartialView(@"~/Views\\WayBill\_TempUpdte.cshtml", result);
+            //return PartialView(@"~/Views\\WayBill\EditWayBill.cshtml", result);
         }
         [HttpGet]
         public ActionResult GetWayBillEditDetails(int waybill, int waybillserial)

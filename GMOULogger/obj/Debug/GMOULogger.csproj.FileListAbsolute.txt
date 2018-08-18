@@ -1,0 +1,6 @@
+G:\GMOUOnline\GMOUOnline\GMOULogger\bin\Debug\GMOULogger.dll
+G:\GMOUOnline\GMOUOnline\GMOULogger\bin\Debug\GMOULogger.pdb
+G:\GMOUOnline\GMOUOnline\GMOULogger\obj\Debug\GMOULogger.csprojAssemblyReference.cache
+G:\GMOUOnline\GMOUOnline\GMOULogger\obj\Debug\GMOULogger.csproj.CoreCompileInputs.cache
+G:\GMOUOnline\GMOUOnline\GMOULogger\obj\Debug\GMOULogger.dll
+G:\GMOUOnline\GMOUOnline\GMOULogger\obj\Debug\GMOULogger.pdb

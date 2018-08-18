@@ -1,0 +1,221 @@
+﻿
+Log Entry : 09:36:01 14 August 2018
+  :
+  :Way Bill contoller method 23-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:36:21 14 August 2018
+  :
+  :Way Bill contoller method 23-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:36:58 14 August 2018
+  :
+  :Way Bill contoller method 23-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:37:00 14 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 09:37:00 14 August 2018
+  :
+  :Way Bill repository method 23-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:37:01 14 August 2018
+  :
+  :Error Exception
+-------------------------------
+
+Log Entry : 09:37:01 14 August 2018
+  :
+  :System.Data.SqlClient.SqlException (0x80131904): Error converting data type nvarchar to date.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 872
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 150
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 186
+ClientConnectionId:73405259-9612-4298-82e6-1ea04672de05
+Error Number:8114,State:5,Class:16
+-------------------------------
+
+Log Entry : 09:37:02 14 August 2018
+  :
+  :Retun To actionREsult
+-------------------------------
+
+Log Entry : 09:37:48 14 August 2018
+  :
+  :Way Bill contoller method 23-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:37:52 14 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 09:37:52 14 August 2018
+  :
+  :Way Bill repository method 23-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:38:27 14 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 09:38:34 14 August 2018
+  :
+  :Way Bill repository method 23-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:45:34 14 August 2018
+  :
+  :Way Bill contoller method 24-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:45:44 14 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 09:45:49 14 August 2018
+  :
+  :Way Bill repository method 24-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 14:01:01 15 August 2018
+  :
+  :Way Bill contoller method 22-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 14:01:02 15 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 14:01:02 15 August 2018
+  :
+  :Way Bill repository method 22-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 14:01:05 15 August 2018
+  :
+  :Way bill repositoyr method end
+-------------------------------
+
+Log Entry : 14:19:49 15 August 2018
+  :
+  :Way Bill contoller method 10-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 14:19:51 15 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 14:19:51 15 August 2018
+  :
+  :Way Bill repository method 10-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 14:19:52 15 August 2018
+  :
+  :Way bill repositoyr method end
+-------------------------------
+
+Log Entry : 15:02:48 15 August 2018
+  :
+  :Way Bill contoller method 14-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 15:03:03 15 August 2018
+  :
+  :Way Bill contoller method 14-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 15:03:04 15 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 15:03:04 15 August 2018
+  :
+  :Way Bill repository method 14-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 15:03:06 15 August 2018
+  :
+  :Way bill repositoyr method end
+-------------------------------
+
+Log Entry : 15:03:57 15 August 2018
+  :
+  :Way Bill contoller method 24-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 15:03:58 15 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 15:03:58 15 August 2018
+  :
+  :Way Bill repository method 24-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 15:03:59 15 August 2018
+  :
+  :Way bill repositoyr method end
+-------------------------------
+
+Log Entry : 00:49:19 16 August 2018
+  :
+  :Way Bill contoller method 15-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 00:49:22 16 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 00:49:22 16 August 2018
+  :
+  :Way Bill repository method 15-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 00:49:24 16 August 2018
+  :
+  :Way bill repositoyr method end
+-------------------------------
+
+Log Entry : 09:38:52 16 August 2018
+  :
+  :Way Bill contoller method 17-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:38:54 16 August 2018
+  :
+  :Way Bill BAL MEthod
+-------------------------------
+
+Log Entry : 09:38:54 16 August 2018
+  :
+  :Way Bill repository method 17-08-2018 00:00:00 
+-------------------------------
+
+Log Entry : 09:38:56 16 August 2018
+  :
+  :Way bill repositoyr method end
+-------------------------------

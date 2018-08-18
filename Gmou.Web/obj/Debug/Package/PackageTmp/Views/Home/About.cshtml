@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<link href="~/Content/DataTable/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Content/DataTable/jquery-1.12.0.min.js"></script>
+<script src="~/Content/DataTable/jquery.dataTables.min.js"></script>
+ 
+ <table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>MiddleName</th>
+            <th>LastName</th>
+            <th>Caste</th>
+            <th>FatherName</th>
+            <th>Village</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>FirstName</th>
+            <th>MiddleName</th>
+            <th>LastName</th>
+            <th>Caste</th>
+            <th>FatherName</th>
+            <th>Village</th>
+        </tr>
+    </tfoot>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        ;
+        $('#example').DataTable({
+            ajax: '/Admin/Employee',
+            columns: [
+         { data: 'RelationShip' },
+         { data: 'MemberName' },
+         { data: 'WifeName' },
+         { data: 'NextToKin' },
+         { data: 'WifeDOB' },
+         { data: 'NomineeName' }
+            ]
+        });
+    });
+ 
+
+
+//$(document).ready(function() {
+//    $.ajax({
+//        type: 'GET',
+//        data: {},
+//        url: "/Admin/Employee",
+//        success: function (data) {
+            
+//                $('#example').DataTable({
+//                    data: data,
+//                    columns: [
+//                        { title: "Name" },
+//                        { title: "Position" },
+//                        { title: "Office" },
+//                        { title: "Extn." },
+//                        { title: "Start date" },
+//                        { title: "Salary" }
+//                    ]
+//                });
+//            });
+//        }
+//    });
+
+//    });
+</script>

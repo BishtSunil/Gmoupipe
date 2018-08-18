@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="BookStoreRepository.cs" />
     <Compile Include="BulkInsert\SQLBulkInsert.cs" />
+    <Compile Include="ConvertorGmou.cs" />
     <Compile Include="CustomRepository\BusRepository.cs" />
     <Compile Include="EmployeeRepository.cs" />
     <Compile Include="EntityRepository\GmouERPModel.Context.cs">
@@ -182,6 +183,10 @@
     <ProjectReference Include="..\Gmou.DomainModelEntities\Gmou.DomainModelEntities.csproj">
       <Project>{c68cdfcf-d598-4b03-b334-79849d6bc573}</Project>
       <Name>Gmou.DomainModelEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMOULogger\GMOULogger.csproj">
+      <Project>{93a4a1df-b815-49d7-9e7c-ceb2b3f99ae0}</Project>
+      <Name>GMOULogger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

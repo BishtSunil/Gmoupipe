@@ -65,3 +65,5 @@ G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\obj\Debug\Gmou.Repository.csproj.Co
 G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\obj\Debug\Gmou.Repository.csproj.CopyComplete
 G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\obj\Debug\Gmou.DataRepository.dll
 G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\obj\Debug\Gmou.DataRepository.pdb
+G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\bin\Debug\GMOULogger.dll
+G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\bin\Debug\GMOULogger.pdb

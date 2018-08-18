@@ -1,0 +1,278 @@
+﻿@{
+    ViewBag.Title = "Cash Vivrani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.VivraniViewModel
+
+@using System.Web;
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<script src="~/Scripts/GmouScripts/autocompletedropdown.js"></script>
+
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+
+
+    <style type="text/css" > .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+<div id="pnlCoupon">
+
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Cuppon</b>
+
+            </div>
+            <div class="box-body">
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Station From
+                            </td>
+                            <td>
+                                <input type="text" id="txtStationFrom" />
+                            </td>
+                            <td class="alignR">
+                                Station To
+                            </td>
+                            <td>
+                                <input type="text" id="txtStationTo" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Page
+                            </td>
+                            <td>
+                                <input type="text" id="txtPage" />
+                            </td>
+                            <td class="alignR">
+                                Fare
+                            </td>
+                            <td>
+                                <input type="text" id="txtFare" />
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td class="alignR">
+                                Distance
+                            </td>
+                            <td>
+                                <input type="text" id="txtDistance" />
+                            </td>
+                            <td class="alignR">
+                                Validity
+                            </td>
+                            <td>
+                                <input type="text" id="txtValidity" accesskey="a" class="txt100 datepicker" readonly="true">
+                                <img src="~/Images/calendar-icon-blue.png" style="margin-left: -4px;" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" onclick="saveCupponDetail()">Save</button>
+
+    </div>
+</div>
+
+            <div style="height:10px"></div>
+
+            <div class="PageContent">
+                <table cellpadding="0px" cellspacing="0px" width="100%">
+                    <tr>
+                        <td style="width: 6px;">
+                            <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+                        </td>
+                        <td class="PageWindowHeader">
+                            <table width="100%" cellpadding="0px" cellspacing="0px">
+                                <tr>
+                                    <td width="200px">
+                                        &nbsp; <label>Cuppon</label>
+                                    </td>
+                                    <td align="right"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 6px;">
+                            <img src="~/Images/gridImages/RightCorner.png" />
+                        </td>
+                    </tr>
+                </table>
+                <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+                    <table id="CupponTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Station Form
+                                </th>
+                                <th>
+                                    Station To
+                                </th>
+                                <th>
+                                    Page No
+                                </th>
+                                <th>
+                                    Fare
+                                </th>
+                                <th>
+                                    Edit
+                                </th>
+                                <th>
+                                    Delete
+                                </th>
+
+                            </tr>
+
+                        </thead>
+                    </table>
+
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="container">
+
+
+
+            <!-- Cuppon -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+
+                </div>
+            </div>
+
+
+        </div>
+        <script type="text/javascript">
+
+            $(function () {
+                $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+                getCouponDetail();
+            });
+            function DateTimeFunction(id) {
+                var dt = getControlValueN(id);
+                if (dt != null) {
+                    var day = dt.split("-");
+                    var d = new Date(day[2], day[1], day[0]);
+                    return d.toLocaleDateString();
+                }
+            }
+
+
+
+
+            function saveCupponDetail() {
+                ;
+                var obj = new Object();
+                obj.StationFrom = getControlValueN("txtStationFrom");
+                obj.StationTo = getControlValueN("txtStationTo");
+                obj.Page = getControlValueN("txtPage");
+                obj.Fare = getControlValueN("txtFare");
+                obj.Distance = getControlValueN("txtDistance");
+                obj.Validity = getControlValueN("txtValidity");
+                $.ajax({
+                    type: "POST",
+                    url: '/Waybill/SaveCouponDetails',
+                    data: JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        alert("done");
+                        clearAllTextBoxes("pnlCoupon");
+                        getCouponDetail();
+                    },
+                    error: OnError
+                });
+            }
+
+            function getCouponDetail() {
+                 
+                $.ajax({
+                    type: "GET",
+                    url: '/WayBill/GetAllCouponDetails',
+                    //data: { 'busId': busId},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            var len = data.length;
+                            var txt = "";
+                            if (len > 0) {
+                                for (var i = 0; i < len; i++) {
+                                    
+                                    txt += "<tr><td>" + data[i].StationFrom + "</td><td>" + data[i].StationTo + "</td><td> " + data[i].Page + " </td><td>" + data[i].Fare + "</td>"
+                                                                     + "<td><a href='javascript:void(0)' onclick= editBuses(" + '"' +   + '"' + ")><img src='../Images/edit.png' style='height:20px' /></a></td>"
+ 
+                              + "<td><a href='javascript:void(0)' onclick= deleteBus(" + '"' + + '"' + ")><img src='../Images/delete.png' style='height:20px' /></a></td></tr>";
+
+                                }
+                                if (txt != "") {
+                                    $("#CupponTable").append(txt);
+
+                                }
+                            }
+                        }
+                    },      
+                });
+            }
+        </script>

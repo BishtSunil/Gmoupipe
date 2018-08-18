@@ -202,3 +202,5 @@ G:\GMOUOnline\GMOUOnline\Gmou.Web\obj\Debug\Gmou.Web.csproj.CoreCompileInputs.ca
 G:\GMOUOnline\GMOUOnline\Gmou.Web\obj\Debug\Gmou.Web.csproj.CopyComplete
 G:\GMOUOnline\GMOUOnline\Gmou.Web\obj\Debug\Gmou.Web.dll
 G:\GMOUOnline\GMOUOnline\Gmou.Web\obj\Debug\Gmou.Web.pdb
+G:\GMOUOnline\GMOUOnline\Gmou.Web\bin\GMOULogger.dll
+G:\GMOUOnline\GMOUOnline\Gmou.Web\bin\GMOULogger.pdb

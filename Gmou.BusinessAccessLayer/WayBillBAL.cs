@@ -146,13 +146,14 @@ namespace Gmou.BusinessAccessLayer
             //        // model.NumberOfTicket;
             //lstwaybillmodel.Add(WayBillRepository.SaveWayBillDetailsEntry(model).FirstOrDefault());
             // }
+            GMOULogger.Logger.Log("Way Bill BAL MEthod");
             return WayBillRepository.SaveWayBillDetailsEntry(model).ToList();
         }
 
-        public static bool BALGenerateCashVivrani(int empid, int busid, int vivraniid)
+        public static bool BALGenerateCashVivrani(int empid, int busid, int vivraniid , DateTime date)
         {
 
-            var _data = WayBillRepository.GenerateCashVivrani(empid, busid, vivraniid);
+            var _data = WayBillRepository.GenerateCashVivrani(empid, busid, vivraniid, date);
             if (_data == 1)
             { return true; }
             else { return false; }

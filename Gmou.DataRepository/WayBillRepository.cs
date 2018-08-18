@@ -832,6 +832,7 @@ namespace Gmou.DataRepository
 
         public static IEnumerable<WayBillTicketViewModel> SaveWayBillDetailsEntry(WayBillTicketModel model)
         {
+            GMOULogger.Logger.Log(String.Format("Way Bill repository method {0} ",model.InsertedDate));
             int WayBillID;
             int totalamount = model.TotalAmount;
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
@@ -874,6 +875,7 @@ namespace Gmou.DataRepository
                     conn.Close();
                 }
             }
+            GMOULogger.Logger.Log("Way bill repositoyr method end");
             return GetUpdatedWayBill(WayBillID, totalamount);
         }
         private static IEnumerable<WayBillTicketViewModel> GetUpdatedWayBill(int waybillID, int totalamount)
@@ -933,7 +935,7 @@ namespace Gmou.DataRepository
 
         }
 
-        public static int GenerateCashVivrani(int empid, int busid, int vivraniid)
+        public static int GenerateCashVivrani(int empid, int busid, int vivraniid, DateTime date)
         {
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
@@ -942,7 +944,7 @@ namespace Gmou.DataRepository
                 {
 
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("waybilldate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("waybilldate", DateTime.Now );
                     cmd.Parameters.AddWithValue("empId", empid);
                     cmd.Parameters.AddWithValue("bus_id", busid);
                     cmd.Parameters.AddWithValue("vivraniid", vivraniid);

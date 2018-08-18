@@ -1,0 +1,300 @@
+﻿@model Gmou.Web.Models.FuelViewModel
+@{
+
+    ViewBag.Title = "Fuel Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Web;
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        /*background-color: #eeeeee;*/
+    }
+
+    .span {
+        padding-left: 25%;
+    }
+
+    .span2 {
+        padding-left: 32%;
+    }
+</style>
+
+
+
+
+<div>
+    <table id="tblAccount">
+        <tr>
+               <td>From Date </td>
+
+            <td><input type="date" class=".datepicker" id="txtDate" /></td>
+            <td>End Date </td>
+
+            <td><input type="date" class=".datepicker" id="txtendDate" /></td>
+        </tr>
+        <tr>
+
+            <td>
+                <input type="button" value="Show" onclick="getBusVivraniDetails();">
+            </td>
+            <td><input name="b_print" type="button" class="ipt" onclick="printdiv('VivraniDetails');" value=" Print "></td>
+        </tr>
+    </table>
+</div>
+<div style="height:20px"></div>
+
+<div id="VivraniDetails">
+
+
+    <div class="PageContent">
+
+        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+            <span id="spnMessage" style="font-size: large; font-weight: bold;"></span>
+            <table id="EmployeesTable">
+                <thead>
+                    <tr>
+                        <th>
+                            Station Name
+                        </th>
+
+
+                        <th>
+                            Fuel Type
+                        </th>
+                        <th>
+                            Total Amount
+                        </th>
+                      
+
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function printdiv(printpage) {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+    $(function () {
+        //$(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+        $(".datepicker").datepicker();
+    });
+    function getBusVivraniDetails() {
+        var message = "Total Sales from Date :" + getControlValueN("txtDate") + " To Date: " + getControlValueN("txtendDate")+"";  
+        $.ajax({
+            type: "GET",
+            url: '/Transaction/GetFuelReportsByDate',
+            data: {  'sdate': getControlValueN("txtDate"), 'edate': getControlValueN ("txtendDate")},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                //this.VivraniNumber = vivraniid;
+                //this.WayBillSerialNumber = waybillnumber;
+                //this.WayBillNumber = wayserialnumb;
+                //this.TicketFrom = ticketfrom;
+                //this.TicketTo = ticketto;
+                //this.StationFrom = stationfrom;
+                //this.StationTo = stationto;
+                //this.Amount = amount;
+                //this.VivraniDate = date;
+
+
+                $("#EmployeesTable > tbody").html("");
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {
+                           // $('#lblbusnumber').text(data[2].BusNumber)
+                           // var regDate = new Date(parseInt(data[i].VivraniDate.substr(6))).format("dd-mm-yyyy")
+                            txt += "<tr><td>" + data[i].StationName + "</td><td>" + data[i].FuelType + "</td><td>" 
+                                +  data[i].TotalAmount+ "</td></tr> ";
+
+
+                        }
+                        if (txt != "") {
+                            $("#EmployeesTable").append(txt);
+                            $('#spnMessage').html(message);
+                            $("#EmployeesTable > tbody").css("font-size", "large");
+                        }
+                    }
+                }
+            },
+            error: OnError
+        });
+    }
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .tooltip()
+
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.data("ui-autocomplete").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $(function () {
+        $("#ddlbusNumberlst").combobox();
+        $("#toggle").click(function () {
+            $("#ddlbusNumberlst").toggle();
+        });
+
+
+
+
+    });
+</script>
+
+
+

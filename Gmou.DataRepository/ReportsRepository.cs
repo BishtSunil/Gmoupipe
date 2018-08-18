@@ -44,6 +44,7 @@ namespace Gmou.DataRepository
 
         public static IEnumerable<VivraniReportUpdated> GetViraniList(int busid, DateTime date,DateTime enddate)
         {
+            GMOULogger.Logger.Log(String.Format("Reports start date{0}  and End date {1}", date,enddate));
             using (var conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
                 using (var cmd = new SqlCommand("sp_GetVivraniByDateandBus1", conn))

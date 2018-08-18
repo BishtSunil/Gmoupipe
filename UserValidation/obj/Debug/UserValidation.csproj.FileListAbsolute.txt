@@ -55,3 +55,14 @@ G:\GMOUOnline\GMOUOnline\UserValidation\obj\Debug\UserValidation.csproj.CoreComp
 G:\GMOUOnline\GMOUOnline\UserValidation\obj\Debug\UserValidation.csproj.CopyComplete
 G:\GMOUOnline\GMOUOnline\UserValidation\obj\Debug\UserValidation.dll
 G:\GMOUOnline\GMOUOnline\UserValidation\obj\Debug\UserValidation.pdb
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.Razor.dll
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.WebPages.Razor.dll
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.WebPages.dll
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\Microsoft.Web.Infrastructure.dll
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.WebPages.Deployment.dll
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.Razor.xml
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.WebPages.Razor.xml
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.WebPages.xml
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\System.Web.WebPages.Deployment.xml
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\GMOULogger.dll
+G:\GMOUOnline\GMOUOnline\UserValidation\bin\Debug\GMOULogger.pdb

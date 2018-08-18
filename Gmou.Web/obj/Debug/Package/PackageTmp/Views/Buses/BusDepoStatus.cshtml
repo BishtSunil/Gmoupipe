@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewBag.Title = "Buses Depostatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<style type="text/css">
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+
+
+    .left-inner-addon {
+        position: relative;
+    }
+
+        .left-inner-addon input {
+            padding-left: 30px;
+        }
+
+        .left-inner-addon i {
+            position: absolute;
+            padding: 10px 12px;
+            pointer-events: none;
+        }
+
+    .right-inner-addon {
+        position: relative;
+    }
+
+        .right-inner-addon input {
+            padding-right: 30px;
+        }
+
+        .right-inner-addon i {
+            position: absolute;
+            right: 0px;
+            padding: 2px 12px;
+            pointer-events: none;
+        }
+</style>
+<div class="PageContent">
+    <div class="col-xs-3" style="padding-left:0px">
+        <div class="right-inner-addon">
+            <i class="icon-search"><img src="~/Images/searchicon.png" /></i>
+            <input type="search" class="form-control" id="txtSearch" placeholder="Enter Bus Number ...">
+        </div>
+    </div>
+    <div style="height:40px"></div>
+    <table cellpadding="0px" cellspacing="0px" width="100%">
+        <tr>
+            <td style="width: 6px;">
+                <asp:Image runat="server" ID="Image1" SkinID="LeftCorner" />
+            </td>
+            <td class="PageWindowHeader">
+                <table width="100%" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td width="200px">
+                            &nbsp; <label>Buses</label>
+                        </td>
+                        <td align="right"></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 6px;">
+                <img src="~/Images/gridImages/RightCorner.png" />
+            </td>
+        </tr>
+    </table>
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+        <table id="BusTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+            <thead>
+                <tr>
+                    <th>
+                        Bus Number
+                    </th>
+                    <th>
+                        Station
+                    </th>
+                    <th>
+                        Owner Name
+                    </th>
+                    
+
+                    <th style="width:30px">Edit</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtSearch").on("keyup", function() {
+            var value = $(this).val();
+
+            $("table tr").each(function(index) {
+                if (index != 0) {
+
+                    $row = $(this);
+
+                    var id = $row.find("td:first").text();
+
+                    if (id.indexOf(value) != 0) {
+                        ;
+                        if(id.trim()!="Buses" && id!="")
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                }
+            });
+        })
+        $('#dvLoading').fadeOut(2000);
+        GetData();
+    });
+
+    function GetData()
+    {
+        $.ajax({
+            type: "POST",
+            url: "/Buses/getAllBuses",
+            traditional: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                ;
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+                        for (var i = 0; i < len; i++) {
+                            if (data[i].bus_id) {
+                                var regDate = new Date(parseInt(data[i].registration_date.substr(6))).format("dd/mm/yyyy")
+                                txt += "<tr><td>" + data[i].bus_number + "</td>" + "<td>" + data[i].bus_operating_center + "</td><td>" + data[i].bus_owner_name + "</td>"
+                                   
+                                 + "<td><a href='javascript:void(0)' onclick= editBuses(" + '"' + data[i].busEncrpId + '"' + ")><img src='../Images/edit.png' style='height:20px' /></a></td>"
+                                 + "<td><a href='javascript:void(0)' onclick= searchBus(" + '"' + data[i].busEncrpNumber + '"' + ")> <i class='fa fa-eye'></i></td>"
+                                + "<td><a href='javascript:void(0)' onclick= deleteBus(" + '"' + data[i].busEncrpId + '"' + ")><img src='../Images/delete.png' style='height:20px' /></a></td></tr>";
+                            }
+                        }
+                        if (txt != "") {
+                            $("#BusTable").append(txt);
+
+                        }
+                    }
+                }
+            },
+            error: function (data) { alert("error" + data) }
+        });
+
+    }
+    function editBuses(id)
+    {
+        var url = "/buses/EditBusDetail?busId=" + id;
+        window.location.href = url;
+    }
+
+    function searchBus(id) {
+        ;
+        var url = "/buses/SearchBus?busNumber=" + id;
+        window.location.href = url;
+    }
+
+    function deleteBus(id) {
+
+
+        var url = "/admin/DeleteBus?Id=" + id;
+        if (confirm("Are you sure you want to delete this?")) {
+            Deletebus(id);
+        } else {
+            false;
+        }
+
+    }
+    function Deletebus(id) {
+
+        $.ajax({
+            type: "GET",
+            url: "/Buses/Deletebus?busID=" + id,
+            traditional: true,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data==true)
+                {
+                    $("#BusTable > tbody").html("");
+                    GetData();
+                }
+            }
+        });
+    }
+</script>

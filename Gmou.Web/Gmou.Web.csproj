@@ -104,9 +104,6 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Http.OData">
-      <HintPath>..\..\work\Gmou.Web\Gmou.Web\Gmou.Web\bin\System.Web.Http.OData.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -523,6 +520,7 @@
     <Content Include="Images\loading2.gif" />
     <Content Include="Images\logo1.png" />
     <Content Include="Images\searchicon.png" />
+    <Content Include="Log.txt" />
     <Content Include="Scripts\Admin\jquery.confirm.min.js" />
     <Content Include="Scripts\Admin\jquery.js" />
     <Content Include="Content\fonts\codropsicons\codropsicons.eot" />
@@ -1093,6 +1091,8 @@
     <Content Include="Views\Fuel\EditFuel.cshtml" />
     <Content Include="Views\Fuel\EditFuelData.cshtml" />
     <Content Include="Views\Fuel\Partial1.cshtml" />
+    <Content Include="Views\WayBill\_tempUdpate.cshtml" />
+    <Content Include="Views\WayBill\_TempUpdte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1112,6 +1112,10 @@
     <ProjectReference Include="..\Gmou.DomainModelEntities\Gmou.DomainModelEntities.csproj">
       <Project>{c68cdfcf-d598-4b03-b334-79849d6bc573}</Project>
       <Name>Gmou.DomainModelEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMOULogger\GMOULogger.csproj">
+      <Project>{93a4a1df-b815-49d7-9e7c-ceb2b3f99ae0}</Project>
+      <Name>GMOULogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserValidation\UserValidation.csproj">
       <Project>{25a30ddc-9b2c-48e1-9fa2-8517b1e424d4}</Project>

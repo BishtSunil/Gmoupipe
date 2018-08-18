@@ -1,0 +1,254 @@
+﻿@{
+    ViewBag.Title = "EditFuelData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Gmou.Web.Models.FuelViewModel
+@using System.Web;
+<h2>पंप की गल्ती याहा सुधारे</h2>
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* support: IE7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+
+    .custom-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+    }
+
+
+    <style type="text/css" > .txt100 {
+        width: 100px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+
+<div id=" " style="height:100%;overflow-y:auto">
+    <div class="box-body">
+
+
+        <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+            <tr>
+                <td>Station Name</td>
+                @*<td>@Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlpumplst", accesskey = "a", style = "width: 135px;" })</td>*@
+                <td>@ViewBag.StationName</td>
+                <td>बस संख्या.</td>
+                <td>@Html.DropDownListFor(model => model.busnumber, Model.busnumber, new { @class = "txt100PValidBreak", id = "ddlbusNumberlst", accesskey = "a", style = "width: 135px;" })</td>
+                <td>
+                    डीजल बुक नंबर
+                </td>
+                <td><input type="text" id="txtchitNo" /></td>
+                <td>डीजल बुक सीरियल नंबर</td>
+                <td><input type="text" id="txtchitserialNo" /></td>
+
+            </tr>
+            <td>
+                <button class="pull-right btn btn-primary" type="button" onclick="GetEditFuel()">
+                    Save
+                </button>
+            </td>
+
+            </tr>
+        </table>
+    </div>
+    <div id="summaryDIV">
+
+    </div>
+</div>
+<script>
+
+
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                    .addClass("custom-combobox")
+                    .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                    value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                    .appendTo(this.wrapper)
+                    .val(value)
+                    .attr("title", "")
+                    .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                    .autocomplete({
+                        delay: 0,
+                        minLength: 0,
+                        source: $.proxy(this, "_source")
+                    })
+                    .tooltip({
+                        tooltipClass: "ui-state-highlight"
+                    });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                    wasOpen = false;
+
+                $("<a>")
+                    .attr("tabIndex", -1)
+                    .tooltip()
+
+                    .appendTo(this.wrapper)
+                    .button({
+                        icons: {
+                            primary: "ui-icon-triangle-1-s"
+                        },
+                        text: false
+                    })
+                    .removeClass("ui-corner-all")
+                    .addClass("custom-combobox-toggle ui-corner-right")
+                    .mousedown(function () {
+                        wasOpen = input.autocomplete("widget").is(":visible");
+                    })
+                    .click(function () {
+                        input.focus();
+
+                        // Close if already visible
+                        if (wasOpen) {
+                            return;
+                        }
+
+                        // Pass empty string as value to search for, displaying all results
+                        input.autocomplete("search", "");
+                    });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                    valueLowerCase = value.toLowerCase(),
+                    valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                    .val("")
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.data("ui-autocomplete").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $(function () {
+        $("#ddlbusNumberlst").combobox();
+        $("#toggle").click(function () {
+            $("#ddlbusNumberlst").toggle();
+        });
+    });
+
+    function GetEditFuel() {
+        debugger;
+        var obj = new Object();
+        obj.BusID = getControlValueN("ddlbusNumberlst");
+        obj.ChitNo = getControlValueN("txtchitNo");
+        obj.ChitSerialNo = getControlValueN("txtchitserialNo");
+        
+        $.ajax({
+            type: "POST",
+            url: '/Fuel/GetFuelEdit',
+
+            data: JSON.stringify(obj),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "Html",
+            success: function (data) {
+                debugger;
+                $('#summaryDIV').html(data);
+            }
+
+
+
+        });
+        
+    }
+</script>

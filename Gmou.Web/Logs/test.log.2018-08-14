@@ -1,0 +1,33 @@
+2018-08-13 11:43:38,803 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlTypes.SqlTypeException: SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+   at System.Data.SqlClient.TdsParser.TdsExecuteRPC(SqlCommand cmd, _SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource`1 completion, Int32 startRpc, Int32 startParam)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 186
+2018-08-13 12:51:35,287 ERROR Gmou.Web.Controllers.WayBillController - System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Gmou.DataRepository.WayBillRepository.InsertTicketDetails(Int32 waybillID, List`1 model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 931
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 186
+2018-08-14 09:37:01,828 ERROR Gmou.Web.Controllers.WayBillController - System.Data.SqlClient.SqlException (0x80131904): Error converting data type nvarchar to date.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 872
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 150
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 186
+ClientConnectionId:73405259-9612-4298-82e6-1ea04672de05
+Error Number:8114,State:5,Class:16

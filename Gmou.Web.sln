@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gmou.Web", "Gmou.Web\Gmou.Web.csproj", "{5F4FA753-F90E-4F7D-A3AD-127271D8E6EA}"
 EndProject
@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityRepository", "EntityR
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{12295AE1-A3A1-48B8-9F69-105DC91BDAEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMOULogger", "GMOULogger\GMOULogger.csproj", "{93A4A1DF-B815-49D7-9E7C-CEB2B3F99AE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25A30DDC-9B2C-48E1-9FA2-8517B1E424D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A4A1DF-B815-49D7-9E7C-CEB2B3F99AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A4A1DF-B815-49D7-9E7C-CEB2B3F99AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A4A1DF-B815-49D7-9E7C-CEB2B3F99AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A4A1DF-B815-49D7-9E7C-CEB2B3F99AE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,8 @@ Global
 		{9817612E-2429-4477-B765-C6D03A6EA5F3} = {5AD8B624-FEBF-448D-A8E5-07131D882203}
 		{18232638-A8D1-4587-A7B1-461EA43BA03E} = {5AD8B624-FEBF-448D-A8E5-07131D882203}
 		{12295AE1-A3A1-48B8-9F69-105DC91BDAEB} = {C043BD65-3A76-451D-873B-D89BEB504E63}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE846B59-821B-44CD-8615-B028A765D326}
 	EndGlobalSection
 EndGlobal

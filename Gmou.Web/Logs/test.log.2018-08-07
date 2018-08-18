@@ -1,0 +1,21 @@
+2018-08-07 09:40:38,698 ERROR Gmou.Web.Controllers.WayBillController - System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Gmou.DataRepository.WayBillRepository.InsertTicketDetails(Int32 waybillID, List`1 model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 931
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 184
+2018-08-07 09:40:54,153 ERROR Gmou.Web.Controllers.WayBillController - System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Gmou.DataRepository.WayBillRepository.InsertTicketDetails(Int32 waybillID, List`1 model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 931
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 184
+2018-08-07 09:41:33,080 ERROR Gmou.Web.Controllers.WayBillController - System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Gmou.DataRepository.WayBillRepository.InsertTicketDetails(Int32 waybillID, List`1 model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 931
+   at Gmou.DataRepository.WayBillRepository.SaveWayBillDetailsEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.DataRepository\WayBillRepository.cs:line 871
+   at Gmou.BusinessAccessLayer.WayBillBAL.BALSaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.BusinessAccessLayer\WayBillBAL.cs:line 149
+   at Gmou.Web.Controllers.WayBillController.SaveWayBillEntry(WayBillTicketModel model) in G:\GMOUOnline\GMOUOnline\Gmou.Web\Controllers\WayBillController.cs:line 184

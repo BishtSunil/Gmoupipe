@@ -68,215 +68,222 @@
             </div>
             <div class="box-body">
                 <table id="tblAccount">
-                  
-                        <tr>
-                            <td>
-                                Date
-                            </td>
-                            <td>
-                                <h5>@DateTime.Now.ToString()</h5>
-                            </td>
-                            @*<td>
-                                bus number
-                            </td>
-                            <td>
-                                <h5>@Model.busId</h5>
-                            </td>*@
-                            <td>
-                               Virani Serail
-                            </td>
-                            <td>
-                                <span id="spnVivraniNumber"></span>
-                            </td>
-                        </tr>
-                   
+
+                    <tr>
+                        <td>
+                            Date
+                        </td>
+                        <td>
+                            <h5>@DateTime.Now.ToString()</h5>
+                        </td>
+                        @*
+                        <td>
+                            bus number
+                        </td>
+                        <td>
+                            <h5>@Model.busId</h5>
+                        </td>*@
+                        <td>
+                            Virani Serail
+                        </td>
+                        <td>
+                            <span id="spnVivraniNumber"></span>
+                        </td>
+                    </tr>
+
                 </table>
             </div>
         </div>
     </div>
     <div class="col-md-12 marT20">
-            <div class="box box-success">
-                <div class="boxHeading">
-                    <b> Fuel Detail</b>
-                    <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
-                </div>
-                <div class="box-body">
-                    <table id="tblAccount">
-                        
-                            <tr>
-                                <td>
-                                    Date
-                                </td>
-                                <td>
-                                <input type="date" class=".datepicker" id="txtfuelDate" /> 
-                                                               </td>
-                                <td>
-                                    Fuel Type
-                                </td>
-                                <td>
-                                    @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlFuelType", accesskey = "a", style = "width: 135px;" })
-
-
-                                    @*<select id="ddlFuelType" class="txt100">
-                                            <option value="patrol ">Patrol </option>
-                                            <option value="disal">Disal</option>
-                                            <option value="mobioil">Mobioil</option>
-                                        </select>*@
-                                </td>
-
-                            </tr>
-                            <tr>
-
-                                <td>
-                                    Chit No
-                                </td>
-                                <td>
-                                    <input type="text" id="txtChttNo" class="txt100" />
-                                </td>
-
-                                <td>
-                                    Fuel Book 
-                                </td>
-                                <td>
-                                    <input type="text" id="txtBookno" class="txt100" />
-                                </td>
-
-                              
-
-                            </tr>
-
-                            <tr>
-
-
-                                <td>
-                                    Fuel Station
-                                </td>
-                                <td>
-                                    @Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlPumpName", accesskey = "a", style = "width: 135px;" })
-
-
-                                    @*<select id="ddlPumpName" class="txt100">
-                                            <option value="a">A </option>
-                                            <option value="b">B</option>
-                                            <option value="c">C</option>
-                                        </select>*@
-                                </td>
-                                <td>
-                                    Quantity
-                                </td>
-                                <td>
-                                    <input type="text" id="txtFuelQuantity" class="txt100" value="0" onchange="calcTotalAmount()" onkeypress="return numbersonly(event)" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Price
-                                </td>
-                                <td>
-                                    <input type="text" id="txtPrice" class="txt100" value="0" onchange="calcTotalAmount()" onkeypress="return numbersonly(event)" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Others
-                                </td>
-                                <td>
-                                    <input type="text" id="txtOthers" class="txt100" />
-                                </td>
-
-                            </tr>
-
-                        
-                    </table>
-
-                </div>
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b> Fuel Detail</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
             </div>
-        </div>
-    </div>
-    <div class="box-footer clearfix" style="padding-right:30px">
-        <input type="button" id="btnVivraniDetails" value="Save" class="pull-right btn btn-primary" onclick="saveVivraniDetails()" style="padding:4px 22px 6px 15px;margin-left: 40px;" />
-    </div>
-    <div style="height:10px"></div>
+            <div class="box-body">
+                <table id="tblAccount">
 
-    <div class="PageContent">
-      
-        <div>Round Off: <input type="text" id="txtextra"> <input type="submit" value="Update" onclick='calcTotalAmount();' /> </div>
-        <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
-          
-            <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
-                <thead>
                     <tr>
-                      
-                        <th>
-                            Bus Number
-                        </th>
+                        <td>
+                            Date
+                        </td>
+                        <td>
+                            <input type="date" class=".datepicker" id="txtfuelDate" />
+                        </td>
+                        <td>
+                            Fuel Type
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(model => model.fueltype, Model.fueltype, new { @class = "txt100PValidBreak", id = "ddlFuelType", accesskey = "a", style = "width: 135px;" })
 
-                        <th>
-                            Waybill No
-                        </th>
-                        <th>
-                            Waybill Serial No
-                        </th>
-                        <th>
-                            Station From
-                        </th>
 
-                        <th>
-                            Station To
-                        </th>
-                        <th>
-                            Ticket Book No
-                        </th>
-                        <th>
-                            Ticket Series
-                        </th>
+                            @*<select id="ddlFuelType" class="txt100">
+                                <option value="patrol ">Patrol </option>
+                                <option value="disal">Disal</option>
+                                <option value="mobioil">Mobioil</option>
+                            </select>*@
+                        </td>
 
-                        <th>
-                            Fare
-                        </th>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            Chit No
+                        </td>
+                        <td>
+                            <input type="text" id="txtChttNo" class="txt100" />
+                        </td>
+
+                        <td>
+                            Fuel Book
+                        </td>
+                        <td>
+                            <input type="text" id="txtBookno" class="txt100" />
+                        </td>
+
+
 
                     </tr>
 
-                </thead>
-            </table>
-            <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;" class="hide">Total Amount :- <span id="ttlamt">0</span></div>
- </div>
-        <div style="height:10px"></div>
-       
-       
-        <button class="pull-right btn btn-primary" type="button" style="margin-left: 5px;" onclick="CashSheet();"@*location.href='@Url.Action("AddOtherExpences", "waybill")'"*@>
-            Genrate Cash Sheet
-        </button>&nbsp;&nbsp;
-        <button class="pull-right btn btn-primary" type="button"  onclick= "demohit();">@*//"location.href='@Url.Action("AddWaybill", "waybill")'">*@
-            Add Waybill
-        </button>
-        <button class="pull-right btn btn-primary" type="button" onclick="SendSMS();">
-            Send Message
-        </button>
+                    <tr>
 
 
+                        <td>
+                            Fuel Station
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(model => model.fuelpump, Model.fuelpump, new { @class = "txt100PValidBreak", id = "ddlPumpName", accesskey = "a", style = "width: 135px;" })
+
+
+                            @*<select id="ddlPumpName" class="txt100">
+                                <option value="a">A </option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                            </select>*@
+                        </td>
+                        <td>
+                            Quantity
+                        </td>
+                        <td>
+                            <input type="text" id="txtFuelQuantity" class="txt100" value="0" onchange="calcTotalAmount()" onkeypress="return numbersonly(event)" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Price
+                        </td>
+                        <td>
+                            <input type="text" id="txtPrice" class="txt100" value="0" onchange="calcTotalAmount()" onkeypress="return numbersonly(event)" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Others
+                        </td>
+                        <td>
+                            <input type="text" id="txtOthers" class="txt100" />
+                        </td>
+
+                    </tr>
+
+
+                </table>
+
+            </div>
+        </div>
     </div>
+</div>
+<div class="box-footer clearfix" style="padding-right:30px">
+    <input type="button" id="btnVivraniDetails" value="Save" class="pull-right btn btn-primary" onclick="saveVivraniDetails()" style="padding:4px 22px 6px 15px;margin-left: 40px;" />
+</div>
+<div style="height:10px"></div>
+
+<div class="PageContent">
+
+    <div>Round Off: <input type="text" id="txtextra"> <input type="submit" value="Update" onclick='calcTotalAmount();' /> </div>
+    <div class="PageContentWindow" style="text-align: center; font-size: 12px;">
+
+        <table id="EmployeesTable" cellpadding="3px" cellspacing="0px" width="100%" class="grdTrHoverEffect">
+            <thead>
+                <tr>
+
+                    <th>
+                        Bus Number
+                    </th>
+
+                    <th>
+                        Waybill No
+                    </th>
+                    <th>
+                        Waybill Serial No
+                    </th>
+                    <th>
+                        Station From
+                    </th>
+
+                    <th>
+                        Station To
+                    </th>
+                    <th>
+                        Ticket Book No
+                    </th>
+                    <th>
+                        Ticket Series
+                    </th>
+
+                    <th>
+                        Fare
+                    </th>
+
+                </tr>
+
+            </thead>
+        </table>
+        <div id="ttlamtttxt" style="text-align: right;margin-right: 51px;" class="hide">Total Amount :- <span id="ttlamt">0</span></div>
+    </div>
+    <div style="height:10px"></div>
+
+
+    <button class="pull-right btn btn-primary" type="button" style="margin-left: 5px;" onclick="CashSheet();" @*location.href='@Url.Action("AddOtherExpences", "waybill")' "*@>
+        Genrate Cash Sheet
+    </button>&nbsp;&nbsp;
+    <button class="pull-right btn btn-primary" type="button" onclick="Navigate();">
+        @*//"location.href='@Url.Action("AddWaybill", "waybill")'">*@
+        Add Waybill
+    </button>&nbsp;&nbsp;
+    <button class="pull-right btn btn-primary" type="button" onclick="SendSMS();">
+        Send Message
+    </button>
+
+
+</div>
 
 
 
 
 
- 
-    
-            <script type="text/javascript">
-                function demohit() {
+
+
+<script type="text/javascript">
+
+        function Navigate()
+        {
+                window.location.href = '/waybill/AddWaybill';
+        }
+                function SendSMS() {
                     $.confirm({
                         text: "क्या आप SMS भेजना चाहते हैं??",
                         confirm: function (button) {
-                            alert("oh!! Yes oh yes!!!");
+
                             SendSMSToOwnwer();
                         },
                         cancel: function (button) {
                             window.location.href = '/waybill/AddWaybill'
                         }
                     });
-                   
-                  
+
+
                 }
                 function SendSMSToOwnwer() {
 
@@ -312,7 +319,7 @@
                 }
 
                 function genrateCasVivraani(vivraniid) {
-                    ;
+                    debugger;
                     var busId = getControlValue("ddlBusNumber");
                     $.ajax({
                         type: "GET",
@@ -321,25 +328,14 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                            if (data == true) {
+                            if (data == false) {
                                 window.location.href = '/waybill/AddOtherExpences?&cashid=' + vivraniid
                             }
                         },
                         error: OnError
                     });
                 }
-                function SendSMS() {
-                    $.confirm({
-                        text: "How are you HEri!!",
-                        confirm: function (button) {
-                            alert("oh!! Yes oh yes!!!");
-                        },
-                        cancel: function (button) {
-                            alert("oh!! no oh no!!!");
-                        }
-                    });
-
-                }
+               
                 function calcTotalAmount() {
                     var calcAmount = parseFloat(getControlValue("txtextra")) + parseFloat(getControlValue("ttlamt"));;
 
@@ -352,11 +348,11 @@
                         dataType: "json",
                         success: function (data) {
                             if (data) {
-                               
+
                             }
                         }
                     });
-                   
+
                 }
                 $(function () {
                     $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
@@ -425,7 +421,7 @@
                                 });
                             }
 
-                           
+
                             function saveVivraniDetails() {
                                 debugger;
                                 var fuelobj = new Object();
@@ -443,12 +439,12 @@
                                     fuelobj.Fueltype = getControlValueN("ddlFuelType");
                                 }
 
-                                
+
                                 fuelobj.FuelQuantity = getControlValueN("txtFuelQuantity");
-                               
+
                                 fuelobj.Price = getControlValueN("txtPrice");
-                                
-                                
+
+
                                 $.ajax({
                                     type: "POST",
                                     url: '/Fuel/saveFuelDetail1',
@@ -470,28 +466,28 @@
                             function showOtherExpences() {
                                 var url = "/WayBill/AddOtherExpences";
                                 window.location.href = url;
-                                
+
                             }
 
                             function ClearFuel()
                             {
-                                
-                               
+
+
                                 setControlValue("txtfuelDate","");
-                                
-                               
+
+
                                setControlValue("txtBookno","");
                                setControlValue("txtChttNo","");
-                               
-                                
-                               fsetControlValue("txtOthers","");
-                                
 
-                                
+
+                               fsetControlValue("txtOthers","");
+
+
+
                                setControlValue("txtFuelQuantity","");
-                               
+
                                setControlValue("txtPrice","");
 
                             }
 
-            </script>
+</script>

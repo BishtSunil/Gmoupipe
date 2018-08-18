@@ -60,6 +60,10 @@
       <Project>{c68cdfcf-d598-4b03-b334-79849d6bc573}</Project>
       <Name>Gmou.DomainModelEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GMOULogger\GMOULogger.csproj">
+      <Project>{93a4a1df-b815-49d7-9e7c-ceb2b3f99ae0}</Project>
+      <Name>GMOULogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

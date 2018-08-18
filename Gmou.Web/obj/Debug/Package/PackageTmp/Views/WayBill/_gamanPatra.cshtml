@@ -1,0 +1,350 @@
+﻿@{
+    ViewBag.Title = "_gamanPatra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model Gmou.Web.Models.GamanViewModel
+@using System.Web;
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+
+    .txtH20 {
+        height: 20px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div id="OtherExpences">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>गमन पत्र </b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+
+
+                <table id="tblAccount" style="width:100%" class="tbl20 alignROdd">
+                   
+                    <tr>
+                        <td>गाडी संख्या </td>
+                       <td> @Html.DropDownListFor(model => model.dipo, Model.dipo, new { @class = "txt100PValidBreak", id = "txtDipoo", accesskey = "a", style = "width: 135px;" })</td>
+                        <td>न० </td>
+                        <td><span id="spnGamanpatra"> @Model.GamanPatraSerialNumber</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>गाडी संख्या </td>
+                        <td>@Html.DropDownListFor(model => model.bus, Model.bus, new { @class = "txt100PValidBreak", id = "ddlbusNumberlst", accesskey = "a", style = "width: 135px;" })</td>
+                        <td>दिनाक</td>
+                        <td><input type="date" class=".datepicker" id="txtDate" /></td>
+                    </tr>
+                    <tr>
+                        <td>कहाँ से </td>
+                        <td><input type="text" id="txtfrom" class="  txt100" /></td>
+
+                        <td>प्रस्थान  की तिथि /समय</td>
+                        <td><input type="date" class=".datepicker" id="journeyDate" /></td>
+                    </tr>
+                    <tr>
+                        <td>कहाँ तक </td>
+                        <td><input type="text" id="txtto" class="  txt100" /></td>
+
+                        <td>वापसी  की तिथि </td>
+                        <td><input type="date" class=".datepicker" id="returningDate" /></td>
+                    </tr>
+                    <tr>
+                        <td>एडवांस धनराशि </td>
+                        <td><input type="text" id="txtAdvanceamount" class="  txt100" /></td>
+
+                        <td>शेष  धनराशि </td>
+                        <td><input type="text" id="txtremaingamount" class="  txt100" /></td>
+                    </tr>
+                    <tr>
+                        <td>परमिशन  (Free) </td>
+                        <td><input type="radio" id="rdFree" name ="permission"class="  txt100" /></td>
+
+                        <td>परमिशन  (Discount)</td>
+                        <td><input type="radio" id="rdDiscount" name="permission" class="  txt100" /></td>
+                    </tr>
+                    <tr>
+                        <td>डेली सर्विस </td>
+                        <td><input type="checkbox" id="chkDailyservice" class="  txt100" /></td>
+
+                        <td>कुल धनराशि </td>
+                        <td><input type="text" id="txtTotalamount" class="  txt100" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <button class="pull-right btn btn-primary" onclick="SaveGamanPatra();" id="btnGenrate" type="button">
+                           Save
+                        </button>
+                            </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <input name="b_print" type="button" class="ipt" onclick="printdiv('gamanpatra');" value=" Print ">
+    <div id="gamanpatra">
+        
+
+
+
+
+    </div>
+
+<script>    
+
+    function SaveGamanPatra()
+    {
+        var obj = new Object();
+   
+        obj.GamanPatraID = getControlValueN('spnGamanpatra');
+        obj.StaionId = getControlValueN('txtDipoo');
+        obj.IssueDate = getControlValueN("txtDate");
+        obj.BusID = getControlValueN("ddlbusNumberlst");
+        obj.From = getControlValueN("txtfrom");
+        obj.To = getControlValueN("txtto");
+        obj.DepartureDate = getControlValueN("journeyDate");
+        obj.ReturnDate = getControlValueN("returningDate");
+        obj.Seats = 56;
+        if ($('#chkDailyservice').is(':checked'))
+        {
+            obj.IsDailyService=1;
+        }
+        else{
+            obj.IsDailyService=0;
+        }
+        
+       
+        if ($('#rdFree').is(':checked'))
+        {
+            obj.PermissionType = 0;
+        }
+        if ($('#rdDiscount').is(':checked'))
+        {
+            obj.PermissionType = 1;
+        }
+      
+       
+        obj.AdvanceAmount = getControlValueN("txtAdvanceamount");
+        obj.RemainingAmount = getControlValueN("txtremaingamount");
+        obj.TotalAmount = getControlValueN("txtTotalamount");
+
+        $.ajax({
+            type: "POST",
+            url: '/WayBill/SaveGamanPatra',
+
+            data: JSON.stringify(obj),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (data) {
+                if (data) {
+                    $('#gamanpatra').html(data);
+                }
+
+
+            }
+        });
+
+    }
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .tooltip()
+
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.data("ui-autocomplete").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+    $(function () {
+       // GetGamanPatra();
+        $("#ddlbusNumberlst").combobox();
+        $("#toggle").click(function () {
+            $("#ddlbusNumberlst").toggle();
+        });
+
+
+
+
+    });
+
+    function GetGamanPatra()
+    {
+        $.ajax({
+            type: "GET",
+            url: '/WayBill/GetGamanPatra',
+
+            
+
+           
+            dataType: "html",
+            success: function (data) {
+                if (data) {
+                    $('#gamanpatra').html(data);
+                }
+
+
+            }
+        });
+
+    }
+    function printdiv(printpage)
+    {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr+newstr+footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+ 
+   
+    //HTML Page
+    //Other content you wouldn't like to print
+    
+</script>

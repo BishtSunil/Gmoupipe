@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "DebitStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/Admin/validation.js"></script>
+<script src="~/Scripts/LTE/ui/jquery-ui.js"></script>
+<link href="~/Scripts/LTE/ui/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/LTE/ui/date.format.js"></script>
+<link href="~/Content/jquery.loader.css" rel="stylesheet" />
+<script src="~/Scripts/GmouScripts/jquery.loader.js"></script>
+<link href="~/Content/css/normalize.css" rel="stylesheet" />
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<link href="~/Content/css/component.css" rel="stylesheet" />
+<style type="text/css">
+    .txt100 {
+        width: 100px;
+    }
+
+    .txtH20 {
+        height: 20px;
+    }
+
+    .modal-box {
+        width: 650px;
+    }
+
+    .grdTrHoverEffect td, .grdTrHoverEffect th {
+        text-align: left;
+        line-height: 30px;
+    }
+
+    .grdTrHoverEffect tr:nth-child(2n+1) td {
+        background-color: #eeeeee;
+    }
+</style>
+<div id="OtherExpences">
+    <div class="col-md-12 marT20">
+        <div class="box box-success">
+            <div class="boxHeading">
+                <b>Debit Status</b>
+                <a href="" class="pull-right hide" id="ancAddNewStore" title="Add a Store"><i class="fa fa-plus"></i> Add Related Account</a>
+            </div>
+            <div class="box-body">
+
+
+                <table id="tblAccount" >
+                    <tr>
+                        <td>Start Date</td>
+                        
+                        <td><input type="date" class=".datepicker" id="txtstartDate" /></td>
+
+                        <td>End Date</td>
+
+                        <td><input type="date" class=".datepicker" id="txtendDate" /></td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+    <button class="pull-right btn btn-primary" type="button" onclick="GetStatus();">
+        Show
+    </button>
+
+   
+
+    <div style="padding-top:10px;"></div>
+    <div class="PageContentWindow" style="text-align: center; font-size: 16px;">
+        <table id="DebitStatusTable">
+         
+                <tr>
+                    <th>
+                        Bus Number
+                    </th>
+
+
+                    <th>
+                        Vivrani Amount
+                    </th>
+                    <th>
+                        Fuel Amount
+                    </th>
+                    <th>Advance Amount</th>
+                  
+                    <th>Debit Amount</th>
+
+                </tr>
+           
+        </table>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        //$(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+        $(".datepicker").datepicker();
+    });
+
+    function GetStatus()
+    {
+        
+
+
+        var stdate = getControlValueN("txtstartDate");
+        var enddate = getControlValueN("txtendDate");
+
+        $.ajax({
+            type: "GET",
+            url: '/Transaction/GetDebitStatus',
+            data: { 'stdate': stdate, 'enddate': enddate },
+            dataType: "json",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data) {
+                    var len = data.length;
+                    var txt = "";
+                    if (len > 0) {
+
+
+                        for (var i = 0; i < len; i++) {
+                            var vivamount, fuelamount, advance;
+                            var td ; 
+                            if (data[i].VivraniAmount == null)
+                            {
+                                vivamount = "N/A";
+                            }
+                            else {
+                                vivamount = data[i].VivraniAmount;
+                            }
+                            if (data[i].FuelFillingAmount == null) {
+                                fuelamount = "N/A";
+                            }
+                            else {
+                                fuelamount = data[i].FuelFillingAmount;
+                            }
+                            if (data[i].AdvanceAmount == null) {
+                                advance = "N/A";
+                            }
+                            else
+                            {
+                                advance = data[i].AdvanceAmount;
+                            }
+                            if (parseInt(data[i].DebitAmount) < 0)
+                            {
+                                ;
+                                txt += "<tr style='background-color: #deabab;' ><td>" + data[i].Busnumber + "</td><td>" + vivamount + "</td>"
+                                    + "<td>" + fuelamount + "</td><td>" + advance + "</td><td>" + data[i].DebitAmount + "</td></tr>";
+
+                            }
+                            else {
+                                txt += "<tr><td>" + data[i].Busnumber + "</td><td>" + vivamount + "</td>"
+                                                                  + "<td>" + fuelamount + "</td><td>" + advance + "</td><td>" + data[i].DebitAmount + "</td></tr>";
+
+                            }
+
+                           // var regDate = new Date(parseInt(data[i].InsertedDate.substr(6))).format("dd/mm/yyyy")
+                            
+                        }
+
+                        if (txt != "") {
+                            $("#DebitStatusTable").append(txt);
+
+                        }
+                    }
+                }
+
+
+            }
+
+
+        });
+    }
+</script>

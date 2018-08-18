@@ -1,0 +1,309 @@
+﻿@model Gmou.DomainModelEntities.MontlyBusReport
+@using System.Globalization
+<div>
+    <div>
+        <span style="display: inline-block; width: 234px; background: #6af; vertical-align: top;">
+            <span style="font-size:larger">Garhwal Motor Owners Union LTD. kotdwar </span>
+            @{
+
+            String dt = DateTime.Today.Month.ToString("MMM", CultureInfo.InvariantCulture);
+
+
+            string month = String.Format("{0:MMMM}", DateTime.Now).ToString();
+
+            <span> Account Statement For the Period of @month</span>
+            }
+            </span>
+            <table>
+                <tr>
+                    <td>Bus Number</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.BusNumber</td>
+
+                    <td>Owner Name</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.OwnerName</td>
+                </tr>
+                <tr>
+                    <td>Bank Name</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.BankName</td>
+
+                    <td>Account Number</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.AccountName</td>
+                </tr>
+                <tr>
+                    <td> Dipo Name</td>
+                    <td style="font-size: medium; font-weight: bold;">@Model.Dipo</td>
+                </tr>
+            </table>
+    </div>
+    
+    <div>
+        @Html.Partial(@"~/Views\\Reports\_Partial_VivraniDetails.cshtml", Model.lstVivraniReports)
+
+    </div>
+
+    <div>
+        @Html.Partial(@"~/Views\\Reports\_Partial_FuelDeatils.cshtml", Model.lstFuleReposrts)
+
+        <table>
+            <tr>
+                <th>Particulars</th>
+                <th>Debit</th>
+                <th>Credit</th>
+            </tr>
+            <tbody>
+                <tr>
+                    <td>Transipment</td>
+                    <td>
+                        <input type="text" id="dbttxtTransipment" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
+                    <td><input type="text" id="txtTransipment" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>WayBill (Correction)</td>
+                    <td>
+                        <input type="text" id="dbttxtwayCorrection" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
+                    <td><input type="text" id="txtwayCorrection" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Fare Refund Dr.</td>
+                    <td>
+                        <input type="text" id="dbttxtFareRefund" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
+                    <td><input type="text" id="txtFareRefund" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Deficiency</td>
+                    <td>
+                        <input type="text" id="dbttxtDeficiency" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
+                    <td><input type="text" id="txtDeficiency" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Election Bill</td>
+                    <td>
+                        <input type="text" id="txtElectionBill" class="txt100" onfocusout="Total(this);" onfocus="PreviousValue(this);" />
+                    </td>
+                    <td><input type="text" id="txtElectionBill" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Free Seat</td>
+                    <td><input type="text" id="txtFreeSeat" class="txt100" /></td>
+                    <td><input type="text" id="txtFreeSeat" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Road Warrant</td>
+                    <td><input type="text" id="txtRoadWarrant" class="txt100" /></td>
+                    <td><input type="text" id="txtRoadWarrant" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Commission (4%)</td>
+                    <td><input type="text" id="txtCommission" class="txt100" /></td>
+                    <td><input type="text" id="txtCommission" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Owner's A/C (2%)</td>
+                    <td><input type="text" id="txtOwner" class="txt100" /></td>
+                    <td><input type="text" id="txtOwner" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Balance (Last Month) Seat</td>
+                    <td><input type="text" id="txtBalance" class="txt100" /></td>
+                    <td><input type="text" id="txtBalance" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Payment (Last Month)</td>
+                    <td><input type="text" id="txtPayment" class="txt100" /></td>
+                    <td><input type="text" id="txtPayment" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Advance</td>
+                    <td><input type="text" id="txtAdvance" class="txt100" /></td>
+                    <td><input type="text" id="txtAdvance" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Advance(Station)</td>
+                    <td><input type="text" id="txtAdvanceStation" class="txt100" /></td>
+                    <td><input type="text" id="txtAdvanceStation" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Toll/Parking/Yatra</td>
+                    <td><input type="text" id="txtToll" class="txt100" /></td>
+                    <td><input type="text" id="txtToll" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Road Warrant</td>
+                    <td><input type="text" id="txtTRoadWarrant" class="txt100" /></td>
+                    <td><input type="text" id="txtTRoadWarrant" class="txt100" /></td>
+
+                </tr>
+                <tr>
+                    <td>Road Tax</td>
+                    <td><input type="text" id="txtRoadTax" class="txt100" /></td>
+                    <td><input type="text" id="txtRoadTax" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>TTC/Fine</td>
+                    <td><input type="text" id="txtTTC" class="txt100" /></td>
+                    <td><input type="text" id="txtTTC" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Paise Detain/Release</td>
+                    <td><input type="text" id="txtPaiseDetain" class="txt100" /></td>
+                    <td><input type="text" id="txtPaiseDetain" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Super V.charge DR/CR</td>
+                    <td><input type="text" id="txtSuper" class="txt100" /></td>
+                    <td><input type="text" id="txtSuper" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Fine on DR (2%)</td>
+                    <td><input type="text" id="txtFine" class="txt100" /></td>
+                    <td><input type="text" id="txtFine" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Permit Fee DR/CR</td>
+                    <td><input type="text" id="txtPermitFee" class="txt100" /></td>
+                    <td><input type="text" id="txtPermitFee" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Insurance DR/CR</td>
+                    <td><input type="text" id="txtInsurance" class="txt100" /></td>
+                    <td><input type="text" id="txtInsurance" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Advance (2%) DR/CR</td>
+                    <td><input type="text" id="txtAdvance2" class="txt100" /></td>
+                    <td><input type="text" id="txtAdvance2" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Building Fund</td>
+                    <td><input type="text" id="txtBuildingFund" class="txt100" /></td>
+                    <td><input type="text" id="txtBuildingFund" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Loss</td>
+                    <td><input type="text" id="txtLoss" class="txt100" /></td>
+                    <td><input type="text" id="txtLoss" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>2% Refund</td>
+                    <td><input type="text" id="txt2Refund" class="txt100" /></td>
+                    <td><input type="text" id="txt2Refund" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Road Warrant Exp.</td>
+                    <td><input type="text" id="txtRoadWarrantExp" class="txt100" /></td>
+                    <td><input type="text" id="txtRoadWarrantExp" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Supply Mail</td>
+                    <td><input type="text" id="txtSupplyMail" class="txt100" /></td>
+                    <td><input type="text" id="txtSupplyMail" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Correction</td>
+                    <td><input type="text" id="txtCorrection" class="txt100" /></td>
+                    <td><input type="text" id="txtCorrection" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Free Seat</td>
+                    <td><input type="text" id="txtFreeSeat" class="txt100" /></td>
+                    <td><input type="text" id="txtFreeSeat" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Road Warrant</td>
+                    <td><input type="text" id="txtRoadWarrant" class="txt100" /></td>
+                    <td><input type="text" id="txtRoadWarrant" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Owner's Security</td>
+                    <td><input type="text" id="txtOwnerSecurity" class="txt100" /></td>
+                    <td><input type="text" id="txtOwnerSecurity" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Entree Fees</td>
+                    <td><input type="text" id="txtEntreeFees" class="txt100" /></td>
+                    <td><input type="text" id="txtEntreeFees" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Vechile Tranfer</td>
+                    <td><input type="text" id="txtVechileTranfer" class="txt100" /></td>
+                    <td><input type="text" id="txtVechileTranfer" class="txt100" /></td>
+                </tr>
+                <tr>
+                    <td>Dist. Board</td>
+                    <td><input type="text" id="txtDistBoard" class="txt100" /></td>
+                    <td><input type="text" id="txtDistBoard" class="txt100" /></td>
+
+                </tr>
+            </tbody>
+        </table>
+        <table>
+
+            <tr>
+
+                <td> Debit</td>
+
+                <td>  Total Amount:<span id="totalamountVivrani" style="padding-left:62%; font-weight:bold"> </span></td>
+                <td> Credit</td>
+
+                <td>  Total Amount:<span id="totalAmountCredit" style="padding-left:62%; font-weight:bold"> </span></td>
+
+            </tr>
+        </table>
+
+        <script>
+
+            function getMonth() {
+
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+
+                const d = new Date();
+                return monthNames[d.getMonth()]);
+            }
+            $(document).ready(function () {
+                alert($('#amountVivrani').text().split(":")[1]);
+                $('#txtOwner').val("Hello");
+
+                $('#totalamountVivrani').text($('#amountVivrani').text());
+                $('#totalAmountCredit').text($('#amountFue').text());
+
+            });
+            var total = parseFloat($('#totalamountVivrani').text());
+            var prevvalue = 0;
+            function chkCoupon(e) {
+
+
+            }
+            function PreviousValue(e) {
+                debugger;
+                if (e.value != "") {
+                    prevvalue = parseFloat(e.value);
+                }
+            }
+            function Total(e) {
+
+
+                if (e.value != "") {
+                    if (prevvalue != 0) {
+                        total = total - prevvalue;
+                        prevvalue = 0;
+                    }
+
+                    total = total + parseFloat(e.value);
+                    $('#totalamountVivrani').text(total);
+
+                }
+                else {
+                    total = total - prevvalue;
+                    prevvalue = 0;
+                    $('#lblShowFare').text(total);
+                }
+            }
+        </script>
+    </div>
+</div>

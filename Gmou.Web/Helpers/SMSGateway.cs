@@ -70,7 +70,7 @@ namespace Gmou.Web.Helpers
                     }
                 case SMSMessage.Fuel:
                     {
-                        string emssage = String.Format("Dear Sir, {0}/ {1} Fuel is filled for {2} of {3} at {4} on Date : {5} Thanks, GMOU LTD", "UK12PA-090", "Mr.Kamal kumar", "Rs.5000", DateTime.Now.ToShortDateString());
+                        string emssage = String.Format("Dear Sir, {0}/ {1} Fuel is filled for {2} of Diesel at IOC on Date : {3} Thanks, GMOU LTD", busnumber, ownername, String.Format("Rs. {0:0.00}", amount), DateTime.Now.ToShortDateString());
                         return emssage;
 
                     }
